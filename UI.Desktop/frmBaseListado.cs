@@ -164,6 +164,49 @@ namespace UI.Desktop
             int cantCli = frmListaClientes.dgvListado.Rows.Count;
         }
 
+        // Proveedores
+        public void exportarProveedores()
+        {
+            // ACA VA EL CODIGO PARA EXPORTAR PROVEEDORES. DEBO AGREGAR TAMBIEN LOS ARTÍCULOS Q VENDE 
+
+            Proveedores.frmListadoProveedores formListaProveedores = new UI.Desktop.Proveedores.frmListadoProveedores();
+
+            formListaProveedores.Show();
+            formListaProveedores.Hide();
+
+            Microsoft.Office.Interop.Excel.Application ExcelAppProveedores = new Microsoft.Office.Interop.Excel.Application();
+            ExcelAppProveedores.Application.Workbooks.Add(Type.Missing);
+
+            SaveFileDialog drProveedores = new SaveFileDialog();
+            drProveedores.FileName = "Proveedores " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString();
+            drProveedores.Filter = "Excel files (*.xls)|*.xls";
+            drProveedores.Title = "PROVEEDORES";
+
+
+            if (drProveedores.ShowDialog() == DialogResult.OK)
+            {
+                for (int i = 1; i < formListaProveedores.dgvListado.Columns.Count + 1; i++)
+                {
+                    ExcelAppProveedores.Cells[1, i] = formListaProveedores.dgvListado.Columns[i - 1].HeaderText;
+                }
+
+                for (int i = 0; i < formListaProveedores.dgvListado.Rows.Count; i++)
+                {
+                    for (int j = 0; j < formListaProveedores.dgvListado.Columns.Count; j++)
+                    {
+                        ExcelAppProveedores.Cells[i + 2, j + 1] = formListaProveedores.dgvListado.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+
+
+                ExcelAppProveedores.ActiveWorkbook.SaveCopyAs(drProveedores.FileName);
+                ExcelAppProveedores.ActiveWorkbook.Saved = true;
+                ExcelAppProveedores.Quit();
+            }
+            int cantProv = formListaProveedores.dgvListado.Rows.Count;
+
+        }
+
 
         // ------------------------------------IMPORTAR ------------------------------------
 
@@ -192,19 +235,65 @@ namespace UI.Desktop
                     {
                         Entidades.Cliente clienteExcel = new Entidades.Cliente();
 
-                        clienteExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<Double>(0).ToString();
+                        clienteExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<String>(0).ToString();
                         clienteExcel.Nombre = ExDataSet.Tables[0].Rows[i].Field<String>(1).ToString();
                         clienteExcel.Apellido = ExDataSet.Tables[0].Rows[i].Field<String>(2).ToString();
                         clienteExcel.Telefono = ExDataSet.Tables[0].Rows[i].Field<String>(3).ToString();
                         clienteExcel.Direccion = ExDataSet.Tables[0].Rows[i].Field<String>(4).ToString();
                         clienteExcel.Email = ExDataSet.Tables[0].Rows[i].Field<String>(5).ToString();
+                    clienteExcel.TipoCliente = ExDataSet.Tables[0].Rows[i].Field<String>(6).ToString();
 
-                        DatosClienteAdapter.AñadirNuevo(clienteExcel);
+                    DatosClienteAdapter.AñadirNuevo(clienteExcel);
 
                     }
                 
 
             }
+        }
+
+        public BindingList<Cliente> importarClientesAlt()
+        {
+
+            BindingList<Cliente> clientesExcel = new BindingList<Cliente>();
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            DialogResult dr = openFileDialog1.ShowDialog();
+
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                string connectionString = String.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=YES;IMEX=1;""", openFileDialog1.FileName);
+
+                string sqlExcel = String.Format("select * from [{0}$]", "Hoja1");
+
+                DataSet ExDataSet = new DataSet();
+                //
+                OleDbConnection ExConexion = new OleDbConnection(connectionString);
+                OleDbCommand OleDbCommand = new OleDbCommand(sqlExcel, ExConexion);
+                OleDbDataAdapter ExDataAdapter = new OleDbDataAdapter(OleDbCommand);
+                //
+                ExDataAdapter.Fill(ExDataSet);
+
+                for (int i = 0; i < ExDataSet.Tables[0].Rows.Count; i++)
+                {
+                    Entidades.Cliente clienteExcel = new Entidades.Cliente();
+
+                    clienteExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<String>(0).ToString();
+                    clienteExcel.Nombre = ExDataSet.Tables[0].Rows[i].Field<String>(1).ToString();
+                    clienteExcel.Apellido = ExDataSet.Tables[0].Rows[i].Field<String>(2).ToString();
+                    clienteExcel.Telefono = ExDataSet.Tables[0].Rows[i].Field<String>(3).ToString();
+                    clienteExcel.Direccion = ExDataSet.Tables[0].Rows[i].Field<String>(4).ToString();
+                    clienteExcel.Email = ExDataSet.Tables[0].Rows[i].Field<String>(5).ToString();
+                    clienteExcel.TipoCliente = ExDataSet.Tables[0].Rows[i].Field<String>(6).ToString();
+
+                    //DatosClienteAdapter.AñadirNuevo(clienteExcel);
+                    clientesExcel.Add(clienteExcel);
+
+                }
+
+
+            }
+            return clientesExcel;
         }
 
         // Articulos
@@ -314,6 +403,84 @@ namespace UI.Desktop
 
             }
             return articulosExcel;
+        }
+
+        // Proveedores
+        public BindingList<Proveedor> importarProveedoresAlt()
+        {
+            BindingList<Proveedor> proveedoresExcel = new BindingList<Proveedor>();
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult dr = openFileDialog1.ShowDialog();
+
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                string connectionString = String.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=YES;IMEX=1;""", openFileDialog1.FileName);
+                string sqlExcel = String.Format("select * from [{0}$]", "Hoja1");
+
+                DataSet ExDataSet = new DataSet();
+                //
+                OleDbConnection ExConexion = new OleDbConnection(connectionString);
+                OleDbCommand OleDbCommand = new OleDbCommand(sqlExcel, ExConexion);
+                OleDbDataAdapter ExDataAdapter = new OleDbDataAdapter(OleDbCommand);
+                //
+                ExDataAdapter.Fill(ExDataSet);
+
+
+
+                for (int i = 0; i < ExDataSet.Tables[0].Rows.Count; i++)
+                {
+                    Entidades.Proveedor proveedorExcel = new Proveedor();
+
+
+
+                    
+                    proveedorExcel.Nombre = ExDataSet.Tables[0].Rows[i].Field<String>(1);
+                    
+                    
+                    
+                    if (ExDataSet.Tables[0].Rows[i].ItemArray[0].ToString() == "")
+                    {
+                        proveedorExcel.Dni = "NO REGISTRADO";
+                    }
+                    else
+                    {
+                        proveedorExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<Double>(0).ToString();
+                    }
+
+                    if (ExDataSet.Tables[0].Rows[i].ItemArray[2].ToString() == "")
+                    {
+                        proveedorExcel.Email = "NO REGISTRADO";
+                    }
+                    else
+                    {
+                        proveedorExcel.Email = ExDataSet.Tables[0].Rows[i].Field<String>(2);
+                    }
+
+                    if (ExDataSet.Tables[0].Rows[i].ItemArray[3].ToString() == "")
+                    {
+                        proveedorExcel.Telefono = "NO REGISTRADO";
+                    }
+                    else
+                    {
+                        proveedorExcel.Telefono = ExDataSet.Tables[0].Rows[i].Field<String>(3);
+                    }
+
+                    if (ExDataSet.Tables[0].Rows[i].ItemArray[4].ToString() == "")
+                    {
+                        proveedorExcel.Direccion = "NO REGISTRADO";
+                    }
+                    else
+                    {
+                        proveedorExcel.Direccion = ExDataSet.Tables[0].Rows[i].Field<String>(4);
+                    }
+
+                    proveedoresExcel.Add(proveedorExcel);
+                }
+
+
+            }
+            return proveedoresExcel;
         }
 
 

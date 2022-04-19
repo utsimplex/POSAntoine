@@ -51,6 +51,9 @@ namespace UI.Desktop.Clientes
         //CLIENTE ACTUAL/SELECCIONADO
         public string dniClienteSelecccionado;
 
+        //LISTA DE ARTICULOS
+        public List<Entidades.Cliente> ListaClientes;
+
         #endregion
 
 
@@ -59,7 +62,8 @@ namespace UI.Desktop.Clientes
         // ACTUALIZAR LISTA DE CLIENTES
         private void ActualizarLista()
         {
-            dgvListado.DataSource = DatosClienteAdapter.GetAll();
+            ListaClientes = DatosClienteAdapter.GetAll();
+            dgvListado.DataSource = ListaClientes;
             dgvListado.Width = 810;
             dgvListado.Columns["email"].Width = 160;
             dgvListado.Columns["dni"].HeaderText = "D.N.I";
@@ -230,8 +234,33 @@ namespace UI.Desktop.Clientes
         //IMPORTAR CLIENTES CLICK
         private void btnImportar_Click(object sender, EventArgs e)
         {
-            this.importarClientes();
+            //this.importarClientes();
+            //ActualizarLista();
+            BindingList<Cliente> clientesExcel = importarClientesAlt();
+
+            foreach (Cliente clienteExcel in clientesExcel)
+            {
+                Boolean estaCargado = false;
+
+                foreach (Cliente clienteApp in ListaClientes)
+                {
+                    if (clienteApp.Nombre == clienteExcel.Nombre)
+                    {
+                        estaCargado = true;
+                    }
+                }
+                if (estaCargado)
+                {
+                    DatosClienteAdapter.Actualizar(clienteExcel);
+                }
+                else
+                {
+                    DatosClienteAdapter.AñadirNuevo(clienteExcel);
+                }
+            }
+            ActualizarLista();
         }
+    
 
 
         //TECLAS ACCESO RAPIDO

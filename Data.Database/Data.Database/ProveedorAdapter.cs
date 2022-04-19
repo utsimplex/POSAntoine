@@ -83,7 +83,7 @@ namespace Data.Database
             Comando.Parameters.Add(new SqlCeParameter("@EMAIL", SqlDbType.NVarChar));
             Comando.Parameters["@EMAIL"].Value = prov.Email;
             Comando.Parameters.Add(new SqlCeParameter("@DIRECCION", SqlDbType.NVarChar));
-            Comando.Parameters["@DIRECCION"].Value = prov.Direccion;
+            Comando.Parameters["@DIRECCION"].Value = prov.Direccion == null ? "NO REGISTRADO" : prov.Direccion;
 
 
             //Ejecuta el comando INSERT

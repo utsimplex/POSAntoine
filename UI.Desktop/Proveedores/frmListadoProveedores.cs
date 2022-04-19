@@ -24,6 +24,9 @@ namespace UI.Desktop.Proveedores
 
         }
 
+        //LISTA DE ARTICULOS
+        public List<Entidades.Proveedor> ListaProveedores;
+
         public frmListadoProveedores(Usuario usr)
         {
             InitializeComponent();
@@ -70,7 +73,8 @@ namespace UI.Desktop.Proveedores
         // ACTUALIZAR LISTA DE PROVEEDORES
         private void ActualizarLista()
         {
-            dgvListado.DataSource = DatosProveedorAdapter.GetAll();
+            this.ListaProveedores = DatosProveedorAdapter.GetAll();
+            dgvListado.DataSource = ListaProveedores;
         }
 
 
@@ -253,12 +257,43 @@ namespace UI.Desktop.Proveedores
         }
 
 
+
+
+
+
+
         #endregion
 
-       
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            this.exportarProveedores();
+        }
 
-       
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            BindingList<Proveedor> proveedoresExcel = importarProveedoresAlt();
 
+            foreach (Proveedor proveedorExcel in proveedoresExcel)
+            {
+                Boolean estaCargado = false;
 
+                foreach (Proveedor proveedorApp in ListaProveedores)
+                {
+                    if (proveedorApp.Nombre == proveedorExcel.Nombre)
+                    {
+                        estaCargado = true;
+                    }
+                }
+                if (estaCargado)
+                {
+                    DatosProveedorAdapter.Actualizar(proveedorExcel);
+                }
+                else
+                {
+                    DatosProveedorAdapter.AñadirNuevo(proveedorExcel);
+                }
+            }
+            ActualizarLista();
+        }
     }
 }
