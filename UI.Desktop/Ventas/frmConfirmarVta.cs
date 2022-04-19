@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace UI.Desktop.Ventas
+{
+    public partial class frmConfirmarVta : Form
+    {
+        public frmConfirmarVta()
+        {
+            InitializeComponent();
+        }
+
+        private void txtPago_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPago.Text != "")
+            {
+                txtVuelto.Text = Convert.ToString(Convert.ToDecimal(txtPago.Text) - Convert.ToDecimal(txtTotal.Text));
+            }
+            else if (txtPago.Text == "")
+            {
+                txtVuelto.Text = "0";
+            }
+        }
+
+
+
+
+    }
+}

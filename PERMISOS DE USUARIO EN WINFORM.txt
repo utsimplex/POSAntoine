@@ -1,0 +1,10 @@
+ROL: EMPLEADO
+
+	Se limitó el acceso a:
+
+	* Modificar 
+	* Eliminar
+
+en las listas de artículos, clientes y proveedores.
+
+Se prohibio el acceso a historial de comprobantes.

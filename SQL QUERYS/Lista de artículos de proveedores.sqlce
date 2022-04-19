@@ -1,0 +1,15 @@
+SELECT prov.nombre as "Nombre o Razón Social",
+	   prov.email as "Email",
+	   prov.telefono as "Teléfono",
+	   prov.direccion as "Dirección",
+	   art.codigo as "Código",
+	   art.descripcion as "Descripción",
+	   prov_art.costoCompraProv as "Costo de Compra"
+	   
+FROM Proveedores prov
+
+INNER JOIN Proveedores_Articulos prov_art ON prov.nombre = prov_art.nombreProv
+
+INNER JOIN Articulos art ON art.codigo = prov_art.codigoArt
+
+ORDER BY prov.nombre asc
