@@ -218,7 +218,7 @@
             this.stockCríticoToolStripMenuItem,
             this.aReponerPorMarcaToolStripMenuItem});
             this.artículosToolStripMenuItem1.Name = "artículosToolStripMenuItem1";
-            this.artículosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.artículosToolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
             this.artículosToolStripMenuItem1.Text = "Artículos";
             // 
             // listaDePreciosToolStripMenuItem
@@ -250,34 +250,34 @@
             this.porArtículoToolStripMenuItem1,
             this.porFechaToolStripMenuItem});
             this.comprobantesToolStripMenuItem2.Name = "comprobantesToolStripMenuItem2";
-            this.comprobantesToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.comprobantesToolStripMenuItem2.Size = new System.Drawing.Size(153, 22);
             this.comprobantesToolStripMenuItem2.Text = "Comprobantes";
             // 
             // listaCompletaToolStripMenuItem1
             // 
             this.listaCompletaToolStripMenuItem1.Name = "listaCompletaToolStripMenuItem1";
-            this.listaCompletaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.listaCompletaToolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
             this.listaCompletaToolStripMenuItem1.Text = "Lista Completa";
             this.listaCompletaToolStripMenuItem1.Click += new System.EventHandler(this.listaCompletaToolStripMenuItem1_Click);
             // 
             // porClienteToolStripMenuItem
             // 
             this.porClienteToolStripMenuItem.Name = "porClienteToolStripMenuItem";
-            this.porClienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.porClienteToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.porClienteToolStripMenuItem.Text = "Por Artículo";
             this.porClienteToolStripMenuItem.Click += new System.EventHandler(this.porClienteToolStripMenuItem_Click);
             // 
             // porArtículoToolStripMenuItem1
             // 
             this.porArtículoToolStripMenuItem1.Name = "porArtículoToolStripMenuItem1";
-            this.porArtículoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.porArtículoToolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
             this.porArtículoToolStripMenuItem1.Text = "Por Cliente";
             this.porArtículoToolStripMenuItem1.Click += new System.EventHandler(this.porArtículoToolStripMenuItem1_Click);
             // 
             // porFechaToolStripMenuItem
             // 
             this.porFechaToolStripMenuItem.Name = "porFechaToolStripMenuItem";
-            this.porFechaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.porFechaToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.porFechaToolStripMenuItem.Text = "Por Fecha";
             this.porFechaToolStripMenuItem.Click += new System.EventHandler(this.porFechaToolStripMenuItem_Click);
             // 
@@ -487,7 +487,7 @@
             // 
             this.NI.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.NI.Icon = ((System.Drawing.Icon)(resources.GetObject("NI.Icon")));
-            this.NI.Text = "Baap - Punto de Ventas ";
+            this.NI.Text = "POS - Ut Simplex ";
             this.NI.Visible = true;
             // 
             // groupBox1

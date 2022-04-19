@@ -68,7 +68,7 @@ namespace UI.Desktop
         {
             NI.BalloonTipIcon = ToolTipIcon.Info;
             NI.BalloonTipText = "- PUNTO DE VENTA -";
-            NI.BalloonTipTitle = "Baap Sistemas";
+            NI.BalloonTipTitle = "Ut Simplex";
             NI.Visible = true;
             NI.ContextMenu = this.ContextMenu;
 
@@ -90,7 +90,7 @@ namespace UI.Desktop
 
                 NI.BalloonTipIcon = ToolTipIcon.Info;
                 NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
-                NI.BalloonTipTitle = "Baap";
+                NI.BalloonTipTitle = "Ut Simplex";
                 NI.Visible = true;
                 NI.ContextMenu = this.ContextMenu;
                 NI.ShowBalloonTip(100);
