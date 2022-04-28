@@ -132,10 +132,10 @@ public void Actualizar(Entidades.Articulo arti)
                          arti.Proveedor = (string)drArticulos["marca"];
                          arti.Habilitado = (string)drArticulos["habilitado"];
 
-                         if (arti.Habilitado == "Si")
-                         {
+                         //if (arti.Habilitado == "Si")
+                         //{
                              ListaArticulos.Add(arti);
-                         }
+                         //}
                      }
                      drArticulos.Close();
 

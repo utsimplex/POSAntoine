@@ -46,6 +46,7 @@
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.lblNoHayProveedores = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbDatosArticulo.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,7 @@
             // 
             // gbDatosArticulo
             // 
+            this.gbDatosArticulo.Controls.Add(this.lblNoHayProveedores);
             this.gbDatosArticulo.Controls.Add(this.cbxProveedor);
             this.gbDatosArticulo.Controls.Add(this.label3);
             this.gbDatosArticulo.Controls.Add(this.btnGuardar);
@@ -231,6 +233,17 @@
             this.txtDescripcion.Size = new System.Drawing.Size(200, 51);
             this.txtDescripcion.TabIndex = 1;
             // 
+            // lblNoHayProveedores
+            // 
+            this.lblNoHayProveedores.AutoSize = true;
+            this.lblNoHayProveedores.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoHayProveedores.Location = new System.Drawing.Point(238, 55);
+            this.lblNoHayProveedores.Name = "lblNoHayProveedores";
+            this.lblNoHayProveedores.Size = new System.Drawing.Size(181, 13);
+            this.lblNoHayProveedores.TabIndex = 47;
+            this.lblNoHayProveedores.Text = "No hay proveedores cargados.";
+            this.lblNoHayProveedores.Visible = false;
+            // 
             // frmArticuloABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,5 +283,6 @@
         private System.Windows.Forms.Button btnModificarStock;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbxProveedor;
+        private System.Windows.Forms.Label lblNoHayProveedores;
     }
 }

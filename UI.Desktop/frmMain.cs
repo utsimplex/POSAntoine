@@ -32,12 +32,12 @@ namespace UI.Desktop
 
         public frmMain()
         {
-            //Thread tardar = new Thread(new ThreadStart(pantalla));
-            //tardar.Start();
-            //Thread.Sleep(7000);
+            Thread tardar = new Thread(new ThreadStart(pantalla));
+            tardar.Start();
+            Thread.Sleep(3500);
 
             InitializeComponent();
-            //tardar.Abort();
+            tardar.Abort();
 
         }
 

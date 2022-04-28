@@ -135,15 +135,15 @@ namespace UI.Desktop.Ventas
         //DobleClick CANTIDAD - Modificar celda
         private void dgvArticulosVtaActual_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (dgvArticulosVtaActual.CurrentCell.ColumnIndex == 3 && modo == "Alta")
-            {
-                dgvArticulosVtaActual.BeginEdit(true);
+            //if (dgvArticulosVtaActual.CurrentCell.ColumnIndex == 3 && modo == "Alta")
+            //{
+            //    dgvArticulosVtaActual.BeginEdit(true);
                                
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 MessageBox.Show("No se puede editar esta columna", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //}
 
             
 

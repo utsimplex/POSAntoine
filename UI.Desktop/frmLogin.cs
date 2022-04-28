@@ -56,8 +56,8 @@ namespace UI.Desktop
         // OLVIDE MI CONTRASEÑA CLICK
         private void lnkOlvidaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ResetearClave("dantearrighi@gmail.com");
-            MessageBox.Show("Comuníquese con el servicio técnico al: \n(0341) 153-115510\n o envíe un correo a: \ninfo@utsimplex.com","Olvidé mi contraseña", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //ResetearClave("dantearrighi@gmail.com");
+            MessageBox.Show("Comuníquese con servicio técnico al: \n(0341) 153-115510\n o envíe un correo a: \ninfo@utsimplex.com","Olvidé mi contraseña", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 
         }
 

@@ -76,8 +76,10 @@ namespace UI.Desktop.Artículos
 
         //LISTA DE ARTICULOS Añadidos Venta Actual
         public BindingList<Entidades.Venta_Articulo> ListaArticulosVtaActual = new BindingList<Venta_Articulo>();
-       
-      
+
+        // Lista de PROVEEDORES
+        public AutoCompleteStringCollection listaProveedoresExistentes; 
+
 
         //ROL
         string rol;
@@ -93,7 +95,7 @@ namespace UI.Desktop.Artículos
         {
             ListaArticulos = DatosArticuloAdapter.GetAll();
             
-            dgvListado.DataSource = ListaArticulos;
+            dgvListado.DataSource = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
             dgvListado.Columns["habilitado"].Visible = false;
             dgvListado.Size = new Size(650,429);
             
@@ -108,7 +110,12 @@ namespace UI.Desktop.Artículos
             Artículos.frmArticuloABM frmAltaArticulo = new Artículos.frmArticuloABM();
             frmAltaArticulo.ModoForm = Artículos.frmArticuloABM.TipoForm.Alta;
 
-            frmAltaArticulo.ShowDialog();
+
+            if (frmAltaArticulo.DialogResult != DialogResult.Abort)
+            {
+                frmAltaArticulo.ShowDialog();
+            }
+            
 
             //Completa la tabla con los datos nuevos
             ActualizarLista();
@@ -195,6 +202,7 @@ namespace UI.Desktop.Artículos
                     
                     
                 }
+                tbxFiltro.ResetText();
             }
             
             
@@ -380,8 +388,9 @@ namespace UI.Desktop.Artículos
                btnExportar.Visible = true;
                btnImportar.Visible = true;
                btnSeleccionar.Visible = false ;
- 
-           }
+               listaProveedoresExistentes = DatosProveedorAdapter.GetListadoNombres();
+
+            }
        }
 
         // CLICK Seleccionar Artículo
@@ -444,33 +453,42 @@ namespace UI.Desktop.Artículos
 
         #endregion
 
-       private void btnImportar_Click(object sender, EventArgs e)
-       {
-            //importarArtículos();
-            //ActualizarLista();
-            BindingList<Articulo> articulosExcel = importarArtículosAlt();
-
-            foreach (Articulo articuloExcel in articulosExcel)
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            if (listaProveedoresExistentes.Count != 0)
             {
-                Boolean estaCargado = false;
+                //importarArtículos();
+                //ActualizarLista();
+                BindingList<Articulo> articulosExcel = importarArtículosAlt();
 
-                foreach (Articulo articuloApp in ListaArticulos)
+                foreach (Articulo articuloExcel in articulosExcel)
                 {
-                    if(articuloApp.Codigo == articuloExcel.Codigo)
+                    Boolean estaCargado = false;
+
+                    foreach (Articulo articuloApp in ListaArticulos)
                     {
-                        estaCargado = true;
+                        if (articuloApp.Codigo == articuloExcel.Codigo)
+                        {
+                            estaCargado = true;
+                        }
+                    }
+                    if (estaCargado)
+                    {
+                        DatosArticuloAdapter.Actualizar(articuloExcel);
+                    }
+                    else
+                    {
+                        DatosArticuloAdapter.AñadirNuevo(articuloExcel);
                     }
                 }
-                if (estaCargado)
-                {
-                    DatosArticuloAdapter.Actualizar(articuloExcel);
-                }else
-                {
-                    DatosArticuloAdapter.AñadirNuevo(articuloExcel);
-                }
-            }
-            ActualizarLista();
+                ActualizarLista();
 
+            }
+            else
+            {
+                MessageBox.Show("No es posible añadir artículos cuando no hay Proveedores cargados. Diríjase al módulo de Proveedores para ingresar al menos 1 proveedor.", "Imposible añadir Artículo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
 
        private void btnMostrarTodos_Click(object sender, EventArgs e)

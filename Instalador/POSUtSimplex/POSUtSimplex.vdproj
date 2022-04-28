@@ -51,6 +51,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1A342C4C4D824D83BCC952B879F8E8A4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2116A4241F2B47DE91FC0F7E5A3A82D5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -76,12 +82,6 @@
         "Entry"
         {
         "MsmKey" = "8:_322FBDCBC1084BF4BE86C614E7AA9302"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_38645F12BC8F42FD9FC7FF466E456299"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -135,6 +135,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7DF294222F3E4574933F7E08BB3A4607"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7F41B76434BE565EE3341FE5EA13FB1F"
         "OwnerKey" = "8:_4ACC777C7C968A6D47DA0E1D49160EDF"
         "MsmSig" = "8:_UNDEFINED"
@@ -165,7 +171,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_91845967E30B4321821D64709ABB2F17"
+        "MsmKey" = "8:_8F96A758A0F048EEB7DFB6EA1AAC1C48"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -184,12 +190,6 @@
         "Entry"
         {
         "MsmKey" = "8:_A982B4BE2E144E58A530D87C62504106"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B74550DA0E314A748607A4922A9D6DF9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -250,13 +250,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_62B46AEE21D6422E8DEDD632C988222E"
+        "OwnerKey" = "8:_CC70354810D88DC4D6965EC6F85E742A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC70354810D88DC4D6965EC6F85E742A"
+        "OwnerKey" = "8:_62B46AEE21D6422E8DEDD632C988222E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -274,7 +274,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2116A4241F2B47DE91FC0F7E5A3A82D5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6E24CEDA659CD1E24488AAF391CDDF17"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0C89D6CA9DEF4A7B851A73BF2217F7BB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -293,18 +305,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_22C1E8A8FFA75C302732925C8789D19C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2116A4241F2B47DE91FC0F7E5A3A82D5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0C89D6CA9DEF4A7B851A73BF2217F7BB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -532,6 +532,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A342C4C4D824D83BCC952B879F8E8A4"
+            {
+            "SourcePath" = "8:..\\Clientes.xls"
+            "TargetName" = "8:Clientes.xls"
+            "Tag" = "8:"
+            "Folder" = "8:_CCD986A792524C0F9F93F2599E3B40FE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_22C1E8A8FFA75C302732925C8789D19C"
             {
             "AssemblyRegister" = "3:1"
@@ -569,26 +589,6 @@
             "TargetName" = "8:utsimplex-monolito-ICON-transparent.ico"
             "Tag" = "8:"
             "Folder" = "8:_6554BE594C754C9BA9F309BB341A2358"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_38645F12BC8F42FD9FC7FF466E456299"
-            {
-            "SourcePath" = "8:..\\..\\..\\Proveedores.xls"
-            "TargetName" = "8:Proveedores.xls"
-            "Tag" = "8:"
-            "Folder" = "8:_E24109E32BD142EB9DAD521062776326"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -759,6 +759,26 @@
             "ReadOnly" = "11:FALSE"
             "Hidden" = "11:FALSE"
             "System" = "11:FALSE"
+            "Permanent" = "11:TRUE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7DF294222F3E4574933F7E08BB3A4607"
+            {
+            "SourcePath" = "8:..\\Proveedores.xls"
+            "TargetName" = "8:Proveedores.xls"
+            "Tag" = "8:"
+            "Folder" = "8:_CCD986A792524C0F9F93F2599E3B40FE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
@@ -829,12 +849,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_91845967E30B4321821D64709ABB2F17"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F96A758A0F048EEB7DFB6EA1AAC1C48"
             {
-            "SourcePath" = "8:..\\..\\..\\Artículos.xls"
+            "SourcePath" = "8:..\\Artículos.xls"
             "TargetName" = "8:Artículos.xls"
             "Tag" = "8:"
-            "Folder" = "8:_E24109E32BD142EB9DAD521062776326"
+            "Folder" = "8:_CCD986A792524C0F9F93F2599E3B40FE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -917,26 +937,6 @@
             "TargetName" = "8:SSCERuntime_x86-ENU.exe"
             "Tag" = "8:"
             "Folder" = "8:_6554BE594C754C9BA9F309BB341A2358"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B74550DA0E314A748607A4922A9D6DF9"
-            {
-            "SourcePath" = "8:..\\..\\..\\Clientes.xls"
-            "TargetName" = "8:Clientes.xls"
-            "Tag" = "8:"
-            "Folder" = "8:_E24109E32BD142EB9DAD521062776326"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1176,6 +1176,17 @@
             "Property" = "8:DBFOLDER"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_CCD986A792524C0F9F93F2599E3B40FE"
+                    {
+                    "Name" = "8:Listas Excel"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_980F5E1C0F744C9A8CD49DFC34B19D63"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -1195,7 +1206,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:POSUtSimplex"
         "ProductCode" = "8:{C9C167DF-1A6F-4E57-B8E8-376E072079A4}"
-        "PackageCode" = "8:{C8FD43C6-428E-4678-B68B-1D639B6790CB}"
+        "PackageCode" = "8:{60483465-231B-441E-A024-3DD3DD18826E}"
         "UpgradeCode" = "8:{CE94A235-EDCF-4186-8A99-9AA42E0E8A47}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1216,7 +1227,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:1"
+        "TargetPlatform" = "3:0"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -1730,7 +1741,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_0C89D6CA9DEF4A7B851A73BF2217F7BB"
             {
-            "SourcePath" = "8:..\\..\\UI.Desktop\\obj\\Debug\\UI.Desktop.exe"
+            "SourcePath" = "8:..\\..\\UI.Desktop\\obj\\x86\\Debug\\UI.Desktop.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6554BE594C754C9BA9F309BB341A2358"

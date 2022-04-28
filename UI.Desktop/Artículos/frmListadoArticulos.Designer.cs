@@ -42,6 +42,7 @@
             // 
             this.tbxFiltro.Location = new System.Drawing.Point(130, 18);
             this.tbxFiltro.Size = new System.Drawing.Size(380, 20);
+            this.tbxFiltro.TabIndex = 1;
             this.toolTip1.SetToolTip(this.tbxFiltro, "Ingrese código o descripción para filtrar");
             this.tbxFiltro.TextChanged += new System.EventHandler(this.tbxFiltro_TextChanged_1);
             // 
@@ -51,6 +52,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnSeleccionar);
             this.groupBox2.Size = new System.Drawing.Size(658, 46);
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.Text = "Búsqueda";
             this.groupBox2.Controls.SetChildIndex(this.tbxFiltro, 0);
             this.groupBox2.Controls.SetChildIndex(this.btnSeleccionar, 0);
@@ -68,6 +70,7 @@
             // 
             // btnModificar
             // 
+            this.btnModificar.TabIndex = 2;
             this.toolTip1.SetToolTip(this.btnModificar, "Modifica datos del artículo.");
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -78,6 +81,7 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.TabIndex = 3;
             this.toolTip1.SetToolTip(this.btnSalir, "Cerrar esta ventana.");
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -88,6 +92,7 @@
             // 
             // btnAñadirNuevo
             // 
+            this.btnAñadirNuevo.TabIndex = 1;
             this.toolTip1.SetToolTip(this.btnAñadirNuevo, "Añade artículo nuevo a la grilla.");
             this.btnAñadirNuevo.Click += new System.EventHandler(this.btnAñadirNuevo_Click);
             // 
@@ -120,7 +125,7 @@
             this.btnMostrarTodos.Location = new System.Drawing.Point(516, 12);
             this.btnMostrarTodos.Name = "btnMostrarTodos";
             this.btnMostrarTodos.Size = new System.Drawing.Size(136, 30);
-            this.btnMostrarTodos.TabIndex = 30;
+            this.btnMostrarTodos.TabIndex = 2;
             this.btnMostrarTodos.Text = "Quitar Filtro";
             this.btnMostrarTodos.UseVisualStyleBackColor = true;
             this.btnMostrarTodos.Click += new System.EventHandler(this.btnMostrarTodos_Click);
