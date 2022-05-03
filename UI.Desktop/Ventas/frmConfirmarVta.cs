@@ -28,8 +28,10 @@ namespace UI.Desktop.Ventas
             }
         }
 
-
-
-
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Yes;
+            this.Dispose();
+        }
     }
 }

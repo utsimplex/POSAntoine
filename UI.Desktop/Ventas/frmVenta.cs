@@ -533,26 +533,27 @@ namespace UI.Desktop.Ventas
 
                 if (formConfirmarVenta.DialogResult == DialogResult.Yes)
                 {
-                    int numVenta = Convert.ToInt32(txtNumeroVenta.Text);
+                    PrinterDrawing prt = new PrinterDrawing(vtaNueva, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                    //int numVenta = Convert.ToInt32(txtNumeroVenta.Text);
 
-                    string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion  INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.tipooperacion = 'V' )";
+                    //string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion  INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.tipooperacion = 'V' )";
 
-                    if (Datos_InformesAdapter.BuscarRegistros(sql))
-                    {
-                        System.IO.Directory.CreateDirectory("C:\\XML");
-                        string url = "C:\\XML\\informeVenta.xml";
+                    //if (Datos_InformesAdapter.BuscarRegistros(sql))
+                    // {
+                    //     System.IO.Directory.CreateDirectory("C:\\XML");
+                    //     string url = "C:\\XML\\informeVenta.xml";
 
-                        Datos_InformesAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
+                        //     Datos_InformesAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
 
-                    }
+                        // }
 
-                    frmInformeVenta formInformeVenta = new frmInformeVenta();
-                    formInformeVenta.ShowDialog();
-                   System.IO.File.Delete("C:\\XML\\informeVenta.xml"); 
-                 
+                        // frmInformeVenta formInformeVenta = new frmInformeVenta();
+                        // formInformeVenta.ShowDialog();
+                        //System.IO.File.Delete("C:\\XML\\informeVenta.xml"); 
+
                 }
 
-                    if (formConfirmarVenta.DialogResult != DialogResult.Cancel)
+                if (formConfirmarVenta.DialogResult != DialogResult.Cancel)
                     {
                         ActualizarStock();
                     }
