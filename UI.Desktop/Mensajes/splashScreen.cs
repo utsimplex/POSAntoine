@@ -37,7 +37,7 @@ namespace UI.Desktop.Mensajes
             {
                 this.label1.Text = "Que tengan muchas ventas!!!!";
             }
-            this.progressBar.Increment(3);
+            this.progressBar.Increment(2);
             if (progressBar.Value == 100)
             {
                 this.timer.Stop();
