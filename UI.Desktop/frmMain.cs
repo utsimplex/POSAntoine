@@ -142,16 +142,11 @@ namespace UI.Desktop
         // CLICK BTN Historial de ventas
          private void btnHistorialVentas_Click(object sender, EventArgs e)
         {
-            if (usrActual.Rol == "Administrador")
-            {
+           
                 Ventas.frmHistorialVentas formListaVentas = new UI.Desktop.Ventas.frmHistorialVentas(usrActual);
                 formListaVentas.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("El usuario no posee permisos para realizar esta tarea.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
+            
+          
             }
 
         // CLICK LBL CERRAR SESION

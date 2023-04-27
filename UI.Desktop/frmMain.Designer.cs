@@ -416,7 +416,6 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Image = global::UI.Desktop.Properties.Resources.Key_24x24;
             this.btnCerrarSesion.Location = new System.Drawing.Point(118, 79);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(102, 36);
@@ -428,7 +427,6 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::UI.Desktop.Properties.Resources.Persona;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(112, 118);
@@ -517,7 +515,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoCoraVeggie;
+            this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1107, 673);
             this.Controls.Add(this.monthCalendar1);
@@ -529,7 +527,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msnPrincipal;
             this.Name = "frmMain";
-            this.Text = "utsimplex - INHALA";
+            this.Text = "utsimplex - Antoine";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.msnPrincipal.ResumeLayout(false);

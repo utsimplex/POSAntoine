@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Desktop", "UI.Desktop\UI.Desktop.csproj", "{8E3F6F1A-AB5E-4F52-8442-A33456673D43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{69725928-AA80-4EFE-A4D0-55B082587370}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Database", "Data.Database\Data.Database\Data.Database.csproj", "{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "POSUtSimplex", "Instalador\POSUtSimplex\POSUtSimplex.vdproj", "{DC14F835-0980-4D7D-B22B-D5A20F738986}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "POSSetup", "POSSetup\POSSetup.vdproj", "{14F5BF25-1409-4386-A559-4F7F98E7922C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,23 +61,6 @@ Global
 		{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}.Release|x86.ActiveCfg = Release|Any CPU
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Debug|.NET.ActiveCfg = Debug
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Debug|Any CPU.ActiveCfg = Debug
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Debug|x86.ActiveCfg = Debug
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Debug|x86.Build.0 = Debug
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Release|.NET.ActiveCfg = Release
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Release|Any CPU.ActiveCfg = Release
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Release|Mixed Platforms.ActiveCfg = Release
-		{DC14F835-0980-4D7D-B22B-D5A20F738986}.Release|x86.ActiveCfg = Release
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Debug|.NET.ActiveCfg = Debug
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Debug|Any CPU.ActiveCfg = Debug
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Debug|x86.ActiveCfg = Debug
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Release|.NET.ActiveCfg = Release
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Release|Any CPU.ActiveCfg = Release
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Release|Mixed Platforms.ActiveCfg = Release
-		{14F5BF25-1409-4386-A559-4F7F98E7922C}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

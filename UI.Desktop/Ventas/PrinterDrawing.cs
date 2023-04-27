@@ -37,7 +37,7 @@ namespace UI.Desktop.Ventas
             _modo = modo;
             _directorioLogo = "C:\\POSDataBase\\Drops.png";
             nombreComandera = "80mm Thermal Printer";
-            _cabeceraComanda = "Inhala Bar & Almacen natural";
+            _cabeceraComanda = "Antoine - Bebes y niños";
             //_direccionComanda = parametros.getOne("DIRECCION").Valor;
             //_telefonoComanda = parametros.getOne("TELEFONO").Valor;
             //_imprimeFechaEmision = parametros.getOne("EMISION").Valor;

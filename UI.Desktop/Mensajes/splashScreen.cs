@@ -20,22 +20,22 @@ namespace UI.Desktop.Mensajes
         {
             if (this.progressBar.Value == 20)
             {
-                this.label1.Text = "Conectando a la base de datos...";
+                this.label1.Text = "Inicializando Antoine App";
                 
             }
             if (this.progressBar.Value == 40)
             {
-                this.label1.Text = "Agregando cúrcuma...";
+                this.label1.Text = "Conectando a la base de datos...";
 
             }
             if (this.progressBar.Value == 60)
             {
-                this.label1.Text = "Flores, pimienta y sal...";
+                this.label1.Text = "Cargando info...";
 
             }
             if (this.progressBar.Value == 70)
             {
-                this.label1.Text = "Aguante la vida!!!";
+                this.label1.Text = "Que tengan muchas ventas!!!!";
             }
             this.progressBar.Increment(2);
             if (progressBar.Value == 100)
