@@ -11,7 +11,8 @@ namespace Data.Database
     public class Adapter
     {
         //Crea Cadena de conexion
-        const string CadenaCon = "Data Source=C:\\POSDataBase\\POSDataBase.sdf";
+        const string CadenaCon = "Data Source=E:\\GitHub\\POS Ut Simplex\\POSDataBase.sdf";
+                                     
         // static string CadenaCon = Properties.Settings.Default.ConnectionString;         
 
         //Crear y devuelve Conexion
