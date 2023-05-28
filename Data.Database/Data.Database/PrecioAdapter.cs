@@ -4,7 +4,7 @@ using System.Text;
 using System.Data.SqlServerCe;
 using System.Data;
 using System.Data.SqlTypes;
-
+using System.Data.SqlClient;
 
 namespace Data.Database
 {
@@ -15,19 +15,19 @@ namespace Data.Database
         {
 
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand();
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
             Comando.CommandText = "INSERT INTO [Precios] ([codigoArti], [fechaDesde], [valorPrecio]) VALUES (@CODARTI, @FECHADESDE, @VALORPRECIO)";
-            Comando.Parameters.Add(new SqlCeParameter("@CODARTI", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@CODARTI", SqlDbType.NVarChar));
             Comando.Parameters["@CODARTI"].Value = codArti;
-            Comando.Parameters.Add(new SqlCeParameter("@FECHADESDE", SqlDbType.DateTime));
+            Comando.Parameters.Add(new SqlParameter("@FECHADESDE", SqlDbType.DateTime));
             Comando.Parameters["@FECHADESDE"].Value = fechaDesde;
-            Comando.Parameters.Add(new SqlCeParameter("@VALORPRECIO", SqlDbType.Money));
+            Comando.Parameters.Add(new SqlParameter("@VALORPRECIO", SqlDbType.Money));
             Comando.Parameters["@VALORPRECIO"].Value = valorPrecio;
        
 
@@ -48,16 +48,16 @@ namespace Data.Database
 
             DateTime fechaMax;
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT MAX(fechaDesde) AS Fecha FROM Precios WHERE(codigoArti = @CODIGOARTI)", Con);
-            Comando.Parameters.Add(new SqlCeParameter("@CODIGOARTI", SqlDbType.NVarChar));
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT MAX(fechaDesde) AS Fecha FROM Precios WHERE(codigoArti = @CODIGOARTI)", Con);
+            Comando.Parameters.Add(new SqlParameter("@CODIGOARTI", SqlDbType.NVarChar));
             Comando.Parameters["@CODIGOARTI"].Value = codArti;
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drPrecios = Comando.ExecuteReader();
+                SqlDataReader drPrecios = Comando.ExecuteReader();
 
                 drPrecios.Read();
                 
@@ -91,19 +91,19 @@ namespace Data.Database
 
             decimal ultimoPrecio;
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT valorPrecio FROM Precios WHERE (codigoArti = @CODIGOARTI) AND (fechaDesde = @FECHAMAX)", Con);
-            Comando.Parameters.Add(new SqlCeParameter("@CODIGOARTI", SqlDbType.NVarChar));
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT valorPrecio FROM Precios WHERE (codigoArti = @CODIGOARTI) AND (fechaDesde = @FECHAMAX)", Con);
+            Comando.Parameters.Add(new SqlParameter("@CODIGOARTI", SqlDbType.NVarChar));
             Comando.Parameters["@CODIGOARTI"].Value = codArti;
-            Comando.Parameters.Add(new SqlCeParameter("@FECHAMAX", SqlDbType.DateTime));
+            Comando.Parameters.Add(new SqlParameter("@FECHAMAX", SqlDbType.DateTime));
             Comando.Parameters["@FECHAMAX"].Value = fechaMax;
 
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drPrecios = Comando.ExecuteReader();
+                SqlDataReader drPrecios = Comando.ExecuteReader();
 
                 drPrecios.Read();
                 

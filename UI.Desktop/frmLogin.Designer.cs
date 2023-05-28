@@ -80,7 +80,7 @@
             this.label3.Location = new System.Drawing.Point(128, 124);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 16);
+            this.label3.Size = new System.Drawing.Size(79, 16);
             this.label3.TabIndex = 9;
             this.label3.Text = "Contraseña:";
             // 
@@ -91,7 +91,7 @@
             this.label2.Location = new System.Drawing.Point(82, 91);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 16);
+            this.label2.Size = new System.Drawing.Size(125, 16);
             this.label2.TabIndex = 8;
             this.label2.Text = "Nombre de usuario:";
             // 
@@ -102,7 +102,7 @@
             this.label1.Location = new System.Drawing.Point(128, 22);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(254, 32);
+            this.label1.Size = new System.Drawing.Size(253, 32);
             this.label1.TabIndex = 7;
             this.label1.Text = "¡Bienvenido al Sistema!\r\nPor favor digite su información de Ingreso";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,7 +113,7 @@
             this.lnkOlvidaPass.Location = new System.Drawing.Point(13, 226);
             this.lnkOlvidaPass.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkOlvidaPass.Name = "lnkOlvidaPass";
-            this.lnkOlvidaPass.Size = new System.Drawing.Size(134, 16);
+            this.lnkOlvidaPass.Size = new System.Drawing.Size(133, 16);
             this.lnkOlvidaPass.TabIndex = 12;
             this.lnkOlvidaPass.TabStop = true;
             this.lnkOlvidaPass.Text = "Olvidé mi contraseña";
@@ -155,8 +155,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingreso";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

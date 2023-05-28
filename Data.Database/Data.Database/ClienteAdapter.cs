@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlServerCe;
-
+using System.Data.SqlClient;
 
 namespace Data.Database
 {
@@ -14,27 +14,27 @@ namespace Data.Database
         {
                     
           //Crear Conexion y Abrirla
-          SqlCeConnection Con = CrearConexion();
+          SqlConnection Con = CrearConexion();
           
-          // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-          SqlCeCommand Comando = new SqlCeCommand();
+          // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+          SqlCommand Comando = new SqlCommand();
           Comando.Connection = Con;
           Comando.CommandType = CommandType.Text;
 
           Comando.CommandText = "INSERT INTO [Clientes] ([dni], [nombre], [apellido], [direccion], [telefono], [email], [tipo]) VALUES (@DNI, @NOMBRE, @APELLIDO, @DIRECCION, @TELEFONO, @EMAIL, @TIPO)";
-          Comando.Parameters.Add(new SqlCeParameter("@DNI", SqlDbType.NVarChar));
+          Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
           Comando.Parameters["@DNI"].Value = cli.Dni;
-          Comando.Parameters.Add(new SqlCeParameter("@NOMBRE", SqlDbType.NVarChar));
+          Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
           Comando.Parameters["@NOMBRE"].Value = cli.Nombre;
-          Comando.Parameters.Add(new SqlCeParameter("@APELLIDO", SqlDbType.NVarChar));
+          Comando.Parameters.Add(new SqlParameter("@APELLIDO", SqlDbType.NVarChar));
           Comando.Parameters["@APELLIDO"].Value = cli.Apellido;
-          Comando.Parameters.Add(new SqlCeParameter("@DIRECCION", SqlDbType.NVarChar));
+          Comando.Parameters.Add(new SqlParameter("@DIRECCION", SqlDbType.NVarChar));
           Comando.Parameters["@DIRECCION"].Value = cli.Direccion;
-          Comando.Parameters.Add(new SqlCeParameter("@TELEFONO", SqlDbType.NVarChar));
+          Comando.Parameters.Add(new SqlParameter("@TELEFONO", SqlDbType.NVarChar));
           Comando.Parameters["@TELEFONO"].Value = cli.Telefono;
-          Comando.Parameters.Add(new SqlCeParameter("@EMAIL", SqlDbType.NVarChar));
+          Comando.Parameters.Add(new SqlParameter("@EMAIL", SqlDbType.NVarChar));
           Comando.Parameters["@EMAIL"].Value = cli.Email;
-          Comando.Parameters.Add(new SqlCeParameter("@TIPO", SqlDbType.NVarChar));
+          Comando.Parameters.Add(new SqlParameter("@TIPO", SqlDbType.NVarChar));
           Comando.Parameters["@TIPO"].Value = cli.TipoCliente;
 
           //Ejecuta el comando INSERT
@@ -49,14 +49,14 @@ namespace Data.Database
         {
 
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand();
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
             Comando.CommandText = "DELETE FROM [Clientes] WHERE (([dni] = @DNI))";
-            Comando.Parameters.Add(new SqlCeParameter("@DNI", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
             Comando.Parameters["@DNI"].Value = Dni;
 
             //Ejecuta el comando INSERT
@@ -68,27 +68,27 @@ namespace Data.Database
         public void Actualizar(Entidades.Cliente cli)
         {
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand();
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
             Comando.CommandText = "UPDATE [Clientes] SET [nombre] = @NOMBRE, [apellido] = @APELLIDO, [direccion] = @DIRECCION, [telefono] = @TELEFONO, [email] = @EMAIL, [tipo] = @TIPO WHERE (([dni] = @DNI))";
-            Comando.Parameters.Add(new SqlCeParameter("@DNI", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
             Comando.Parameters["@DNI"].Value = cli.Dni;
-            Comando.Parameters.Add(new SqlCeParameter("@NOMBRE", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
             Comando.Parameters["@NOMBRE"].Value = cli.Nombre;
-            Comando.Parameters.Add(new SqlCeParameter("@APELLIDO", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@APELLIDO", SqlDbType.NVarChar));
             Comando.Parameters["@APELLIDO"].Value = cli.Apellido;
-            Comando.Parameters.Add(new SqlCeParameter("@DIRECCION", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@DIRECCION", SqlDbType.NVarChar));
             Comando.Parameters["@DIRECCION"].Value = cli.Direccion;
-            Comando.Parameters.Add(new SqlCeParameter("@TELEFONO", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@TELEFONO", SqlDbType.NVarChar));
             Comando.Parameters["@TELEFONO"].Value = cli.Telefono;
-            Comando.Parameters.Add(new SqlCeParameter("@EMAIL", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@EMAIL", SqlDbType.NVarChar));
             Comando.Parameters["@EMAIL"].Value = cli.Email;
-            Comando.Parameters.Add(new SqlCeParameter("@TIPO", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@TIPO", SqlDbType.NVarChar));
             Comando.Parameters["@TIPO"].Value = cli.TipoCliente;
 
 
@@ -102,14 +102,14 @@ namespace Data.Database
         {
             List<Entidades.Cliente> ListaClientes = new List<Entidades.Cliente>();
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Clientes", Con);
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Clientes", Con);
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drClientes = Comando.ExecuteReader();
+                SqlDataReader drClientes = Comando.ExecuteReader();
 
                 while (drClientes.Read())
                 {
@@ -153,17 +153,17 @@ namespace Data.Database
             Entidades.Cliente ClienteActual = new Entidades.Cliente();
 
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Clientes WHERE Clientes.dni = @DNI", Con);
-            Comando.Parameters.Add(new SqlCeParameter("@DNI", SqlDbType.NVarChar));
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Clientes WHERE Clientes.dni = @DNI", Con);
+            Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
             Comando.Parameters["@DNI"].Value = dni;
 
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drClientes = Comando.ExecuteReader();
+                SqlDataReader drClientes = Comando.ExecuteReader();
 
                 while (drClientes.Read())
                 {
@@ -208,16 +208,16 @@ namespace Data.Database
            
             List<Entidades.Cliente> ListaClientes = new List<Entidades.Cliente>();
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Clientes WHERE Clientes.nombre like @texto OR Clientes.dni like @texto OR Clientes.apellido like @texto", Con);
-            Comando.Parameters.Add(new SqlCeParameter("@texto", SqlDbType.NVarChar));
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Clientes WHERE Clientes.nombre like @texto OR Clientes.dni like @texto OR Clientes.apellido like @texto", Con);
+            Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
             Comando.Parameters["@texto"].Value = texto+'%';
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drClientes = Comando.ExecuteReader();
+                SqlDataReader drClientes = Comando.ExecuteReader();
 
                 while (drClientes.Read())
                 {

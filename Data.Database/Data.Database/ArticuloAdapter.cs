@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlServerCe;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Data.Database
 {
@@ -11,29 +12,29 @@ namespace Data.Database
         public void AñadirNuevo(Entidades.Articulo arti)
         {
                 //Crear Conexion y Abrirla
-                SqlCeConnection Con = CrearConexion();
+                SqlConnection Con = CrearConexion();
 
-                // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                SqlCeCommand Comando = new SqlCeCommand();
+                // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+                SqlCommand Comando = new SqlCommand();
                 Comando.Connection = Con;
                 Comando.CommandType = CommandType.Text;
             try
             {
 
                 Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO)";
-                Comando.Parameters.Add(new SqlCeParameter("@CODIGO", SqlDbType.NVarChar));
+                Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO"].Value = arti.Codigo;
-                Comando.Parameters.Add(new SqlCeParameter("@DESCRIPCION", SqlDbType.NVarChar));
+                Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
                 Comando.Parameters["@DESCRIPCION"].Value = arti.Descripcion;
-                Comando.Parameters.Add(new SqlCeParameter("@STOCK", SqlDbType.Int));
+                Comando.Parameters.Add(new SqlParameter("@STOCK", SqlDbType.Int));
                 Comando.Parameters["@STOCK"].Value = arti.Stock;
-                Comando.Parameters.Add(new SqlCeParameter("@STOCKMIN", SqlDbType.Int));
+                Comando.Parameters.Add(new SqlParameter("@STOCKMIN", SqlDbType.Int));
                 Comando.Parameters["@STOCKMIN"].Value = arti.StockMin;
-                Comando.Parameters.Add(new SqlCeParameter("@PRECIO", SqlDbType.Money));
+                Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Money));
                 Comando.Parameters["@PRECIO"].Value = arti.Precio;
-                Comando.Parameters.Add(new SqlCeParameter("@MARCA", SqlDbType.NVarChar));
+                Comando.Parameters.Add(new SqlParameter("@MARCA", SqlDbType.NVarChar));
                 Comando.Parameters["@MARCA"].Value = arti.Proveedor;
-                Comando.Parameters.Add(new SqlCeParameter("@HABILITADO", SqlDbType.NVarChar));
+                Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
                 Comando.Parameters["@HABILITADO"].Value = "Si";
 
                 //Ejecuta el comando INSERT
@@ -57,14 +58,14 @@ namespace Data.Database
      {
 
          //Crear Conexion y Abrirla
-         SqlCeConnection Con = CrearConexion();
+         SqlConnection Con = CrearConexion();
 
-         // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-         SqlCeCommand Comando = new SqlCeCommand();
+         // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+         SqlCommand Comando = new SqlCommand();
          Comando.Connection = Con;
          Comando.CommandType = CommandType.Text;
          Comando.CommandText = "DELETE FROM [Articulos] WHERE (([codigo] = @CODIGO))";
-         Comando.Parameters.Add(new SqlCeParameter("@CODIGO", SqlDbType.NVarChar));
+         Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
          Comando.Parameters["@CODIGO"].Value = Codigo;
 
          //Ejecuta el comando INSERT
@@ -77,27 +78,27 @@ namespace Data.Database
 public void Actualizar(Entidades.Articulo arti)
              {
                //Crear Conexion y Abrirla
-               SqlCeConnection Con = CrearConexion();
+               SqlConnection Con = CrearConexion();
           
-               // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-               SqlCeCommand Comando = new SqlCeCommand();
+               // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+               SqlCommand Comando = new SqlCommand();
                Comando.Connection = Con;
                Comando.CommandType = CommandType.Text;
                  
                Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO WHERE (([codigo] = @CODIGO))";
-               Comando.Parameters.Add(new SqlCeParameter("@CODIGO", SqlDbType.NVarChar));
+               Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                Comando.Parameters["@CODIGO"].Value = arti.Codigo;
-               Comando.Parameters.Add(new SqlCeParameter("@DESCRIPCION", SqlDbType.NVarChar));
+               Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
                Comando.Parameters["@DESCRIPCION"].Value = arti.Descripcion;
-               Comando.Parameters.Add(new SqlCeParameter("@STOCK", SqlDbType.Int));
+               Comando.Parameters.Add(new SqlParameter("@STOCK", SqlDbType.Int));
                Comando.Parameters["@STOCK"].Value = arti.Stock;
-               Comando.Parameters.Add(new SqlCeParameter("@STOCKMIN", SqlDbType.Int));
+               Comando.Parameters.Add(new SqlParameter("@STOCKMIN", SqlDbType.Int));
                Comando.Parameters["@STOCKMIN"].Value = arti.StockMin;
-               Comando.Parameters.Add(new SqlCeParameter("@PRECIO", SqlDbType.Money));
+               Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Money));
                Comando.Parameters["@PRECIO"].Value = arti.Precio;
-               Comando.Parameters.Add(new SqlCeParameter("@MARCA", SqlDbType.NVarChar));
+               Comando.Parameters.Add(new SqlParameter("@MARCA", SqlDbType.NVarChar));
                Comando.Parameters["@MARCA"].Value = arti.Proveedor;
-               Comando.Parameters.Add(new SqlCeParameter("@HABILITADO", SqlDbType.NVarChar));
+               Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
                Comando.Parameters["@HABILITADO"].Value = arti.Habilitado;
 
                //Ejecuta el comando INSERT
@@ -111,14 +112,14 @@ public void Actualizar(Entidades.Articulo arti)
              {
                  System.ComponentModel.BindingList<Entidades.Articulo> ListaArticulos = new System.ComponentModel.BindingList<Entidades.Articulo>();
                  //Crear Conexion y Abrirla
-                 SqlCeConnection Con = CrearConexion();
+                 SqlConnection Con = CrearConexion();
 
                  // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Articulos ORDER BY Articulos.descripcion", Con);
+                 SqlCommand Comando = new SqlCommand("SELECT * FROM Articulos ORDER BY Articulos.descripcion", Con);
                  try
                  {
                      Comando.Connection.Open();
-                     SqlCeDataReader drArticulos = Comando.ExecuteReader();
+                     SqlDataReader drArticulos = Comando.ExecuteReader();
 
                      while (drArticulos.Read())
                      {
@@ -163,16 +164,16 @@ public void Actualizar(Entidades.Articulo arti)
              {
                  List<Entidades.Articulo> ListaArticulos = new List<Entidades.Articulo>();
                  //Crear Conexion y Abrirla
-                 SqlCeConnection Con = CrearConexion();
+                 SqlConnection Con = CrearConexion();
 
                  // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Articulos WHERE Articulos.codigo like @texto or Articulos.descripcion like @texto OR Articulos.marca like @texto", Con);
-                 Comando.Parameters.Add(new SqlCeParameter("@texto", SqlDbType.NVarChar));
+                 SqlCommand Comando = new SqlCommand("SELECT * FROM Articulos WHERE Articulos.codigo like @texto or Articulos.descripcion like @texto OR Articulos.marca like @texto", Con);
+                 Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
                  Comando.Parameters["@texto"].Value = '%' + texto + '%';
                  try
                  {
                      Comando.Connection.Open();
-                     SqlCeDataReader drArticulos = Comando.ExecuteReader();
+                     SqlDataReader drArticulos = Comando.ExecuteReader();
 
                      while (drArticulos.Read())
                      {
@@ -217,14 +218,14 @@ public void Actualizar(Entidades.Articulo arti)
              {
                  List<Entidades.Articulo> ListaArticulosReponer = new List<Entidades.Articulo>();
                  //Crear Conexion y Abrirla
-                 SqlCeConnection Con = CrearConexion();
+                 SqlConnection Con = CrearConexion();
 
-                 // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Articulos WHERE Articulos.stock <= Articulos.stockmin", Con);
+                 // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+                 SqlCommand Comando = new SqlCommand("SELECT * FROM Articulos WHERE Articulos.stock <= Articulos.stockmin", Con);
                  try
                  {
                      Comando.Connection.Open();
-                     SqlCeDataReader drArticulos = Comando.ExecuteReader();
+                     SqlDataReader drArticulos = Comando.ExecuteReader();
 
                      while (drArticulos.Read())
                      {
@@ -270,16 +271,16 @@ public void Actualizar(Entidades.Articulo arti)
              {
                  Entidades.Articulo ListaArticulos = new Entidades.Articulo();
                  //Crear Conexion y Abrirla
-                 SqlCeConnection Con = CrearConexion();
+                 SqlConnection Con = CrearConexion();
 
-                 // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Articulos WHERE Articulos.codigo = @texto or Articulos.descripcion = @texto", Con);
-                 Comando.Parameters.Add(new SqlCeParameter("@texto", SqlDbType.NVarChar));
+                 // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+                 SqlCommand Comando = new SqlCommand("SELECT * FROM Articulos WHERE Articulos.codigo = @texto or Articulos.descripcion = @texto", Con);
+                 Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
                  Comando.Parameters["@texto"].Value = texto;
                  try
                  {
                      Comando.Connection.Open();
-                     SqlCeDataReader drArticulos = Comando.ExecuteReader();
+                     SqlDataReader drArticulos = Comando.ExecuteReader();
 
                      while (drArticulos.Read())
                      {
@@ -318,10 +319,10 @@ public void Actualizar(Entidades.Articulo arti)
                  int canti;
                  
                  //Crear Conexion y Abrirla
-                 SqlCeConnection Con = CrearConexion();
+                 SqlConnection Con = CrearConexion();
 
-                 // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCeCommand Comando = new SqlCeCommand("SELECT COUNT(*) Cantidad FROM Articulos", Con);
+                 // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+                 SqlCommand Comando = new SqlCommand("SELECT COUNT(*) Cantidad FROM Articulos", Con);
                  try
                  {
                      Comando.Connection.Open();
@@ -352,10 +353,10 @@ public void Actualizar(Entidades.Articulo arti)
                  int canti;
 
                  //Crear Conexion y Abrirla
-                 SqlCeConnection Con = CrearConexion();
+                 SqlConnection Con = CrearConexion();
 
-                 // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCeCommand Comando = new SqlCeCommand("SELECT SUM(articulos.stock) as ArticuloStock from articulos", Con);
+                 // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+                 SqlCommand Comando = new SqlCommand("SELECT SUM(articulos.stock) as ArticuloStock from articulos", Con);
                  try
                  {
                      Comando.Connection.Open();
@@ -387,14 +388,14 @@ public void Actualizar(Entidades.Articulo arti)
                  List<string> ListaMarcas = new List<string>();
 
                  //Crear Conexion y Abrirla
-                 SqlCeConnection Con = CrearConexion();
+                 SqlConnection Con = CrearConexion();
 
-                 // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCeCommand Comando = new SqlCeCommand("SELECT DISTINCT marca FROM Articulos WHERE (habilitado = 'Si')", Con);
+                 // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+                 SqlCommand Comando = new SqlCommand("SELECT DISTINCT marca FROM Articulos WHERE (habilitado = 'Si')", Con);
                  try
                  {
                      Comando.Connection.Open();
-                     SqlCeDataReader drMarcas = Comando.ExecuteReader();
+                     SqlDataReader drMarcas = Comando.ExecuteReader();
 
                      while (drMarcas.Read())
                      {

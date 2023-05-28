@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlServerCe;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Data.Database
 {
   public  class InformeVentaAdapter:Adapter
     {
-        public SqlCeConnection conexion;
+        public SqlConnection conexion;
 
-        public SqlCeDataAdapter adaptador;
-        public SqlCeDataAdapter adaptador1;
+        public SqlDataAdapter adaptador;
+        public SqlDataAdapter adaptador1;
 
         public DataTable tabla;
 
@@ -31,9 +32,9 @@ namespace Data.Database
             try
             {
                 
-                SqlCeConnection conexion = CrearConexion();
+                SqlConnection conexion = CrearConexion();
 
-                adaptador = new SqlCeDataAdapter(consulta, conexion);
+                adaptador = new SqlDataAdapter(consulta, conexion);
 
                 tablas = new DataSet("tablas1");
 

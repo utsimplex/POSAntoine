@@ -5,6 +5,7 @@ using System.Data.SqlServerCe;
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlTypes;
+using System.Data.SqlClient;
 
 namespace Data.Database
 {
@@ -14,20 +15,20 @@ namespace Data.Database
         {
 
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand();
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
             
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
             Comando.CommandText = "INSERT INTO [Proveedores_Articulos] ([nombreProv], [codigoArt], [costoCompraProv]) VALUES (@NOMBREPROV, @CODIGOART, @COSTOCOMPRAPROV)";
-            Comando.Parameters.Add(new SqlCeParameter("@NOMBREPROV", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@NOMBREPROV", SqlDbType.NVarChar));
             Comando.Parameters["@NOMBREPROV"].Value = prov_arti.Nombre;
-            Comando.Parameters.Add(new SqlCeParameter("@CODIGOART", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@CODIGOART", SqlDbType.NVarChar));
             Comando.Parameters["@CODIGOART"].Value = prov_arti.CodigoArticulo;
-            Comando.Parameters.Add(new SqlCeParameter("@COSTOCOMPRAPROV", SqlDbType.Money));
+            Comando.Parameters.Add(new SqlParameter("@COSTOCOMPRAPROV", SqlDbType.Money));
             Comando.Parameters["@COSTOCOMPRAPROV"].Value = prov_arti.CostoCompraProveedor;
            
 
@@ -41,14 +42,14 @@ namespace Data.Database
         {
             List<Entidades.Proveedor_Articulo> ListaProveedoresArticulos = new List<Entidades.Proveedor_Articulo>();
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT * FROM Proveedores_Articulos", Con);
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Proveedores_Articulos", Con);
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drProveedoresArticulos = Comando.ExecuteReader();
+                SqlDataReader drProveedoresArticulos = Comando.ExecuteReader();
 
                 while (drProveedoresArticulos.Read())
                 {
@@ -88,11 +89,11 @@ namespace Data.Database
         public DataTable GetArticulosProveedor(string nombreProveedor)
         {
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT Articulos.codigo, Articulos.descripcion, Proveedores_Articulos.costoCompraProv FROM [Articulos] INNER JOIN [Proveedores_Articulos] on Proveedores_Articulos.codigoArt = (Articulos.codigo)  WHERE (Proveedores_Articulos.nombreProv = @nombreProveedor)", Con);
-            Comando.Parameters.Add(new SqlCeParameter("@nombreProveedor", SqlDbType.NVarChar));
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT Articulos.codigo, Articulos.descripcion, Proveedores_Articulos.costoCompraProv FROM [Articulos] INNER JOIN [Proveedores_Articulos] on Proveedores_Articulos.codigoArt = (Articulos.codigo)  WHERE (Proveedores_Articulos.nombreProv = @nombreProveedor)", Con);
+            Comando.Parameters.Add(new SqlParameter("@nombreProveedor", SqlDbType.NVarChar));
             Comando.Parameters["@nombreProveedor"].Value = nombreProveedor;
             
             //Crea DataTable para ser Origen de la Grilla
@@ -114,7 +115,7 @@ namespace Data.Database
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drCatalogoPorProveedor = Comando.ExecuteReader();
+                SqlDataReader drCatalogoPorProveedor = Comando.ExecuteReader();
                
                 while (drCatalogoPorProveedor.Read())
                
@@ -150,11 +151,11 @@ namespace Data.Database
         public DataTable GetProveedoresArticulo(string codigoArticulo)
         {
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand("SELECT Proveedores.nombre, Proveedores.telefono, Proveedores_Articulos.costoCompraProv FROM [Proveedores] INNER JOIN [Proveedores_Articulos] on Proveedores_Articulos.nombreProv = (Proveedores.nombre) INNER JOIN [Articulos] on Proveedores_Articulos.codigoArt = Articulos.codigo  WHERE (Articulos.codigo= @codigoArticulo)", Con);
-            Comando.Parameters.Add(new SqlCeParameter("@codigoArticulo", SqlDbType.NVarChar));
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT Proveedores.nombre, Proveedores.telefono, Proveedores_Articulos.costoCompraProv FROM [Proveedores] INNER JOIN [Proveedores_Articulos] on Proveedores_Articulos.nombreProv = (Proveedores.nombre) INNER JOIN [Articulos] on Proveedores_Articulos.codigoArt = Articulos.codigo  WHERE (Articulos.codigo= @codigoArticulo)", Con);
+            Comando.Parameters.Add(new SqlParameter("@codigoArticulo", SqlDbType.NVarChar));
             Comando.Parameters["@codigoArticulo"].Value = codigoArticulo;
 
             //Crea DataTable para ser Origen de la Grilla
@@ -174,7 +175,7 @@ namespace Data.Database
             try
             {
                 Comando.Connection.Open();
-                SqlCeDataReader drCatalogoProvPorArticulo = Comando.ExecuteReader();
+                SqlDataReader drCatalogoProvPorArticulo = Comando.ExecuteReader();
 
                 while (drCatalogoProvPorArticulo.Read())
                 {
@@ -209,19 +210,19 @@ namespace Data.Database
         public void ModificarCosto(Entidades.Proveedor_Articulo prov_arti_modif)
         {
             //Crear Conexion y Abrirla
-            SqlCeConnection Con = CrearConexion();
+            SqlConnection Con = CrearConexion();
 
-            // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCeCommand Comando = new SqlCeCommand();
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
             Comando.CommandText = "UPDATE [Proveedores_Articulos] SET [nombreProv]=@NOMBREPROV, [codigoArt]=@CODIGOART, [costoCompraProv]=@COSTOCOMPRAPROV WHERE (([codigoArt] = @CODIGOART AND [nombreProv]=@NOMBREPROV))";
-            Comando.Parameters.Add(new SqlCeParameter("@NOMBREPROV", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@NOMBREPROV", SqlDbType.NVarChar));
             Comando.Parameters["@NOMBREPROV"].Value = prov_arti_modif.Nombre;
-            Comando.Parameters.Add(new SqlCeParameter("@CODIGOART", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@CODIGOART", SqlDbType.NVarChar));
             Comando.Parameters["@CODIGOART"].Value = prov_arti_modif.CodigoArticulo;
-            Comando.Parameters.Add(new SqlCeParameter("@COSTOCOMPRAPROV", SqlDbType.Money));
+            Comando.Parameters.Add(new SqlParameter("@COSTOCOMPRAPROV", SqlDbType.Money));
             Comando.Parameters["@COSTOCOMPRAPROV"].Value = prov_arti_modif.CostoCompraProveedor;
 
             //Ejecuta el comando INSERT
