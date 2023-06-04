@@ -842,7 +842,7 @@ namespace UI.Desktop
         private void InicializarCaja()
         {
 
-            Cajas.frmAperturaCaja frmAperturaCaja = new Cajas.frmAperturaCaja();
+            Cajas.frmAperturaCaja frmAperturaCaja = new Cajas.frmAperturaCaja(usrActual);
 
             if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
             {

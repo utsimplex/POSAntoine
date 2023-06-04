@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,20 @@ namespace UI.Desktop.Cajas
 {
     public partial class frmAperturaCaja : Form
     {
-        public frmAperturaCaja()
+        #region /*/*/*   VARIABLES LOCALES   *\*\*\
+
+        //Data.Database.InformeVentaAdapter Datos_InformeAdapter = new InformeVentaAdapter();
+        //Data.Database.VentasAdapter Datos_VentasAdapter = new Data.Database.VentasAdapter();
+        Entidades.Usuario usrActual;
+
+        #endregion
+
+
+        public frmAperturaCaja(Entidades.Usuario usr)
         {
             InitializeComponent();
+            usrActual = usr;
+            txtUsuario.Text = usrActual.usuario;
         }
 
         private void btnNo_Click(object sender, EventArgs e)
