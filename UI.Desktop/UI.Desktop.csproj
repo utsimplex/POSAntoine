@@ -257,6 +257,18 @@
       <DependentUpon>informeListaDePrecios.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Cajas\frmAperturaCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmAperturaCaja.Designer.cs">
+      <DependentUpon>frmAperturaCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cajas\frmCajas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmCajas.Designer.cs">
+      <DependentUpon>frmCajas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clientes\frmClienteABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -358,6 +370,12 @@
     <EmbeddedResource Include="Artículos\informeListaDePrecios.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>informeListaDePrecios.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmAperturaCaja.resx">
+      <DependentUpon>frmAperturaCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmCajas.resx">
+      <DependentUpon>frmCajas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Clientes\frmClienteABM.resx">
       <DependentUpon>frmClienteABM.cs</DependentUpon>
@@ -579,6 +597,14 @@
     <None Include="Resources\antoine.png" />
     <None Include="Resources\antoine-transparent.png" />
     <None Include="Resources\fondoAntoineBlack.png" />
+    <None Include="Resources\3387295_shopping_finance_payment_machine_credit.png" />
+    <None Include="Resources\forward16.png" />
+    <None Include="Resources\back16.png" />
+    <None Include="Resources\back241.png" />
+    <None Include="Resources\forward32.png" />
+    <None Include="Resources\back32.png" />
+    <None Include="Resources\3319632_chart_investment_stocks_graph_report_infographic.png" />
+    <None Include="Resources\3319627_coin_money_banking_transfer_dollar.png" />
     <Content Include="Resources\logoColor.jpg" />
     <Content Include="Resources\Persona.JPG" />
     <None Include="Resources\splash2blue.bmp" />
@@ -599,6 +625,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

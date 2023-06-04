@@ -75,13 +75,29 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.NI = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnCajas = new System.Windows.Forms.Button();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.scntCaja = new System.Windows.Forms.SplitContainer();
+            this.txtCajaFecha = new System.Windows.Forms.TextBox();
+            this.lblCajaFecha = new System.Windows.Forms.Label();
+            this.txtCajaNro = new System.Windows.Forms.TextBox();
+            this.lblNroCaja = new System.Windows.Forms.Label();
+            this.lblCajaAbierta = new System.Windows.Forms.Label();
+            this.lblCajaCerrada = new System.Windows.Forms.Label();
+            this.btnAbrirCaja = new System.Windows.Forms.Button();
+            this.btnCajaExtraer = new System.Windows.Forms.Button();
+            this.btnCajaIngresar = new System.Windows.Forms.Button();
+            this.btnCerrarCaja = new System.Windows.Forms.Button();
             this.msnPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scntCaja)).BeginInit();
+            this.scntCaja.Panel1.SuspendLayout();
+            this.scntCaja.Panel2.SuspendLayout();
+            this.scntCaja.SuspendLayout();
             this.SuspendLayout();
             // 
             // msnPrincipal
@@ -321,7 +337,7 @@
             this.btnListaClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnListaClientes.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnListaClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnListaClientes.Image")));
-            this.btnListaClientes.Location = new System.Drawing.Point(15, 279);
+            this.btnListaClientes.Location = new System.Drawing.Point(15, 344);
             this.btnListaClientes.Name = "btnListaClientes";
             this.btnListaClientes.Size = new System.Drawing.Size(124, 59);
             this.btnListaClientes.TabIndex = 2;
@@ -334,7 +350,7 @@
             // 
             this.btnListaArticulos.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnListaArticulos.Image = ((System.Drawing.Image)(resources.GetObject("btnListaArticulos.Image")));
-            this.btnListaArticulos.Location = new System.Drawing.Point(15, 84);
+            this.btnListaArticulos.Location = new System.Drawing.Point(15, 149);
             this.btnListaArticulos.Name = "btnListaArticulos";
             this.btnListaArticulos.Size = new System.Drawing.Size(124, 59);
             this.btnListaArticulos.TabIndex = 4;
@@ -347,7 +363,7 @@
             // 
             this.btnListaProveedores.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnListaProveedores.Image = ((System.Drawing.Image)(resources.GetObject("btnListaProveedores.Image")));
-            this.btnListaProveedores.Location = new System.Drawing.Point(15, 214);
+            this.btnListaProveedores.Location = new System.Drawing.Point(15, 279);
             this.btnListaProveedores.Name = "btnListaProveedores";
             this.btnListaProveedores.Size = new System.Drawing.Size(124, 59);
             this.btnListaProveedores.TabIndex = 6;
@@ -373,7 +389,7 @@
             // 
             this.btnHistorialVentas.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnHistorialVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnHistorialVentas.Image")));
-            this.btnHistorialVentas.Location = new System.Drawing.Point(15, 149);
+            this.btnHistorialVentas.Location = new System.Drawing.Point(15, 214);
             this.btnHistorialVentas.Name = "btnHistorialVentas";
             this.btnHistorialVentas.Size = new System.Drawing.Size(124, 59);
             this.btnHistorialVentas.TabIndex = 8;
@@ -467,9 +483,9 @@
             this.lblNombreUsuario.AutoSize = true;
             this.lblNombreUsuario.Location = new System.Drawing.Point(135, 28);
             this.lblNombreUsuario.Name = "lblNombreUsuario";
-            this.lblNombreUsuario.Size = new System.Drawing.Size(51, 13);
+            this.lblNombreUsuario.Size = new System.Drawing.Size(94, 13);
             this.lblNombreUsuario.TabIndex = 1;
-            this.lblNombreUsuario.Text = "Alejandro";
+            this.lblNombreUsuario.Text = "NombreDeUsuario";
             // 
             // lblUsuario
             // 
@@ -493,22 +509,213 @@
             this.groupBox1.Controls.Add(this.btnNuevaVenta);
             this.groupBox1.Controls.Add(this.btnListaClientes);
             this.groupBox1.Controls.Add(this.btnListaArticulos);
+            this.groupBox1.Controls.Add(this.btnCajas);
             this.groupBox1.Controls.Add(this.btnHistorialVentas);
             this.groupBox1.Controls.Add(this.btnListaProveedores);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox1.Location = new System.Drawing.Point(12, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(152, 353);
+            this.groupBox1.Size = new System.Drawing.Size(152, 414);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Menú de Opciones";
             // 
+            // btnCajas
+            // 
+            this.btnCajas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCajas.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCajas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnCajas.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCajas.Image = global::UI.Desktop.Properties.Resources._3319627_coin_money_banking_transfer_dollar;
+            this.btnCajas.Location = new System.Drawing.Point(15, 84);
+            this.btnCajas.Name = "btnCajas";
+            this.btnCajas.Size = new System.Drawing.Size(124, 59);
+            this.btnCajas.TabIndex = 9;
+            this.btnCajas.Text = "Cajas";
+            this.btnCajas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCajas.UseVisualStyleBackColor = true;
+            this.btnCajas.Click += new System.EventHandler(this.btnCajas_Click);
+            // 
             // monthCalendar1
             // 
             this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.monthCalendar1.Location = new System.Drawing.Point(15, 369);
+            this.monthCalendar1.Location = new System.Drawing.Point(12, 369);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 13;
+            // 
+            // scntCaja
+            // 
+            this.scntCaja.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.scntCaja.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.scntCaja.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.scntCaja.Location = new System.Drawing.Point(873, 39);
+            this.scntCaja.Name = "scntCaja";
+            this.scntCaja.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // scntCaja.Panel1
+            // 
+            this.scntCaja.Panel1.Controls.Add(this.txtCajaFecha);
+            this.scntCaja.Panel1.Controls.Add(this.lblCajaFecha);
+            this.scntCaja.Panel1.Controls.Add(this.txtCajaNro);
+            this.scntCaja.Panel1.Controls.Add(this.lblNroCaja);
+            this.scntCaja.Panel1.Controls.Add(this.lblCajaAbierta);
+            this.scntCaja.Panel1.Controls.Add(this.lblCajaCerrada);
+            // 
+            // scntCaja.Panel2
+            // 
+            this.scntCaja.Panel2.Controls.Add(this.btnAbrirCaja);
+            this.scntCaja.Panel2.Controls.Add(this.btnCajaExtraer);
+            this.scntCaja.Panel2.Controls.Add(this.btnCajaIngresar);
+            this.scntCaja.Panel2.Controls.Add(this.btnCerrarCaja);
+            this.scntCaja.Size = new System.Drawing.Size(222, 273);
+            this.scntCaja.SplitterDistance = 93;
+            this.scntCaja.TabIndex = 4;
+            // 
+            // txtCajaFecha
+            // 
+            this.txtCajaFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCajaFecha.Enabled = false;
+            this.txtCajaFecha.Location = new System.Drawing.Point(89, 69);
+            this.txtCajaFecha.Name = "txtCajaFecha";
+            this.txtCajaFecha.Size = new System.Drawing.Size(130, 20);
+            this.txtCajaFecha.TabIndex = 16;
+            // 
+            // lblCajaFecha
+            // 
+            this.lblCajaFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCajaFecha.AutoSize = true;
+            this.lblCajaFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCajaFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCajaFecha.Location = new System.Drawing.Point(26, 70);
+            this.lblCajaFecha.Name = "lblCajaFecha";
+            this.lblCajaFecha.Size = new System.Drawing.Size(57, 17);
+            this.lblCajaFecha.TabIndex = 15;
+            this.lblCajaFecha.Text = "Fecha:";
+            this.lblCajaFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtCajaNro
+            // 
+            this.txtCajaNro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCajaNro.Enabled = false;
+            this.txtCajaNro.Location = new System.Drawing.Point(89, 43);
+            this.txtCajaNro.Name = "txtCajaNro";
+            this.txtCajaNro.Size = new System.Drawing.Size(130, 20);
+            this.txtCajaNro.TabIndex = 14;
+            // 
+            // lblNroCaja
+            // 
+            this.lblNroCaja.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNroCaja.AutoSize = true;
+            this.lblNroCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNroCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNroCaja.Location = new System.Drawing.Point(3, 44);
+            this.lblNroCaja.Name = "lblNroCaja";
+            this.lblNroCaja.Size = new System.Drawing.Size(86, 17);
+            this.lblNroCaja.TabIndex = 11;
+            this.lblNroCaja.Text = "Nro. Caja: ";
+            this.lblNroCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCajaAbierta
+            // 
+            this.lblCajaAbierta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCajaAbierta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCajaAbierta.ForeColor = System.Drawing.Color.SeaGreen;
+            this.lblCajaAbierta.Location = new System.Drawing.Point(3, 2);
+            this.lblCajaAbierta.Name = "lblCajaAbierta";
+            this.lblCajaAbierta.Size = new System.Drawing.Size(216, 36);
+            this.lblCajaAbierta.TabIndex = 1;
+            this.lblCajaAbierta.Text = "Caja abierta";
+            this.lblCajaAbierta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCajaAbierta.Visible = false;
+            // 
+            // lblCajaCerrada
+            // 
+            this.lblCajaCerrada.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCajaCerrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCajaCerrada.ForeColor = System.Drawing.Color.Tomato;
+            this.lblCajaCerrada.Location = new System.Drawing.Point(3, 2);
+            this.lblCajaCerrada.Name = "lblCajaCerrada";
+            this.lblCajaCerrada.Size = new System.Drawing.Size(216, 36);
+            this.lblCajaCerrada.TabIndex = 0;
+            this.lblCajaCerrada.Text = "Caja cerrada";
+            this.lblCajaCerrada.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnAbrirCaja
+            // 
+            this.btnAbrirCaja.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAbrirCaja.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnAbrirCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnAbrirCaja.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAbrirCaja.Image = global::UI.Desktop.Properties.Resources._3387295_shopping_finance_payment_machine_credit;
+            this.btnAbrirCaja.Location = new System.Drawing.Point(3, 3);
+            this.btnAbrirCaja.Name = "btnAbrirCaja";
+            this.btnAbrirCaja.Size = new System.Drawing.Size(216, 47);
+            this.btnAbrirCaja.TabIndex = 13;
+            this.btnAbrirCaja.Text = "Abrir caja";
+            this.btnAbrirCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAbrirCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAbrirCaja.UseVisualStyleBackColor = true;
+            this.btnAbrirCaja.Click += new System.EventHandler(this.btnAbrirCaja_Click);
+            // 
+            // btnCajaExtraer
+            // 
+            this.btnCajaExtraer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCajaExtraer.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCajaExtraer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnCajaExtraer.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCajaExtraer.Image = global::UI.Desktop.Properties.Resources.back32;
+            this.btnCajaExtraer.Location = new System.Drawing.Point(3, 64);
+            this.btnCajaExtraer.Name = "btnCajaExtraer";
+            this.btnCajaExtraer.Size = new System.Drawing.Size(216, 47);
+            this.btnCajaExtraer.TabIndex = 15;
+            this.btnCajaExtraer.Text = "Extraer $";
+            this.btnCajaExtraer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCajaExtraer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCajaExtraer.UseVisualStyleBackColor = true;
+            // 
+            // btnCajaIngresar
+            // 
+            this.btnCajaIngresar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCajaIngresar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCajaIngresar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnCajaIngresar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCajaIngresar.Image = global::UI.Desktop.Properties.Resources.forward32;
+            this.btnCajaIngresar.Location = new System.Drawing.Point(3, 11);
+            this.btnCajaIngresar.Name = "btnCajaIngresar";
+            this.btnCajaIngresar.Size = new System.Drawing.Size(216, 47);
+            this.btnCajaIngresar.TabIndex = 14;
+            this.btnCajaIngresar.Text = "Ingresar $";
+            this.btnCajaIngresar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCajaIngresar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCajaIngresar.UseVisualStyleBackColor = true;
+            // 
+            // btnCerrarCaja
+            // 
+            this.btnCerrarCaja.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerrarCaja.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCerrarCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnCerrarCaja.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCerrarCaja.Image = global::UI.Desktop.Properties.Resources.close_24;
+            this.btnCerrarCaja.Location = new System.Drawing.Point(3, 117);
+            this.btnCerrarCaja.Name = "btnCerrarCaja";
+            this.btnCerrarCaja.Size = new System.Drawing.Size(216, 47);
+            this.btnCerrarCaja.TabIndex = 10;
+            this.btnCerrarCaja.Text = "Cerrar caja";
+            this.btnCerrarCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCerrarCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCerrarCaja.UseVisualStyleBackColor = true;
+            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
             // frmMain
             // 
@@ -518,6 +725,7 @@
             this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1107, 673);
+            this.Controls.Add(this.scntCaja);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCerrarSistema);
@@ -537,6 +745,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.scntCaja.Panel1.ResumeLayout(false);
+            this.scntCaja.Panel1.PerformLayout();
+            this.scntCaja.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scntCaja)).EndInit();
+            this.scntCaja.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -591,6 +804,18 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnCajas;
+        private System.Windows.Forms.Label lblCajaCerrada;
+        private System.Windows.Forms.SplitContainer scntCaja;
+        private System.Windows.Forms.Label lblCajaAbierta;
+        private System.Windows.Forms.Label lblNroCaja;
+        private System.Windows.Forms.Button btnCerrarCaja;
+        private System.Windows.Forms.Button btnAbrirCaja;
+        private System.Windows.Forms.Label lblCajaFecha;
+        private System.Windows.Forms.TextBox txtCajaNro;
+        private System.Windows.Forms.Button btnCajaExtraer;
+        private System.Windows.Forms.Button btnCajaIngresar;
+        private System.Windows.Forms.TextBox txtCajaFecha;
     }
 }
 
