@@ -95,6 +95,7 @@
     <Compile Include="Proveedor_Articulo.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="Caja.cs" />
     <Compile Include="Venta.cs" />
     <Compile Include="Venta_Articulo.cs" />
   </ItemGroup>

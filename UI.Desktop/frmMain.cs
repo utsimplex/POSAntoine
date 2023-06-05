@@ -53,7 +53,7 @@ namespace UI.Desktop
         Data.Database.UsuarioAdapter Datos_UsuarioAdapter = new Data.Database.UsuarioAdapter();
         Data.Database.InformeArticulos Datos_InformeArticulosAdapter = new Data.Database.InformeArticulos();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
-
+        Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
 
 
         // EVENTO LOAD
@@ -846,7 +846,7 @@ namespace UI.Desktop
 
             if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
             {
-                //Se abrio la caja
+                Datos_CajasAdapter.GetCajaAbierta();
             }
             else
             {
@@ -861,7 +861,7 @@ namespace UI.Desktop
 
         // BARRA DE MENU 
         
-        //     MENU > BACKUP 
+        // MENU > BACKUP 
 
         private void artículosToolStripMenuItem_Click(object sender, EventArgs e)
         {
