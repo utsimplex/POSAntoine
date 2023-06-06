@@ -1,6 +1,6 @@
 ﻿namespace UI.Desktop.Cajas
 {
-    partial class frmAperturaCaja
+    partial class frmCierreCaja
     {
         /// <summary>
         /// Required designer variable.

@@ -581,6 +581,7 @@
             this.txtCajaFecha.Name = "txtCajaFecha";
             this.txtCajaFecha.Size = new System.Drawing.Size(130, 20);
             this.txtCajaFecha.TabIndex = 16;
+            this.txtCajaFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblCajaFecha
             // 
@@ -605,6 +606,7 @@
             this.txtCajaNro.Name = "txtCajaNro";
             this.txtCajaNro.Size = new System.Drawing.Size(130, 20);
             this.txtCajaNro.TabIndex = 14;
+            this.txtCajaNro.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblNroCaja
             // 

@@ -75,11 +75,19 @@ namespace Entidades
         }
 
         // USUARIO
-        string _Usuario;
-        public string Usuario
+        string _Abre_Usuario;
+        public string AbreUsuario
         {
-            get { return _Usuario; }
-            set { _Usuario = value; }
+            get { return _Abre_Usuario; }
+            set { _Abre_Usuario = value; }
+        }
+
+        // USUARIO
+        string _Cierra_Usuario;
+        public string CierraUsuario
+        {
+            get { return _Cierra_Usuario; }
+            set { _Cierra_Usuario = value; }
         }
 
         // MONTO VENTAS TOTAL

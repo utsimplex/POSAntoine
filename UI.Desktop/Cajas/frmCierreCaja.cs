@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace UI.Desktop.Cajas
 {
-    public partial class frmAperturaCaja : Form
+    public partial class frmCierreCaja : Form
     {
         #region /*/*/*   VARIABLES LOCALES   *\*\*\
 
@@ -23,7 +23,7 @@ namespace UI.Desktop.Cajas
         #endregion
 
 
-        public frmAperturaCaja(Entidades.Usuario usr)
+        public frmCierreCaja(Entidades.Usuario usr)
         {
             InitializeComponent();
             usrActual = usr;

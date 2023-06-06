@@ -15,7 +15,9 @@ namespace UI.Desktop
     public partial class frmMain : Form
     {
         #region PROPIEDADES Y ENUMERADORES
+
         TipoForm _modoForm;
+
         public TipoForm ModoForm
         {
             get { return _modoForm; }
@@ -28,6 +30,7 @@ namespace UI.Desktop
             Edicion
 
         }
+        
         #endregion
 
         public frmMain()
@@ -48,8 +51,9 @@ namespace UI.Desktop
         }
 
         // VARIABLES
+        Entidades.Usuario usrActual = null;
+        Entidades.Caja cajaActual = null;
         Data.Database.ClienteAdapter Datos_ClienteAdapter = new Data.Database.ClienteAdapter();
-        Entidades.Usuario usrActual;
         Data.Database.UsuarioAdapter Datos_UsuarioAdapter = new Data.Database.UsuarioAdapter();
         Data.Database.InformeArticulos Datos_InformeArticulosAdapter = new Data.Database.InformeArticulos();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
@@ -59,13 +63,32 @@ namespace UI.Desktop
         // EVENTO LOAD
         private void frmMain_Load(object sender, EventArgs e)
         {
-            IniciarSesion();
+            usrActual = IniciarSesion();
 
+            if (usrActual != null)
+            {
+                lblNombreUsuario.Text = usrActual.usuario;
+                lblRol.Text = usrActual.Rol;
+                if (usrActual.Rol == "Empleado")
+                { mnuUsuarios.Visible = false; }
+
+                NI.BalloonTipIcon = ToolTipIcon.Info;
+                NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
+                NI.BalloonTipTitle = "Ut Simplex";
+                NI.Visible = true;
+                NI.ContextMenu = this.ContextMenu;
+                NI.ShowBalloonTip(100);
+                InicializarCaja();
+            }
+            else
+            {
+                this.Dispose();
+            }
 
         }
 
         // INICIAR SESION
-        private void IniciarSesion()
+        private Entidades.Usuario IniciarSesion()
         {
             NI.BalloonTipIcon = ToolTipIcon.Info;
             NI.BalloonTipText = "- PUNTO DE VENTA -";
@@ -80,30 +103,22 @@ namespace UI.Desktop
             frmLogin appLogin = new frmLogin();
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
-                this.Dispose();
+                return null;
             }
             else
             {
-                usrActual = appLogin.usrActual;
-                lblNombreUsuario.Text = usrActual.usuario;
-                lblRol.Text = usrActual.Rol;
-                if (usrActual.Rol == "Empleado")
-                { mnuUsuarios.Visible = false; }
-
-                NI.BalloonTipIcon = ToolTipIcon.Info;
-                NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
-                NI.BalloonTipTitle = "Ut Simplex";
-                NI.Visible = true;
-                NI.ContextMenu = this.ContextMenu;
-                NI.ShowBalloonTip(100);
-                inicializarUICaja(false);
+                
+                return appLogin.usrActual;
+                
             }
 
         }
 
-        // Inicializacion de UI Caja Cerrada
-        private void inicializarUICaja(Boolean isAbierta)
+        // Bind UI Caja
+        private void bindUICaja()
         {
+            Boolean isAbierta = cajaActual != null? true : false;
+
             lblCajaAbierta.Visible = isAbierta;
             lblCajaCerrada.Visible = !isAbierta;
             btnCerrarCaja.Enabled = isAbierta;
@@ -114,7 +129,8 @@ namespace UI.Desktop
 
             txtCajaFecha.Visible = isAbierta;
             txtCajaNro.Visible = isAbierta;
-
+            txtCajaNro.Text = isAbierta ? cajaActual.ID.ToString() : "";
+            txtCajaFecha.Text =  isAbierta ? cajaActual.FechaCaja.ToString() : "";
 
             btnCajaExtraer.Visible = isAbierta;
             btnCajaIngresar.Visible = isAbierta;
@@ -123,8 +139,6 @@ namespace UI.Desktop
             scntCaja.Height = isAbierta ? 273 : 135;
 
         }
-
-
 
         // CLICK MENU>>Salir
         private void mnuSalir_Click(object sender, EventArgs e)
@@ -164,8 +178,15 @@ namespace UI.Desktop
         // CLICK BTN Nueva Venta
         private void btnNuevaVenta_Click(object sender, EventArgs e)
         {
-            Ventas.frmVenta formNuevaVenta = new Ventas.frmVenta(usrActual);
-            formNuevaVenta.ShowDialog();
+            if(cajaActual != null)
+            {
+                Ventas.frmVenta formNuevaVenta = new Ventas.frmVenta(usrActual);
+                formNuevaVenta.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Debe abrir una caja antes de realizar ventas.", "Caja CERRADA - Ventas no permitidas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         // CLICK BTN Cerrar SISTEMA
@@ -214,6 +235,19 @@ namespace UI.Desktop
                     break;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        //CLICK ABRIR CAJA
+        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        {
+            AbrirCajaNueva();
+        }
+
+        //CLICK CERRAR CAJA
+        private void btnCerrarCaja_Click(object sender, EventArgs e)
+        {
+            //CerrarCaja();
+            //inicializarUICaja(false);
         }
 
 
@@ -758,11 +792,11 @@ namespace UI.Desktop
         #endregion
 
 
-        //////////////////////INFORMES////////////////////
+        #region //////////////////////INFORMES////////////////////
 
         //Informe STOCK CRITICO
 
-        //Informe Stock Crítico - Artículos a Reponer
+
         private void informeStockCritico()
         {
             string sql = "SELECT * FROM Articulos WHERE Articulos.stock <= Articulos.stockmin AND Articulos.habilitado = 'Si'";
@@ -782,8 +816,6 @@ namespace UI.Desktop
             System.IO.File.Delete("C:\\XML\\informeArticulosReponer.xml");
 
         }
-
-
 
         //Informe Lista de Precios
         private void informeListaDePrecios()
@@ -831,6 +863,8 @@ namespace UI.Desktop
             formValorización.ShowDialog();
         }
 
+        #endregion
+
         //CONSULTA RÁPIDA STOCK Y PRECIO
         private void ConsultaRapida()
         {
@@ -841,26 +875,49 @@ namespace UI.Desktop
         //INICIALIZAR CAJA
         private void InicializarCaja()
         {
+            Entidades.Caja cajaAbierta = Datos_CajasAdapter.GetCajaAbierta();
 
-            Cajas.frmAperturaCaja frmAperturaCaja = new Cajas.frmAperturaCaja(usrActual);
-
-            if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
+            if(cajaAbierta != null)
             {
-                Datos_CajasAdapter.GetCajaAbierta();
+                this.cajaActual = cajaAbierta;
             }
             else
             {
-                inicializarUICaja(false);
+                this.cajaActual = null;
             }
+            
+            bindUICaja();
 
         }
 
 
+        //ABRIR CAJA NUEVA
+        private void AbrirCajaNueva()
+        {
+            if(cajaActual == null)
+            {
+                Cajas.frmAperturaCaja frmAperturaCaja = new Cajas.frmAperturaCaja(usrActual);
+                
+                if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
+                {
+                    cajaActual = frmAperturaCaja.caja;
+                    bindUICaja();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ya existe una caja abierta. Debe cerrarla antes de abrir una nueva.", "Abrir caja no permitido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
         #endregion
 
 
+
+
         // BARRA DE MENU 
-        
+        #region BARRA DE MENU
         // MENU > BACKUP 
 
         private void artículosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -995,15 +1052,6 @@ namespace UI.Desktop
             mensajeNoDisponible();
         }
 
-        private void btnAbrirCaja_Click(object sender, EventArgs e)
-        {
-            inicializarUICaja(true);
-            InicializarCaja();
-        }
-
-        private void btnCerrarCaja_Click(object sender, EventArgs e)
-        {
-            inicializarUICaja(false);
-        }
+        #endregion
     }
 }

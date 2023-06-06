@@ -257,6 +257,12 @@
       <DependentUpon>informeListaDePrecios.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Cajas\frmCierreCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmCierreCaja.Designer.cs">
+      <DependentUpon>frmCierreCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cajas\frmAperturaCaja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,6 +376,9 @@
     <EmbeddedResource Include="Artículos\informeListaDePrecios.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>informeListaDePrecios.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmCierreCaja.resx">
+      <DependentUpon>frmCierreCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cajas\frmAperturaCaja.resx">
       <DependentUpon>frmAperturaCaja.cs</DependentUpon>
