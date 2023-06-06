@@ -78,7 +78,7 @@ namespace UI.Desktop
                 NI.Visible = true;
                 NI.ContextMenu = this.ContextMenu;
                 NI.ShowBalloonTip(100);
-                InicializarCaja();
+                
             }
             else
             {
@@ -107,7 +107,7 @@ namespace UI.Desktop
             }
             else
             {
-                
+                InicializarCaja();
                 return appLogin.usrActual;
                 
             }
@@ -246,8 +246,7 @@ namespace UI.Desktop
         //CLICK CERRAR CAJA
         private void btnCerrarCaja_Click(object sender, EventArgs e)
         {
-            //CerrarCaja();
-            //inicializarUICaja(false);
+            CerrarCaja();
         }
 
 
@@ -890,7 +889,25 @@ namespace UI.Desktop
 
         }
 
+        //CERRAR CAJA
+        private void CerrarCaja()
+        {
+            if (cajaActual != null)
+            {
+                Cajas.frmCierreCaja frmAperturaCaja = new Cajas.frmCierreCaja(usrActual, cajaActual);
 
+                if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
+                {
+                    cajaActual = null;
+                    bindUICaja();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("No existe una caja abierta. Debe abrirla antes de intentar cerrarla.", "Cerrar caja no permitido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
         //ABRIR CAJA NUEVA
         private void AbrirCajaNueva()
         {

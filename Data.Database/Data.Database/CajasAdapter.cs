@@ -56,17 +56,17 @@ namespace Data.Database
 
                 if (listaCajasAbiertas.Count > 1)
                 {
-                    MessageBox.Show("Hay más de 1 caja");
+                    MessageBox.Show("Hay más de 1 caja abierta. Dante le erró :'(");
                     return null;
                 }
                 if (listaCajasAbiertas.Count == 1)
                 {
-                    MessageBox.Show("Hay 1 sola caja abierta");
                     return listaCajasAbiertas[0];
                 }
                 if (listaCajasAbiertas.Count == 0)
                 {
-                    MessageBox.Show("No hay cajas");
+                    // NO HAY CAJAS ABIERTAS...
+                    //MessageBox.Show("No hay cajas abiertas");
                 }
             }
             catch (Exception ex)
@@ -146,43 +146,76 @@ namespace Data.Database
             return caja;
         }
 
-
-        public void RegistrarVenta(Venta ventaNueva)
+        public void CerrarCaja(int caja_id, SqlMoney saldo_final, string cierra_usuario)
         {
+            // Crear conexión
+            SqlConnection con = CrearConexion();
 
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
+            try
+            {
+                // Abrir la conexión
+                con.Open();
 
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand();
-            Comando.Connection = Con;
-            Comando.CommandType = CommandType.Text;
+                // Crear SqlCommand
+                SqlCommand cmd = new SqlCommand("CerrarCaja", con);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion] ) VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION)";
-            Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
-            Comando.Parameters["@NUMVENTA"].Value = ventaNueva.NumeroVenta;
-            Comando.Parameters.Add(new SqlParameter("@FECHAHORA", SqlDbType.DateTime));
-            Comando.Parameters["@FECHAHORA"].Value = ventaNueva.FechaHora;
-            Comando.Parameters.Add(new SqlParameter("@TIPOPAGO", SqlDbType.NVarChar));
-            Comando.Parameters["@TIPOPAGO"].Value = ventaNueva.TipoPago;
-            Comando.Parameters.Add(new SqlParameter("@TOTAL", SqlDbType.Money));
-            Comando.Parameters["@TOTAL"].Value = ventaNueva.Total;
-            Comando.Parameters.Add(new SqlParameter("@DNICLIENTE", SqlDbType.NVarChar));
-            Comando.Parameters["@DNICLIENTE"].Value = ventaNueva.DniCliente;
-            Comando.Parameters.Add(new SqlParameter("@DESCUENTO", SqlDbType.Int));
-            Comando.Parameters["@DESCUENTO"].Value = ventaNueva.Descuento;
-            Comando.Parameters.Add(new SqlParameter("@USUARIO", SqlDbType.NVarChar));
-            Comando.Parameters["@USUARIO"].Value = ventaNueva.Usuario;
-            Comando.Parameters.Add(new SqlParameter("@TIPOOPERACION", SqlDbType.NVarChar));
-            Comando.Parameters["@TIPOOPERACION"].Value = ventaNueva.TipoOperacion;
+                // Agregar los parámetros al comando
+                cmd.Parameters.AddWithValue("@caja_id", caja_id);
+                cmd.Parameters.AddWithValue("@saldo_final", saldo_final);
+                cmd.Parameters.AddWithValue("@cierra_usuario", cierra_usuario);
 
-            //Ejecuta el comando INSERT
-            Comando.Connection.Open();
-            Comando.ExecuteNonQuery();
-            Comando.Connection.Close();
-
-
+                // Ejecutar el stored procedure
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción o mostrar un mensaje de error
+                MessageBox.Show("Error al cerrar la caja: " + ex.Message);
+            }
+            finally
+            {
+                // Cerrar la conexión después de usarla
+                con.Close();
+            }
         }
+
+        //public void RegistrarVenta(Venta ventaNueva)
+        //{
+
+        //    //Crear Conexion y Abrirla
+        //    SqlConnection Con = CrearConexion();
+
+        //    // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+        //    SqlCommand Comando = new SqlCommand();
+        //    Comando.Connection = Con;
+        //    Comando.CommandType = CommandType.Text;
+
+        //    Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion] ) VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION)";
+        //    Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
+        //    Comando.Parameters["@NUMVENTA"].Value = ventaNueva.NumeroVenta;
+        //    Comando.Parameters.Add(new SqlParameter("@FECHAHORA", SqlDbType.DateTime));
+        //    Comando.Parameters["@FECHAHORA"].Value = ventaNueva.FechaHora;
+        //    Comando.Parameters.Add(new SqlParameter("@TIPOPAGO", SqlDbType.NVarChar));
+        //    Comando.Parameters["@TIPOPAGO"].Value = ventaNueva.TipoPago;
+        //    Comando.Parameters.Add(new SqlParameter("@TOTAL", SqlDbType.Money));
+        //    Comando.Parameters["@TOTAL"].Value = ventaNueva.Total;
+        //    Comando.Parameters.Add(new SqlParameter("@DNICLIENTE", SqlDbType.NVarChar));
+        //    Comando.Parameters["@DNICLIENTE"].Value = ventaNueva.DniCliente;
+        //    Comando.Parameters.Add(new SqlParameter("@DESCUENTO", SqlDbType.Int));
+        //    Comando.Parameters["@DESCUENTO"].Value = ventaNueva.Descuento;
+        //    Comando.Parameters.Add(new SqlParameter("@USUARIO", SqlDbType.NVarChar));
+        //    Comando.Parameters["@USUARIO"].Value = ventaNueva.Usuario;
+        //    Comando.Parameters.Add(new SqlParameter("@TIPOOPERACION", SqlDbType.NVarChar));
+        //    Comando.Parameters["@TIPOOPERACION"].Value = ventaNueva.TipoOperacion;
+
+        //    //Ejecuta el comando INSERT
+        //    Comando.Connection.Open();
+        //    Comando.ExecuteNonQuery();
+        //    Comando.Connection.Close();
+
+
+        //}
 
         //public void ModificarVenta(Venta ventaModificada)
         //{
@@ -221,298 +254,298 @@ namespace Data.Database
 
         //}
 
-        public List<Venta> GetAll()
-        {
-            List<Venta> ListaVentas = new List<Venta>();
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
+        //public List<Venta> GetAll()
+        //{
+        //    List<Venta> ListaVentas = new List<Venta>();
+        //    //Crear Conexion y Abrirla
+        //    SqlConnection Con = CrearConexion();
 
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas ORDER BY Ventas.numVenta, Ventas.TipoOperacion DESC", Con);
-            try
-            {
-                Comando.Connection.Open();
-                SqlDataReader drVentas = Comando.ExecuteReader();
+        //    // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+        //    SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas ORDER BY Ventas.numVenta, Ventas.TipoOperacion DESC", Con);
+        //    try
+        //    {
+        //        Comando.Connection.Open();
+        //        SqlDataReader drVentas = Comando.ExecuteReader();
 
-                while (drVentas.Read())
-                {
-                    Venta vta = new Venta();
+        //        while (drVentas.Read())
+        //        {
+        //            Venta vta = new Venta();
 
-                    vta.NumeroVenta = (int)drVentas["numventa"];
-                    vta.FechaHora = (DateTime)drVentas["fechahora"];
-                    vta.Descuento = (decimal)drVentas["descuento"];
-                    vta.DniCliente = (string)drVentas["dnicliente"];
-                    vta.Usuario = (string)drVentas["usuario"];
-                    vta.TipoPago = (string)drVentas["tipopago"];
-                    vta.Total = (decimal)drVentas["total"];
-                    vta.TipoOperacion = (string)drVentas["tipooperacion"];
-
-
-                    ListaVentas.Add(vta);
-                }
-                drVentas.Close();
-
-            }
-            catch (Exception Ex)
-            {
-                Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
-                throw ExcepcionManejada;
-            }
-            finally
-            {
-                Comando.Connection.Close();
-            }
+        //            vta.NumeroVenta = (int)drVentas["numventa"];
+        //            vta.FechaHora = (DateTime)drVentas["fechahora"];
+        //            vta.Descuento = (decimal)drVentas["descuento"];
+        //            vta.DniCliente = (string)drVentas["dnicliente"];
+        //            vta.Usuario = (string)drVentas["usuario"];
+        //            vta.TipoPago = (string)drVentas["tipopago"];
+        //            vta.Total = (decimal)drVentas["total"];
+        //            vta.TipoOperacion = (string)drVentas["tipooperacion"];
 
 
+        //            ListaVentas.Add(vta);
+        //        }
+        //        drVentas.Close();
 
-            return ListaVentas;
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //        Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
+        //        throw ExcepcionManejada;
+        //    }
+        //    finally
+        //    {
+        //        Comando.Connection.Close();
+        //    }
 
 
 
+        //    return ListaVentas;
 
-        }
 
-        public int getUltNroVenta()
-        {
 
-            int nroUltVta = 0;
 
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
+        //}
 
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand(" select CASE WHEN MAX(numVenta) IS NULL THEN 0 ELSE MAX(numVenta) END AS NROULTIMAVENTA FROM Ventas", Con);
-            try
-            {
-                Comando.Connection.Open();
-                SqlDataReader drVentas = Comando.ExecuteReader();
+        //public int getUltNroVenta()
+        //{
+
+        //    int nroUltVta = 0;
+
+        //    //Crear Conexion y Abrirla
+        //    SqlConnection Con = CrearConexion();
+
+        //    // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+        //    SqlCommand Comando = new SqlCommand(" select CASE WHEN MAX(numVenta) IS NULL THEN 0 ELSE MAX(numVenta) END AS NROULTIMAVENTA FROM Ventas", Con);
+        //    try
+        //    {
+        //        Comando.Connection.Open();
+        //        SqlDataReader drVentas = Comando.ExecuteReader();
                
-                drVentas.Read();
+        //        drVentas.Read();
                 
-                 nroUltVta = (int)drVentas["NROULTIMAVENTA"]; 
+        //         nroUltVta = (int)drVentas["NROULTIMAVENTA"]; 
                
                
 
-                drVentas.Close();
+        //        drVentas.Close();
 
-            }
-            catch (Exception Ex)
-            {
-                Exception ExcepcionManejada = new Exception("Error al recuperar el Ultimo número de venta.", Ex);
-                throw ExcepcionManejada;
-            }
-            finally
-            {
-                Comando.Connection.Close();
-            }
-
-
-
-            return nroUltVta;
-
-
-        }
-
-        public int getStatusVenta(int nroVenta)
-        {
-
-            int tieneDevolucion;
-
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
-
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT COUNT(*) FROM Ventas WHERE TipoOperacion = 'D' AND numVenta = " + nroVenta, Con);
-            Comando.CommandType = CommandType.Text;
-            try
-            {
-                Comando.Connection.Open();
-                tieneDevolucion = (int)Comando.ExecuteScalar();
-                Comando.Connection.Close();
-
-            }
-            catch (Exception Ex)
-            {
-                Exception ExcepcionManejada = new Exception("Error al recuperar el Ultimo número de venta.", Ex);
-                throw ExcepcionManejada;
-            }
-            finally
-            {
-                Comando.Connection.Close();
-            }
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //        Exception ExcepcionManejada = new Exception("Error al recuperar el Ultimo número de venta.", Ex);
+        //        throw ExcepcionManejada;
+        //    }
+        //    finally
+        //    {
+        //        Comando.Connection.Close();
+        //    }
 
 
 
-            return tieneDevolucion;
+        //    return nroUltVta;
 
 
-        }
+        //}
 
-        public List<Entidades.Venta> Busqueda(string texto)
-        {
+        //public int getStatusVenta(int nroVenta)
+        //{
 
-            List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
+        //    int tieneDevolucion;
 
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.tipoPago like @texto OR Ventas.usuario like @texto OR Ventas.dniCliente like @texto;", Con);
-            Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
-            Comando.Parameters["@texto"].Value = texto + '%';
-            try
-            {
-                Comando.Connection.Open();
-                SqlDataReader drVentas = Comando.ExecuteReader();
+        //    //Crear Conexion y Abrirla
+        //    SqlConnection Con = CrearConexion();
 
-                while (drVentas.Read())
-                {
-                    Entidades.Venta ventaActual = new Entidades.Venta();
+        //    // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+        //    SqlCommand Comando = new SqlCommand("SELECT COUNT(*) FROM Ventas WHERE TipoOperacion = 'D' AND numVenta = " + nroVenta, Con);
+        //    Comando.CommandType = CommandType.Text;
+        //    try
+        //    {
+        //        Comando.Connection.Open();
+        //        tieneDevolucion = (int)Comando.ExecuteScalar();
+        //        Comando.Connection.Close();
 
-                    ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.DniCliente = (string)drVentas["dniCliente"];
-                    ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
-                    ventaActual.NumeroVenta = (int)drVentas["numVenta"];
-                    ventaActual.Total = (decimal)drVentas["total"];
-                    ventaActual.TipoPago = (string)drVentas["tipoPago"];
-                    ventaActual.Usuario = (string)drVentas["usuario"];
-                    ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
-
-                    ListaVentas.Add(ventaActual);
-                }
-                drVentas.Close();
-
-            }
-            catch (Exception Ex)
-            {
-                Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
-                throw ExcepcionManejada;
-            }
-            finally
-            {
-                Comando.Connection.Close();
-            }
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //        Exception ExcepcionManejada = new Exception("Error al recuperar el Ultimo número de venta.", Ex);
+        //        throw ExcepcionManejada;
+        //    }
+        //    finally
+        //    {
+        //        Comando.Connection.Close();
+        //    }
 
 
 
-            return ListaVentas;
+        //    return tieneDevolucion;
+
+
+        //}
+
+        //public List<Entidades.Venta> Busqueda(string texto)
+        //{
+
+        //    List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
+        //    //Crear Conexion y Abrirla
+        //    SqlConnection Con = CrearConexion();
+
+        //    // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+        //    SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.tipoPago like @texto OR Ventas.usuario like @texto OR Ventas.dniCliente like @texto;", Con);
+        //    Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
+        //    Comando.Parameters["@texto"].Value = texto + '%';
+        //    try
+        //    {
+        //        Comando.Connection.Open();
+        //        SqlDataReader drVentas = Comando.ExecuteReader();
+
+        //        while (drVentas.Read())
+        //        {
+        //            Entidades.Venta ventaActual = new Entidades.Venta();
+
+        //            ventaActual.Descuento = (decimal)drVentas["descuento"];
+        //            ventaActual.DniCliente = (string)drVentas["dniCliente"];
+        //            ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
+        //            ventaActual.NumeroVenta = (int)drVentas["numVenta"];
+        //            ventaActual.Total = (decimal)drVentas["total"];
+        //            ventaActual.TipoPago = (string)drVentas["tipoPago"];
+        //            ventaActual.Usuario = (string)drVentas["usuario"];
+        //            ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+
+        //            ListaVentas.Add(ventaActual);
+        //        }
+        //        drVentas.Close();
+
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //        Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
+        //        throw ExcepcionManejada;
+        //    }
+        //    finally
+        //    {
+        //        Comando.Connection.Close();
+        //    }
 
 
 
-
-        }
-
-        public List<Entidades.Venta> BusquedaFechaDesde(DateTime fechaDesde)
-        {
-            DateTime fechaDsd = new DateTime(fechaDesde.Year, fechaDesde.Month, fechaDesde.Day);
-            List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
-
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.fechaHora >= @fechaDesde;", Con);
-            Comando.Parameters.Add(new SqlParameter("@fechaDesde", SqlDbType.DateTime));
-            Comando.Parameters["@fechaDesde"].Value = fechaDsd;
-            try
-            {
-                Comando.Connection.Open();
-                SqlDataReader drVentas = Comando.ExecuteReader();
-
-                while (drVentas.Read())
-                {
-                    Entidades.Venta ventaActual = new Entidades.Venta();
-
-                    ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.DniCliente = (string)drVentas["dniCliente"];
-                    ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
-                    ventaActual.NumeroVenta = (int)drVentas["numVenta"];
-                    ventaActual.Total = (decimal)drVentas["total"];
-                    ventaActual.TipoPago = (string)drVentas["tipoPago"];
-                    ventaActual.Usuario = (string)drVentas["usuario"];
-
-                    ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
-
-                    ListaVentas.Add(ventaActual);
-                }
-                drVentas.Close();
-
-            }
-            catch (Exception Ex)
-            {
-                Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
-                throw ExcepcionManejada;
-            }
-            finally
-            {
-                Comando.Connection.Close();
-            }
-
-
-
-            return ListaVentas;
+        //    return ListaVentas;
 
 
 
 
-        }
+        //}
+
+        //public List<Entidades.Venta> BusquedaFechaDesde(DateTime fechaDesde)
+        //{
+        //    DateTime fechaDsd = new DateTime(fechaDesde.Year, fechaDesde.Month, fechaDesde.Day);
+        //    List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
+        //    //Crear Conexion y Abrirla
+        //    SqlConnection Con = CrearConexion();
+
+        //    // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+        //    SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.fechaHora >= @fechaDesde;", Con);
+        //    Comando.Parameters.Add(new SqlParameter("@fechaDesde", SqlDbType.DateTime));
+        //    Comando.Parameters["@fechaDesde"].Value = fechaDsd;
+        //    try
+        //    {
+        //        Comando.Connection.Open();
+        //        SqlDataReader drVentas = Comando.ExecuteReader();
+
+        //        while (drVentas.Read())
+        //        {
+        //            Entidades.Venta ventaActual = new Entidades.Venta();
+
+        //            ventaActual.Descuento = (decimal)drVentas["descuento"];
+        //            ventaActual.DniCliente = (string)drVentas["dniCliente"];
+        //            ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
+        //            ventaActual.NumeroVenta = (int)drVentas["numVenta"];
+        //            ventaActual.Total = (decimal)drVentas["total"];
+        //            ventaActual.TipoPago = (string)drVentas["tipoPago"];
+        //            ventaActual.Usuario = (string)drVentas["usuario"];
+
+        //            ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+
+        //            ListaVentas.Add(ventaActual);
+        //        }
+        //        drVentas.Close();
+
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //        Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
+        //        throw ExcepcionManejada;
+        //    }
+        //    finally
+        //    {
+        //        Comando.Connection.Close();
+        //    }
+
+
+
+        //    return ListaVentas;
+
+
+
+
+        //}
         
-        public List<Entidades.Venta> BusquedaFechaDesde(DateTime fechaDesde, DateTime fechaHasta)
-        {
+        //public List<Entidades.Venta> BusquedaFechaDesde(DateTime fechaDesde, DateTime fechaHasta)
+        //{
 
-            DateTime fDesde = new DateTime(fechaDesde.Year, fechaDesde.Month, fechaDesde.Day);
-            DateTime fHasta = new DateTime(fechaHasta.Year, fechaHasta.Month, fechaHasta.Day);
-            List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
+        //    DateTime fDesde = new DateTime(fechaDesde.Year, fechaDesde.Month, fechaDesde.Day);
+        //    DateTime fHasta = new DateTime(fechaHasta.Year, fechaHasta.Month, fechaHasta.Day);
+        //    List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
+        //    //Crear Conexion y Abrirla
+        //    SqlConnection Con = CrearConexion();
 
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.fechaHora BETWEEN @fechaDesde AND @fechaHasta;", Con);
-            Comando.Parameters.Add(new SqlParameter("@fechaDesde", SqlDbType.DateTime));
-            Comando.Parameters["@fechaDesde"].Value = fDesde;
-            Comando.Parameters.Add(new SqlParameter("@fechaHasta", SqlDbType.DateTime));
-            Comando.Parameters["@fechaHasta"].Value = fHasta;
+        //    // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+        //    SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.fechaHora BETWEEN @fechaDesde AND @fechaHasta;", Con);
+        //    Comando.Parameters.Add(new SqlParameter("@fechaDesde", SqlDbType.DateTime));
+        //    Comando.Parameters["@fechaDesde"].Value = fDesde;
+        //    Comando.Parameters.Add(new SqlParameter("@fechaHasta", SqlDbType.DateTime));
+        //    Comando.Parameters["@fechaHasta"].Value = fHasta;
 
-            try
-            {
-                Comando.Connection.Open();
-                SqlDataReader drVentas = Comando.ExecuteReader();
+        //    try
+        //    {
+        //        Comando.Connection.Open();
+        //        SqlDataReader drVentas = Comando.ExecuteReader();
 
-                while (drVentas.Read())
-                {
-                    Entidades.Venta ventaActual = new Entidades.Venta();
+        //        while (drVentas.Read())
+        //        {
+        //            Entidades.Venta ventaActual = new Entidades.Venta();
 
-                    ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.DniCliente = (string)drVentas["dniCliente"];
-                    ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
-                    ventaActual.NumeroVenta = (int)drVentas["numVenta"];
-                    ventaActual.Total = (decimal)drVentas["total"];
-                    ventaActual.TipoPago = (string)drVentas["tipoPago"];
-                    ventaActual.Usuario = (string)drVentas["usuario"];
+        //            ventaActual.Descuento = (decimal)drVentas["descuento"];
+        //            ventaActual.DniCliente = (string)drVentas["dniCliente"];
+        //            ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
+        //            ventaActual.NumeroVenta = (int)drVentas["numVenta"];
+        //            ventaActual.Total = (decimal)drVentas["total"];
+        //            ventaActual.TipoPago = (string)drVentas["tipoPago"];
+        //            ventaActual.Usuario = (string)drVentas["usuario"];
 
-                    ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+        //            ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
 
-                    ListaVentas.Add(ventaActual);
-                }
-                drVentas.Close();
+        //            ListaVentas.Add(ventaActual);
+        //        }
+        //        drVentas.Close();
 
-            }
-            catch (Exception Ex)
-            {
-                Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
-                throw ExcepcionManejada;
-            }
-            finally
-            {
-                Comando.Connection.Close();
-            }
-
-
-
-            return ListaVentas;
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //        Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
+        //        throw ExcepcionManejada;
+        //    }
+        //    finally
+        //    {
+        //        Comando.Connection.Close();
+        //    }
 
 
 
+        //    return ListaVentas;
 
-        }
+
+
+
+        //}
 
     }
 }

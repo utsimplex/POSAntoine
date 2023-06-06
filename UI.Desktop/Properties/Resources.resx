@@ -136,6 +136,9 @@
   <data name="antoine-transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\antoine-transparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="3319627_coin_money_banking_transfer_dollar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3319627_coin_money_banking_transfer_dollar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="splash2blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\splash2blue.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -166,9 +169,6 @@
   <data name="User_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="fondoMain2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fondoMain2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -183,6 +183,9 @@
   </data>
   <data name="Search_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Search_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="User_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,8 +214,8 @@
   <data name="Search_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Search_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="splashScreenGrande" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\splashScreenGrande.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="document_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="fondoAntoineBlack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fondoAntoineBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,8 +226,8 @@
   <data name="Persona" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Persona1.JPG;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="splashScreenGrande" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\splashScreenGrande.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="back32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\back32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,7 +235,7 @@
   <data name="forward32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\forward32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="3319627_coin_money_banking_transfer_dollar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\3319627_coin_money_banking_transfer_dollar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="3319640_money_coin_dollar_save_lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3319640_money_coin_dollar_save_lock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
