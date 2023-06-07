@@ -20,9 +20,10 @@ namespace UI.Desktop
             InitializeComponent();
         }
 
+        //Rewritten code with comments
+
         public Entidades.Usuario usrActual;
         Data.Database.UsuarioAdapter Datos_UsuarioAdapter = new Data.Database.UsuarioAdapter();
-
 
         // BOTON INGRESAR CLICK
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -30,19 +31,18 @@ namespace UI.Desktop
             txtUsuario.Text = txtUsuario.Text.ToLower();
             if (txtUsuario.Text != "" && txtPass.Text != "")
             {
-                //VALIDO USUARIO Y CONTRASEÑA
+                //VALIDATE USERNAME AND PASSWORD
                 if (Datos_UsuarioAdapter.ValidarUsuario(txtUsuario.Text, txtPass.Text))
                 {
-                    //OBTENGO EL USUARIO
+                    //GET USER
                     Usuario usr = Datos_UsuarioAdapter.GetUsuario(txtUsuario.Text);
-                    
-                        
-                            usrActual = Datos_UsuarioAdapter.GetUsuario(txtUsuario.Text);
-                            DialogResult = DialogResult.OK;
-                        
-                    
+
+
+                    usrActual = Datos_UsuarioAdapter.GetUsuario(txtUsuario.Text);
+                    DialogResult = DialogResult.OK;
+
                 }
-                else // MAL USER Y PASS
+                else // WRONG USER AND PASS
                 {
                     MessageBox.Show("Usuario y/o Contraseña incorrectos", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -53,20 +53,19 @@ namespace UI.Desktop
             }
         }
 
-        // OLVIDE MI CONTRASEÑA CLICK
+        // FORGOT MY PASSWORD CLICK
         private void lnkOlvidaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //ResetearClave("dantearrighi@gmail.com");
-            MessageBox.Show("Comuníquese con servicio técnico al: \n(0341) 153-115510\n o envíe un correo a: \ninfo@utsimplex.com","Olvidé mi contraseña", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                
+            MessageBox.Show("Comuníquese con servicio técnico al: \n(0341) 153-115510\n o envíe un correo a: \ninfo@utsimplex.com", "Olvidé mi contraseña", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
         }
 
-
-        // Método para la generación de la contraseña al azar
+        // Method for generating a random password
         private string GenerarClaveAleatoria(int caracteres, bool minusculas)
         {
             StringBuilder constructor = new StringBuilder();
-            Random numeroalazar = new Random(DateTime.Now.Millisecond); // generar con el milisegundo actual como semilla
+            Random numeroalazar = new Random(DateTime.Now.Millisecond); // generate with the current millisecond as seed
             char caracter;
             for (int i = 0; i < caracteres; i++)
             {
@@ -83,27 +82,22 @@ namespace UI.Desktop
             }
         }
 
-        // Generar una clave al azar para la creación del usuario
-        public void ResetearClave( string email)
+        // Generate a random password for user creation
+        public void ResetearClave(string email)
         {
-            //generar una clave aleatoria
-           string claveNueva = GenerarClaveAleatoria(4, false);
-            //enviar la clave sin encriptar por mail
+            //generate a random password
+            string claveNueva = GenerarClaveAleatoria(4, false);
+            //send the unencrypted password by mail
 
-            string De = "dantearrighi@gmail.com";
-            //string Password = "9789Hrqs.";
+            string De = "dev@utsimplex.com";
+            //string Password = ".Nimda2023";
             string Para = email;
-            string Mensaje = "El sistema ha generado una clave aleatoria porque el administrador de UT SIMPLEX le ha dado de alta. Su clave temporal es: " + claveNueva + ". Por favor cambie su clave la primera vez que entre al sistema.";
+            string Mensaje = "El sistema ha generado una clave aleatoria. Su clave temporal es: " + claveNueva + ". Por favor, cambie su clave la primera vez que entre al sistema.";
             string Asunto = "Ut Simplex: Usuario y Contraseña para POS";
 
+            SmtpClient smtpClient = new SmtpClient("smtp.hostinger.com", 465);
 
-
-
-
-
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 465);
-
-            smtpClient.Credentials = new System.Net.NetworkCredential("dantearrighi@gmail.com", "9789Hrqs.");
+            smtpClient.Credentials = new System.Net.NetworkCredential("dev@utsimplex.com", ".Nimda2023");
             // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.EnableSsl = true;
@@ -113,52 +107,23 @@ namespace UI.Desktop
             //Setting From , To and CC
             mail.From = new MailAddress(De);
             mail.To.Add(new MailAddress(email));
+            mail.Body = Mensaje;
 
-            smtpClient.Send(mail);
-
-
-
-
-
-
-            //System.Net.Mail.MailMessage Email;
-
-            //Email = new System.Net.Mail.MailMessage(De, Para, Asunto, Mensaje);
-            ///*
-            //System.Net.Mail.SmtpClient smtpMail = new System.Net.Mail.SmtpClient("smtp.gmail.com"); 
-            //Email.IsBodyHtml = false; 
-            //smtpMail.EnableSsl = true; 
-            //smtpMail.UseDefaultCredentials = false;
-            //smtpMail.Host = "smtp.gmail.com";
-            //smtpMail.Port = ; 
-            //smtpMail.Credentials = new System.Net.NetworkCredential(De, Password); 
-            //smtpMail.ClientCertificates. 
-            //SmtpClient clienteSmtp = new SmtpClient("WIN02");
-            // * */
-            ///*
-            // * Cliente SMTP
-            // * Gmail:  smtp.gmail.com  puerto:587
-            // * Hotmail: smtp.liva.com  puerto:25
-            // */
-            //SmtpClient server = new SmtpClient("smtp.gmail.com", 587);
-            ///*
-            //* Autenticacion en el Servidor
-            //* Utilizaremos nuestra cuenta de correo
-            //*
-            //* Direccion de Correo (Gmail o Hotmail)
-            //* y Contrasena correspondiente
-            //*/
-            //server.Credentials = new System.Net.NetworkCredential(De, Password);
-            //server.EnableSsl = true;
-
-            //server.Send(Email);
+            try
+            {
+                smtpClient.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                // NO FUNCIONA ROMPE ACA
+            }
 
         }
 
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

@@ -63,21 +63,13 @@ namespace UI.Desktop
         // EVENTO LOAD
         private void frmMain_Load(object sender, EventArgs e)
         {
-            usrActual = IniciarSesion();
+            bindUINoUser();
+
+            IniciarSesion();
 
             if (usrActual != null)
             {
-                lblNombreUsuario.Text = usrActual.usuario;
-                lblRol.Text = usrActual.Rol;
-                if (usrActual.Rol == "Empleado")
-                { mnuUsuarios.Visible = false; }
-
-                NI.BalloonTipIcon = ToolTipIcon.Info;
-                NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
-                NI.BalloonTipTitle = "Ut Simplex";
-                NI.Visible = true;
-                NI.ContextMenu = this.ContextMenu;
-                NI.ShowBalloonTip(100);
+                //bindUIUsuario();
                 
             }
             else
@@ -90,6 +82,26 @@ namespace UI.Desktop
         // INICIAR SESION
         private Entidades.Usuario IniciarSesion()
         {
+            
+            frmLogin appLogin = new frmLogin();
+            if (appLogin.ShowDialog() != DialogResult.OK)
+            {
+                return null;
+            }
+            else
+            {
+                usrActual = appLogin.usrActual;
+                InicializarCaja();
+                bindUIUsuario();
+                return appLogin.usrActual;
+                
+            }
+
+        }
+
+        // Bind UI No User
+        private void bindUINoUser()
+        {
             NI.BalloonTipIcon = ToolTipIcon.Info;
             NI.BalloonTipText = "- PUNTO DE VENTA -";
             NI.BalloonTipTitle = "Ut Simplex";
@@ -100,18 +112,23 @@ namespace UI.Desktop
             lblNombreUsuario.Text = "";
             lblRol.Text = "";
             scntCaja.Visible = false;
-            frmLogin appLogin = new frmLogin();
-            if (appLogin.ShowDialog() != DialogResult.OK)
-            {
-                return null;
-            }
-            else
-            {
-                InicializarCaja();
-                return appLogin.usrActual;
-                
-            }
+        }
+        
+        // Bind UI Usuario
+        private void bindUIUsuario()
+        {
+            
+            lblNombreUsuario.Text = usrActual.usuario;
+            lblRol.Text = usrActual.Rol;
+            if (usrActual.Rol == "Empleado")
+            { mnuUsuarios.Visible = false; }
 
+            NI.BalloonTipIcon = ToolTipIcon.Info;
+            NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
+            NI.BalloonTipTitle = "Ut Simplex";
+            NI.Visible = true;
+            NI.ContextMenu = this.ContextMenu;
+            NI.ShowBalloonTip(100);
         }
 
         // Bind UI Caja
@@ -205,18 +222,7 @@ namespace UI.Desktop
 
         }
 
-        // CLICK LBL CERRAR SESION
-        private void lblCerrarSesión_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Mensajes.frmConfirmar formConfirmar = new Mensajes.frmConfirmar("¿Está seguro que desea cerrar la sesión iniciada?", "");
-
-            if (formConfirmar.ShowDialog() == DialogResult.Yes)
-            {
-                IniciarSesion();
-            }
-
-        }
-
+      
 
         //TECLAS ACCESO RAPIDO
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -908,6 +914,7 @@ namespace UI.Desktop
                 MessageBox.Show("No existe una caja abierta. Debe abrirla antes de intentar cerrarla.", "Cerrar caja no permitido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
+       
         //ABRIR CAJA NUEVA
         private void AbrirCajaNueva()
         {
@@ -1003,7 +1010,8 @@ namespace UI.Desktop
 
             if (formConfirmar.ShowDialog() == DialogResult.Yes)
             {
-                IniciarSesion();
+               bindUINoUser();
+               usrActual= IniciarSesion();
             }
         }
 

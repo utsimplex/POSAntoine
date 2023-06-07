@@ -32,6 +32,9 @@
             this.lblSaldoInicial = new System.Windows.Forms.Label();
             this.txtSaldoInicial = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpFechaApertura = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaCaja = new System.Windows.Forms.DateTimePicker();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lblDescripcionCaja = new System.Windows.Forms.Label();
@@ -40,17 +43,14 @@
             this.lblCajaFecha = new System.Windows.Forms.Label();
             this.txtCajaNro = new System.Windows.Forms.TextBox();
             this.lblNroCaja = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnNo = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtCerradaPorUsr = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtCerradaPorUsr = new System.Windows.Forms.TextBox();
             this.txtSaldoFinal = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblSaldoFinal = new System.Windows.Forms.Label();
-            this.dtpFechaApertura = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -101,8 +101,44 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información de la caja";
             // 
+            // dtpFechaApertura
+            // 
+            this.dtpFechaApertura.Enabled = false;
+            this.dtpFechaApertura.Location = new System.Drawing.Point(146, 129);
+            this.dtpFechaApertura.Name = "dtpFechaApertura";
+            this.dtpFechaApertura.Size = new System.Drawing.Size(232, 20);
+            this.dtpFechaApertura.TabIndex = 27;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label4.Location = new System.Drawing.Point(12, 132);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 17);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Fecha apertura:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Location = new System.Drawing.Point(153, 169);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 29);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "$";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // dtpFechaCaja
             // 
+            this.dtpFechaCaja.Enabled = false;
             this.dtpFechaCaja.Location = new System.Drawing.Point(146, 77);
             this.dtpFechaCaja.Name = "dtpFechaCaja";
             this.dtpFechaCaja.Size = new System.Drawing.Size(232, 20);
@@ -112,6 +148,7 @@
             // 
             this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescripcion.Enabled = false;
             this.txtDescripcion.Location = new System.Drawing.Point(146, 103);
             this.txtDescripcion.MaxLength = 999;
             this.txtDescripcion.Name = "txtDescripcion";
@@ -196,19 +233,6 @@
             this.lblNroCaja.Text = "Nro. Caja: ";
             this.lblNroCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(153, 169);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 29);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "$";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // btnNo
             // 
             this.btnNo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -255,6 +279,19 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cierre de caja";
             // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.Location = new System.Drawing.Point(153, 62);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 29);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "$";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // txtCerradaPorUsr
             // 
             this.txtCerradaPorUsr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -265,6 +302,16 @@
             this.txtCerradaPorUsr.Size = new System.Drawing.Size(253, 20);
             this.txtCerradaPorUsr.TabIndex = 27;
             this.txtCerradaPorUsr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtSaldoFinal
+            // 
+            this.txtSaldoFinal.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtSaldoFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSaldoFinal.Location = new System.Drawing.Point(186, 59);
+            this.txtSaldoFinal.Name = "txtSaldoFinal";
+            this.txtSaldoFinal.Size = new System.Drawing.Size(128, 32);
+            this.txtSaldoFinal.TabIndex = 27;
+            this.txtSaldoFinal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
@@ -280,29 +327,6 @@
             this.label2.Text = "Cerrada por:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label3.Location = new System.Drawing.Point(153, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 29);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "$";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtSaldoFinal
-            // 
-            this.txtSaldoFinal.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtSaldoFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSaldoFinal.Location = new System.Drawing.Point(186, 59);
-            this.txtSaldoFinal.Name = "txtSaldoFinal";
-            this.txtSaldoFinal.Size = new System.Drawing.Size(128, 32);
-            this.txtSaldoFinal.TabIndex = 27;
-            this.txtSaldoFinal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // lblSaldoFinal
             // 
             this.lblSaldoFinal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -314,27 +338,6 @@
             this.lblSaldoFinal.TabIndex = 26;
             this.lblSaldoFinal.Text = "Saldo final";
             this.lblSaldoFinal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // dtpFechaApertura
-            // 
-            this.dtpFechaApertura.Location = new System.Drawing.Point(146, 129);
-            this.dtpFechaApertura.Name = "dtpFechaApertura";
-            this.dtpFechaApertura.Size = new System.Drawing.Size(232, 20);
-            this.dtpFechaApertura.TabIndex = 27;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Location = new System.Drawing.Point(12, 132);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(124, 17);
-            this.label4.TabIndex = 26;
-            this.label4.Text = "Fecha apertura:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmCierreCaja
             // 
