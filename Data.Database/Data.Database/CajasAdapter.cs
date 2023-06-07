@@ -46,7 +46,7 @@ namespace Data.Database
                         cajaAbierta.Descripcion = reader.IsDBNull(reader.GetOrdinal("descripcion")) ? string.Empty : reader.GetString(reader.GetOrdinal("descripcion"));
                         cajaAbierta.FechaCaja = (DateTime)reader["fecha_caja"];
                         cajaAbierta.FechaApertura = (DateTime)reader["fecha_apertura"];
-                        cajaAbierta.FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? DateTime.MinValue : (DateTime)reader["fecha_cierre"];
+                        cajaAbierta.FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? null : (DateTime?)reader["fecha_cierre"];
                         cajaAbierta.SaldoInicial = reader.IsDBNull(reader.GetOrdinal("saldo_inicial")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("saldo_inicial"));
                         cajaAbierta.SaldoFinal = reader.IsDBNull(reader.GetOrdinal("saldo_final")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("saldo_final"));
                         cajaAbierta.MontoNetoMovimientos = reader.IsDBNull(reader.GetOrdinal("monto_neto_movimientos")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("monto_neto_movimientos"));
@@ -133,7 +133,7 @@ namespace Data.Database
                         Descripcion = reader.IsDBNull(reader.GetOrdinal("descripcion")) ? string.Empty : reader.GetString(reader.GetOrdinal("descripcion")),
                         FechaCaja = (DateTime)reader["fecha_caja"],
                         FechaApertura = (DateTime)reader["fecha_apertura"],
-                        FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? DateTime.MinValue : (DateTime)reader["fecha_cierre"],
+                        FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? null : (DateTime?)reader["fecha_cierre"],
                         SaldoInicial = reader.IsDBNull(reader.GetOrdinal("saldo_inicial")) ? decimal.Zero : (decimal)reader["saldo_inicial"],
                         SaldoFinal = reader.IsDBNull(reader.GetOrdinal("saldo_final")) ? decimal.Zero : (decimal)reader["saldo_final"],
                         MontoNetoMovimientos = reader.IsDBNull(reader.GetOrdinal("monto_neto_movimientos")) ? decimal.Zero : (decimal)reader["monto_neto_movimientos"],

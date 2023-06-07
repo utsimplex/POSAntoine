@@ -41,9 +41,9 @@ namespace Entidades
             set { _FechaApertura = value; }
         }
 
-        //FECHA DE APERTURA
-        DateTime _FechaCierre;
-        public DateTime FechaCierre
+        //FECHA DE CIERRE
+        DateTime? _FechaCierre;
+        public DateTime? FechaCierre
         {
             get { return _FechaCierre; }
             set { _FechaCierre = value; }

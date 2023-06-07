@@ -56,7 +56,6 @@ namespace UI.Desktop
         {
             //ResetearClave("dantearrighi@gmail.com");
             MessageBox.Show("Comuníquese con servicio técnico al: \n(0341) 153-115510\n o envíe un correo a: \ninfo@utsimplex.com", "Olvidé mi contraseña", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
         }
 
         // Method for generating a random password
