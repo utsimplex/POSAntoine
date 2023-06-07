@@ -14,7 +14,7 @@ Puedes utilizar la última versión 2.0 de esta aplicación para gestionar tus v
 
 Para empezar a utilizar POS UtSimplex, sigue los siguientes pasos:
 
-1. Puedes contactarnos visitando nuestra <a href="https://www.utsimplex.com">página web</a>. Te proporcionaremos instrucciones adicionales por correo electrónico y estarás listo para empezar.
+1. Puedes contactarnos visitando nuestra <a href="https://www.utsimplex.com">página web</a>. Te proporcionaremos los precios e instrucciones adicionales por correo electrónico y estarás listo para empezar.
 2. Ejecuta la aplicación e inicia sesión con tus credenciales.
 3. Comienza a gestionar tu inventario y ventas con la interfaz fácil de usar de POS UtSimplex.
 
