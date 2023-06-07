@@ -1,4 +1,4 @@
-# POS UtSimplex
+# POS Ut Simplex
 
 <p align="center">
   <img src="https://img.icons8.com/?size=240&id=r5oDueTsU4cn&format=png"/><br>
