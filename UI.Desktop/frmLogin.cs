@@ -20,8 +20,6 @@ namespace UI.Desktop
             InitializeComponent();
         }
 
-        //Rewritten code with comments
-
         public Entidades.Usuario usrActual;
         Data.Database.UsuarioAdapter Datos_UsuarioAdapter = new Data.Database.UsuarioAdapter();
 
@@ -90,14 +88,14 @@ namespace UI.Desktop
             //send the unencrypted password by mail
 
             string De = "dev@utsimplex.com";
-            //string Password = ".Nimda2023";
+            //string Password = ".";
             string Para = email;
             string Mensaje = "El sistema ha generado una clave aleatoria. Su clave temporal es: " + claveNueva + ". Por favor, cambie su clave la primera vez que entre al sistema.";
             string Asunto = "Ut Simplex: Usuario y Contraseña para POS";
 
             SmtpClient smtpClient = new SmtpClient("smtp.hostinger.com", 465);
 
-            smtpClient.Credentials = new System.Net.NetworkCredential("dev@utsimplex.com", ".Nimda2023");
+            smtpClient.Credentials = new System.Net.NetworkCredential("dev@utsimplex.com", ".");
             // smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.EnableSsl = true;
