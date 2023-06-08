@@ -51,6 +51,8 @@
             this.txtSaldoFinal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSaldoFinal = new System.Windows.Forms.Label();
+            this.txtEfectivoRendir = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -60,9 +62,9 @@
             this.lblSaldoInicial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSaldoInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldoInicial.Location = new System.Drawing.Point(6, 169);
+            this.lblSaldoInicial.Location = new System.Drawing.Point(23, 172);
             this.lblSaldoInicial.Name = "lblSaldoInicial";
-            this.lblSaldoInicial.Size = new System.Drawing.Size(163, 23);
+            this.lblSaldoInicial.Size = new System.Drawing.Size(186, 23);
             this.lblSaldoInicial.TabIndex = 21;
             this.lblSaldoInicial.Text = "Saldo inicial";
             this.lblSaldoInicial.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -71,9 +73,9 @@
             // 
             this.txtSaldoInicial.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtSaldoInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSaldoInicial.Location = new System.Drawing.Point(186, 169);
+            this.txtSaldoInicial.Location = new System.Drawing.Point(215, 172);
             this.txtSaldoInicial.Name = "txtSaldoInicial";
-            this.txtSaldoInicial.Size = new System.Drawing.Size(128, 32);
+            this.txtSaldoInicial.Size = new System.Drawing.Size(187, 32);
             this.txtSaldoInicial.TabIndex = 22;
             this.txtSaldoInicial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -96,7 +98,7 @@
             this.groupBox1.Controls.Add(this.lblNroCaja);
             this.groupBox1.Location = new System.Drawing.Point(21, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(499, 216);
+            this.groupBox1.Size = new System.Drawing.Size(522, 216);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información de la caja";
@@ -106,7 +108,7 @@
             this.dtpFechaApertura.Enabled = false;
             this.dtpFechaApertura.Location = new System.Drawing.Point(146, 129);
             this.dtpFechaApertura.Name = "dtpFechaApertura";
-            this.dtpFechaApertura.Size = new System.Drawing.Size(232, 20);
+            this.dtpFechaApertura.Size = new System.Drawing.Size(256, 20);
             this.dtpFechaApertura.TabIndex = 27;
             // 
             // label4
@@ -129,7 +131,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(153, 169);
+            this.label1.Location = new System.Drawing.Point(182, 172);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 29);
             this.label1.TabIndex = 25;
@@ -141,7 +143,7 @@
             this.dtpFechaCaja.Enabled = false;
             this.dtpFechaCaja.Location = new System.Drawing.Point(146, 77);
             this.dtpFechaCaja.Name = "dtpFechaCaja";
-            this.dtpFechaCaja.Size = new System.Drawing.Size(232, 20);
+            this.dtpFechaCaja.Size = new System.Drawing.Size(256, 20);
             this.dtpFechaCaja.TabIndex = 24;
             // 
             // txtDescripcion
@@ -152,7 +154,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(146, 103);
             this.txtDescripcion.MaxLength = 999;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(347, 20);
+            this.txtDescripcion.Size = new System.Drawing.Size(370, 20);
             this.txtDescripcion.TabIndex = 24;
             // 
             // lblDescripcionCaja
@@ -176,7 +178,7 @@
             this.txtAbiertaPorUsr.Enabled = false;
             this.txtAbiertaPorUsr.Location = new System.Drawing.Point(146, 25);
             this.txtAbiertaPorUsr.Name = "txtAbiertaPorUsr";
-            this.txtAbiertaPorUsr.Size = new System.Drawing.Size(233, 20);
+            this.txtAbiertaPorUsr.Size = new System.Drawing.Size(370, 20);
             this.txtAbiertaPorUsr.TabIndex = 22;
             this.txtAbiertaPorUsr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -215,7 +217,7 @@
             this.txtCajaNro.Enabled = false;
             this.txtCajaNro.Location = new System.Drawing.Point(146, 51);
             this.txtCajaNro.Name = "txtCajaNro";
-            this.txtCajaNro.Size = new System.Drawing.Size(233, 20);
+            this.txtCajaNro.Size = new System.Drawing.Size(256, 20);
             this.txtCajaNro.TabIndex = 18;
             this.txtCajaNro.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -238,7 +240,7 @@
             this.btnNo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnNo.Image = ((System.Drawing.Image)(resources.GetObject("btnNo.Image")));
-            this.btnNo.Location = new System.Drawing.Point(132, 361);
+            this.btnNo.Location = new System.Drawing.Point(143, 396);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(124, 46);
             this.btnNo.TabIndex = 20;
@@ -255,7 +257,7 @@
             this.btnCerrarCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnCerrarCaja.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnCerrarCaja.Image = global::UI.Desktop.Properties.Resources._3319640_money_coin_dollar_save_lock;
-            this.btnCerrarCaja.Location = new System.Drawing.Point(262, 361);
+            this.btnCerrarCaja.Location = new System.Drawing.Point(273, 396);
             this.btnCerrarCaja.Name = "btnCerrarCaja";
             this.btnCerrarCaja.Size = new System.Drawing.Size(138, 46);
             this.btnCerrarCaja.TabIndex = 14;
@@ -267,6 +269,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtEfectivoRendir);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txtCerradaPorUsr);
             this.groupBox2.Controls.Add(this.txtSaldoFinal);
@@ -274,7 +278,7 @@
             this.groupBox2.Controls.Add(this.lblSaldoFinal);
             this.groupBox2.Location = new System.Drawing.Point(21, 234);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(498, 105);
+            this.groupBox2.Size = new System.Drawing.Size(522, 142);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cierre de caja";
@@ -285,7 +289,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label3.Location = new System.Drawing.Point(153, 62);
+            this.label3.Location = new System.Drawing.Point(182, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 29);
             this.label3.TabIndex = 28;
@@ -299,17 +303,18 @@
             this.txtCerradaPorUsr.Enabled = false;
             this.txtCerradaPorUsr.Location = new System.Drawing.Point(125, 25);
             this.txtCerradaPorUsr.Name = "txtCerradaPorUsr";
-            this.txtCerradaPorUsr.Size = new System.Drawing.Size(253, 20);
+            this.txtCerradaPorUsr.Size = new System.Drawing.Size(391, 20);
             this.txtCerradaPorUsr.TabIndex = 27;
             this.txtCerradaPorUsr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSaldoFinal
             // 
             this.txtSaldoFinal.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtSaldoFinal.Enabled = false;
             this.txtSaldoFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSaldoFinal.Location = new System.Drawing.Point(186, 59);
+            this.txtSaldoFinal.Location = new System.Drawing.Point(215, 59);
             this.txtSaldoFinal.Name = "txtSaldoFinal";
-            this.txtSaldoFinal.Size = new System.Drawing.Size(128, 32);
+            this.txtSaldoFinal.Size = new System.Drawing.Size(187, 32);
             this.txtSaldoFinal.TabIndex = 27;
             this.txtSaldoFinal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -332,18 +337,41 @@
             this.lblSaldoFinal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSaldoFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldoFinal.Location = new System.Drawing.Point(6, 62);
+            this.lblSaldoFinal.Location = new System.Drawing.Point(23, 62);
             this.lblSaldoFinal.Name = "lblSaldoFinal";
-            this.lblSaldoFinal.Size = new System.Drawing.Size(162, 23);
+            this.lblSaldoFinal.Size = new System.Drawing.Size(186, 23);
             this.lblSaldoFinal.TabIndex = 26;
             this.lblSaldoFinal.Text = "Saldo final";
             this.lblSaldoFinal.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtEfectivoRendir
+            // 
+            this.txtEfectivoRendir.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtEfectivoRendir.Enabled = false;
+            this.txtEfectivoRendir.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEfectivoRendir.Location = new System.Drawing.Point(215, 97);
+            this.txtEfectivoRendir.Name = "txtEfectivoRendir";
+            this.txtEfectivoRendir.Size = new System.Drawing.Size(187, 32);
+            this.txtEfectivoRendir.TabIndex = 30;
+            this.txtEfectivoRendir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(8, 100);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(216, 23);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Efectivo a rendir";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // frmCierreCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 419);
+            this.ClientSize = new System.Drawing.Size(555, 454);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnNo);
@@ -384,5 +412,7 @@
         private System.Windows.Forms.Label lblSaldoFinal;
         private System.Windows.Forms.DateTimePicker dtpFechaApertura;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtEfectivoRendir;
+        private System.Windows.Forms.Label label5;
     }
 }

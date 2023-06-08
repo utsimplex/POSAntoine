@@ -163,7 +163,7 @@ namespace Data.Database
         /// <summary>
         /// Cierra una caja con el ID especificado, el saldo final y el usuario que la cierra.
         /// </summary>
-        public void CerrarCaja(int caja_id, SqlMoney saldo_final, string cierra_usuario)
+        public void CerrarCaja(int caja_id, string cierra_usuario)
         {
             // Crear conexión
             SqlConnection con = CrearConexion();
@@ -179,8 +179,7 @@ namespace Data.Database
 
                 // Agregar los parámetros al comando
                 cmd.Parameters.AddWithValue("@caja_id", caja_id);
-                cmd.Parameters.AddWithValue("@saldo_final", saldo_final);
-                cmd.Parameters.AddWithValue("@cierra_usuario", cierra_usuario);
+               cmd.Parameters.AddWithValue("@cierra_usuario", cierra_usuario);
 
                 // Ejecutar el stored procedure
                 cmd.ExecuteNonQuery();
@@ -196,6 +195,181 @@ namespace Data.Database
                 con.Close();
             }
         }
+
+
+        /// <summary>
+        ///// Dado un ID de caja, obtiene el neto de los movimientos realizados
+        ///// </summary>
+        //public Decimal GetMovimientosNeto(int caja_id)
+        //{
+        //    // Crear conexión
+        //    SqlConnection con = CrearConexion();
+
+        //    try
+        //    {
+        //        // Abrir la conexión
+        //        con.Open();
+
+        //        // Crear SqlCommand
+        //        SqlCommand cmd = new SqlCommand("GetNetoMovimientosCaja", con);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+
+        //        // Agregar los parámetros al comando
+        //        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+        //        // Ejecutar el stored procedure y almacenar el resultado en una variable decimal
+        //        Decimal netoMovimientos = (Decimal)cmd.ExecuteScalar();
+
+        //        // Devolver el resultado
+        //        return netoMovimientos;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Manejar la excepción o mostrar un mensaje de error
+        //        MessageBox.Show("Error al obtener valor neto de movimientos " + ex.Message);
+        //        return 0; 
+        //    }
+        //    finally
+        //    {
+        //        // Cerrar la conexión después de usarla
+        //        con.Close();
+        //    }
+        //}
+
+         
+        ///// <summary>
+        ///// Dado un ID de caja, obtiene el neto de las ventas realizadas
+        ///// </summary>
+        //public Decimal GetVentasNeto(int caja_id)
+        //{
+        //    // Crear conexión
+        //    SqlConnection con = CrearConexion();
+
+        //    try
+        //    {
+        //        // Abrir la conexión
+        //        con.Open();
+
+        //        // Crear SqlCommand
+        //        SqlCommand cmd = new SqlCommand("GetNetoVentasCaja", con);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+
+        //        // Agregar los parámetros al comando
+        //        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+        //        // Ejecutar el stored procedure y almacenar el resultado en una variable decimal
+        //        Decimal netoVentas = (Decimal)cmd.ExecuteScalar();
+
+        //        // Devolver el resultado
+        //        return netoVentas;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Manejar la excepción o mostrar un mensaje de error
+        //        MessageBox.Show("Error al obtener valor neto de ventas " + ex.Message);
+        //        return 0;
+        //    }
+        //    finally
+        //    {
+        //        // Cerrar la conexión después de usarla
+        //        con.Close();
+        //    }
+        //}
+
+       
+        /// <summary>
+        /// Dado un ID de caja, obtiene el saldo final
+        /// </summary>
+        /// 
+        public decimal GetSaldoFinal(int caja_id)
+        {
+            // Crear conexión
+            using (SqlConnection con = CrearConexion())
+            {
+                try
+                {
+                    // Abrir la conexión
+                    con.Open();
+
+                    // Crear SqlCommand
+                    using (SqlCommand cmd = new SqlCommand("GetSaldoFinalCaja", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros al comando
+                        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+                        // Agregar parámetro de salida para el saldo final
+                        SqlParameter saldoFinalParam = new SqlParameter("@saldo_final", SqlDbType.Money);
+                        saldoFinalParam.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(saldoFinalParam);
+
+                        // Ejecutar el stored procedure
+                        cmd.ExecuteNonQuery();
+
+                        // Obtener el saldo final del parámetro de salida
+                        decimal saldoFinal = (decimal)saldoFinalParam.Value;
+
+                        // Devolver el resultado
+                        return saldoFinal;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción o mostrar un mensaje de error
+                    MessageBox.Show("Error al obtener saldo final: " + ex.Message);
+                    return 0;
+                }
+            }
+        }
+
+      
+        /// <summary>
+        /// Dado un ID de caja, obtiene el efectivo a rendir
+        /// </summary>
+
+        public decimal GetRendirEfectivo(int caja_id)
+        {
+            // Crear conexión
+            using (SqlConnection con = CrearConexion())
+            {
+                try
+                {
+                    // Abrir la conexión
+                    con.Open();
+
+                    // Crear SqlCommand
+                    using (SqlCommand cmd = new SqlCommand("GetRendirEfectivo", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros al comando
+                        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+                        // Agregar parámetro de salida para el efectivo a rendir
+                        SqlParameter rendirEfectivoParam = new SqlParameter("@efectivo_a_rendir", SqlDbType.Money);
+                        rendirEfectivoParam.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(rendirEfectivoParam);
+
+                        // Ejecutar el stored procedure
+                        cmd.ExecuteNonQuery();
+
+                        // Obtener el efectivo a rendir del parámetro de salida
+                        decimal rendirEfectivo = (decimal)rendirEfectivoParam.Value;
+
+                        // Devolver el resultado
+                        return rendirEfectivo;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción o mostrar un mensaje de error
+                    MessageBox.Show("Error al obtener efectivo a rendir: " + ex.Message);
+                    return 0;
+                }
+            }
+        }
+
 
     }
 }

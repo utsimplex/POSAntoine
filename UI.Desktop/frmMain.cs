@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using Microsoft.Office.Interop;
 using System.Threading;
+using UI.Desktop.Cajas;
 
 namespace UI.Desktop
 {
@@ -1078,5 +1079,17 @@ namespace UI.Desktop
         }
 
         #endregion
+
+        private void btnCajaExtraer_Click(object sender, EventArgs e)
+        {
+            frmMovimientoCaja frmMovCaja = new frmMovimientoCaja(false, cajaActual, usrActual.usuario);
+            frmMovCaja.ShowDialog();
+        }
+
+        private void btnCajaIngresar_Click(object sender, EventArgs e)
+        {
+            frmMovimientoCaja frmMovCaja = new frmMovimientoCaja(true, cajaActual, usrActual.usuario);
+            frmMovCaja.ShowDialog();
+        }
     }
 }

@@ -683,6 +683,7 @@
             this.btnCajaExtraer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCajaExtraer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCajaExtraer.UseVisualStyleBackColor = true;
+            this.btnCajaExtraer.Click += new System.EventHandler(this.btnCajaExtraer_Click);
             // 
             // btnCajaIngresar
             // 
@@ -700,6 +701,7 @@
             this.btnCajaIngresar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCajaIngresar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCajaIngresar.UseVisualStyleBackColor = true;
+            this.btnCajaIngresar.Click += new System.EventHandler(this.btnCajaIngresar_Click);
             // 
             // btnCerrarCaja
             // 

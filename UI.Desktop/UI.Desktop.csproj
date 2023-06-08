@@ -275,6 +275,12 @@
     <Compile Include="Cajas\frmCajas.Designer.cs">
       <DependentUpon>frmCajas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cajas\frmMovimientoCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmMovimientoCaja.Designer.cs">
+      <DependentUpon>frmMovimientoCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clientes\frmClienteABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -385,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cajas\frmCajas.resx">
       <DependentUpon>frmCajas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmMovimientoCaja.resx">
+      <DependentUpon>frmMovimientoCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Clientes\frmClienteABM.resx">
       <DependentUpon>frmClienteABM.cs</DependentUpon>
