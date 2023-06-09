@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Entidades;
 using System.Data;
-using System.Data.SqlServerCe;
+//using System.Data.SqlServerCe;
 using System.Data.SqlClient;
 
 namespace Data.Database
@@ -23,7 +23,10 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion], [caja_id] ) VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID)";
+            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion], [caja_id],[Neto]"+
+           ",[Iva],[TipoComprobante],[PuntoDeVenta],[CAE],[TICKETFISCAL],[VencimientoCAE],[TipoDocumentoCliente],[NumeroDocumentoCliente],[NombreCliente],[DireccionCliente],[SituacionFiscalCliente],[CUITEMISOR] ) " +
+                "VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID,@IVA,@TIPOCOMPROBANTE@PUNTODEVENTA,@CAE,@TICKETFISCAL,@VENCIMIENTOCAE," +
+                "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE,@CUITEMISOR)";
             Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
             Comando.Parameters["@NUMVENTA"].Value = ventaNueva.NumeroVenta;
             Comando.Parameters.Add(new SqlParameter("@FECHAHORA", SqlDbType.DateTime));
@@ -42,7 +45,34 @@ namespace Data.Database
             Comando.Parameters["@TIPOOPERACION"].Value = ventaNueva.TipoOperacion;
             Comando.Parameters.Add(new SqlParameter("@CAJA_ID", SqlDbType.Int));
             Comando.Parameters["@CAJA_ID"].Value = caja.ID;
-
+            Comando.Parameters.Add(new SqlParameter("@IVA", SqlDbType.Decimal));
+            Comando.Parameters["@IVA"].Value = ventaNueva.Iva;
+            Comando.Parameters.Add(new SqlParameter("@NETO", SqlDbType.Int));
+            Comando.Parameters["@NETO"].Value = ventaNueva.Neto;
+            Comando.Parameters.Add(new SqlParameter("@TIPOCOMPROBANTE", SqlDbType.Int));
+            Comando.Parameters["@TIPOCOMPROBANTE"].Value = ventaNueva.TipoComprobante;
+            Comando.Parameters.Add(new SqlParameter("@PUNTODEVENTA", SqlDbType.Int));
+            Comando.Parameters["@CAE"].Value = ventaNueva.PuntoDeVenta;
+            Comando.Parameters.Add(new SqlParameter("@TICKETFISCAL", SqlDbType.VarChar));
+            Comando.Parameters["@TICKETFISCAL"].Value = ventaNueva.NumeroTicketFiscal;
+            Comando.Parameters.Add(new SqlParameter("@CAE", SqlDbType.NVarChar));
+            Comando.Parameters["@CAE"].Value = ventaNueva.CAE;
+            Comando.Parameters.Add(new SqlParameter("@VENCIMIENTOCAE", SqlDbType.DateTime));
+            Comando.Parameters["@VENCIMIENTOCAE"].Value = ventaNueva.VencimientoCAE;
+            Comando.Parameters.Add(new SqlParameter("@TIPODOCUMENTOCLIENTE", SqlDbType.Int));
+            Comando.Parameters["@TIPODOCUMENTOCLIENTE"].Value = ventaNueva.TipoDocumentoCliente;
+            Comando.Parameters.Add(new SqlParameter("@NUMERODOCUMENTOCLIENTE", SqlDbType.BigInt));
+            Comando.Parameters["@NUMERODOCUMENTOCLIENTE"].Value = ventaNueva.NumeroDocumentoCliente;
+            Comando.Parameters.Add(new SqlParameter("@NOMBRECLIENTE", SqlDbType.NVarChar));
+            Comando.Parameters["@NOMBRECLIENTE"].Value = ventaNueva.NombreCliente;
+            Comando.Parameters.Add(new SqlParameter("@CUITEMISOR", SqlDbType.BigInt));
+            Comando.Parameters["@CUITEMISOR"].Value = ventaNueva.CuitEmisor;
+            Comando.Parameters.Add(new SqlParameter("@DIRECCIONCLIENTE", SqlDbType.Int));
+            Comando.Parameters["@DIRECCIONCLIENTE"].Value = ventaNueva.DireccionCliente;
+            Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCALCLIENTE", SqlDbType.Int));
+            Comando.Parameters["@SITUACIONFISCALCLIENTE"].Value = ventaNueva.SituacionFiscalCliente;
+            //@IVA,@TIPOCOMPROBANTE,@CAE,@VENCIMIENTOCAE,"+
+            //    "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE,@CUITEMISOR
             //Ejecuta el comando INSERT
             Comando.Connection.Open();
             Comando.ExecuteNonQuery();
@@ -97,29 +127,30 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "UPDATE [VENTA] SET TICKET_FISCAL=@TICKET_FISCAL,CAE=@CAE, VTOCAE=@VTOCAE, PTOVTA=@PTOVTA,TIPOCBTE=@TIPOCBTE, TIPODOCCLI=@TIPODOCCLI, DOCCLI=@DOCCLI, NOMBRECLI=@NOMBRECLI, DIRECCIONCLI=@DIRECCIONCLI, SITFISCALCLI= @SITFISCALCLI,CUITEMISOR=@CUITEMISOR WHERE ID=@ID";
-            Comando.Parameters.Add(new SqlParameter("@TICKET_FISCAL", SqlDbType.NVarChar));
-            Comando.Parameters["@TICKET_FISCAL"].Value = VentaActual.NumeroTicketFiscal;
+            Comando.CommandText = "UPDATE [VENTA] SET TIPOCOMPROBANTE=@TIPOCOMPROBANTE,PUNTODEVENTA=@PUNTODEVENTA,TICKETFISCAL=@TICKETFISCAL, CAE=@CAE, VENCIMIENTOCAE=@VENCIMIENTOCAE,"+
+                " TIPODOCUMENTOCLIENTE=@TIPODOCUMENTOCLIENTE, NUMERODOCUMENTOCLIENTE=@NUMERODOCUMENTOCLIENTE, NOMBRECLIENTE=@NOMBRECLIENTE, DIRECCIONCLIENTE=@DIRECCIONCLIENTE, SITUACIONFISCALCLIENTE= @SITUACIONFISCALCLIENTE,CUITEMISOR=@CUITEMISOR WHERE ID=@ID";
+            Comando.Parameters.Add(new SqlParameter("@TIPOCOMPROBANTE", SqlDbType.Int));
+            Comando.Parameters["@TIPOCOMPROBANTE"].Value = VentaActual.TipoComprobante;
+            Comando.Parameters.Add(new SqlParameter("@PUNTODEVENTA", SqlDbType.Int));
+            Comando.Parameters["@CAE"].Value = VentaActual.PuntoDeVenta;
+            Comando.Parameters.Add(new SqlParameter("@TICKETFISCAL", SqlDbType.VarChar));
+            Comando.Parameters["@TICKETFISCAL"].Value = VentaActual.NumeroTicketFiscal;
             Comando.Parameters.Add(new SqlParameter("@CAE", SqlDbType.NVarChar));
             Comando.Parameters["@CAE"].Value = VentaActual.CAE;
-            Comando.Parameters.Add(new SqlParameter("@VTOCAE", SqlDbType.NVarChar));
-            Comando.Parameters["@VTOCAE"].Value = VentaActual.VencimientoCAE;
-            Comando.Parameters.Add(new SqlParameter("@PTOVTA", SqlDbType.NVarChar));
-            Comando.Parameters["@PTOVTA"].Value = VentaActual.PuntoDeVenta;
-            Comando.Parameters.Add(new SqlParameter("@TIPOCBTE", SqlDbType.NVarChar));
-            Comando.Parameters["@TIPOCBTE"].Value = VentaActual.TipoComprobante;
-            Comando.Parameters.Add(new SqlParameter("@TIPODOCCLI", SqlDbType.NVarChar));
-            Comando.Parameters["@TIPODOCCLI"].Value = VentaActual.TipoDocumentoCliente;
-            Comando.Parameters.Add(new SqlParameter("@DOCCLI", SqlDbType.NVarChar));
-            Comando.Parameters["@DOCCLI"].Value = VentaActual.NumeroDocumentoCliente;
-            Comando.Parameters.Add(new SqlParameter("@NOMBRECLI", SqlDbType.NVarChar));
-            Comando.Parameters["@NOMBRECLI"].Value = VentaActual.NombreCliente;
-            Comando.Parameters.Add(new SqlParameter("@DIRECCIONCLI", SqlDbType.NVarChar));
-            Comando.Parameters["@DIRECCIONCLI"].Value = VentaActual.DireccionCliente;
-            Comando.Parameters.Add(new SqlParameter("@SITFISCALCLI", SqlDbType.NVarChar));
-            Comando.Parameters["@SITFISCALCLI"].Value = VentaActual.situacionFiscalCliente;
-            Comando.Parameters.Add(new SqlParameter("@CUITEMISOR", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@VENCIMIENTOCAE", SqlDbType.DateTime));
+            Comando.Parameters["@VENCIMIENTOCAE"].Value = VentaActual.VencimientoCAE;
+            Comando.Parameters.Add(new SqlParameter("@TIPODOCUMENTOCLIENTE", SqlDbType.Int));
+            Comando.Parameters["@TIPODOCUMENTOCLIENTE"].Value = VentaActual.TipoDocumentoCliente;
+            Comando.Parameters.Add(new SqlParameter("@NUMERODOCUMENTOCLIENTE", SqlDbType.BigInt));
+            Comando.Parameters["@NUMERODOCUMENTOCLIENTE"].Value = VentaActual.NumeroDocumentoCliente;
+            Comando.Parameters.Add(new SqlParameter("@NOMBRECLIENTE", SqlDbType.NVarChar));
+            Comando.Parameters["@NOMBRECLIENTE"].Value = VentaActual.NombreCliente;
+            Comando.Parameters.Add(new SqlParameter("@CUITEMISOR", SqlDbType.BigInt));
             Comando.Parameters["@CUITEMISOR"].Value = VentaActual.CuitEmisor;
+            Comando.Parameters.Add(new SqlParameter("@DIRECCIONCLIENTE", SqlDbType.Int));
+            Comando.Parameters["@DIRECCIONCLIENTE"].Value = VentaActual.DireccionCliente;
+            Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCALCLIENTE", SqlDbType.Int));
+            Comando.Parameters["@SITUACIONFISCALCLIENTE"].Value = VentaActual.SituacionFiscalCliente;
 
 
             //Ejecuta el comando INSERT
@@ -152,6 +183,7 @@ namespace Data.Database
                     vta.TipoPago = (string)drVentas["tipopago"];
                     vta.Total = (decimal)drVentas["total"];
                     vta.TipoOperacion = (string)drVentas["tipooperacion"];
+                    //FALTAN TRAER DATOS FISCALES
 
 
                     ListaVentas.Add(vta);
