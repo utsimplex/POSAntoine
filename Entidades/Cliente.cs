@@ -11,63 +11,32 @@ namespace Entidades
         /*   D A T O S    D E L    C L I E N T E    */
         
         //DNI
-        string _Dni;
-        public string Dni
-        {
-            get { return _Dni; }
-            set { _Dni = value; }
-        }
+        public string NumeroDocumento { get; set; }
+        public int? TipoDocumento { get; set; }
 
         //NOMBRE
-        string _Nombre;
-        public string Nombre
-        {
-            get { return _Nombre; }
-            set { _Nombre = value; }
-        }
+        public string Nombre { get; set; }
 
         //APELLIDO
-        string _Apellido;
-        public string Apellido
-        {
-            get { return _Apellido; }
-            set { _Apellido = value; }
-        }
+        public string Apellido { get; set; }
 
         //TELEFONO
-        string _Telefono;
-        public string Telefono
-        {
-            get { return _Telefono; }
-            set { _Telefono = value; }
-        }
+        public string Telefono { get; set; }
 
         //DIRECCION
-        string _Direccion;
-        public string Direccion
-        {
-            get { return _Direccion; }
-            set { _Direccion = value; }
-        }
+        public string Direccion { get; set; }
 
         //EMAIL
-        string _email;
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
+        public string Email { get; set; }
 
         //TIPO
-        string _tipo;
-        public string TipoCliente
-        {
-            get { return _tipo; }
-            set { _tipo = value; }
-        }
-        
-        
-      
+        public string TipoCliente { get; set; }
+        public int? TipoComprobante { get; set; }
+        public int? SituacionFiscal { get; set; }
+
+
+
+
 
     }
 }

@@ -83,7 +83,46 @@ namespace Data.Database
 
 
         //}
+        public void ActualizarDatosFiscales(Venta VentaActual)
+        {
+            //Crear Conexion y Abrirla
+            SqlConnection Con = CrearConexion();
 
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
+            Comando.Connection = Con;
+            Comando.CommandType = CommandType.Text;
+
+            Comando.CommandText = "UPDATE [VENTA] SET TICKET_FISCAL=@TICKET_FISCAL,CAE=@CAE, VTOCAE=@VTOCAE, PTOVTA=@PTOVTA,TIPOCBTE=@TIPOCBTE, TIPODOCCLI=@TIPODOCCLI, DOCCLI=@DOCCLI, NOMBRECLI=@NOMBRECLI, DIRECCIONCLI=@DIRECCIONCLI, SITFISCALCLI= @SITFISCALCLI,CUITEMISOR=@CUITEMISOR WHERE ID=@ID";
+            Comando.Parameters.Add(new SqlParameter("@TICKET_FISCAL", SqlDbType.NVarChar));
+            Comando.Parameters["@TICKET_FISCAL"].Value = VentaActual.NumeroTicketFiscal;
+            Comando.Parameters.Add(new SqlParameter("@CAE", SqlDbType.NVarChar));
+            Comando.Parameters["@CAE"].Value = VentaActual.CAE;
+            Comando.Parameters.Add(new SqlParameter("@VTOCAE", SqlDbType.NVarChar));
+            Comando.Parameters["@VTOCAE"].Value = VentaActual.VencimientoCAE;
+            Comando.Parameters.Add(new SqlParameter("@PTOVTA", SqlDbType.NVarChar));
+            Comando.Parameters["@PTOVTA"].Value = VentaActual.PuntoDeVenta;
+            Comando.Parameters.Add(new SqlParameter("@TIPOCBTE", SqlDbType.NVarChar));
+            Comando.Parameters["@TIPOCBTE"].Value = VentaActual.TipoComprobante;
+            Comando.Parameters.Add(new SqlParameter("@TIPODOCCLI", SqlDbType.NVarChar));
+            Comando.Parameters["@TIPODOCCLI"].Value = VentaActual.TipoDocumentoCliente;
+            Comando.Parameters.Add(new SqlParameter("@DOCCLI", SqlDbType.NVarChar));
+            Comando.Parameters["@DOCCLI"].Value = VentaActual.NumeroDocumentoCliente;
+            Comando.Parameters.Add(new SqlParameter("@NOMBRECLI", SqlDbType.NVarChar));
+            Comando.Parameters["@NOMBRECLI"].Value = VentaActual.NombreCliente;
+            Comando.Parameters.Add(new SqlParameter("@DIRECCIONCLI", SqlDbType.NVarChar));
+            Comando.Parameters["@DIRECCIONCLI"].Value = VentaActual.DireccionCliente;
+            Comando.Parameters.Add(new SqlParameter("@SITFISCALCLI", SqlDbType.NVarChar));
+            Comando.Parameters["@SITFISCALCLI"].Value = VentaActual.situacionFiscalCliente;
+            Comando.Parameters.Add(new SqlParameter("@CUITEMISOR", SqlDbType.NVarChar));
+            Comando.Parameters["@CUITEMISOR"].Value = VentaActual.CuitEmisor;
+
+
+            //Ejecuta el comando INSERT
+            Comando.Connection.Open();
+            Comando.ExecuteNonQuery();
+            Comando.Connection.Close();
+        }
         public List<Venta> GetAll()
         {
             List<Venta> ListaVentas = new List<Venta>();

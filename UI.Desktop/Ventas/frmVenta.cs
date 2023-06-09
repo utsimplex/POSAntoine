@@ -8,12 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using Entidades;
 using System.Globalization;
-
+using System.Threading.Tasks;
 
 namespace UI.Desktop.Ventas
 {
     public partial class frmVenta : Form
     {
+        //Variables de Clase
         public frmVenta(Usuario usr)
         {
             InitializeComponent();
@@ -22,14 +23,16 @@ namespace UI.Desktop.Ventas
             string f = fecha.ToString("dd ' de ' MMMM ', ' yyyy");
             txtFechaHoraVta.Text = f;
             modo = "Alta";
+            ventaLocal = new Venta();
                    
         }
         //MODO EDICION
         public frmVenta(Usuario usr,Venta vtaSelec)
         {
             InitializeComponent();
-            usuarioLogueado = usr;
+            ventaLocal = vtaSelec;
 
+            usuarioLogueado = usr;
             modo = "Modificacion";
             txtFechaHoraVta.Text = vtaSelec.FechaHora.ToString("dd ' de ' MMMM ', ' yyyy"); 
             txtDcto.Text = vtaSelec.Descuento.ToString();
@@ -58,8 +61,9 @@ namespace UI.Desktop.Ventas
         Artículos.frmListadoArticulos formListaArticulos;
         string modo;
         Entidades.Usuario usuarioLogueado;
+        Entidades.Venta ventaLocal;
         Venta vtaModificar;
-         
+
         #endregion
 
 
@@ -75,7 +79,7 @@ namespace UI.Desktop.Ventas
         {
                clienteActual = BuscarCliente();
             txtNombRazCli.Text = clienteActual.Nombre + " " + clienteActual.Apellido;
-            txtDniCuit.Text = clienteActual.Dni;
+            txtDniCuit.Text = clienteActual.NumeroDocumento;
                
         }
 
@@ -161,7 +165,7 @@ namespace UI.Desktop.Ventas
                 
                   clienteActual = BuscarCliente();
                     txtNombRazCli.Text = clienteActual.Nombre + " " + clienteActual.Apellido;
-                    txtDniCuit.Text = clienteActual.Dni;
+                    txtDniCuit.Text = clienteActual.NumeroDocumento;
                  
                     break;
 
@@ -223,9 +227,15 @@ namespace UI.Desktop.Ventas
             }
         }
 
+        private async void btnFacturar_Click(object sender, EventArgs e)
+        {
+            this.ConstruirVenta();
+            this.GuardarVenta();
+            await this.FacturarVentaAsync();
+        }
         #endregion
-        
-    
+
+
         #region /*/*/*/ M E T O D O S \*\*\*\
 
         //Configurar Grilla Detalles
@@ -284,7 +294,7 @@ namespace UI.Desktop.Ventas
                 clienteActual = new Entidades.Cliente();
                 clienteActual.Nombre = "No Registrado";
                 clienteActual.Apellido = " ";
-                clienteActual.Dni = "No Registrado";
+                clienteActual.NumeroDocumento = "No Registrado";
                 clienteActual.Email = "No Registrado";
                 clienteActual.Telefono = "No Registrado";
             }
@@ -470,7 +480,198 @@ namespace UI.Desktop.Ventas
             }
 
         }
+        
+        //VALIDAR VENTA
+        private bool ValidarVenta()
+        {
+            //Este metodo devuelve true si la venta es valida
+            return Convert.ToDouble(this.ventaLocal.Total) != 0 ;
+        }
+        //GENERAR VENTA a Variable Local
+        private void ConstruirVenta()
+        {
+            if (modo == "Alta")
+            {
+                //Entidades.Venta vtaNueva = new Entidades.Venta();
+                ventaLocal.TipoOperacion = "V";
+                frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
 
+                formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
+
+                string medio = null;
+
+                if (rbEfectivo.Checked)
+                {
+                    medio = "Efectivo";
+                    //vtaNueva.TipoPago = "Efectivo"; 
+                }
+                else if (rbTarjeta.Checked)
+                {
+                    medio = "Debito/Credito";
+                    // vtaNueva.TipoPago = "Debito/Credito";
+                }
+                else if (rbMP.Checked)
+                {
+                    medio = "Mercado Pago";
+                }
+
+                ventaLocal.TipoPago = medio;
+
+                formConfirmarVenta.txtTipoPago.Text = ventaLocal.TipoPago;
+                formConfirmarVenta.ShowDialog();
+
+                if (formConfirmarVenta.DialogResult == DialogResult.OK || formConfirmarVenta.DialogResult == DialogResult.Yes)
+                {
+                    ventaLocal.NumeroVenta = Convert.ToInt32(txtNumeroVenta.Text);
+                    ventaLocal.FechaHora = Convert.ToDateTime(DateTime.Now);
+                    //ventaLocal.DniCliente = txtDniCuit.Text;
+                    
+                    //#Data Fiscal
+                    ventaLocal.NumeroDocumentoCliente = Convert.ToInt64(clienteActual.NumeroDocumento);
+                    //ventaLocal.SituacionFiscalCliente = clienteActual.TipoCliente; TO-DO: asignar id de situacion Fiscal
+                    ventaLocal.NombreCliente = clienteActual.Nombre;
+                    ventaLocal.DireccionCliente = clienteActual.Direccion;
+                    ventaLocal.TipoDocumentoCliente = clienteActual !=null && clienteActual.TipoDocumento!=null? clienteActual.TipoDocumento:(int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR;
+                    ventaLocal.Total = Convert.ToDecimal(txtTotal.Text);
+                    double Neto = Convert.ToDouble(txtTotal.Text) / 1.21;
+                    ventaLocal.Neto = Convert.ToDouble(Neto.ToString("0.00"));
+                    double Iva = Convert.ToDouble(ventaLocal.Total) - Neto;
+                    ventaLocal.Iva = Convert.ToDouble(Iva.ToString("0.00"));
+                    //TO-DO: Evaluar parametro de Usuario para saber si el emisor es Monotributista
+                    bool Monotributista = true;
+                    if (Monotributista)
+                        ventaLocal.TipoComprobante = (int)FeConstantes.TipoComprobante.FacturaC;
+                    else
+                        ventaLocal.TipoComprobante = lblTipoComprobante.Text == "FACTURA B" ? (int)FeConstantes.TipoComprobante.FacturaC : clienteActual.TipoComprobante; 
+                    
+                    ventaLocal.Usuario = usuarioLogueado.usuario;
+
+                    if (txtDcto.Text == "")
+                    {
+                        ventaLocal.Descuento = 0;
+                    }
+                    else
+                    {
+                        ventaLocal.Descuento = Convert.ToInt32(txtDcto.Text);
+                    }
+
+                }
+
+                if (formConfirmarVenta.DialogResult == DialogResult.Yes)
+                {
+                    PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                }
+
+                if (formConfirmarVenta.DialogResult != DialogResult.Cancel)
+                {
+                    ActualizarStock();
+                }
+            }
+            else if (modo == "Modificacion")
+            {
+                Ventas.frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
+                formConfirmarVenta.Text = "Modificar Venta - Confirmar";
+                formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
+
+                string medio = null;
+
+                if (rbEfectivo.Checked)
+                {
+                    medio = "Efectivo";
+                    //vtaNueva.TipoPago = "Efectivo"; 
+                }
+                else if (rbTarjeta.Checked)
+                {
+                    medio = "Debito/Credito";
+                    // vtaNueva.TipoPago = "Debito/Credito";
+                }
+                else if (rbMP.Checked)
+                {
+                    medio = "Mercado Pago";
+                }
+
+                vtaModificar.TipoPago = medio;
+
+                formConfirmarVenta.txtTipoPago.Text = vtaModificar.TipoPago;
+                formConfirmarVenta.ShowDialog();
+
+                if (formConfirmarVenta.DialogResult == DialogResult.OK || formConfirmarVenta.DialogResult == DialogResult.Yes)
+                {
+                    vtaModificar.NumeroVenta = Convert.ToInt32(txtNumeroVenta.Text);
+                    vtaModificar.FechaHora = Convert.ToDateTime(DateTime.Now);
+                    vtaModificar.DniCliente = txtDniCuit.Text;
+                    vtaModificar.Total = Convert.ToDecimal(txtTotal.Text);
+                    vtaModificar.Usuario = usuarioLogueado.usuario;
+
+                    if (txtDcto.Text == "")
+                    {
+                        vtaModificar.Descuento = 0;
+                    }
+                    else
+                    {
+                        vtaModificar.Descuento = Convert.ToInt32(txtDcto.Text);
+                    }
+
+                    Datos_VentasAdapter.RegistrarVenta(vtaModificar);
+
+
+                    foreach (Entidades.Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
+                    {
+                        if (lineaVta.TipoOperacion == "D")
+                        {
+                            lineaVta.NumeroVenta = vtaModificar.NumeroVenta;
+                            Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
+                        }
+                    }
+                }
+
+                if (formConfirmarVenta.DialogResult == DialogResult.Yes)
+                {
+                    int numVenta = Convert.ToInt32(txtNumeroVenta.Text);
+
+                    string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni  WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.tipooperacion = 'D' )";
+
+                    if (Datos_InformesAdapter.BuscarRegistros(sql))
+                    {
+                        System.IO.Directory.CreateDirectory("C:\\XML");
+                        string url = "C:\\XML\\informeVenta.xml";
+
+                        Datos_InformesAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
+
+                    }
+
+                    frmInformeVenta formInformeVenta = new frmInformeVenta();
+                    formInformeVenta.ShowDialog();
+                    System.IO.File.Delete("C:\\XML\\informeVenta.xml");
+
+                }
+
+                if (formConfirmarVenta.DialogResult != DialogResult.Cancel)
+                {
+                    ActualizarStock();
+                }
+            }
+
+        }
+
+
+        //GUARDAR VENTA desde Variable Local
+        private void GuardarVenta()
+        {
+            Datos_VentasAdapter.RegistrarVenta(ventaLocal);
+
+            foreach (Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
+            {
+                lineaVta.NumeroVenta = ventaLocal.NumeroVenta;
+                lineaVta.TipoOperacion = ventaLocal.TipoOperacion;
+                Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
+            }
+        }
+        
+        private async Task FacturarVentaAsync()
+        {
+            await Facturador.facturarAsync(ventaLocal);
+        }
         //GUARDAR VENTA
         private void ConfirmarVenta()
         {
@@ -640,10 +841,13 @@ namespace UI.Desktop.Ventas
                 {
                     ActualizarStock();
                 }
+        else if(formConfirmarVenta.DialogResult == DialogResult.Cancel)
+                {
+                    this.Focus();
+                }
             }
             
         }
-
 
         #endregion
 
@@ -703,46 +907,7 @@ namespace UI.Desktop.Ventas
 
         }
 
-        
-
-
-        
-
-    
-
-      
-
        
-
-       
-
-       
-
-    
-      
-
-       
-
-      
-        
-
-    
-     
-     
-        
-
-       
-
-      
-     
-
-       
-
-
-       
-
-
-
 
     }
 }

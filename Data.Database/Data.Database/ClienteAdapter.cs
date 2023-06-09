@@ -23,7 +23,7 @@ namespace Data.Database
 
           Comando.CommandText = "INSERT INTO [Clientes] ([dni], [nombre], [apellido], [direccion], [telefono], [email], [tipo]) VALUES (@DNI, @NOMBRE, @APELLIDO, @DIRECCION, @TELEFONO, @EMAIL, @TIPO)";
           Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
-          Comando.Parameters["@DNI"].Value = cli.Dni;
+          Comando.Parameters["@DNI"].Value = cli.NumeroDocumento;
           Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
           Comando.Parameters["@NOMBRE"].Value = cli.Nombre;
           Comando.Parameters.Add(new SqlParameter("@APELLIDO", SqlDbType.NVarChar));
@@ -77,7 +77,7 @@ namespace Data.Database
 
             Comando.CommandText = "UPDATE [Clientes] SET [nombre] = @NOMBRE, [apellido] = @APELLIDO, [direccion] = @DIRECCION, [telefono] = @TELEFONO, [email] = @EMAIL, [tipo] = @TIPO WHERE (([dni] = @DNI))";
             Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
-            Comando.Parameters["@DNI"].Value = cli.Dni;
+            Comando.Parameters["@DNI"].Value = cli.NumeroDocumento;
             Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
             Comando.Parameters["@NOMBRE"].Value = cli.Nombre;
             Comando.Parameters.Add(new SqlParameter("@APELLIDO", SqlDbType.NVarChar));
@@ -118,7 +118,7 @@ namespace Data.Database
                     cli.Apellido= (string)drClientes["apellido"];
                     cli.Nombre = (string)drClientes["nombre"];
                     cli.Direccion = (string)drClientes["direccion"];
-                    cli.Dni = (string)drClientes["dni"];
+                    cli.NumeroDocumento = (string)drClientes["dni"];
                     cli.Email = (string)drClientes["email"];
                     cli.Telefono = (string)drClientes["telefono"];
                     cli.TipoCliente = (string)drClientes["tipo"];
@@ -173,7 +173,7 @@ namespace Data.Database
                     ClienteActual.Apellido = (string)drClientes["apellido"];
                     ClienteActual.Nombre = (string)drClientes["nombre"];
                     ClienteActual.Direccion = (string)drClientes["direccion"];
-                    ClienteActual.Dni = (string)drClientes["dni"];
+                    ClienteActual.NumeroDocumento = (string)drClientes["dni"];
                     ClienteActual.Email = (string)drClientes["email"];
                     ClienteActual.Telefono = (string)drClientes["telefono"];
 
@@ -226,7 +226,7 @@ namespace Data.Database
                     cli.Apellido = (string)drClientes["apellido"];
                     cli.Nombre = (string)drClientes["nombre"];
                     cli.Direccion = (string)drClientes["direccion"];
-                    cli.Dni = (string)drClientes["dni"];
+                    cli.NumeroDocumento = (string)drClientes["dni"];
                     cli.Email = (string)drClientes["email"];
                     cli.Telefono = (string)drClientes["telefono"];
 
