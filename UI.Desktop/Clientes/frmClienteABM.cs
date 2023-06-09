@@ -112,7 +112,10 @@ namespace UI.Desktop.Clientes
                         newCliente.Telefono = txtTelefono.Text.Trim();
                         newCliente.Email = txtEmail.Text.Trim();
                         newCliente.TipoCliente = cbxSituacionFiscal.SelectedItem.ToString();
-                        
+                        newCliente.SituacionFiscal = (int)cbxSituacionFiscal.SelectedValue;
+                        newCliente.TipoComprobante = (int)cbxTipoComprobante.SelectedValue;
+                        newCliente.TipoDocumento = (int)cbxTipoDocumento.SelectedValue;
+
                         // nuevoCliente to Base de Datos (capa de datos)
                         ClienteAdapter CapaDatos = new ClienteAdapter();
                         CapaDatos.AñadirNuevo(newCliente);
@@ -145,15 +148,18 @@ namespace UI.Desktop.Clientes
                     cliToEdit.Telefono = txtTelefono.Text;
                     cliToEdit.Email = txtEmail.Text;
                     cliToEdit.TipoCliente = cbxSituacionFiscal.SelectedItem.ToString();
+                        cliToEdit.SituacionFiscal = (int)cbxSituacionFiscal.SelectedValue;
+                        cliToEdit.TipoComprobante = (int)cbxTipoComprobante.SelectedValue;
+                        cliToEdit.TipoDocumento = (int)cbxTipoDocumento.SelectedValue;
 
-                    //Si el cliente tiene deuda
-                    //
-                    // if (this.gbDeuda.Visible == true)
-                    // {
-                    //    Actualizar la Deuda
-                    //
-                    // }
-                    Datos_ClienteAdapter.Actualizar(cliToEdit);
+                        //Si el cliente tiene deuda
+                        //
+                        // if (this.gbDeuda.Visible == true)
+                        // {
+                        //    Actualizar la Deuda
+                        //
+                        // }
+                        Datos_ClienteAdapter.Actualizar(cliToEdit);
                     this.Close();
                     }
                     catch (Exception ex)

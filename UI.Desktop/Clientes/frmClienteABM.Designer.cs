@@ -141,7 +141,6 @@
             // 
             // cbxSituacionFiscal
             // 
-            this.cbxSituacionFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSituacionFiscal.FormattingEnabled = true;
             this.cbxSituacionFiscal.Location = new System.Drawing.Point(291, 201);
             this.cbxSituacionFiscal.Name = "cbxSituacionFiscal";
@@ -150,7 +149,6 @@
             // 
             // cbxTipoDocumento
             // 
-            this.cbxTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoDocumento.FormattingEnabled = true;
             this.cbxTipoDocumento.Location = new System.Drawing.Point(291, 151);
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";
@@ -177,7 +175,6 @@
             // 
             // cbxTipoComprobante
             // 
-            this.cbxTipoComprobante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoComprobante.FormattingEnabled = true;
             this.cbxTipoComprobante.Location = new System.Drawing.Point(291, 228);
             this.cbxTipoComprobante.Name = "cbxTipoComprobante";
