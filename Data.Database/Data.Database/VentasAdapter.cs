@@ -12,6 +12,8 @@ namespace Data.Database
     {
         public void RegistrarVenta(Venta ventaNueva)
         {
+            CajasAdapter DatosCajaAdapter = new CajasAdapter();
+            Caja caja = DatosCajaAdapter.GetCajaAbierta();
 
             //Crear Conexion y Abrirla
             SqlConnection Con = CrearConexion();
@@ -21,7 +23,7 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion] ) VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION)";
+            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion], [caja_id] ) VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID)";
             Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
             Comando.Parameters["@NUMVENTA"].Value = ventaNueva.NumeroVenta;
             Comando.Parameters.Add(new SqlParameter("@FECHAHORA", SqlDbType.DateTime));
@@ -38,6 +40,8 @@ namespace Data.Database
             Comando.Parameters["@USUARIO"].Value = ventaNueva.Usuario;
             Comando.Parameters.Add(new SqlParameter("@TIPOOPERACION", SqlDbType.NVarChar));
             Comando.Parameters["@TIPOOPERACION"].Value = ventaNueva.TipoOperacion;
+            Comando.Parameters.Add(new SqlParameter("@CAJA_ID", SqlDbType.Int));
+            Comando.Parameters["@CAJA_ID"].Value = caja.ID;
 
             //Ejecuta el comando INSERT
             Comando.Connection.Open();

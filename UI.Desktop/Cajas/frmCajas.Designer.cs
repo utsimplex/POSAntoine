@@ -33,19 +33,23 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // tbxFiltro
+            // 
+            this.tbxFiltro.TextChanged += new System.EventHandler(this.tbxFiltro_TextChanged_1);
+            // 
             // groupBox2
             // 
-            this.groupBox2.Size = new System.Drawing.Size(825, 46);
+            this.groupBox2.Size = new System.Drawing.Size(1086, 46);
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(841, 16);
+            this.groupBox1.Location = new System.Drawing.Point(1102, 16);
             // 
             // frmCajas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1032, 495);
+            this.ClientSize = new System.Drawing.Size(1293, 495);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCajas";
             this.Text = "Cajas";

@@ -18,8 +18,10 @@ namespace UI.Desktop.Cajas
         #region /*/*/*   VARIABLES LOCALES   *\*\*\
 
         //Data.Database.InformeVentaAdapter Datos_InformeAdapter = new InformeVentaAdapter();
-        //Data.Database.VentasAdapter Datos_VentasAdapter = new Data.Database.VentasAdapter();
+        Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
         Entidades.Usuario usrActual;
+        //LISTA DE ARTICULOS
+        public BindingList<Entidades.Caja> ListaCajas;
 
 
         #endregion
@@ -46,15 +48,66 @@ namespace UI.Desktop.Cajas
 
 
         #region /*/*/*   METODOS   *\*\*\
-        // ACTUALIZAR LISTA DE VENTAS
+        // ACTUALIZAR LISTA DE Cajas
         private void ActualizarListaCajas()
         {
             //dgvListado.DataSource = Datos_CajasAdapter.GetAll();
             //dgvListado.Refresh();
-            dgvListado.Size = new Size(820, 429);
 
+            ListaCajas = Datos_CajasAdapter.GetCajas();
+
+            dgvListado.DataSource = ListaCajas.ToList();
+            dgvListado.Size = new Size(1080, 429);
+            AcomodarGrilla();
         }
 
+
+        private void AcomodarGrilla()
+        {
+            this.dgvListado.Columns["ID"].Width = 35;
+
+            this.dgvListado.Columns["fechaCaja"].DisplayIndex = 1;
+            this.dgvListado.Columns["fechaCaja"].HeaderText = "Fecha de caja";
+
+            this.dgvListado.Columns["fechaApertura"].DisplayIndex = 2;
+            this.dgvListado.Columns["fechaApertura"].HeaderText = "Fecha apertura";
+
+
+            this.dgvListado.Columns["descripcion"].HeaderText = "Descripción";
+            this.dgvListado.Columns["descripcion"].Width = 200;
+            this.dgvListado.Columns["descripcion"].DisplayIndex = 3;
+
+            this.dgvListado.Columns["saldoInicial"].DisplayIndex = 4;
+            this.dgvListado.Columns["saldoInicial"].HeaderText = "Saldo Inicial";
+
+            this.dgvListado.Columns["abreUsuario"].DisplayIndex = 5;
+            this.dgvListado.Columns["abreUsuario"].HeaderText = "Abierta por";
+
+            this.dgvListado.Columns["fechaCierre"].DisplayIndex = 6;
+            this.dgvListado.Columns["fechaCierre"].HeaderText = "Fecha cierre";
+
+            this.dgvListado.Columns["saldoFinal"].DisplayIndex = 7;
+            this.dgvListado.Columns["saldoFinal"].HeaderText = "Saldo Final";
+
+
+            this.dgvListado.Columns["montoNetoMovimientos"].DisplayIndex = 8;
+            this.dgvListado.Columns["montoNetoMovimientos"].HeaderText = "Neto movimientos";
+
+            this.dgvListado.Columns["montoVentasTotal"].DisplayIndex = 9;
+
+            this.dgvListado.Columns["montoVentasTotal"].HeaderText = "Neto ventas";
+
+            this.dgvListado.Columns["cierraUsuario"].DisplayIndex = 10;
+
+            this.dgvListado.Columns["cierraUsuario"].HeaderText = "Cerrada por";
+
+            //this.dgvListado.Columns["descripcion"].HeaderText = "Descripción";
+            //this.dgvListado.Columns["stockMin"].HeaderText = "Stock Min.";
+            //this.dgvListado.Columns["precio"].HeaderText = "Precio ($)";
+            //this.dgvListado.Columns["stock"].Width = 45;
+            //this.dgvListado.Columns["stockMin"].Width = 45;
+            //this.dgvListado.Columns["precio"].Width = 75;
+        }
 
         #endregion
 
@@ -67,5 +120,9 @@ namespace UI.Desktop.Cajas
 
         #endregion
 
+        private void tbxFiltro_TextChanged_1(object sender, EventArgs e)
+        {
+            this.dgvListado.DataSource = Datos_CajasAdapter.GetCajas().Where(c => c.AbreUsuario == tbxFiltro.Text).ToList();
+        }
     }
 }

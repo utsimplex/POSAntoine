@@ -397,17 +397,17 @@
             this.lblDireccion.AutoSize = true;
             this.lblDireccion.Location = new System.Drawing.Point(124, 59);
             this.lblDireccion.Name = "lblDireccion";
-            this.lblDireccion.Size = new System.Drawing.Size(113, 13);
+            this.lblDireccion.Size = new System.Drawing.Size(73, 13);
             this.lblDireccion.TabIndex = 1;
-            this.lblDireccion.Text = "Houssay 1670 - Funes";
+            this.lblDireccion.Text = "Santa cruz 68";
             // 
             // lblNombreNegocio
             // 
-            this.lblNombreNegocio.Location = new System.Drawing.Point(110, 21);
+            this.lblNombreNegocio.Location = new System.Drawing.Point(111, 21);
             this.lblNombreNegocio.Name = "lblNombreNegocio";
             this.lblNombreNegocio.Size = new System.Drawing.Size(170, 38);
             this.lblNombreNegocio.TabIndex = 0;
-            this.lblNombreNegocio.Text = "Mercado y autoservicio de comida saludable. Local or take away !";
+            this.lblNombreNegocio.Text = "Alta pilcha viejo";
             // 
             // btnConfirmar
             // 

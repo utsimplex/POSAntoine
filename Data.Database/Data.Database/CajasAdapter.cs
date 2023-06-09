@@ -6,11 +6,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data.SqlTypes;
+using System.ComponentModel;
+using Microsoft.Office.Interop.Excel;
 
 namespace Data.Database
 {
     public class CajasAdapter : Adapter
     {
+
+
+        public Entidades.Caja caja { get; set; }
 
         /// <summary>
         /// Obtiene la caja abierta desde la base de datos.
@@ -67,6 +72,7 @@ namespace Data.Database
                 }
                 if (listaCajasAbiertas.Count == 1)
                 {
+                    caja = listaCajasAbiertas[0];
                     return listaCajasAbiertas[0];
                 }
                 if (listaCajasAbiertas.Count == 0)
@@ -88,6 +94,73 @@ namespace Data.Database
 
             return null;
         }
+
+
+        /// <summary>
+        /// Obtiene TODAS las cajas desde la base de datos.
+        /// </summary>
+        /// <returns>
+        /// Una instancia de la entidad Caja con los datos de la caja abierta.
+        /// </returns>
+        public BindingList<Entidades.Caja> GetCajas()
+        {
+            BindingList<Entidades.Caja> listaCajasAbiertas = new BindingList<Entidades.Caja>();
+
+            // Crear conexión
+            SqlConnection con = CrearConexion();
+
+            try
+            {
+                // Abrir la conexión
+                con.Open();
+
+                // Crear SqlCommand
+                // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Cajas", con);
+                cmd.CommandType = CommandType.Text;
+
+                // Ejecutar el stored procedure y obtener el resultado en un SqlDataReader
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Crear una instancia de la entidad Caja y asignar los valores del resultado
+                        Entidades.Caja cajaAbierta = new Entidades.Caja();
+
+                        cajaAbierta.ID = (int)reader["id"];
+                        cajaAbierta.Descripcion = reader.IsDBNull(reader.GetOrdinal("descripcion")) ? string.Empty : reader.GetString(reader.GetOrdinal("descripcion"));
+                        cajaAbierta.FechaCaja = (DateTime)reader["fecha_caja"];
+                        cajaAbierta.FechaApertura = (DateTime)reader["fecha_apertura"];
+                        cajaAbierta.FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? null : (DateTime?)reader["fecha_cierre"];
+                        cajaAbierta.SaldoInicial = reader.IsDBNull(reader.GetOrdinal("saldo_inicial")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("saldo_inicial"));
+                        cajaAbierta.SaldoFinal = reader.IsDBNull(reader.GetOrdinal("saldo_final")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("saldo_final"));
+                        cajaAbierta.MontoNetoMovimientos = reader.IsDBNull(reader.GetOrdinal("monto_neto_movimientos")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("monto_neto_movimientos"));
+                        cajaAbierta.AbreUsuario = reader.IsDBNull(reader.GetOrdinal("abre_usuario")) ? string.Empty : (string)reader["abre_usuario"];
+                        cajaAbierta.CierraUsuario = reader.IsDBNull(reader.GetOrdinal("cierra_usuario")) ? string.Empty : (string)reader["cierra_usuario"];
+                        cajaAbierta.MontoVentasTotal = reader.IsDBNull(reader.GetOrdinal("monto_ventas_total")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("monto_ventas_total"));
+
+
+                        // Agrego a la lista de cajas abiertas
+                        listaCajasAbiertas.Add(cajaAbierta);
+                    }
+                }
+
+                return listaCajasAbiertas;
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción o mostrar un mensaje de error
+                MessageBox.Show("Error al obtener cajas: " + ex.Message);
+            }
+            finally
+            {
+                // Cerrar la conexión después de usarla
+                con.Close();
+            }
+
+            return null;
+        }
+
 
         /// <summary>
         /// Crea y abre una nueva caja con los parámetros especificados.
@@ -181,6 +254,18 @@ namespace Data.Database
                 cmd.Parameters.AddWithValue("@caja_id", caja_id);
                cmd.Parameters.AddWithValue("@cierra_usuario", cierra_usuario);
 
+                //// Agregar los parámetros de salida
+                //SqlParameter pNetoMovimientos = new SqlParameter("@monto_neto_movimientos", SqlDbType.Money);
+                //pNetoMovimientos.Direction = ParameterDirection.Output;
+                //cmd.Parameters.Add(pNetoMovimientos);
+
+                //SqlParameter pNetoVentas = new SqlParameter("@monto_total_ventas", SqlDbType.Money);
+                //pNetoVentas.Direction = ParameterDirection.Output;
+                //cmd.Parameters.Add(pNetoVentas);
+
+                //SqlParameter pSaldoFinal = new SqlParameter("@saldo_final", SqlDbType.Money);
+                //pSaldoFinal.Direction = ParameterDirection.Output;
+                //cmd.Parameters.Add(pSaldoFinal);
                 // Ejecutar el stored procedure
                 cmd.ExecuteNonQuery();
             }
