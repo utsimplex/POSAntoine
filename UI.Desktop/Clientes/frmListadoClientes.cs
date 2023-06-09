@@ -66,7 +66,7 @@ namespace UI.Desktop.Clientes
             dgvListado.DataSource = ListaClientes;
             dgvListado.Width = 810;
             dgvListado.Columns["email"].Width = 160;
-            dgvListado.Columns["dni"].HeaderText = "D.N.I";
+            dgvListado.Columns["numeroDocumento"].HeaderText = "D.N.I";
             dgvListado.Columns["telefono"].HeaderText = "Teléfono";
             dgvListado.Columns["direccion"].HeaderText = "Dirección";
             dgvListado.Columns["tipoCliente"].HeaderText = "Tipo";
@@ -109,7 +109,7 @@ namespace UI.Desktop.Clientes
             CliToEdit.Direccion = dgvListado.SelectedRows[0].Cells["direccion"].Value.ToString();
             CliToEdit.Email= dgvListado.SelectedRows[0].Cells["email"].Value.ToString();
             CliToEdit.Telefono = dgvListado.SelectedRows[0].Cells["telefono"].Value.ToString();
-            CliToEdit.Dni = dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+            CliToEdit.NumeroDocumento = dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString();
 
             // Instanciación del formulario ABM Articulos EDICION
             Clientes.frmClienteABM formClienteABM = new Clientes.frmClienteABM(CliToEdit);

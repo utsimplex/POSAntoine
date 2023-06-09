@@ -96,7 +96,8 @@
     <Compile Include="Proveedores_Articulos_Adapter.cs" />
     <Compile Include="UsuarioAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CajasAdapter.cs" />
+	  <Compile Include="CajasAdapter.cs" />
+	  <Compile Include="FacturaElectronicaAdapter.cs" />
     <Compile Include="VentasAdapter.cs" />
     <Compile Include="Ventas_ArticulosAdapter.cs" />
   </ItemGroup>

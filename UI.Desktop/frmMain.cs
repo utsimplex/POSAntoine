@@ -775,7 +775,7 @@ namespace UI.Desktop
                     Entidades.Cliente clienteExcel = new Entidades.Cliente();
 
 
-                    clienteExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<String>(0);
+                    clienteExcel.NumeroDocumento = ExDataSet.Tables[0].Rows[i].Field<String>(0);
                     clienteExcel.Nombre = ExDataSet.Tables[0].Rows[i].Field<String>(1);
                     clienteExcel.Apellido = ExDataSet.Tables[0].Rows[i].Field<String>(3);
                     clienteExcel.Telefono = ExDataSet.Tables[0].Rows[i].Field<String>(2);

@@ -60,6 +60,10 @@
             this.lblDireccion = new System.Windows.Forms.Label();
             this.lblNombreNegocio = new System.Windows.Forms.Label();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.btnFacturar = new System.Windows.Forms.Button();
+            this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
+            this.txtTipoComprobante = new System.Windows.Forms.TextBox();
+            this.lblTipoComprobante = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
@@ -129,6 +133,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtTipoComprobante);
+            this.groupBox2.Controls.Add(this.lblTipoComprobante);
             this.groupBox2.Controls.Add(this.btnBuscarCliente);
             this.groupBox2.Controls.Add(this.txtDniCuit);
             this.groupBox2.Controls.Add(this.txtNombRazCli);
@@ -136,7 +142,7 @@
             this.groupBox2.Controls.Add(this.lblNombreCli);
             this.groupBox2.Location = new System.Drawing.Point(12, 90);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(332, 87);
+            this.groupBox2.Size = new System.Drawing.Size(332, 97);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del Cliente";
@@ -144,7 +150,7 @@
             // btnBuscarCliente
             // 
             this.btnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscarCliente.Image")));
-            this.btnBuscarCliente.Location = new System.Drawing.Point(252, 46);
+            this.btnBuscarCliente.Location = new System.Drawing.Point(252, 61);
             this.btnBuscarCliente.Name = "btnBuscarCliente";
             this.btnBuscarCliente.Size = new System.Drawing.Size(69, 29);
             this.btnBuscarCliente.TabIndex = 1;
@@ -156,7 +162,7 @@
             // txtDniCuit
             // 
             this.txtDniCuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDniCuit.Location = new System.Drawing.Point(142, 50);
+            this.txtDniCuit.Location = new System.Drawing.Point(142, 41);
             this.txtDniCuit.Name = "txtDniCuit";
             this.txtDniCuit.ReadOnly = true;
             this.txtDniCuit.Size = new System.Drawing.Size(104, 20);
@@ -167,7 +173,7 @@
             // txtNombRazCli
             // 
             this.txtNombRazCli.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNombRazCli.Location = new System.Drawing.Point(142, 20);
+            this.txtNombRazCli.Location = new System.Drawing.Point(142, 15);
             this.txtNombRazCli.Name = "txtNombRazCli";
             this.txtNombRazCli.ReadOnly = true;
             this.txtNombRazCli.Size = new System.Drawing.Size(144, 20);
@@ -178,7 +184,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(73, 52);
+            this.label1.Location = new System.Drawing.Point(73, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 6;
@@ -187,7 +193,7 @@
             // lblNombreCli
             // 
             this.lblNombreCli.AutoSize = true;
-            this.lblNombreCli.Location = new System.Drawing.Point(14, 22);
+            this.lblNombreCli.Location = new System.Drawing.Point(14, 17);
             this.lblNombreCli.Name = "lblNombreCli";
             this.lblNombreCli.Size = new System.Drawing.Size(122, 13);
             this.lblNombreCli.TabIndex = 5;
@@ -195,12 +201,13 @@
             // 
             // gbTipoPago
             // 
+            this.gbTipoPago.Controls.Add(this.cbxMedioDePago);
             this.gbTipoPago.Controls.Add(this.rbMP);
             this.gbTipoPago.Controls.Add(this.rbTarjeta);
             this.gbTipoPago.Controls.Add(this.rbEfectivo);
             this.gbTipoPago.Location = new System.Drawing.Point(350, 121);
             this.gbTipoPago.Name = "gbTipoPago";
-            this.gbTipoPago.Size = new System.Drawing.Size(288, 56);
+            this.gbTipoPago.Size = new System.Drawing.Size(288, 66);
             this.gbTipoPago.TabIndex = 1;
             this.gbTipoPago.TabStop = false;
             this.gbTipoPago.Text = "Tipo de Pago";
@@ -209,7 +216,7 @@
             // 
             this.rbMP.AutoSize = true;
             this.rbMP.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbMP.Location = new System.Drawing.Point(102, 33);
+            this.rbMP.Location = new System.Drawing.Point(9, 38);
             this.rbMP.Name = "rbMP";
             this.rbMP.Size = new System.Drawing.Size(95, 17);
             this.rbMP.TabIndex = 2;
@@ -221,7 +228,7 @@
             // 
             this.rbTarjeta.AutoSize = true;
             this.rbTarjeta.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbTarjeta.Location = new System.Drawing.Point(99, 15);
+            this.rbTarjeta.Location = new System.Drawing.Point(6, 27);
             this.rbTarjeta.Name = "rbTarjeta";
             this.rbTarjeta.Size = new System.Drawing.Size(98, 17);
             this.rbTarjeta.TabIndex = 1;
@@ -234,7 +241,7 @@
             this.rbEfectivo.AutoSize = true;
             this.rbEfectivo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rbEfectivo.Checked = true;
-            this.rbEfectivo.Location = new System.Drawing.Point(7, 25);
+            this.rbEfectivo.Location = new System.Drawing.Point(6, 15);
             this.rbEfectivo.Name = "rbEfectivo";
             this.rbEfectivo.Size = new System.Drawing.Size(64, 17);
             this.rbEfectivo.TabIndex = 0;
@@ -249,9 +256,9 @@
             this.gbArticulosVenta.Controls.Add(this.btnQuitar);
             this.gbArticulosVenta.Controls.Add(this.groupBox3);
             this.gbArticulosVenta.Controls.Add(this.gbTotal);
-            this.gbArticulosVenta.Location = new System.Drawing.Point(14, 180);
+            this.gbArticulosVenta.Location = new System.Drawing.Point(14, 193);
             this.gbArticulosVenta.Name = "gbArticulosVenta";
-            this.gbArticulosVenta.Size = new System.Drawing.Size(624, 303);
+            this.gbArticulosVenta.Size = new System.Drawing.Size(624, 305);
             this.gbArticulosVenta.TabIndex = 2;
             this.gbArticulosVenta.TabStop = false;
             this.gbArticulosVenta.Text = "Detalle";
@@ -353,7 +360,7 @@
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = global::UI.Desktop.Properties.Resources.close_24;
-            this.btnCancelar.Location = new System.Drawing.Point(518, 489);
+            this.btnCancelar.Location = new System.Drawing.Point(519, 502);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(119, 34);
             this.btnCancelar.TabIndex = 6;
@@ -413,7 +420,7 @@
             // 
             this.btnConfirmar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnConfirmar.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
-            this.btnConfirmar.Location = new System.Drawing.Point(396, 489);
+            this.btnConfirmar.Location = new System.Drawing.Point(396, 502);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(119, 34);
             this.btnConfirmar.TabIndex = 5;
@@ -422,12 +429,56 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
+            // btnFacturar
+            // 
+            this.btnFacturar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnFacturar.Image = global::UI.Desktop.Properties.Resources.document_24;
+            this.btnFacturar.Location = new System.Drawing.Point(271, 502);
+            this.btnFacturar.Name = "btnFacturar";
+            this.btnFacturar.Size = new System.Drawing.Size(119, 34);
+            this.btnFacturar.TabIndex = 12;
+            this.btnFacturar.Text = "Facturar";
+            this.btnFacturar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
+            // 
+            // cbxMedioDePago
+            // 
+            this.cbxMedioDePago.BackColor = System.Drawing.SystemColors.Control;
+            this.cbxMedioDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxMedioDePago.FormattingEnabled = true;
+            this.cbxMedioDePago.Location = new System.Drawing.Point(116, 26);
+            this.cbxMedioDePago.Name = "cbxMedioDePago";
+            this.cbxMedioDePago.Size = new System.Drawing.Size(121, 21);
+            this.cbxMedioDePago.TabIndex = 3;
+            // 
+            // txtTipoComprobante
+            // 
+            this.txtTipoComprobante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTipoComprobante.Location = new System.Drawing.Point(142, 67);
+            this.txtTipoComprobante.Name = "txtTipoComprobante";
+            this.txtTipoComprobante.ReadOnly = true;
+            this.txtTipoComprobante.Size = new System.Drawing.Size(104, 20);
+            this.txtTipoComprobante.TabIndex = 9;
+            this.txtTipoComprobante.TabStop = false;
+            this.txtTipoComprobante.Text = "FACTURA B";
+            // 
+            // lblTipoComprobante
+            // 
+            this.lblTipoComprobante.AutoSize = true;
+            this.lblTipoComprobante.Location = new System.Drawing.Point(24, 69);
+            this.lblTipoComprobante.Name = "lblTipoComprobante";
+            this.lblTipoComprobante.Size = new System.Drawing.Size(112, 13);
+            this.lblTipoComprobante.TabIndex = 8;
+            this.lblTipoComprobante.Text = "Tipo de Comprobante:";
+            // 
             // frmVenta
             // 
             this.AcceptButton = this.btnConfirmar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 529);
+            this.ClientSize = new System.Drawing.Size(649, 541);
+            this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnCancelar);
@@ -494,5 +545,9 @@
         private System.Windows.Forms.Label lblNombreNegocio;
         private System.Windows.Forms.Label lblSignoPeso;
         private System.Windows.Forms.RadioButton rbMP;
+        private System.Windows.Forms.Button btnFacturar;
+        private System.Windows.Forms.TextBox txtTipoComprobante;
+        private System.Windows.Forms.Label lblTipoComprobante;
+        private System.Windows.Forms.ComboBox cbxMedioDePago;
     }
 }

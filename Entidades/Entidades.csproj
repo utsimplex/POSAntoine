@@ -71,6 +71,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -81,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfipJsonQR.cs" />
     <Compile Include="Articulo.cs" />
     <Compile Include="MovimientoCaja.cs" />
     <Compile Include="Cliente.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="CostoCompra.cs" />
     <Compile Include="Deuda.cs" />
     <Compile Include="EntidadNegocio.cs" />
+    <Compile Include="FacturaElectronica.cs" />
     <Compile Include="Modulo.cs" />
     <Compile Include="ModuloUsuario.cs" />
     <Compile Include="Precio.cs" />

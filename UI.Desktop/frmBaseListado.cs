@@ -235,7 +235,7 @@ namespace UI.Desktop
                     {
                         Entidades.Cliente clienteExcel = new Entidades.Cliente();
 
-                        clienteExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<String>(0).ToString();
+                        clienteExcel.NumeroDocumento = ExDataSet.Tables[0].Rows[i].Field<String>(0).ToString();
                         clienteExcel.Nombre = ExDataSet.Tables[0].Rows[i].Field<String>(1).ToString();
                         clienteExcel.Apellido = ExDataSet.Tables[0].Rows[i].Field<String>(2).ToString();
                         clienteExcel.Telefono = ExDataSet.Tables[0].Rows[i].Field<String>(3).ToString();
@@ -278,7 +278,7 @@ namespace UI.Desktop
                 {
                     Entidades.Cliente clienteExcel = new Entidades.Cliente();
 
-                    clienteExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<String>(0).ToString();
+                    clienteExcel.NumeroDocumento = ExDataSet.Tables[0].Rows[i].Field<String>(0).ToString();
                     clienteExcel.Nombre = ExDataSet.Tables[0].Rows[i].Field<String>(1).ToString();
                     clienteExcel.Apellido = ExDataSet.Tables[0].Rows[i].Field<String>(2).ToString();
                     clienteExcel.Telefono = ExDataSet.Tables[0].Rows[i].Field<String>(3).ToString();
