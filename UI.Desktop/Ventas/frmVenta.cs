@@ -525,12 +525,14 @@ namespace UI.Desktop.Ventas
                     ventaLocal.NumeroVenta = Convert.ToInt32(txtNumeroVenta.Text);
                     ventaLocal.FechaHora = Convert.ToDateTime(DateTime.Now);
                     //ventaLocal.DniCliente = txtDniCuit.Text;
-                    
+
                     //#Data Fiscal
-                    ventaLocal.NumeroDocumentoCliente = Convert.ToInt64(clienteActual.NumeroDocumento);
-                    //ventaLocal.SituacionFiscalCliente = clienteActual.TipoCliente; TO-DO: asignar id de situacion Fiscal
-                    ventaLocal.NombreCliente = clienteActual.Nombre;
-                    ventaLocal.DireccionCliente = clienteActual.Direccion;
+                    ventaLocal.DniCliente = "";
+                    ventaLocal.NumeroDocumentoCliente = clienteActual!=null?Convert.ToInt64(clienteActual.NumeroDocumento):0;
+                    //ventaLocal.SituacionFiscalCliente = clienteActual.TipoCliente; TO - DO: asignar id de situacion Fiscal
+                    ventaLocal.SituacionFiscalCliente = (int)FeConstantes.SituacionFiscal.ConsumidorFinal;
+                    ventaLocal.NombreCliente = clienteActual != null ? clienteActual.Nombre:"";
+                    ventaLocal.DireccionCliente = clienteActual != null ? clienteActual.Direccion:"";
                     ventaLocal.TipoDocumentoCliente = clienteActual !=null && clienteActual.TipoDocumento!=null? clienteActual.TipoDocumento:(int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR;
                     ventaLocal.Total = Convert.ToDecimal(txtTotal.Text);
                     double Neto = Convert.ToDouble(txtTotal.Text) / 1.21;
@@ -670,7 +672,7 @@ namespace UI.Desktop.Ventas
         
         private async Task FacturarVentaAsync()
         {
-            await Facturador.facturarAsync(ventaLocal);
+            //await Facturador.facturarAsync(ventaLocal);
         }
         //GUARDAR VENTA
         private void ConfirmarVenta()

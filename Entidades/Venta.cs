@@ -22,7 +22,7 @@ namespace Entidades
         public string TipoOperacion { get; set; }
         
         // TOTAL DEL COMPROBANTE (Decimal)
-        public SqlMoney Total { get; set; }
+        public decimal Total { get; set; }
 
         // DESCUENTO
        public decimal Descuento { get; set; }
@@ -40,7 +40,7 @@ namespace Entidades
         public int? PuntoDeVenta { get; set; }
         public string NumeroTicketFiscal { get; set; }
         public string CAE { get; set; }
-        public DateTime VencimientoCAE { get; set; }
+        public DateTime? VencimientoCAE { get; set; }
         public int? TipoDocumentoCliente { get; set; }
         public long? NumeroDocumentoCliente { get; set; }
         public string NombreCliente { get; set; }

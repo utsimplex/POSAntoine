@@ -608,7 +608,7 @@
       <Name>Data.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{69725928-AA80-4EFE-A4D0-55B082587370}</Project>
+      <Project>{69725928-aa80-4efe-a4d0-55b082587370}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
   </ItemGroup>
