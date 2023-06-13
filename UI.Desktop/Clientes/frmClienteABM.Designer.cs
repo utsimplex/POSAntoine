@@ -48,7 +48,7 @@
             this.groupBox1.Controls.Add(this.cbxTipoDocumento);
             this.groupBox1.Controls.Add(this.lblTipo);
             this.groupBox1.Controls.Add(this.cbxSituacionFiscal);
-            this.groupBox1.Location = new System.Drawing.Point(7, 21);
+            this.groupBox1.Location = new System.Drawing.Point(7, 27);
             this.groupBox1.Size = new System.Drawing.Size(521, 309);
             this.groupBox1.Controls.SetChildIndex(this.cbxSituacionFiscal, 0);
             this.groupBox1.Controls.SetChildIndex(this.lblTipo, 0);
@@ -185,7 +185,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 337);
+            this.ClientSize = new System.Drawing.Size(535, 339);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmClienteABM";
             this.Text = "frmClienteABM";

@@ -25,14 +25,10 @@ namespace Data.Database
 
             Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion], [caja_id],[Neto]"+
            ",[Iva]," +
-           //"[TipoComprobante],[PuntoDeVenta],[CAE],[TICKETFISCAL],[VencimientoCAE]," +
            "[TipoDocumentoCliente],[NumeroDocumentoCliente],[NombreCliente],[DireccionCliente],[SituacionFiscalCliente]" +
-           //",[CUITEMISOR] " +
            ") " +
                 "VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID,@NETO,@IVA," +
-                //"@TIPOCOMPROBANTE,@PUNTODEVENTA,@CAE,@TICKETFISCAL,@VENCIMIENTOCAE," +
                 "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE"+
-                //",@CUITEMISOR" +
                 ")";
             Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
             Comando.Parameters["@NUMVENTA"].Value = ventaNueva.NumeroVenta;
@@ -56,17 +52,6 @@ namespace Data.Database
             Comando.Parameters["@NETO"].Value = ventaNueva.Neto;
             Comando.Parameters.Add(new SqlParameter("@IVA", SqlDbType.Decimal));
             Comando.Parameters["@IVA"].Value = ventaNueva.Iva;
-            //Son todos datos que luego se actualizan cuando termina de facturar
-            //Comando.Parameters.Add(new SqlParameter("@TIPOCOMPROBANTE", SqlDbType.Int));
-            //Comando.Parameters["@TIPOCOMPROBANTE"].Value = ventaNueva.TipoComprobante;
-            //Comando.Parameters.Add(new SqlParameter("@PUNTODEVENTA", SqlDbType.Int));
-            //Comando.Parameters["@PUNTODEVENTA"].Value = ventaNueva.PuntoDeVenta;
-            //Comando.Parameters.Add(new SqlParameter("@TICKETFISCAL", SqlDbType.VarChar));
-            //Comando.Parameters["@TICKETFISCAL"].Value = ventaNueva.NumeroTicketFiscal;
-            //Comando.Parameters.Add(new SqlParameter("@CAE", SqlDbType.NVarChar));
-            //Comando.Parameters["@CAE"].Value = ventaNueva.CAE;
-            //Comando.Parameters.Add(new SqlParameter("@VENCIMIENTOCAE", SqlDbType.DateTime));
-            //Comando.Parameters["@VENCIMIENTOCAE"].Value = ventaNueva.VencimientoCAE;
             Comando.Parameters.Add(new SqlParameter("@TIPODOCUMENTOCLIENTE", SqlDbType.Int));
             Comando.Parameters["@TIPODOCUMENTOCLIENTE"].Value = ventaNueva.TipoDocumentoCliente;
             Comando.Parameters.Add(new SqlParameter("@NUMERODOCUMENTOCLIENTE", SqlDbType.BigInt));
@@ -77,10 +62,6 @@ namespace Data.Database
             Comando.Parameters["@DIRECCIONCLIENTE"].Value = ventaNueva.DireccionCliente;
             Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCALCLIENTE", SqlDbType.Int));
             Comando.Parameters["@SITUACIONFISCALCLIENTE"].Value = ventaNueva.SituacionFiscalCliente;
-            //Comando.Parameters.Add(new SqlParameter("@CUITEMISOR", SqlDbType.BigInt));
-            //Comando.Parameters["@CUITEMISOR"].Value = ventaNueva.CuitEmisor;
-            //@IVA,@TIPOCOMPROBANTE,@CAE,@VENCIMIENTOCAE,"+
-            //    "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE,@CUITEMISOR
             //Ejecuta el comando INSERT
             Comando.Connection.Open();
             Comando.ExecuteNonQuery();

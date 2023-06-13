@@ -92,7 +92,9 @@ namespace UI.Desktop.Ventas
         // CLICK - BOTON ACEPTAR
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            ConfirmarVenta();
+            this.ConstruirVenta();
+            this.GuardarVenta();
+            //ConfirmarVenta();
         }
 
   
@@ -202,7 +204,21 @@ namespace UI.Desktop.Ventas
         //DESCUENTO - Modificar valor del porcentaje de descuento.
         private void txtDcto_Leave(object sender, EventArgs e)
         {
-            AplicarDescuento();
+            if (!String.IsNullOrEmpty(this.txtDcto.Text))
+            {
+                if (!String.IsNullOrEmpty(this.txtDctoPesos.Text))
+                    this.txtDctoPesos.Text = "";
+                AplicarDescuento();
+            }
+        }
+        private void txtDctoPesos_Leave(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txtDctoPesos.Text))
+            {
+                if (!String.IsNullOrEmpty(this.txtDcto.Text))
+                    this.txtDcto.Text = "";
+                AplicarDescuento();
+            }
         }
 
         //BTN QUITAR CLICK
@@ -233,6 +249,7 @@ namespace UI.Desktop.Ventas
             this.GuardarVenta();
             await this.FacturarVentaAsync();
         }
+
         #endregion
 
 
@@ -407,11 +424,24 @@ namespace UI.Desktop.Ventas
         {
             ActualizarTotal();
             
+            Decimal total = Convert.ToDecimal(txtTotal.Text);
+
             if (txtDcto.Text != "")
             {
                 Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
-                Decimal total = Convert.ToDecimal(txtTotal.Text);
                 txtTotal.Text = Convert.ToString(total - descuentoTotal);
+            }
+            else if (txtDctoPesos.Text != "")
+            {
+                Decimal descuentoTotal = Convert.ToDecimal(txtDctoPesos.Text);
+                //Decimal total = Convert.ToDecimal(txtTotal.Text);
+                if(descuentoTotal<=total)
+                txtTotal.Text = Convert.ToString(total - descuentoTotal);
+                else
+                {
+                    MessageBox.Show("El monto de descuento es mayor al total. No puede aplicarse", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtDctoPesos.Text = "";
+                }
             }
             else
             {
@@ -672,7 +702,7 @@ namespace UI.Desktop.Ventas
         
         private async Task FacturarVentaAsync()
         {
-            //await Facturador.facturarAsync(ventaLocal);
+            await Facturador.facturarAsync(ventaLocal);
         }
         //GUARDAR VENTA
         private void ConfirmarVenta()
@@ -910,6 +940,5 @@ namespace UI.Desktop.Ventas
         }
 
        
-
     }
 }

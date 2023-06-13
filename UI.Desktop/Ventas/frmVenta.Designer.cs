@@ -35,12 +35,15 @@
             this.txtFechaHoraVta = new System.Windows.Forms.TextBox();
             this.txtNumeroVenta = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtTipoComprobante = new System.Windows.Forms.TextBox();
+            this.lblTipoComprobante = new System.Windows.Forms.Label();
             this.btnBuscarCliente = new System.Windows.Forms.Button();
             this.txtDniCuit = new System.Windows.Forms.TextBox();
             this.txtNombRazCli = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNombreCli = new System.Windows.Forms.Label();
             this.gbTipoPago = new System.Windows.Forms.GroupBox();
+            this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
             this.rbMP = new System.Windows.Forms.RadioButton();
             this.rbTarjeta = new System.Windows.Forms.RadioButton();
             this.rbEfectivo = new System.Windows.Forms.RadioButton();
@@ -61,9 +64,10 @@
             this.lblNombreNegocio = new System.Windows.Forms.Label();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.btnFacturar = new System.Windows.Forms.Button();
-            this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
-            this.txtTipoComprobante = new System.Windows.Forms.TextBox();
-            this.lblTipoComprobante = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtDctoPesos = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
@@ -73,6 +77,7 @@
             this.gbTotal.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblNroFactura
@@ -147,6 +152,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del Cliente";
             // 
+            // txtTipoComprobante
+            // 
+            this.txtTipoComprobante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTipoComprobante.Location = new System.Drawing.Point(142, 67);
+            this.txtTipoComprobante.Name = "txtTipoComprobante";
+            this.txtTipoComprobante.ReadOnly = true;
+            this.txtTipoComprobante.Size = new System.Drawing.Size(104, 20);
+            this.txtTipoComprobante.TabIndex = 9;
+            this.txtTipoComprobante.TabStop = false;
+            this.txtTipoComprobante.Text = "FACTURA B";
+            // 
+            // lblTipoComprobante
+            // 
+            this.lblTipoComprobante.AutoSize = true;
+            this.lblTipoComprobante.Location = new System.Drawing.Point(24, 69);
+            this.lblTipoComprobante.Name = "lblTipoComprobante";
+            this.lblTipoComprobante.Size = new System.Drawing.Size(112, 13);
+            this.lblTipoComprobante.TabIndex = 8;
+            this.lblTipoComprobante.Text = "Tipo de Comprobante:";
+            // 
             // btnBuscarCliente
             // 
             this.btnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscarCliente.Image")));
@@ -211,6 +236,16 @@
             this.gbTipoPago.TabIndex = 1;
             this.gbTipoPago.TabStop = false;
             this.gbTipoPago.Text = "Tipo de Pago";
+            // 
+            // cbxMedioDePago
+            // 
+            this.cbxMedioDePago.BackColor = System.Drawing.SystemColors.Control;
+            this.cbxMedioDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxMedioDePago.FormattingEnabled = true;
+            this.cbxMedioDePago.Location = new System.Drawing.Point(116, 26);
+            this.cbxMedioDePago.Name = "cbxMedioDePago";
+            this.cbxMedioDePago.Size = new System.Drawing.Size(121, 21);
+            this.cbxMedioDePago.TabIndex = 3;
             // 
             // rbMP
             // 
@@ -304,17 +339,18 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.txtDcto);
-            this.groupBox3.Location = new System.Drawing.Point(344, 238);
+            this.groupBox3.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox3.Location = new System.Drawing.Point(250, 238);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(120, 58);
+            this.groupBox3.Size = new System.Drawing.Size(214, 58);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Aplicar Descuento %";
+            this.groupBox3.Text = "Aplicar Descuento";
             // 
             // txtDcto
             // 
-            this.txtDcto.Location = new System.Drawing.Point(25, 24);
+            this.txtDcto.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtDcto.Location = new System.Drawing.Point(19, 18);
             this.txtDcto.Name = "txtDcto";
             this.txtDcto.Size = new System.Drawing.Size(66, 20);
             this.txtDcto.TabIndex = 0;
@@ -442,35 +478,58 @@
             this.btnFacturar.UseVisualStyleBackColor = true;
             this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
             // 
-            // cbxMedioDePago
+            // tableLayoutPanel1
             // 
-            this.cbxMedioDePago.BackColor = System.Drawing.SystemColors.Control;
-            this.cbxMedioDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxMedioDePago.FormattingEnabled = true;
-            this.cbxMedioDePago.Location = new System.Drawing.Point(116, 26);
-            this.cbxMedioDePago.Name = "cbxMedioDePago";
-            this.cbxMedioDePago.Size = new System.Drawing.Size(121, 21);
-            this.cbxMedioDePago.TabIndex = 3;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.txtDctoPesos, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtDcto, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(208, 39);
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // txtTipoComprobante
+            // label2
             // 
-            this.txtTipoComprobante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTipoComprobante.Location = new System.Drawing.Point(142, 67);
-            this.txtTipoComprobante.Name = "txtTipoComprobante";
-            this.txtTipoComprobante.ReadOnly = true;
-            this.txtTipoComprobante.Size = new System.Drawing.Size(104, 20);
-            this.txtTipoComprobante.TabIndex = 9;
-            this.txtTipoComprobante.TabStop = false;
-            this.txtTipoComprobante.Text = "FACTURA B";
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "%";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTipoComprobante
+            // label3
             // 
-            this.lblTipoComprobante.AutoSize = true;
-            this.lblTipoComprobante.Location = new System.Drawing.Point(24, 69);
-            this.lblTipoComprobante.Name = "lblTipoComprobante";
-            this.lblTipoComprobante.Size = new System.Drawing.Size(112, 13);
-            this.lblTipoComprobante.TabIndex = 8;
-            this.lblTipoComprobante.Text = "Tipo de Comprobante:";
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(107, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "$";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtDctoPesos
+            // 
+            this.txtDctoPesos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtDctoPesos.Location = new System.Drawing.Point(123, 18);
+            this.txtDctoPesos.Name = "txtDctoPesos";
+            this.txtDctoPesos.Size = new System.Drawing.Size(66, 20);
+            this.txtDctoPesos.TabIndex = 3;
+            this.txtDctoPesos.Text = "0";
+            this.txtDctoPesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDctoPesos.Leave += new System.EventHandler(this.txtDctoPesos_Leave);
             // 
             // frmVenta
             // 
@@ -502,12 +561,13 @@
             this.gbArticulosVenta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulosVtaActual)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.gbTotal.ResumeLayout(false);
             this.gbTotal.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -549,5 +609,9 @@
         private System.Windows.Forms.TextBox txtTipoComprobante;
         private System.Windows.Forms.Label lblTipoComprobante;
         private System.Windows.Forms.ComboBox cbxMedioDePago;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox txtDctoPesos;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
