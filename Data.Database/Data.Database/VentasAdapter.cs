@@ -173,17 +173,17 @@ namespace Data.Database
                     vta.Total = (decimal)drVentas["total"];
                     vta.TipoOperacion = (string)drVentas["tipooperacion"];
                     //FALTAN TRAER DATOS FISCALES
-                    vta.TipoComprobante = (int)drVentas["TIPOCOMPROBANTE"];
-                    vta.PuntoDeVenta = (int)drVentas["PUNTODEVENTA"];
-                    vta.NumeroTicketFiscal = (string)drVentas["NUMEROTICKETFISCAL"];
-                    vta.CAE = (string)drVentas["CAE"];
-                    vta.VencimientoCAE = (DateTime)drVentas["VENCIMIENTOCAE"];
-                    vta.TipoDocumentoCliente = (int)drVentas["TIPODOCUMENTOCLIENTE"];
-                    vta.NumeroDocumentoCliente = (long)drVentas["NUMERODOCUMENTOCLIENTE"];
-                    vta.NombreCliente = (string)drVentas["NOMBRECLIENTE"];
-                    vta.CuitEmisor = (long)drVentas["CUITEMISOR"];
-                    vta.DireccionCliente = (string)drVentas["DIRECCIONCLIENTE"];
-                    vta.SituacionFiscalCliente = (int)drVentas["SITUACIONFISCALCLIENTE"];
+                    vta.TipoComprobante = (drVentas["TIPOCOMPROBANTE"]!=DBNull.Value)?(int)drVentas["TIPOCOMPROBANTE"]:(int?)null;
+                    vta.PuntoDeVenta = drVentas["PUNTODEVENTA"]!= DBNull.Value? (int)drVentas["PUNTODEVENTA"]:(int?)null;
+                    vta.NumeroTicketFiscal = drVentas["TICKETFISCAL"]!= DBNull.Value? (string)drVentas["TICKETFISCAL"]:null;
+                    vta.CAE = drVentas["CAE"] != DBNull.Value ? (string)drVentas["CAE"]:null;
+                    vta.VencimientoCAE = drVentas["VENCIMIENTOCAE"]!=DBNull.Value? (DateTime)drVentas["VENCIMIENTOCAE"]:(DateTime?)null;
+                    vta.TipoDocumentoCliente = drVentas["TIPODOCUMENTOCLIENTE"]!=DBNull.Value?(int)drVentas["TIPODOCUMENTOCLIENTE"]:(int?)null;
+                    vta.NumeroDocumentoCliente = drVentas["NUMERODOCUMENTOCLIENTE"] !=DBNull.Value?(long?)drVentas["NUMERODOCUMENTOCLIENTE"]:(long?)null;
+                    vta.NombreCliente = drVentas["NOMBRECLIENTE"]!=DBNull.Value? (string)drVentas["NOMBRECLIENTE"]:null;
+                    vta.CuitEmisor = drVentas["CUITEMISOR"] != DBNull.Value ? (long?)drVentas["CUITEMISOR"] : (long?)null;
+                    vta.DireccionCliente = drVentas["DIRECCIONCLIENTE"] != DBNull.Value ? (string)drVentas["DIRECCIONCLIENTE"] : null;
+                    vta.SituacionFiscalCliente = drVentas["SITUACIONFISCALCLIENTE"]!=DBNull.Value?(int)drVentas["SITUACIONFISCALCLIENTE"]:(int?)null;
 
 
                     ListaVentas.Add(vta);

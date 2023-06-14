@@ -35,11 +35,11 @@ namespace Entidades
             [Description("Nota de Credito B")]
             NCB = 8,
             [Description("Factura C")]
-            FacturaC = 6,
+            FacturaC = 11,
             [Description("Nota de Debito C")]
-            NDC = 7,
+            NDC = 12,
             [Description("Nota de Credito C")]
-            NCC = 8,
+            NCC = 13,
 
         }
         public enum TipoDocumento

@@ -69,7 +69,7 @@ namespace UI.Desktop.Clientes
             dgvListado.Columns["numeroDocumento"].HeaderText = "D.N.I";
             dgvListado.Columns["telefono"].HeaderText = "Teléfono";
             dgvListado.Columns["direccion"].HeaderText = "Dirección";
-            dgvListado.Columns["tipoCliente"].HeaderText = "Tipo";
+            dgvListado.Columns["situacionFiscalLetras"].HeaderText = "Situacion Fiscal";
             dgvListado.Columns["tipoCliente"].Width = 145;
         }
 
@@ -104,12 +104,13 @@ namespace UI.Desktop.Clientes
             // Cliente a modificar = CliToEdit
             Cliente CliToEdit = new Cliente();
 
-            CliToEdit.Apellido= dgvListado.SelectedRows[0].Cells["apellido"].Value.ToString();
-            CliToEdit.Nombre = dgvListado.SelectedRows[0].Cells["nombre"].Value.ToString();
-            CliToEdit.Direccion = dgvListado.SelectedRows[0].Cells["direccion"].Value.ToString();
-            CliToEdit.Email= dgvListado.SelectedRows[0].Cells["email"].Value.ToString();
-            CliToEdit.Telefono = dgvListado.SelectedRows[0].Cells["telefono"].Value.ToString();
-            CliToEdit.NumeroDocumento = dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString();
+            CliToEdit = ListaClientes.FirstOrDefault(x => x.NumeroDocumento == dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString());
+            //CliToEdit.Apellido= dgvListado.SelectedRows[0].Cells["apellido"].Value.ToString();
+            //CliToEdit.Nombre = dgvListado.SelectedRows[0].Cells["nombre"].Value.ToString();
+            //CliToEdit.Direccion = dgvListado.SelectedRows[0].Cells["direccion"].Value.ToString();
+            //CliToEdit.Email= dgvListado.SelectedRows[0].Cells["email"].Value.ToString();
+            //CliToEdit.Telefono = dgvListado.SelectedRows[0].Cells["telefono"].Value.ToString();
+            //CliToEdit.NumeroDocumento = dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString();
 
             // Instanciación del formulario ABM Articulos EDICION
             Clientes.frmClienteABM formClienteABM = new Clientes.frmClienteABM(CliToEdit);

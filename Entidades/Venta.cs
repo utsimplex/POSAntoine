@@ -44,7 +44,7 @@ namespace Entidades
         public int? TipoDocumentoCliente { get; set; }
         public long? NumeroDocumentoCliente { get; set; }
         public string NombreCliente { get; set; }
-        public long CuitEmisor { get; set; }
+        public long? CuitEmisor { get; set; }
         public string DireccionCliente{ get; set; }
         public int? SituacionFiscalCliente { get; set; }
 

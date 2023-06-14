@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Data.Database;
 using System.Text.RegularExpressions;
 using Entidades;
+using System.Windows.Controls;
 
 namespace UI.Desktop.Clientes
 {
@@ -28,9 +29,12 @@ namespace UI.Desktop.Clientes
         }
 
         // Constructor 2 (Modo Modificacion)
-        public frmClienteABM(Entidades.Cliente cli):this()
+        public frmClienteABM(Entidades.Cliente cli)
         {
             InitializeComponent();
+            this.ItemsSituacionFiscal();
+            this.ItemsTiposComprobante();
+            this.ItemsTiposDocumento(); 
 
             this.Text = "Modificar datos del Cliente";
             this.groupBox1.Text = "Edición de datos";
@@ -111,7 +115,7 @@ namespace UI.Desktop.Clientes
                         newCliente.Direccion = txtDireccion.Text.Trim();
                         newCliente.Telefono = txtTelefono.Text.Trim();
                         newCliente.Email = txtEmail.Text.Trim();
-                        newCliente.TipoCliente = cbxSituacionFiscal.SelectedItem.ToString();
+                        newCliente.TipoCliente = cbxSituacionFiscal.SelectedValue.ToString();
                         newCliente.SituacionFiscal = (int)cbxSituacionFiscal.SelectedValue;
                         newCliente.TipoComprobante = (int)cbxTipoComprobante.SelectedValue;
                         newCliente.TipoDocumento = (int)cbxTipoDocumento.SelectedValue;
@@ -147,7 +151,7 @@ namespace UI.Desktop.Clientes
                     cliToEdit.Direccion = txtDireccion.Text;
                     cliToEdit.Telefono = txtTelefono.Text;
                     cliToEdit.Email = txtEmail.Text;
-                    cliToEdit.TipoCliente = cbxSituacionFiscal.SelectedItem.ToString();
+                    cliToEdit.TipoCliente = cbxSituacionFiscal.SelectedText.ToString();
                         cliToEdit.SituacionFiscal = (int)cbxSituacionFiscal.SelectedValue;
                         cliToEdit.TipoComprobante = (int)cbxTipoComprobante.SelectedValue;
                         cliToEdit.TipoDocumento = (int)cbxTipoDocumento.SelectedValue;
