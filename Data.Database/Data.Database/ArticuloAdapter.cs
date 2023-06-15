@@ -21,7 +21,7 @@ namespace Data.Database
             try
             {
 
-                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO)";
+                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado], [familia], [rango_etario], [codigo_arti_proveedor], [costo]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO, @FAMILIA, @RANGO_ETARIO, @CODIGO_ARTI_PROVEEDOR, @COSTO)";
                 Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                 Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -36,6 +36,14 @@ namespace Data.Database
                 Comando.Parameters["@MARCA"].Value = arti.Proveedor;
                 Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
                 Comando.Parameters["@HABILITADO"].Value = "Si";
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA"].Value = arti.Familia;
+                Comando.Parameters.Add(new SqlParameter("@RANGO_ETARIO", SqlDbType.Int));
+                Comando.Parameters["@RANGO_ETARIO"].Value = arti.RangoEtario;
+                Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
+                Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
+                Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
+                Comando.Parameters["@COSTO"].Value = arti.Costo;
 
                 //Ejecuta el comando INSERT
                 Comando.Connection.Open();
@@ -75,7 +83,7 @@ namespace Data.Database
      }
 */ //ESTO ELIMINA DE LA BASE DE DATOS
 
-public void Actualizar(Entidades.Articulo arti)
+             public void Actualizar(Entidades.Articulo arti)
              {
                //Crear Conexion y Abrirla
                SqlConnection Con = CrearConexion();
@@ -85,7 +93,7 @@ public void Actualizar(Entidades.Articulo arti)
                Comando.Connection = Con;
                Comando.CommandType = CommandType.Text;
                  
-               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO WHERE (([codigo] = @CODIGO))";
+               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO, [familia]=@FAMILIA, [rango_etario]=@RANGO_ETARIO, [codigo_arti_proveedor]=@CODIGO_ARTI_PROVEEDOR, [costo]=@COSTO WHERE (([codigo] = @CODIGO))";
                Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -100,9 +108,17 @@ public void Actualizar(Entidades.Articulo arti)
                Comando.Parameters["@MARCA"].Value = arti.Proveedor;
                Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
                Comando.Parameters["@HABILITADO"].Value = arti.Habilitado;
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA"].Value = arti.Familia;
+                Comando.Parameters.Add(new SqlParameter("@RANGO_ETARIO", SqlDbType.Int));
+                Comando.Parameters["@RANGO_ETARIO"].Value = arti.RangoEtario;
+                Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
+                Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
+                Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
+                Comando.Parameters["@COSTO"].Value = arti.Costo;
 
-               //Ejecuta el comando INSERT
-               Comando.Connection.Open();
+            //Ejecuta el comando INSERT
+            Comando.Connection.Open();
                Comando.ExecuteNonQuery();
                Comando.Connection.Close();
              
@@ -132,12 +148,18 @@ public void Actualizar(Entidades.Articulo arti)
                          arti.StockMin = (int)drArticulos["stockmin"];
                          arti.Proveedor = (string)drArticulos["marca"];
                          arti.Habilitado = (string)drArticulos["habilitado"];
-
-                         //if (arti.Habilitado == "Si")
-                         //{
-                             ListaArticulos.Add(arti);
-                         //}
+                         arti.Familia =          drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
+                         arti.RangoEtario = drArticulos["rango_etario"] != DBNull.Value ? Convert.ToInt32(drArticulos["rango_etario"]) : (int?)null;
+                         arti.Costo = drArticulos["costo"] != DBNull.Value ? Convert.ToDecimal(drArticulos["costo"]) : (decimal?)null;
+                         arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
+                    
+                    
+                        //if (arti.Habilitado == "Si")
+                        //{
+                        ListaArticulos.Add(arti);
+                             //}
                      }
+
                      drArticulos.Close();
 
                  }
@@ -269,7 +291,7 @@ public void Actualizar(Entidades.Articulo arti)
                  
              public Entidades.Articulo BuscarArticulo(string texto)
              {
-                 Entidades.Articulo ListaArticulos = new Entidades.Articulo();
+                 Entidades.Articulo arti = new Entidades.Articulo();
                  //Crear Conexion y Abrirla
                  SqlConnection Con = CrearConexion();
 
@@ -284,14 +306,18 @@ public void Actualizar(Entidades.Articulo arti)
 
                      while (drArticulos.Read())
                      {
-                         ListaArticulos.Codigo = (string)drArticulos["codigo"];
-                         ListaArticulos.Descripcion = (string)drArticulos["descripcion"];
-                         ListaArticulos.Precio = (decimal)drArticulos["precio"];
-                         ListaArticulos.Stock = (int)drArticulos["stock"];
-                         ListaArticulos.StockMin = (int)drArticulos["stockmin"];
-                         ListaArticulos.Proveedor = (string)drArticulos["marca"];
-                         ListaArticulos.Habilitado = (string)drArticulos["habilitado"];
-                     }
+                         arti.Codigo = (string)drArticulos["codigo"];
+                         arti.Descripcion = (string)drArticulos["descripcion"];
+                         arti.Precio = (decimal)drArticulos["precio"];
+                         arti.Stock = (int)drArticulos["stock"];
+                         arti.StockMin = (int)drArticulos["stockmin"];
+                         arti.Proveedor = (string)drArticulos["marca"];
+                         arti.Habilitado = (string)drArticulos["habilitado"];
+                         arti.Familia = drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
+                         arti.RangoEtario = drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
+                         arti.Costo = drArticulos["costo"] != DBNull.Value ? Convert.ToDecimal(drArticulos["costo"]) : (decimal?)null;
+                         arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
+                }
                      drArticulos.Close();
 
                  }
@@ -306,7 +332,7 @@ public void Actualizar(Entidades.Articulo arti)
                  }
 
 
-                 return ListaArticulos;
+                 return arti;
 
 
 

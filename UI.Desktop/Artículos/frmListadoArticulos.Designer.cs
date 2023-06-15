@@ -51,7 +51,7 @@
             this.groupBox2.Controls.Add(this.btnMostrarTodos);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnSeleccionar);
-            this.groupBox2.Size = new System.Drawing.Size(658, 46);
+            this.groupBox2.Size = new System.Drawing.Size(1034, 46);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.Text = "Búsqueda";
             this.groupBox2.Controls.SetChildIndex(this.tbxFiltro, 0);
@@ -61,7 +61,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(669, 18);
+            this.groupBox1.Location = new System.Drawing.Point(1045, 18);
             // 
             // btnEliminar
             // 
@@ -134,7 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 495);
+            this.ClientSize = new System.Drawing.Size(1241, 495);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmListadoArticulos";
             this.Text = "Lista de Artículos";
