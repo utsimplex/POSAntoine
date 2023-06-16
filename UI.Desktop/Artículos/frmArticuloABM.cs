@@ -7,8 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Data.Database;
-
-
+using Entidades;
 
 namespace UI.Desktop.Artículos
 {
@@ -18,69 +17,25 @@ namespace UI.Desktop.Artículos
         public frmArticuloABM()
         {
             InitializeComponent();
-                    
-            this.Text = "Añadir nuevo Artículo";
-            this.gbDatosArticulo.Text = "Ingreso de datos";
-            this.btnModificarStock.Hide();
-            this.cbxProveedor.DataSource = Datos_ProveedorAdapter.GetListadoNombres();
-            if(cbxProveedor.Items.Count == 0)
-            {
-                lblNoHayProveedores.Visible = true;
-                cbxProveedor.Visible = false;
-                MessageBox.Show("No es posible añadir artículos cuando no hay Proveedores cargados. Diríjase al módulo de Proveedores para ingresar al menos 1 proveedor.", "Imposible añadir Artículo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.DialogResult = DialogResult.Abort;
-            }
-            else
-            {
-                lblNoHayProveedores.Visible = false;
-            }
-            this.cbxProveedor.SelectedIndex = -1;
-            
-                 
+
+            ItemsFamilia();
+            ItemsRangoEtario();
+            BindUiArticuloNuevo();
         }
 
         //Constructor 2 (modo Modificacion)
         public frmArticuloABM(Entidades.Articulo artiToEdit)
         {
             InitializeComponent();
+            ItemsFamilia();
+            ItemsRangoEtario();
 
-            txtCodigo.Text = artiToEdit.Codigo;
-            txtDescripcion.Text = artiToEdit.Descripcion;
-
-            this.cbxProveedor.DataSource = Datos_ProveedorAdapter.GetListadoNombres();
-
-            // ultimafecha = precioadapter.getultimafecha(codigo);
-            // ultimoprecio = precioadapter.getultimoprecio(codigo, ultimafecha);
-            // txtprecio.text = ultimoprecio;
-
-            txtPrecio.Text = artiToEdit.Precio.ToString();
-            txtStock.Text = artiToEdit.Stock.ToString();
-            txtStock.ReadOnly = true;
-            txtStockMin.Text = artiToEdit.StockMin.ToString();
-            txtCodigo.ReadOnly = true;
-
-            
-            for (int i = 0; i < cbxProveedor.Items.Count - 1; i++)
-            {
-                if (cbxProveedor.Items[i].ToString() == artiToEdit.Proveedor)
-                {
-                    cbxProveedor.SelectedIndex = i;
-                    break;
-                }
-            }
-
-            if(cbxProveedor.SelectedIndex == -1)
-            {
-                MessageBox.Show("No hay Proveedores cargados. Se recomienda añadirlos al módulo de Proveedores antes de dar de alta o modificar un artículo", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cbxProveedor.Visible = false;
-                lblNoHayProveedores.Visible = true;
-
-            }
-     //       cbxProveedor.SelectedIndex = artiToEdit.Proveedor;
-            this.Text = "Modificar datos del Artículo";
-            this.gbDatosArticulo.Text = "Edición de datos";
-            this.txtCodigo.ReadOnly = true;
             this.artiToEdit = artiToEdit;
+
+           if(this.artiToEdit != null)
+           {
+                BindUiEditarArticulo();
+           }
           
         }
 
@@ -122,10 +77,44 @@ namespace UI.Desktop.Artículos
         }
 
 
+        private void ItemsFamilia()
+        {
+            cbxFamilia.Items.Clear();
+            cbxFamilia.DisplayMember = "Description";
+            cbxFamilia.ValueMember = "Value";
+            cbxFamilia.DataSource = Enum.GetValues(typeof(ArticuloConstantes.TipoFamilia))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+        }
+
+        private void ItemsRangoEtario()
+        {
+            cbxRangoEtario.Items.Clear();
+            cbxRangoEtario.DisplayMember = "Description";
+            cbxRangoEtario.ValueMember = "Value";
+            cbxRangoEtario.DataSource = Enum.GetValues(typeof(ArticuloConstantes.RangoEtario))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+        }
+
+
+
         #endregion
 
 
-        
+
 
         #region ///***///***///***/// M E T O D O S \\\***\\\***\\\***\\\
 
@@ -149,7 +138,10 @@ namespace UI.Desktop.Artículos
                         Articulo.StockMin = Convert.ToInt32(txtStockMin.Text.Trim());
                         Articulo.Precio = Convert.ToDecimal(txtPrecio.Text.Trim());
                         Articulo.Proveedor = cbxProveedor.SelectedItem.ToString();
-                        
+                        Articulo.Familia = (int)cbxFamilia.SelectedValue;
+                        Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
+                        Articulo.RangoEtario = (int)cbxRangoEtario.SelectedValue;
+                        Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
                         /* NO UTILIZADO, REVISAR //////////////////////////////////////////////
                         // Si tiene proveedor genero nueva instancia y la agrego a datos
                         if (cbxProveedor.SelectedText != "")
@@ -198,6 +190,11 @@ namespace UI.Desktop.Artículos
                 artiToEdit.Precio = Convert.ToDecimal(txtPrecio.Text);
                 artiToEdit.StockMin = Convert.ToInt32(txtStockMin.Text);
                 artiToEdit.Stock = Convert.ToInt32(txtStock.Text);
+                artiToEdit.Familia = (int)cbxFamilia.SelectedValue;
+                artiToEdit.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
+                artiToEdit.RangoEtario = (int)cbxRangoEtario.SelectedValue;
+                artiToEdit.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
+
                 if (cbxProveedor.SelectedItem != null)
                 {
                 artiToEdit.Proveedor = cbxProveedor.SelectedItem.ToString();
@@ -220,7 +217,72 @@ namespace UI.Desktop.Artículos
             
         }
 
-        
+        private void BindUiArticuloNuevo()
+        {
+            this.Text = "Añadir nuevo Artículo";
+            this.gbDatosArticulo.Text = "Ingreso de datos";
+            this.btnModificarStock.Hide();
+
+            // Proveedor
+            this.cbxProveedor.DataSource = Datos_ProveedorAdapter.GetListadoNombres();
+            if (cbxProveedor.Items.Count == 0)
+            {
+                lblNoHayProveedores.Visible = true;
+                cbxProveedor.Visible = false;
+                MessageBox.Show("No es posible añadir artículos cuando no hay Proveedores cargados. Diríjase al módulo de Proveedores para ingresar al menos 1 proveedor.", "Imposible añadir Artículo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.DialogResult = DialogResult.Abort;
+            }
+            else
+            {
+                lblNoHayProveedores.Visible = false;
+            }
+            this.cbxProveedor.SelectedIndex = -1;
+
+        }
+
+        private void BindUiEditarArticulo()
+        {
+            this.Text = "Modificar datos del Artículo";
+            this.gbDatosArticulo.Text = "Edición de datos";
+            this.txtCodigo.ReadOnly = true;
+            this.txtStock.ReadOnly = true;
+
+            // Proveedor
+            this.cbxProveedor.DataSource = Datos_ProveedorAdapter.GetListadoNombres();
+            for (int i = 0; i < cbxProveedor.Items.Count - 1; i++)
+            {
+                if (cbxProveedor.Items[i].ToString() == artiToEdit.Proveedor)
+                {
+                    cbxProveedor.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            if (cbxProveedor.SelectedIndex == -1)
+            {
+                MessageBox.Show("No hay Proveedores cargados. Se recomienda añadirlos al módulo de Proveedores antes de dar de alta o modificar un artículo", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cbxProveedor.Visible = false;
+                lblNoHayProveedores.Visible = true;
+
+            }
+
+            // Datos artículo
+            txtCodigo.Text = artiToEdit.Codigo;
+            txtDescripcion.Text = artiToEdit.Descripcion;
+            txtPrecio.Text = artiToEdit.Precio.ToString();
+            txtStock.Text = artiToEdit.Stock.ToString();
+            txtStockMin.Text = artiToEdit.StockMin.ToString();
+            txtCodigoArtiProveedor.Text = artiToEdit.CodigoArtiProveedor;
+
+            cbxFamilia.SelectedValue = artiToEdit.Familia != null ? (ArticuloConstantes.TipoFamilia)artiToEdit.Familia : ArticuloConstantes.TipoFamilia.PANTALONES;
+
+            cbxRangoEtario.SelectedValue = artiToEdit.RangoEtario != null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.UnAño;
+            
+            txtCosto.Text = artiToEdit.Costo.ToString();
+            
+                      
+        }
+
 
         //*********************** V A L I D A C I O N E S  *********************** \\
         bool ValidarCodigo()
@@ -494,8 +556,8 @@ namespace UI.Desktop.Artículos
             this.cbxProveedor.AutoCompleteSource = AutoCompleteSource.ListItems;
             this.cbxProveedor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.cbxProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
-            
 
+            
         }
 
 

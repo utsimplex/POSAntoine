@@ -97,7 +97,13 @@ namespace UI.Desktop.Artículos
             
             dgvListado.DataSource = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
             dgvListado.Columns["habilitado"].Visible = false;
-            dgvListado.Size = new Size(650,429);
+            dgvListado.Columns["RangoEtario"].Visible = false;
+            dgvListado.Columns["Familia"].Visible = false;
+
+            this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
+            this.dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
+            this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
+            dgvListado.Size = new Size(960,429);
             
            
             
@@ -152,7 +158,11 @@ namespace UI.Desktop.Artículos
             artiToEdit.Stock = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["stock"].Value);
             artiToEdit.Habilitado = "Si";
             artiToEdit.Proveedor = dgvListado.SelectedRows[0].Cells["proveedor"].Value.ToString();
-
+            artiToEdit.Familia = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["familia"].Value.ToString());
+            artiToEdit.Costo = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["Costo"].Value != null ? dgvListado.SelectedRows[0].Cells["Costo"].Value.ToString() : "0");
+            artiToEdit.RangoEtario = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["RangoEtario"].Value.ToString());
+            artiToEdit.CodigoArtiProveedor = dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value != null ? dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value.ToString() : "";
+            
             // Instanciación del formulario ABM Articulos EDICION
             frmArticuloABM formArticuloABM = new frmArticuloABM(artiToEdit);
             formArticuloABM.ModoForm = frmArticuloABM.TipoForm.Edicion;
@@ -360,13 +370,27 @@ namespace UI.Desktop.Artículos
       
        private void tbxFiltro_TextChanged_1(object sender, EventArgs e)
        {
-           if (tbxFiltro.Text == "")
+            // Transforma el searchTerm a minúsculas para hacer búsquedas comparables independientemente de la capitalización
+            string searchTermLower = tbxFiltro.Text.ToLowerInvariant();
+
+            if (searchTermLower == "")
            {
                dgvListado.DataSource = DatosArticuloAdapter.GetAll();
            }
            else
            {
-               dgvListado.DataSource = DatosArticuloAdapter.Busqueda(tbxFiltro.Text);
+                // Filtro cada articulo en ListArticulos buscando coincidencias de código, descripción y proveedor del artículo
+                var articulosEncontrados = ListaArticulos.Where(
+                    a => a.Codigo.ToLowerInvariant().Contains(searchTermLower)
+                      || a.Descripcion.ToLowerInvariant().Contains(searchTermLower)
+                      || a.Proveedor.ToLowerInvariant().Contains(searchTermLower)
+                );
+
+                // Devuelve el listado de Articulos resultantes
+                dgvListado.DataSource = articulosEncontrados.ToList();
+
+                //dgvListado.DataSource = DatosArticuloAdapter.Busqueda(tbxFiltro.Text);
+               
            }
 
        }
