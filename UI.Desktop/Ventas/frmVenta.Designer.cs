@@ -44,9 +44,6 @@
             this.lblNombreCli = new System.Windows.Forms.Label();
             this.gbTipoPago = new System.Windows.Forms.GroupBox();
             this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
-            this.rbMP = new System.Windows.Forms.RadioButton();
-            this.rbTarjeta = new System.Windows.Forms.RadioButton();
-            this.rbEfectivo = new System.Windows.Forms.RadioButton();
             this.gbArticulosVenta = new System.Windows.Forms.GroupBox();
             this.dgvArticulosVtaActual = new System.Windows.Forms.DataGridView();
             this.btnAgregarArt = new System.Windows.Forms.Button();
@@ -227,9 +224,6 @@
             // gbTipoPago
             // 
             this.gbTipoPago.Controls.Add(this.cbxMedioDePago);
-            this.gbTipoPago.Controls.Add(this.rbMP);
-            this.gbTipoPago.Controls.Add(this.rbTarjeta);
-            this.gbTipoPago.Controls.Add(this.rbEfectivo);
             this.gbTipoPago.Location = new System.Drawing.Point(350, 121);
             this.gbTipoPago.Name = "gbTipoPago";
             this.gbTipoPago.Size = new System.Drawing.Size(288, 66);
@@ -242,47 +236,10 @@
             this.cbxMedioDePago.BackColor = System.Drawing.SystemColors.Control;
             this.cbxMedioDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMedioDePago.FormattingEnabled = true;
-            this.cbxMedioDePago.Location = new System.Drawing.Point(116, 26);
+            this.cbxMedioDePago.Location = new System.Drawing.Point(16, 30);
             this.cbxMedioDePago.Name = "cbxMedioDePago";
-            this.cbxMedioDePago.Size = new System.Drawing.Size(121, 21);
+            this.cbxMedioDePago.Size = new System.Drawing.Size(149, 21);
             this.cbxMedioDePago.TabIndex = 3;
-            // 
-            // rbMP
-            // 
-            this.rbMP.AutoSize = true;
-            this.rbMP.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbMP.Location = new System.Drawing.Point(9, 38);
-            this.rbMP.Name = "rbMP";
-            this.rbMP.Size = new System.Drawing.Size(95, 17);
-            this.rbMP.TabIndex = 2;
-            this.rbMP.TabStop = true;
-            this.rbMP.Text = "Mercado Pago";
-            this.rbMP.UseVisualStyleBackColor = true;
-            // 
-            // rbTarjeta
-            // 
-            this.rbTarjeta.AutoSize = true;
-            this.rbTarjeta.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbTarjeta.Location = new System.Drawing.Point(6, 27);
-            this.rbTarjeta.Name = "rbTarjeta";
-            this.rbTarjeta.Size = new System.Drawing.Size(98, 17);
-            this.rbTarjeta.TabIndex = 1;
-            this.rbTarjeta.TabStop = true;
-            this.rbTarjeta.Text = "Crédito - Débito";
-            this.rbTarjeta.UseVisualStyleBackColor = true;
-            // 
-            // rbEfectivo
-            // 
-            this.rbEfectivo.AutoSize = true;
-            this.rbEfectivo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbEfectivo.Checked = true;
-            this.rbEfectivo.Location = new System.Drawing.Point(6, 15);
-            this.rbEfectivo.Name = "rbEfectivo";
-            this.rbEfectivo.Size = new System.Drawing.Size(64, 17);
-            this.rbEfectivo.TabIndex = 0;
-            this.rbEfectivo.TabStop = true;
-            this.rbEfectivo.Text = "Efectivo";
-            this.rbEfectivo.UseVisualStyleBackColor = true;
             // 
             // gbArticulosVenta
             // 
@@ -557,7 +514,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.gbTipoPago.ResumeLayout(false);
-            this.gbTipoPago.PerformLayout();
             this.gbArticulosVenta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulosVtaActual)).EndInit();
             this.groupBox3.ResumeLayout(false);
@@ -586,8 +542,6 @@
         private System.Windows.Forms.Button btnBuscarCliente;
         private System.Windows.Forms.TextBox txtDniCuit;
         private System.Windows.Forms.GroupBox gbTipoPago;
-        private System.Windows.Forms.RadioButton rbEfectivo;
-        private System.Windows.Forms.RadioButton rbTarjeta;
         private System.Windows.Forms.GroupBox gbArticulosVenta;
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnAgregarArt;
@@ -604,7 +558,6 @@
         private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.Label lblNombreNegocio;
         private System.Windows.Forms.Label lblSignoPeso;
-        private System.Windows.Forms.RadioButton rbMP;
         private System.Windows.Forms.Button btnFacturar;
         private System.Windows.Forms.TextBox txtTipoComprobante;
         private System.Windows.Forms.Label lblTipoComprobante;

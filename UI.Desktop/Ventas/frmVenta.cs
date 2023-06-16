@@ -59,7 +59,9 @@ namespace UI.Desktop.Ventas
         Data.Database.Ventas_Articulos Datos_VentasArticulosAdapter = new Data.Database.Ventas_Articulos();
         Data.Database.InformeVentaAdapter Datos_InformesAdapter = new Data.Database.InformeVentaAdapter();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
+        Data.Database.MedioDePagoAdapter Datos_MedioDePagoAdapter = new Data.Database.MedioDePagoAdapter();
         Artículos.frmListadoArticulos formListaArticulos;
+        List<MedioDePago> listaMedioDePagos = new List<MedioDePago>();
         string modo;
         Entidades.Usuario usuarioLogueado;
         Entidades.Venta ventaLocal;
@@ -95,8 +97,8 @@ namespace UI.Desktop.Ventas
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             this.setMedioPago();
-            this.ConstruirVenta();
-            this.GuardarVenta();
+            if (this.ConstruirVenta() != DialogResult.Cancel)
+            { this.GuardarVenta(); }
             //ConfirmarVenta();
         }
 
@@ -105,6 +107,15 @@ namespace UI.Desktop.Ventas
         // EVENTO LOAD
         private void frmVenta_Load(object sender, EventArgs e)
         {
+            cbxMedioDePago.Items.Clear();
+            listaMedioDePagos = Datos_MedioDePagoAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x=>x.id).ToList();
+            if (listaMedioDePagos != null)
+            {
+                cbxMedioDePago.DataSource = listaMedioDePagos;
+                cbxMedioDePago.DisplayMember = "descripcion";
+                cbxMedioDePago.ValueMember = "id";
+                cbxMedioDePago.SelectedIndex = listaMedioDePagos.FindIndex(x => x.Default == true);
+            }
             txtTotal.ReadOnly = true;
             //EVALUO UN CAMPO PARA VER SI ES EDICION O ALTA DE VENTA NUEVA
             if (modo == "Alta")
@@ -249,9 +260,11 @@ namespace UI.Desktop.Ventas
         private async void btnFacturar_Click(object sender, EventArgs e)
         {
             this.setMedioPago();
-            this.ConstruirVenta();
-            this.GuardarVenta();
+            if (this.ConstruirVenta() != DialogResult.Cancel)
+            { 
+                this.GuardarVenta(); 
             await this.FacturarVentaAsync();
+            }
         }
 
         #endregion
@@ -526,11 +539,11 @@ namespace UI.Desktop.Ventas
             return Convert.ToDouble(this.ventaLocal.Total) != 0 ;
         }
         //GENERAR VENTA a Variable Local
-        private void ConstruirVenta()
+        private DialogResult ConstruirVenta()
         {
+            DialogResult formConfirmarVenta = this.ConfirmarVenta();
             if (modo == "Alta")
             {
-                DialogResult formConfirmarVenta = this.ConfirmarVenta();
 
                 if (formConfirmarVenta == DialogResult.OK || formConfirmarVenta == DialogResult.Yes)
                 {
@@ -570,7 +583,7 @@ namespace UI.Desktop.Ventas
             else if (modo == "Devolucion")
             {
                 //TODO:Devoluciones
-                Ventas.frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
+                //Ventas.frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
                 formConfirmarVenta.Text = "Devolucion de Venta - Confirmar";
                 formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
 
@@ -652,7 +665,7 @@ namespace UI.Desktop.Ventas
                     ActualizarStock();
                 }
             }
-
+            return formConfirmarVenta;
         }
 
 
@@ -676,22 +689,24 @@ namespace UI.Desktop.Ventas
         private void setMedioPago()
         {
 
-            if (rbEfectivo.Checked)
-            {
-                ventaLocal.TipoPago = "Efectivo";
-                //vtaNueva.TipoPago = "Efectivo"; 
-            }
-            else if (rbTarjeta.Checked)
-            {
-                ventaLocal.TipoPago = "Debito/Credito";
-                // vtaNueva.TipoPago = "Debito/Credito";
-            }
-            else if (rbMP.Checked)
-            {
-                ventaLocal.TipoPago = "Mercado Pago";
-            }
-            else
-                ventaLocal.TipoPago = "";
+            //if (rbEfectivo.Checked)
+            //{
+            //    ventaLocal.TipoPago = "Efectivo";
+            //    //vtaNueva.TipoPago = "Efectivo"; 
+            //}
+            //else if (rbTarjeta.Checked)
+            //{
+            //    ventaLocal.TipoPago = "Debito/Credito";
+            //    // vtaNueva.TipoPago = "Debito/Credito";
+            //}
+            //else if (rbMP.Checked)
+            //{
+            //    ventaLocal.TipoPago = "Mercado Pago";
+            //}
+            //else
+            //    ventaLocal.TipoPago = "";
+
+            ventaLocal.TipoPago = this.cbxMedioDePago.Text;
         }
         //GUARDAR VENTA
         private DialogResult ConfirmarVenta()
