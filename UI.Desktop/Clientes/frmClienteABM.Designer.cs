@@ -48,7 +48,7 @@
             this.groupBox1.Controls.Add(this.cbxTipoDocumento);
             this.groupBox1.Controls.Add(this.lblTipo);
             this.groupBox1.Controls.Add(this.cbxSituacionFiscal);
-            this.groupBox1.Location = new System.Drawing.Point(7, 74);
+            this.groupBox1.Location = new System.Drawing.Point(4, 5);
             this.groupBox1.Size = new System.Drawing.Size(521, 309);
             this.groupBox1.Controls.SetChildIndex(this.cbxSituacionFiscal, 0);
             this.groupBox1.Controls.SetChildIndex(this.lblTipo, 0);
@@ -76,19 +76,23 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(291, 127);
             this.txtEmail.Size = new System.Drawing.Size(224, 20);
+            this.txtEmail.TabIndex = 4;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(291, 96);
+            this.txtTelefono.TabIndex = 3;
             // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(291, 65);
             this.txtDireccion.Size = new System.Drawing.Size(224, 20);
+            this.txtDireccion.TabIndex = 2;
             // 
             // txtNroDoc
             // 
             this.txtNroDoc.Location = new System.Drawing.Point(291, 175);
+            this.txtNroDoc.TabIndex = 6;
             // 
             // label1
             // 
@@ -105,18 +109,22 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(291, 11);
+            this.txtNombre.TabIndex = 0;
             // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(291, 37);
+            this.txtApellido.TabIndex = 1;
             // 
             // btnGuardar
             // 
             this.btnGuardar.Location = new System.Drawing.Point(244, 266);
+            this.btnGuardar.TabIndex = 9;
             // 
             // btnCancelar
             // 
             this.btnCancelar.Location = new System.Drawing.Point(374, 266);
+            this.btnCancelar.TabIndex = 10;
             // 
             // label2
             // 
@@ -141,19 +149,21 @@
             // 
             // cbxSituacionFiscal
             // 
+            this.cbxSituacionFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSituacionFiscal.FormattingEnabled = true;
             this.cbxSituacionFiscal.Location = new System.Drawing.Point(291, 201);
             this.cbxSituacionFiscal.Name = "cbxSituacionFiscal";
             this.cbxSituacionFiscal.Size = new System.Drawing.Size(224, 21);
-            this.cbxSituacionFiscal.TabIndex = 36;
+            this.cbxSituacionFiscal.TabIndex = 7;
             // 
             // cbxTipoDocumento
             // 
+            this.cbxTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoDocumento.FormattingEnabled = true;
             this.cbxTipoDocumento.Location = new System.Drawing.Point(291, 151);
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";
             this.cbxTipoDocumento.Size = new System.Drawing.Size(155, 21);
-            this.cbxTipoDocumento.TabIndex = 37;
+            this.cbxTipoDocumento.TabIndex = 5;
             // 
             // label7
             // 
@@ -175,17 +185,18 @@
             // 
             // cbxTipoComprobante
             // 
+            this.cbxTipoComprobante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipoComprobante.FormattingEnabled = true;
             this.cbxTipoComprobante.Location = new System.Drawing.Point(291, 228);
             this.cbxTipoComprobante.Name = "cbxTipoComprobante";
             this.cbxTipoComprobante.Size = new System.Drawing.Size(224, 21);
-            this.cbxTipoComprobante.TabIndex = 40;
+            this.cbxTipoComprobante.TabIndex = 8;
             // 
             // frmClienteABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 385);
+            this.ClientSize = new System.Drawing.Size(537, 324);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmClienteABM";
             this.Text = "frmClienteABM";

@@ -23,11 +23,11 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [dniCliente],[descuento],[usuario], [tipooperacion], [caja_id],[Neto]"+
+            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [descuento],[usuario], [tipooperacion], [caja_id],[Neto]"+
            ",[Iva]," +
            "[TipoDocumentoCliente],[NumeroDocumentoCliente],[NombreCliente],[DireccionCliente],[SituacionFiscalCliente]" +
            ") " +
-                "VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DNICLIENTE, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID,@NETO,@IVA," +
+                "VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID,@NETO,@IVA," +
                 "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE"+
                 ")";
             Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
@@ -38,8 +38,8 @@ namespace Data.Database
             Comando.Parameters["@TIPOPAGO"].Value = ventaNueva.TipoPago;
             Comando.Parameters.Add(new SqlParameter("@TOTAL", SqlDbType.Decimal));
             Comando.Parameters["@TOTAL"].Value = ventaNueva.Total;
-            Comando.Parameters.Add(new SqlParameter("@DNICLIENTE", SqlDbType.NVarChar));
-            Comando.Parameters["@DNICLIENTE"].Value = ventaNueva.DniCliente;
+            //Comando.Parameters.Add(new SqlParameter("@DNICLIENTE", SqlDbType.NVarChar));
+            //Comando.Parameters["@DNICLIENTE"].Value = ventaNueva.DniCliente;
             Comando.Parameters.Add(new SqlParameter("@DESCUENTO", SqlDbType.Decimal));
             Comando.Parameters["@DESCUENTO"].Value = ventaNueva.Descuento;
             Comando.Parameters.Add(new SqlParameter("@USUARIO", SqlDbType.NVarChar));

@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="AfipJsonQR.cs" />
     <Compile Include="Articulo.cs" />
+    <Compile Include="ParametrosEmpresa.cs" />
     <Compile Include="MedioDePago.cs" />
     <Compile Include="MovimientoCaja.cs" />
     <Compile Include="Cliente.cs" />

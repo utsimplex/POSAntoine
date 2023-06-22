@@ -142,14 +142,14 @@
             // mnuUsuarios
             // 
             this.mnuUsuarios.Name = "mnuUsuarios";
-            this.mnuUsuarios.Size = new System.Drawing.Size(163, 22);
+            this.mnuUsuarios.Size = new System.Drawing.Size(180, 22);
             this.mnuUsuarios.Text = "Usuarios";
             this.mnuUsuarios.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // mnuEditarMiUsuario
             // 
             this.mnuEditarMiUsuario.Name = "mnuEditarMiUsuario";
-            this.mnuEditarMiUsuario.Size = new System.Drawing.Size(163, 22);
+            this.mnuEditarMiUsuario.Size = new System.Drawing.Size(180, 22);
             this.mnuEditarMiUsuario.Text = "Editar mi usuario";
             this.mnuEditarMiUsuario.Click += new System.EventHandler(this.mnuEditarMiUsuario_Click);
             // 
@@ -539,8 +539,8 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.monthCalendar1.Location = new System.Drawing.Point(12, 369);
+            this.monthCalendar1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.monthCalendar1.Location = new System.Drawing.Point(859, 383);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 13;
             // 

@@ -25,6 +25,7 @@ namespace UI.Desktop.Ventas
             txtFechaHoraVta.Text = f;
             modo = "Alta";
             ventaLocal = new Venta() { TipoOperacion="V",Usuario=usr.usuario};
+            this.ObtieneParametrosEmpresaAUI();
             this.ObtieneClienteGenerico();
             this.AsignaDatosClienteUI();
             medioDePago = "";
@@ -63,11 +64,13 @@ namespace UI.Desktop.Ventas
         Data.Database.InformeVentaAdapter Datos_InformesAdapter = new Data.Database.InformeVentaAdapter();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
         Data.Database.MedioDePagoAdapter Datos_MedioDePagoAdapter = new Data.Database.MedioDePagoAdapter();
+        Data.Database.ParametrosEmpresaAdapter Datos_ParametrosEmpresaAdapter = new Data.Database.ParametrosEmpresaAdapter();
         Artículos.frmListadoArticulos formListaArticulos;
         List<MedioDePago> listaMedioDePagos = new List<MedioDePago>();
         string modo;
         Entidades.Usuario usuarioLogueado;
         Entidades.Venta ventaLocal;
+        Entidades.ParametrosEmpresa parametrosEmpresa;
         Venta vtaModificar;
         string medioDePago;
 
@@ -100,10 +103,12 @@ namespace UI.Desktop.Ventas
         // CLICK - BOTON ACEPTAR
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
+            if(this.dgvArticulosVtaActual.RowCount!=0)
+            {
             this.setMedioPago();
             if (this.ConstruirVenta() != DialogResult.Cancel)
             { this.GuardarVenta(); }
-            //ConfirmarVenta();
+            }
         }
 
   
@@ -259,15 +264,33 @@ namespace UI.Desktop.Ventas
                 }
                 
             }
+            if(modo=="Alta" && dgvArticulosVtaActual.SelectedRows.Count==1)
+            {
+                string codArtiQuitar = dgvArticulosVtaActual.SelectedRows[0].Cells["CodigoArticulo"].Value.ToString();
+
+                Venta_Articulo artiDevuelto = formListaArticulos.ListaArticulosVtaActual.TakeWhile(x => x.CodigoArticulo == codArtiQuitar).FirstOrDefault();
+                    if (artiDevuelto != null)
+                    {
+                        formListaArticulos.ListaArticulosVtaActual.Remove(artiDevuelto);
+                        ActualizarVtaActual();
+                    }
+            }
         }
 
         private async void btnFacturar_Click(object sender, EventArgs e)
         {
+            if (this.dgvArticulosVtaActual.RowCount != 0 && Convert.ToDouble(this.txtTotal.Text) >0)
+            {
             this.setMedioPago();
             if (this.ConstruirVenta() != DialogResult.Cancel)
             { 
                 this.GuardarVenta(); 
             await this.FacturarVentaAsync();
+            }
+            }
+            else
+            {
+                    MessageBox.Show("No se puede emitir un comprobante en $0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -394,8 +417,8 @@ namespace UI.Desktop.Ventas
                 ConfigurarAnchoColumnas();
 
                 //Actualizar Total
-                ActualizarTotal();
             }
+                ActualizarTotal();
         }
 
         //Actualizar Total
@@ -580,10 +603,10 @@ namespace UI.Desktop.Ventas
                     PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
                 }
 
-                if (formConfirmarVenta != DialogResult.Cancel)
-                {
-                    ActualizarStock();
-                }
+                //if (formConfirmarVenta != DialogResult.Cancel)
+                //{
+                //    ActualizarStock();
+                //}
             }
             else if (modo == "Devolucion")
             {
@@ -685,6 +708,7 @@ namespace UI.Desktop.Ventas
                 //lineaVta.TipoOperacion = ventaLocal.TipoOperacion;
                 Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
             }
+            ActualizarStock();
         }
         
         private async Task FacturarVentaAsync()
@@ -732,6 +756,13 @@ namespace UI.Desktop.Ventas
             ventaLocal.NombreCliente = clienteActual != null ? clienteActual.Nombre : "";
             ventaLocal.DireccionCliente = clienteActual != null ? clienteActual.Direccion : "";
             ventaLocal.TipoDocumentoCliente = clienteActual != null && clienteActual.TipoDocumento != null ? clienteActual.TipoDocumento : (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR;
+        }
+        private void ObtieneParametrosEmpresaAUI()
+        {
+            parametrosEmpresa = Datos_ParametrosEmpresaAdapter.getOne();
+            lblDireccion.Text = parametrosEmpresa.Direccion;
+            lblNombreNegocio.Text = parametrosEmpresa.Nombre;
+            lblTelefono.Text = parametrosEmpresa.Telefono;
         }
         private void ObtieneClienteGenerico()
         {

@@ -70,7 +70,12 @@ namespace UI.Desktop.Clientes
             dgvListado.Columns["telefono"].HeaderText = "Teléfono";
             dgvListado.Columns["direccion"].HeaderText = "Dirección";
             dgvListado.Columns["situacionFiscalLetras"].HeaderText = "Situacion Fiscal";
-            dgvListado.Columns["tipoCliente"].Width = 145;
+            //dgvListado.Columns["tipoCliente"].Width = 145;
+            dgvListado.Columns["tipoDocumento"].Visible = false;
+            dgvListado.Columns["tipoCliente"].Visible = false;
+            dgvListado.Columns["TipoComprobante"].Visible = false;
+            dgvListado.Columns["SituacionFiscal"].Visible = false;
+            dgvListado.Columns["tipoDocumentoLetras"].HeaderText = "Tipo Documento";
         }
 
 

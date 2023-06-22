@@ -158,9 +158,9 @@ namespace UI.Desktop.Artículos
             artiToEdit.Stock = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["stock"].Value);
             artiToEdit.Habilitado = "Si";
             artiToEdit.Proveedor = dgvListado.SelectedRows[0].Cells["proveedor"].Value.ToString();
-            artiToEdit.Familia = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["familia"].Value.ToString());
+            artiToEdit.Familia = dgvListado.SelectedRows[0].Cells["familia"].Value!=null?Convert.ToInt32(dgvListado.SelectedRows[0].Cells["familia"].Value.ToString()):(int?)null;
             artiToEdit.Costo = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["Costo"].Value != null ? dgvListado.SelectedRows[0].Cells["Costo"].Value.ToString() : "0");
-            artiToEdit.RangoEtario = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["RangoEtario"].Value.ToString());
+            artiToEdit.RangoEtario = dgvListado.SelectedRows[0].Cells["RangoEtario"].Value!=null? Convert.ToInt32(dgvListado.SelectedRows[0].Cells["RangoEtario"].Value.ToString()):(int?)null;
             artiToEdit.CodigoArtiProveedor = dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value != null ? dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value.ToString() : "";
             
             // Instanciación del formulario ABM Articulos EDICION
@@ -190,7 +190,7 @@ namespace UI.Desktop.Artículos
         //Seleccionar artículo e Ingresar Cantidad
         private void SeleccionarArticulo()
         {
-            Artículos.frmIngresarCantidad formIngreseCantidad = new frmIngresarCantidad();
+            Artículos.frmIngresarCantidad formIngreseCantidad = new frmIngresarCantidad(dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString() +" - " + dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString());
 
             //Ingreso la cantidad a agregar
             if (formIngreseCantidad.ShowDialog() == DialogResult.OK)
