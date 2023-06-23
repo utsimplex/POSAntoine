@@ -384,6 +384,7 @@ namespace UI.Desktop.Artículos
                     a => a.Codigo.ToLowerInvariant().Contains(searchTermLower)
                       || a.Descripcion.ToLowerInvariant().Contains(searchTermLower)
                       || a.Proveedor.ToLowerInvariant().Contains(searchTermLower)
+                      || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTermLower)
                 );
 
                 // Devuelve el listado de Articulos resultantes

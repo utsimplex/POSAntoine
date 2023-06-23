@@ -39,6 +39,8 @@ namespace UI.Desktop.Ventas
         {
             dgvListado.DataSource = Datos_VentasAdapter.GetAll();
             dgvListado.Refresh();
+            dgvListado.Columns["DniCliente"].Visible = dgvListado.Columns["TipoDocumentoCliente"].Visible = dgvListado.Columns["CuitEmisor"].Visible = dgvListado.Columns["SituacionFiscalCliente"].Visible
+                = dgvListado.Columns["QRBase64"].Visible = dgvListado.Columns["puntoDeVenta"].Visible = dgvListado.Columns["numeroDeComprobanteFiscal"].Visible = false;
             dgvListado.Size = new Size(820, 429);
 
         }

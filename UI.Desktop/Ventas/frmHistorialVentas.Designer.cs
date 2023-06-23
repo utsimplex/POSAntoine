@@ -132,6 +132,7 @@
             this.btnModificarComprobante.Text = "Realizar devolución";
             this.btnModificarComprobante.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnModificarComprobante.UseVisualStyleBackColor = true;
+            this.btnModificarComprobante.Visible = false;
             this.btnModificarComprobante.Click += new System.EventHandler(this.btnModificarComprobante_Click);
             // 
             // btnBuscarPorCliente

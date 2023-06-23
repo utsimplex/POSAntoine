@@ -167,7 +167,7 @@ namespace Data.Database
                     vta.NumeroVenta = (int)drVentas["numventa"];
                     vta.FechaHora = (DateTime)drVentas["fechahora"];
                     vta.Descuento = (decimal)drVentas["descuento"];
-                    vta.DniCliente = (string)drVentas["dnicliente"];
+                    //vta.DniCliente = (string)drVentas["dnicliente"];
                     vta.Usuario = (string)drVentas["usuario"];
                     vta.TipoPago = (string)drVentas["tipopago"];
                     vta.Total = (decimal)drVentas["total"];
@@ -176,7 +176,7 @@ namespace Data.Database
                     vta.TipoComprobante = (drVentas["TIPOCOMPROBANTE"]!=DBNull.Value)?(int)drVentas["TIPOCOMPROBANTE"]:(int?)null;
                     vta.PuntoDeVenta = drVentas["PUNTODEVENTA"]!= DBNull.Value? (int)drVentas["PUNTODEVENTA"]:(int?)null;
                     vta.NumeroTicketFiscal = drVentas["TICKETFISCAL"]!= DBNull.Value? (string)drVentas["TICKETFISCAL"]:null;
-                    vta.CAE = drVentas["CAE"] != DBNull.Value ? (string)drVentas["CAE"]:null;
+                    vta.CAE = drVentas["CAE"] != DBNull.Value ? (string)drVentas["CAE"] : null; 
                     vta.VencimientoCAE = drVentas["VENCIMIENTOCAE"]!=DBNull.Value? (DateTime)drVentas["VENCIMIENTOCAE"]:(DateTime?)null;
                     vta.TipoDocumentoCliente = drVentas["TIPODOCUMENTOCLIENTE"]!=DBNull.Value?(int)drVentas["TIPODOCUMENTOCLIENTE"]:(int?)null;
                     vta.NumeroDocumentoCliente = drVentas["NUMERODOCUMENTOCLIENTE"] !=DBNull.Value?(long?)drVentas["NUMERODOCUMENTOCLIENTE"]:(long?)null;

@@ -274,9 +274,9 @@ namespace UI.Desktop.Artículos
             txtStockMin.Text = artiToEdit.StockMin.ToString();
             txtCodigoArtiProveedor.Text = artiToEdit.CodigoArtiProveedor;
 
-            cbxFamilia.SelectedValue = artiToEdit.Familia != null ? (ArticuloConstantes.TipoFamilia)artiToEdit.Familia : ArticuloConstantes.TipoFamilia.PANTALONES;
+            cbxFamilia.SelectedValue = artiToEdit.Familia != null ? (ArticuloConstantes.TipoFamilia)artiToEdit.Familia : ArticuloConstantes.TipoFamilia.PantalonL;
 
-            cbxRangoEtario.SelectedValue = artiToEdit.RangoEtario != null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.UnAño;
+            cbxRangoEtario.SelectedValue = artiToEdit.RangoEtario != null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.Baby;
             
             txtCosto.Text = artiToEdit.Costo.ToString();
             
