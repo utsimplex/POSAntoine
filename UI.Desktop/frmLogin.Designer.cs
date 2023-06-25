@@ -47,7 +47,7 @@
             this.btnIngresar.Margin = new System.Windows.Forms.Padding(4);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(131, 46);
-            this.btnIngresar.TabIndex = 6;
+            this.btnIngresar.TabIndex = 2;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnIngresar.UseVisualStyleBackColor = true;
@@ -61,7 +61,7 @@
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(204, 22);
-            this.txtPass.TabIndex = 11;
+            this.txtPass.TabIndex = 1;
             // 
             // txtUsuario
             // 
@@ -70,7 +70,7 @@
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(204, 22);
-            this.txtUsuario.TabIndex = 10;
+            this.txtUsuario.TabIndex = 0;
             this.txtUsuario.Text = "admin";
             // 
             // label3
@@ -114,7 +114,7 @@
             this.lnkOlvidaPass.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkOlvidaPass.Name = "lnkOlvidaPass";
             this.lnkOlvidaPass.Size = new System.Drawing.Size(133, 16);
-            this.lnkOlvidaPass.TabIndex = 12;
+            this.lnkOlvidaPass.TabIndex = 4;
             this.lnkOlvidaPass.TabStop = true;
             this.lnkOlvidaPass.Text = "Olvidé mi contraseña";
             this.lnkOlvidaPass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkOlvidaPass_LinkClicked);
@@ -128,7 +128,7 @@
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(131, 46);
-            this.btnSalir.TabIndex = 13;
+            this.btnSalir.TabIndex = 3;
             this.btnSalir.Text = "Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnSalir.UseVisualStyleBackColor = true;

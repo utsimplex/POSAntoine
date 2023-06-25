@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Data.Database;
+using Entidades;
 
 namespace UI.Desktop.Ventas
 {
@@ -29,6 +30,7 @@ namespace UI.Desktop.Ventas
         Data.Database.InformeVentaAdapter Datos_InformeAdapter = new InformeVentaAdapter();
         Data.Database.VentasAdapter Datos_VentasAdapter = new Data.Database.VentasAdapter();
         Entidades.Usuario usrActual;
+        List<Venta> ListaVentas;
 
         #endregion
 
@@ -37,10 +39,25 @@ namespace UI.Desktop.Ventas
         // ACTUALIZAR LISTA DE VENTAS
         private void ActualizarLista()
         {
-            dgvListado.DataSource = Datos_VentasAdapter.GetAll();
-            dgvListado.Refresh();
-            dgvListado.Columns["DniCliente"].Visible = dgvListado.Columns["TipoDocumentoCliente"].Visible = dgvListado.Columns["CuitEmisor"].Visible = dgvListado.Columns["SituacionFiscalCliente"].Visible
-                = dgvListado.Columns["QRBase64"].Visible = dgvListado.Columns["puntoDeVenta"].Visible = dgvListado.Columns["numeroDeComprobanteFiscal"].Visible = false;
+            //Solamente voy a la base de datos si mi variable local de ventas esta vacia
+            if(ListaVentas != null)
+            ListaVentas = Datos_VentasAdapter.GetAll();
+
+            int ultimaCaja = ListaVentas.Max(x => x.CajaId);
+            if (chbxSoloCajaAbierta.Checked)
+                dgvListado.DataSource = ListaVentas.Where(x=>x.CajaId ==ultimaCaja).ToList();
+            else
+                dgvListado.DataSource = ListaVentas;
+            //dgvListado.Refresh();
+            dgvListado.Columns["DniCliente"].Visible = dgvListado.Columns["TipoDocumentoClienteRO"].Visible = dgvListado.Columns["CuitEmisor"].Visible = dgvListado.Columns["SituacionFiscalClienteRO"].Visible
+                = dgvListado.Columns["QRBase64RO"].Visible = dgvListado.Columns["puntoDeVentaRO"].Visible = dgvListado.Columns["numeroDeComprobanteFiscalRO"].Visible = dgvListado.Columns["TipoOperacion"].Visible  =false;
+            dgvListado.Columns["Neto"].Visible = dgvListado.Columns["Iva"].Visible = dgvListado.Columns["TipoComprobante"].Visible = dgvListado.Columns["NumeroTicketFiscal"].Visible = dgvListado.Columns["CAE"].Visible =
+                dgvListado.Columns["VencimientoCAE"].Visible = dgvListado.Columns["DireccionCliente"].Visible = dgvListado.Columns["LetraComprobateRO"].Visible = dgvListado.Columns["TipoDocumentoCliente"].Visible =
+                dgvListado.Columns["SituacionFiscalCliente"].Visible = dgvListado.Columns["PuntoDeVenta"].Visible = false;
+            dgvListado.Columns["CajaID"].HeaderText = "N° Caja";
+            dgvListado.Columns["NumeroDocumentoCliente"].HeaderText = "Documento Cliente";
+            dgvListado.Columns["NombreCliente"].HeaderText = "Cliente";
+            dgvListado.Columns["ComprobanteFiscalRO"].HeaderText = "Factura";
             dgvListado.Size = new Size(820, 429);
 
         }
@@ -103,22 +120,32 @@ namespace UI.Desktop.Ventas
         private void btnVerComprobante_Click(object sender, EventArgs e)
         {
             int numVenta = Convert.ToInt32(this.dgvListado.SelectedRows[0].Cells["NumeroVenta"].Value.ToString());
-            string tipooperacion = (this.dgvListado.SelectedRows[0].Cells["TipoOperacion"].Value.ToString());
 
-            string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni  WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.TipoOperacion = '" + tipooperacion+ "'" + ")";
-
-            if (Datos_InformeAdapter.BuscarRegistros(sql))
+            //Venta ventaActual = Datos_VentasAdapter.GetOne(numVenta);
+            Venta ventaActual = ListaVentas.First(x=> x.NumeroVenta == numVenta);
+             frmVenta formVentaReadOnly = new frmVenta(usrActual, ventaActual);
+            if(formVentaReadOnly.ShowDialog() != DialogResult.Cancel)
             {
-                System.IO.Directory.CreateDirectory("C:\\XML");
-                string url = "C:\\XML\\informeVenta.xml";
-
-                Datos_InformeAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
-
+            //TO-DO: si se factura habria que actualizar los datos fiscales
+            this.dgvListado.SelectedRows[0].Cells["TipoPago"].Value = formVentaReadOnly.medioDePago;
+            dgvListado.Refresh();
             }
+            //string tipooperacion = (this.dgvListado.SelectedRows[0].Cells["TipoOperacion"].Value.ToString());
 
-            frmInformeVenta formInformeVenta = new frmInformeVenta();
-            formInformeVenta.ShowDialog();
-            System.IO.File.Delete("C:\\XML\\informeVenta.xml"); 
+            //string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni  WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.TipoOperacion = '" + tipooperacion+ "'" + ")";
+
+            //if (Datos_InformeAdapter.BuscarRegistros(sql))
+            //{
+            //    System.IO.Directory.CreateDirectory("C:\\XML");
+            //    string url = "C:\\XML\\informeVenta.xml";
+
+            //    Datos_InformeAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
+
+            //}
+
+            //frmInformeVenta formInformeVenta = new frmInformeVenta();
+            //formInformeVenta.ShowDialog();
+            //System.IO.File.Delete("C:\\XML\\informeVenta.xml"); 
         }
 
         private void btnFiltroFechaDesde_Click(object sender, EventArgs e)
@@ -128,13 +155,17 @@ namespace UI.Desktop.Ventas
 
             if (formSeleccionFecha.ShowDialog() == DialogResult.OK)
             {
+                chbxSoloCajaAbierta.Checked = false;
+
                 if (formSeleccionFecha.TipoBusqueda == "Fecha Desde")
                 {
-                    dgvListado.DataSource = Datos_VentasAdapter.BusquedaFechaDesde(formSeleccionFecha.dtpFechaDesde.Value);
+                    dgvListado.DataSource = ListaVentas.Where(x=>x.FechaHora.Date >= formSeleccionFecha.dtpFechaDesde.Value);
+                    //dgvListado.DataSource = Datos_VentasAdapter.BusquedaFechaDesde(formSeleccionFecha.dtpFechaDesde.Value);
                 }
                 if (formSeleccionFecha.TipoBusqueda == "Desde-Hasta")
                 {
-                    dgvListado.DataSource = Datos_VentasAdapter.BusquedaFechaDesde(formSeleccionFecha.dtpDHDesde.Value, formSeleccionFecha.dtpDHHasta.Value);
+                    dgvListado.DataSource = ListaVentas.Where(x=>x.FechaHora.Date >= formSeleccionFecha.dtpDHDesde.Value && x.FechaHora.Date <= formSeleccionFecha.dtpDHHasta.Value);
+                    //dgvListado.DataSource = Datos_VentasAdapter.BusquedaFechaDesde(formSeleccionFecha.dtpDHDesde.Value, formSeleccionFecha.dtpDHHasta.Value);
                 }
             }
 
@@ -170,9 +201,9 @@ namespace UI.Desktop.Ventas
             }
         }
 
-      
-
-
-
+        private void chbxSoloCajaAbierta_CheckedChanged(object sender, EventArgs e)
+        {
+            this.ActualizarLista();
+        }
     }
 }

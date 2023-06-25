@@ -89,7 +89,7 @@ namespace UI.Desktop.Artículos
                     (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
                     value
                 })
-                .OrderBy(item => item.value)
+                .OrderBy(item => item.Description)
                 .ToList();
         }
 
@@ -105,7 +105,7 @@ namespace UI.Desktop.Artículos
                     (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
                     value
                 })
-                .OrderBy(item => item.value)
+                .OrderBy(item => item.Description)
                 .ToList();
         }
 

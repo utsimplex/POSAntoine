@@ -31,25 +31,31 @@ namespace UI.Desktop.Ventas
             medioDePago = "";
                    
         }
-        //MODO EDICION
+        //MODO READONLY -- SOLO PUEDE MODIFICAR EL MEDIO DE PAGO SI ES QUE LA CAJA NO ESTA CERRADA
         public frmVenta(Usuario usr,Venta vtaSelec)
         {
             InitializeComponent();
             ventaLocal = vtaSelec;
 
             usuarioLogueado = usr;
-            modo = "Modificacion";
+            modo = "READONLY";
             txtFechaHoraVta.Text = vtaSelec.FechaHora.ToString("dd ' de ' MMMM ', ' yyyy"); 
             txtDcto.Text = vtaSelec.Descuento.ToString();
-            txtDniCuit.Text = vtaSelec.DniCliente.ToString();
-            txtNombRazCli.Text = Datos_ClienteAdapter.GetOne(vtaSelec.DniCliente).Nombre;
+            txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
+            txtNombRazCli.Text = Datos_ClienteAdapter.GetOne(vtaSelec.NumeroDocumentoCliente).Nombre;
             txtNumeroVenta.Text = vtaSelec.NumeroVenta.ToString();
             txtTotal.Text = vtaSelec.Total.ToString();
             dgvArticulosVtaActual.DataSource = Datos_VentasArticulosAdapter.GetAll(vtaSelec.NumeroVenta, vtaSelec.TipoOperacion);
+            cajaAbierta = Datos_CajasAdapter.GetEstadoCajaAbierta(vtaSelec.CajaId);
+            btnConfirmar.Enabled = cbxMedioDePago.Enabled=cajaAbierta;
+            btnFacturar.Enabled = cajaAbierta && vtaSelec.NumeroTicketFiscal == null;
             txtDcto.ReadOnly = true;
             btnBuscarCliente.Visible = false;
-            btnQuitar.Text = "Devolver";
-            vtaModificar = vtaSelec;
+            ventaLocal = vtaSelec;
+             btnAgregarArt.Enabled = btnBuscarCliente.Enabled = btnQuitar.Enabled = txtDcto.Enabled = txtDctoPesos.Enabled=false;
+            //cbxMedioDePago.SelectedText = vtaSelec.TipoPago;
+
+
 
         }
 
@@ -65,6 +71,7 @@ namespace UI.Desktop.Ventas
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
         Data.Database.MedioDePagoAdapter Datos_MedioDePagoAdapter = new Data.Database.MedioDePagoAdapter();
         Data.Database.ParametrosEmpresaAdapter Datos_ParametrosEmpresaAdapter = new Data.Database.ParametrosEmpresaAdapter();
+        Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
         Artículos.frmListadoArticulos formListaArticulos;
         List<MedioDePago> listaMedioDePagos = new List<MedioDePago>();
         string modo;
@@ -72,7 +79,8 @@ namespace UI.Desktop.Ventas
         Entidades.Venta ventaLocal;
         Entidades.ParametrosEmpresa parametrosEmpresa;
         Venta vtaModificar;
-        string medioDePago;
+        bool cajaAbierta = false;
+        public string medioDePago;
 
         #endregion
 
@@ -100,24 +108,12 @@ namespace UI.Desktop.Ventas
             AñadirArticuloVtaActual();
         }
 
-        // CLICK - BOTON ACEPTAR
-        private void btnConfirmar_Click(object sender, EventArgs e)
-        {
-            if(this.dgvArticulosVtaActual.RowCount!=0)
-            {
-            this.setMedioPago();
-            if (this.ConstruirVenta() != DialogResult.Cancel)
-            { this.GuardarVenta(); }
-            }
-        }
-
-  
 
         // EVENTO LOAD
         private void frmVenta_Load(object sender, EventArgs e)
         {
             cbxMedioDePago.Items.Clear();
-            listaMedioDePagos = Datos_MedioDePagoAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x=>x.id).ToList();
+            listaMedioDePagos = Datos_MedioDePagoAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x=>x.Default).OrderBy(x=>x.Descripcion).ToList();
             if (listaMedioDePagos != null)
             {
                 cbxMedioDePago.DataSource = listaMedioDePagos;
@@ -137,25 +133,13 @@ namespace UI.Desktop.Ventas
                 ventaLocal.NumeroVenta = ultNroVta + 1;
                 this.txtNumeroVenta.Text = Convert.ToString(ultNroVta + 1);
             }
-            else //LOAD MODO MODIFICACION
+            else //LOAD MODO READONLY
             {
-                int statusVenta = Datos_VentasAdapter.getStatusVenta(vtaModificar.NumeroVenta);
-                if(statusVenta == 0)
-                {
-
+                cbxMedioDePago.SelectedValue = listaMedioDePagos.First(medioDePago=>medioDePago.Descripcion== ventaLocal.TipoPago).id;
                 formListaArticulos = new UI.Desktop.Artículos.frmListadoArticulos();
                 ConfigurarGrillaDetalles();
-                    this.Text = "Realizar Devolución";
-                    gbTotal.Text = "Total a devolver";
-                formListaArticulos.ListaArticulosVtaActual = Datos_VentasArticulosAdapter.GetAll(Convert.ToInt32(txtNumeroVenta.Text), vtaModificar.TipoOperacion);
-                btnAgregarArt.Visible = false;
-                }
-                else
-                {
-                    MessageBox.Show("Esta venta ya tiene devoluciones registradas. No puede modificarse", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.None;
-                    this.Close();
-                }
+                    this.Text = "VER VENTA";
+                formListaArticulos.ListaArticulosVtaActual = Datos_VentasArticulosAdapter.GetAll(Convert.ToInt32(txtNumeroVenta.Text), ventaLocal.TipoOperacion);
 
             }//ELSE---> ACA ESTA EN MODO MODIFICAR, x lo tanto no cargo nada de lo anterior
         }
@@ -277,20 +261,60 @@ namespace UI.Desktop.Ventas
             }
         }
 
-        private async void btnFacturar_Click(object sender, EventArgs e)
+        // CLICK - BOTON ACEPTAR
+        private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            if (this.dgvArticulosVtaActual.RowCount != 0 && Convert.ToDouble(this.txtTotal.Text) >0)
+            if (modo == "Alta")
             {
-            this.setMedioPago();
-            if (this.ConstruirVenta() != DialogResult.Cancel)
-            { 
-                this.GuardarVenta(); 
-            await this.FacturarVentaAsync();
-            }
+
+                if (this.dgvArticulosVtaActual.RowCount != 0)
+                {
+                    this.setMedioPago();
+                    if (this.ConstruirVenta() != DialogResult.Cancel)
+                    { this.GuardarVenta(); }
+                    this.Dispose();
+                }
+                else
+                    MessageBox.Show("No se puede generar un comprobante sin lineas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
+                //actualizo el medio de pago
+                this.setMedioPago();
+                this.GuardarVenta();
+                this.Dispose();
+
+            }
+        }
+
+
+        private async void btnFacturar_Click(object sender, EventArgs e)
+        {
+            if (modo == "Alta")
+            {
+                if (this.dgvArticulosVtaActual.RowCount != 0 && Convert.ToDouble(this.txtTotal.Text) > 0)
+                {
+                    this.setMedioPago();
+                    if (this.ConstruirVenta() != DialogResult.Cancel)
+                    {
+                        this.GuardarVenta();
+                        await this.FacturarVentaAsync();
+                    this.Dispose();
+                    }
+                }
+                else
+                {
                     MessageBox.Show("No se puede emitir un comprobante en $0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                //actualizo el medio de pago
+                this.setMedioPago();
+                this.GuardarVenta();
+                await this.FacturarVentaAsync();
+                this.Dispose();
+
             }
         }
 
@@ -348,7 +372,7 @@ namespace UI.Desktop.Ventas
 
             if (formListaClientes.ShowDialog() == DialogResult.Yes)
             {
-                clienteActual = Datos_ClienteAdapter.GetOne(formListaClientes.dniClienteSelecccionado);
+                clienteActual = Datos_ClienteAdapter.GetOne((long)formListaClientes.dniClienteSelecccionado);
             }
             else
             {
@@ -700,6 +724,8 @@ namespace UI.Desktop.Ventas
         //GUARDAR VENTA desde Variable Local
         private void GuardarVenta()
         {
+            if(modo=="Alta")
+            {
             Datos_VentasAdapter.RegistrarVenta(ventaLocal);
 
             foreach (Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
@@ -709,6 +735,11 @@ namespace UI.Desktop.Ventas
                 Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
             }
             ActualizarStock();
+            }
+            else if(modo=="READONLY")
+            {
+                Datos_VentasAdapter.ActualizarMedioDePago(ventaLocal);
+            }
         }
         
         private async Task FacturarVentaAsync()
@@ -734,7 +765,7 @@ namespace UI.Desktop.Ventas
             //}
             //else
             //    ventaLocal.TipoPago = "";
-
+            medioDePago = cbxMedioDePago.Text;
             ventaLocal.TipoPago = this.cbxMedioDePago.Text;
         }
         //GUARDAR VENTA
@@ -767,7 +798,7 @@ namespace UI.Desktop.Ventas
         private void ObtieneClienteGenerico()
         {
             //obtiene cliente generico para 
-            clienteActual = Datos_ClienteAdapter.GetOne("0");
+            clienteActual = Datos_ClienteAdapter.GetOne(0);
         }
         private void AsignaDatosClienteUI()
         {
@@ -840,6 +871,9 @@ namespace UI.Desktop.Ventas
 
         }
 
-       
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
     }
 }

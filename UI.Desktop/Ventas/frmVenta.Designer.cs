@@ -417,6 +417,7 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // groupBox4
             // 
@@ -499,7 +500,6 @@
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnConfirmar.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
             this.btnConfirmar.Location = new System.Drawing.Point(396, 502);
             this.btnConfirmar.Name = "btnConfirmar";
@@ -512,7 +512,6 @@
             // 
             // btnFacturar
             // 
-            this.btnFacturar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnFacturar.Image = global::UI.Desktop.Properties.Resources.document_24;
             this.btnFacturar.Location = new System.Drawing.Point(271, 502);
             this.btnFacturar.Name = "btnFacturar";

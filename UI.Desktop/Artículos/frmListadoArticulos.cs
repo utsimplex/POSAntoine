@@ -99,6 +99,7 @@ namespace UI.Desktop.Artículos
             dgvListado.Columns["habilitado"].Visible = false;
             dgvListado.Columns["RangoEtario"].Visible = false;
             dgvListado.Columns["Familia"].Visible = false;
+            dgvListado.Columns["Costo"].Visible = rol =="Admin";
 
             this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
             this.dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
@@ -151,17 +152,18 @@ namespace UI.Desktop.Artículos
             // Artículo a modificar = artiToEdit
             Articulo artiToEdit = new Articulo();
 
-            artiToEdit.Codigo = dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString();
-            artiToEdit.Descripcion = dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString();
-            artiToEdit.Precio = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["precio"].Value.ToString());
-            artiToEdit.StockMin = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["stockMin"].Value);
-            artiToEdit.Stock = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["stock"].Value);
-            artiToEdit.Habilitado = "Si";
-            artiToEdit.Proveedor = dgvListado.SelectedRows[0].Cells["proveedor"].Value.ToString();
-            artiToEdit.Familia = dgvListado.SelectedRows[0].Cells["familia"].Value!=null?Convert.ToInt32(dgvListado.SelectedRows[0].Cells["familia"].Value.ToString()):(int?)null;
-            artiToEdit.Costo = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["Costo"].Value != null ? dgvListado.SelectedRows[0].Cells["Costo"].Value.ToString() : "0");
-            artiToEdit.RangoEtario = dgvListado.SelectedRows[0].Cells["RangoEtario"].Value!=null? Convert.ToInt32(dgvListado.SelectedRows[0].Cells["RangoEtario"].Value.ToString()):(int?)null;
-            artiToEdit.CodigoArtiProveedor = dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value != null ? dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value.ToString() : "";
+            string Codigo = dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString();
+            artiToEdit = ListaArticulos.First(articulo => articulo.Codigo == Codigo);
+            //artiToEdit.Descripcion = dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString();
+            //artiToEdit.Precio = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["precio"].Value.ToString());
+            //artiToEdit.StockMin = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["stockMin"].Value);
+            //artiToEdit.Stock = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["stock"].Value);
+            //artiToEdit.Habilitado = "Si";
+            //artiToEdit.Proveedor = dgvListado.SelectedRows[0].Cells["proveedor"].Value.ToString();
+            //artiToEdit.Familia = dgvListado.SelectedRows[0].Cells["familia"].Value!=null?Convert.ToInt32(dgvListado.SelectedRows[0].Cells["familia"].Value.ToString()):(int?)null;
+            //artiToEdit.Costo = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["Costo"].Value != null ? dgvListado.SelectedRows[0].Cells["Costo"].Value.ToString() : "0");
+            //artiToEdit.RangoEtario = dgvListado.SelectedRows[0].Cells["RangoEtario"].Value!=null? Convert.ToInt32(dgvListado.SelectedRows[0].Cells["RangoEtario"].Value.ToString()):(int?)null;
+            //artiToEdit.CodigoArtiProveedor = dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value != null ? dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value.ToString() : "";
             
             // Instanciación del formulario ABM Articulos EDICION
             frmArticuloABM formArticuloABM = new frmArticuloABM(artiToEdit);
@@ -223,19 +225,19 @@ namespace UI.Desktop.Artículos
         {
             bool añadir = true;
             
-
-            foreach (Venta_Articulo vta_art in ListaArticulosVtaActual)
-            {
-                if (vta_art.CodigoArticulo == vta_art_seleccionado.CodigoArticulo)
-                {
-                    MessageBox.Show("El artículo " + vta_art.CodigoArticulo + " ya se encuentra en la lista de la venta actual.", "Listado de Artículos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    añadir = false;
-                    break;
-                }
+            //Se saltea la validacion de stock, hasta que se normalice el uso del sistema
+            //foreach (Venta_Articulo vta_art in ListaArticulosVtaActual)
+            //{
+            //    if (vta_art.CodigoArticulo == vta_art_seleccionado.CodigoArticulo)
+            //    {
+            //        MessageBox.Show("El artículo " + vta_art.CodigoArticulo + " ya se encuentra en la lista de la venta actual.", "Listado de Artículos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        añadir = false;
+            //        break;
+            //    }
              
                 
 
-            }
+            //}
 
            
             return añadir;

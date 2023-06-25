@@ -91,7 +91,7 @@ namespace UI.Desktop.Ventas
         //CLICK SELECCIONAR CLIENTE
         private void btnSeleccionarCliente_Click(object sender, EventArgs e)
         {
-            dniClienteSeleccionado = dgvListaClientes.SelectedRows[0].Cells["Dni"].Value.ToString();
+            dniClienteSeleccionado = dgvListaClientes.SelectedRows[0].Cells["NumeroDocumento"].Value.ToString();
         }
 
      

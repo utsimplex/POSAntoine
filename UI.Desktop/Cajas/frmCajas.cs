@@ -20,6 +20,7 @@ namespace UI.Desktop.Cajas
         //Data.Database.InformeVentaAdapter Datos_InformeAdapter = new InformeVentaAdapter();
         Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
         Entidades.Usuario usrActual;
+        Entidades.Caja cajaSeleccionada;
         //LISTA DE ARTICULOS
         public BindingList<Entidades.Caja> ListaCajas;
 
@@ -122,7 +123,24 @@ namespace UI.Desktop.Cajas
 
         private void tbxFiltro_TextChanged_1(object sender, EventArgs e)
         {
-            this.dgvListado.DataSource = Datos_CajasAdapter.GetCajas().Where(c => c.AbreUsuario == tbxFiltro.Text).ToList();
+            this.dgvListado.DataSource = ListaCajas.Where(c => c.AbreUsuario == tbxFiltro.Text).ToList();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvListado.SelectedRows[0] != null)
+                if (Datos_CajasAdapter.CajaTieneMovimientos((int)dgvListado.SelectedRows[0].Cells["id"].Value))
+                {
+                    MessageBox.Show("No se puede editar una caja con ventas y/o movimientos", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            else
+                {
+                    cajaSeleccionada = ListaCajas.First(x => x.ID == (int)dgvListado.SelectedRows[0].Cells["id"].Value);
+                    frmAperturaCaja formCaja = new frmAperturaCaja(usrActual, cajaSeleccionada);
+                    formCaja.ShowDialog();
+                    //MostrarFormularioEdicionCaja
+                    this.ActualizarListaCajas();
+                }
         }
     }
 }

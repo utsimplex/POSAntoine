@@ -32,6 +32,7 @@ namespace Entidades
 
        //IDEMPLEADO
        public string Usuario { get; set; }
+        public int CajaId { get; set; }
 
         //modulo de facturacion
         public double? Neto { get; set; }
@@ -49,7 +50,7 @@ namespace Entidades
         public int? SituacionFiscalCliente { get; set; }
 
         //propiedades read-only
-        public string tipoDocumentoCliente
+        public string tipoDocumentoClienteRO
         {
             get
             {
@@ -79,7 +80,7 @@ namespace Entidades
                 }
             }
         }
-        public string QRBase64
+        public string QRBase64RO
         {
             get
             {
@@ -110,7 +111,7 @@ namespace Entidades
                 //return base64;
             }
         }
-        public string situacionFiscalCliente
+        public string situacionFiscalClienteRO
         {
             get
             {
@@ -132,7 +133,7 @@ namespace Entidades
                 }
             }
         }
-        public string letraComprobate
+        public string letraComprobateRO
         {
             get
             {
@@ -154,21 +155,21 @@ namespace Entidades
                 }
             }
         }
-        public string puntoDeVenta
+        public string puntoDeVentaRO
         {
             get
             {
                 return ((int)(this.PuntoDeVenta)).ToString("00000");
             }
         }
-        public string numeroDeComprobanteFiscal
+        public string numeroDeComprobanteFiscalRO
         {
             get
             {
                 return Convert.ToInt32(this.NumeroTicketFiscal).ToString("00000000");
             }
         }
-        public string comprobanteFiscal
+        public string comprobanteFiscalRO
         {
             get
             {

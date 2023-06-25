@@ -49,7 +49,7 @@ namespace UI.Desktop.Clientes
         }
 
         //CLIENTE ACTUAL/SELECCIONADO
-        public string dniClienteSelecccionado;
+        public long dniClienteSelecccionado;
 
         //LISTA DE ARTICULOS
         public List<Entidades.Cliente> ListaClientes;
@@ -175,7 +175,7 @@ namespace UI.Desktop.Clientes
             }
             else if(ModoForm == TipoForm.SeleccionDeCliente)
             {
-                dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+                dniClienteSelecccionado = Convert.ToInt64(this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value);
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
@@ -195,7 +195,7 @@ namespace UI.Desktop.Clientes
 
         private void SeleccionarCliente()
         {
-            dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+            dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["dni"].Value;
             this.Close();
         }
         
@@ -276,7 +276,7 @@ namespace UI.Desktop.Clientes
             {
 
                 case Keys.Enter:
-                    dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+                    dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["dni"].Value;
                     this.DialogResult = DialogResult.Yes;
                     this.Close();
 
