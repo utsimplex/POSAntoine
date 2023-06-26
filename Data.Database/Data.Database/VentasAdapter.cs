@@ -294,7 +294,7 @@ namespace Data.Database
             SqlConnection Con = CrearConexion();
 
             // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.tipoPago like @texto OR Ventas.usuario like @texto OR Ventas.dniCliente like @texto;", Con);
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.tipoPago like @texto OR Ventas.usuario like @texto OR Ventas.NumeroDocumentoCliente like @texto;", Con);
             Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
             Comando.Parameters["@texto"].Value = texto + '%';
             try
@@ -307,13 +307,14 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.DniCliente = (string)drVentas["dniCliente"];
+                    ventaActual.DniCliente = drVentas["dniCliente"] != DBNull.Value ? Convert.ToString(drVentas["dniCliente"]) : (string)null;
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
                     ventaActual.Total = (decimal)drVentas["total"];
                     ventaActual.TipoPago = (string)drVentas["tipoPago"];
                     ventaActual.Usuario = (string)drVentas["usuario"];
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+                    ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
 
                     ListaVentas.Add(ventaActual);
                 }
@@ -360,7 +361,7 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.DniCliente = (string)drVentas["dniCliente"];
+                    ventaActual.DniCliente = drVentas["dniCliente"] != DBNull.Value ? Convert.ToString(drVentas["dniCliente"]) : (string)null;
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
                     ventaActual.Total = (decimal)drVentas["total"];

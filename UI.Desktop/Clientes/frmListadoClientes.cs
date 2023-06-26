@@ -175,7 +175,7 @@ namespace UI.Desktop.Clientes
             }
             else if(ModoForm == TipoForm.SeleccionDeCliente)
             {
-                dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+                dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString();
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
