@@ -49,6 +49,12 @@ namespace Entidades
             set { _FechaCierre = value; }
         }
 
+        DateTime? _FechaModificacion;
+        public DateTime? FechaModificacion
+        {
+            get { return _FechaModificacion; }
+            set { _FechaModificacion = value; }
+        }
         // SALDO INICIAL
         SqlMoney _SaldoInicial;
         public SqlMoney SaldoInicial

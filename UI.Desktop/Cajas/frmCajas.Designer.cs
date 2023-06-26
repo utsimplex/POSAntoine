@@ -45,6 +45,10 @@
             // 
             this.groupBox1.Location = new System.Drawing.Point(1102, 16);
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // frmCajas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

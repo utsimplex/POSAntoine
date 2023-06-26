@@ -129,7 +129,7 @@ namespace Data.Database
 
                         cajaAbierta.ID = (int)reader["id"];
                         cajaAbierta.Descripcion = reader.IsDBNull(reader.GetOrdinal("descripcion")) ? string.Empty : reader.GetString(reader.GetOrdinal("descripcion"));
-                        cajaAbierta.FechaCaja = (DateTime)reader["fecha_caja"];
+                        cajaAbierta.FechaCaja = ((DateTime)reader["fecha_caja"]).Date;
                         cajaAbierta.FechaApertura = (DateTime)reader["fecha_apertura"];
                         cajaAbierta.FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? null : (DateTime?)reader["fecha_cierre"];
                         cajaAbierta.SaldoInicial = reader.IsDBNull(reader.GetOrdinal("saldo_inicial")) ? SqlMoney.Zero : reader.GetSqlMoney(reader.GetOrdinal("saldo_inicial"));
@@ -187,7 +187,6 @@ namespace Data.Database
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // Agregar los parámetros al comando
-                cmd.Parameters.AddWithValue("@abre_usuario", usrActual);
                 cmd.Parameters.AddWithValue("@fecha_caja", fecha_caja);
                 cmd.Parameters.AddWithValue("@saldo_inicial", saldo_inicial);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
@@ -207,6 +206,7 @@ namespace Data.Database
                         FechaCaja = (DateTime)reader["fecha_caja"],
                         FechaApertura = (DateTime)reader["fecha_apertura"],
                         FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? null : (DateTime?)reader["fecha_cierre"],
+                        FechaModificacion = reader.IsDBNull(reader.GetOrdinal("fecha_modificacion")) ? null : (DateTime?)reader["fecha_modificacion"],
                         SaldoInicial = reader.IsDBNull(reader.GetOrdinal("saldo_inicial")) ? decimal.Zero : (decimal)reader["saldo_inicial"],
                         SaldoFinal = reader.IsDBNull(reader.GetOrdinal("saldo_final")) ? decimal.Zero : (decimal)reader["saldo_final"],
                         MontoNetoMovimientos = reader.IsDBNull(reader.GetOrdinal("monto_neto_movimientos")) ? decimal.Zero : (decimal)reader["monto_neto_movimientos"],
@@ -455,6 +455,194 @@ namespace Data.Database
             }
         }
 
+        public decimal GetVentas(int caja_id)
+        {
+            // Crear conexión
+            using (SqlConnection con = CrearConexion())
+            {
+                try
+                {
+                    // Abrir la conexión
+                    con.Open();
 
+                    // Crear SqlCommand
+                    using (SqlCommand cmd = new SqlCommand("GetNetoVentasCaja", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros al comando
+                        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+                        // Agregar parámetro de salida para el efectivo a rendir
+                        SqlParameter ventas = new SqlParameter("@pNetoVentas", SqlDbType.Money);
+                        ventas.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(ventas);
+
+                        // Ejecutar el stored procedure
+                        cmd.ExecuteNonQuery();
+
+                        // Obtener el efectivo a rendir del parámetro de salida
+                        decimal ventasPorCaja = (decimal)ventas.Value;
+
+                        // Devolver el resultado
+                        return ventasPorCaja;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción o mostrar un mensaje de error
+                    MessageBox.Show("Error al obtener efectivo a rendir: " + ex.Message);
+                    return 0;
+                }
+            }
+        }
+
+        public bool GetEstadoCajaAbierta(int caja_id)
+        {
+            // Crear conexión
+            using (SqlConnection con = CrearConexion())
+            {
+                try
+                {
+                    // Abrir la conexión
+                    con.Open();
+
+                    // Crear SqlCommand
+                    using (SqlCommand cmd = new SqlCommand("GetCajaAbierta", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros al comando
+                        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+                        // Agregar parámetro de salida para el efectivo a rendir
+                        SqlParameter cajaAbierta = new SqlParameter("@cajaAbierta", SqlDbType.Bit);
+                        cajaAbierta.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(cajaAbierta);
+
+                        // Ejecutar el stored procedure
+                        cmd.ExecuteNonQuery();
+
+                        // Obtener el efectivo a rendir del parámetro de salida
+                        bool CajaAbierta = (bool)cajaAbierta.Value;
+
+                        // Devolver el resultado
+                        return CajaAbierta;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción o mostrar un mensaje de error
+                    MessageBox.Show("Error al obtener el estado de la caja: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+        public bool CajaTieneMovimientos(int caja_id)
+        {
+            //Este metodo devuelve true si la caja tiene al menos una venta Y/O un movimiento
+            // Crear conexión
+            using (SqlConnection con = CrearConexion())
+            {
+                try
+                {
+                    // Abrir la conexión
+                    con.Open();
+
+                    // Crear SqlCommand
+                    using (SqlCommand cmd = new SqlCommand("GetCajaTieneMovimientosVentas", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros al comando
+                        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+                        // Agregar parámetro de salida para el efectivo a rendir
+                        SqlParameter cajaAbierta = new SqlParameter("@cajaConMovimientos", SqlDbType.Bit);
+                        cajaAbierta.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(cajaAbierta);
+
+                        // Ejecutar el stored procedure
+                        cmd.ExecuteNonQuery();
+
+                        // Obtener el efectivo a rendir del parámetro de salida
+                        bool CajaAbierta = (bool)cajaAbierta.Value;
+
+                        // Devolver el resultado
+                        return CajaAbierta;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción o mostrar un mensaje de error
+                    MessageBox.Show("Error al obtener los movimientos de la caja: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        public Caja ActualizaCaja(string usrActual, DateTime fecha_caja, decimal saldo_inicial, string descripcion,int idCaja)
+        {
+            Entidades.Caja caja = null;
+
+            // Crear conexión
+            SqlConnection con = CrearConexion();
+
+            try
+            {
+                // Abrir la conexión
+                con.Open();
+
+                // Crear SqlCommand
+                SqlCommand cmd = new SqlCommand("ModificarCaja", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Agregar los parámetros al comando
+                cmd.Parameters.AddWithValue("@id_caja", idCaja);
+                cmd.Parameters.AddWithValue("@fecha_caja", fecha_caja);
+                cmd.Parameters.AddWithValue("@saldo_inicial", saldo_inicial);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+
+                // Ejecutar el stored procedure y obtener el resultado en un SqlDataReader
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                // Verificar si se obtuvieron filas del resultado
+                if (reader.HasRows)
+                {
+                    // Leer el resultado y asignarlo a la variable caja
+                    reader.Read();
+                    caja = new Entidades.Caja
+                    {
+                        ID = (int)reader["id"],
+                        Descripcion = reader.IsDBNull(reader.GetOrdinal("descripcion")) ? string.Empty : reader.GetString(reader.GetOrdinal("descripcion")),
+                        FechaCaja = (DateTime)reader["fecha_caja"],
+                        FechaApertura = (DateTime)reader["fecha_apertura"],
+                        FechaCierre = reader.IsDBNull(reader.GetOrdinal("fecha_cierre")) ? null : (DateTime?)reader["fecha_cierre"],
+                        FechaModificacion = reader.IsDBNull(reader.GetOrdinal("fecha_modificacion")) ? null : (DateTime?)reader["fecha_modificacion"],
+                        SaldoInicial = reader.IsDBNull(reader.GetOrdinal("saldo_inicial")) ? decimal.Zero : (decimal)reader["saldo_inicial"],
+                        SaldoFinal = reader.IsDBNull(reader.GetOrdinal("saldo_final")) ? decimal.Zero : (decimal)reader["saldo_final"],
+                        MontoNetoMovimientos = reader.IsDBNull(reader.GetOrdinal("monto_neto_movimientos")) ? decimal.Zero : (decimal)reader["monto_neto_movimientos"],
+                        AbreUsuario = reader.IsDBNull(reader.GetOrdinal("abre_usuario")) ? string.Empty : (string)reader["abre_usuario"],
+                        CierraUsuario = reader.IsDBNull(reader.GetOrdinal("cierra_usuario")) ? string.Empty : (string)reader["cierra_usuario"],
+                        MontoVentasTotal = reader.IsDBNull(reader.GetOrdinal("monto_ventas_total")) ? decimal.Zero : (decimal)reader["monto_ventas_total"]
+
+                    };
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción o mostrar un mensaje de error
+                MessageBox.Show("Error al modificar la caja "+idCaja.ToString()+". " + ex.Message);
+            }
+            finally
+            {
+                // Cerrar la conexión después de usarla
+                con.Close();
+            }
+
+            return caja;
+        }
     }
 }

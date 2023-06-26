@@ -225,10 +225,13 @@
             // 
             // dgvListaClientes
             // 
+            this.dgvListaClientes.AllowUserToAddRows = false;
+            this.dgvListaClientes.AllowUserToDeleteRows = false;
             this.dgvListaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListaClientes.Location = new System.Drawing.Point(6, 6);
             this.dgvListaClientes.MultiSelect = false;
             this.dgvListaClientes.Name = "dgvListaClientes";
+            this.dgvListaClientes.ReadOnly = true;
             this.dgvListaClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListaClientes.Size = new System.Drawing.Size(345, 114);
             this.dgvListaClientes.TabIndex = 0;

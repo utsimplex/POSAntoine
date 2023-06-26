@@ -33,5 +33,10 @@ namespace UI.Desktop.Ventas
             this.DialogResult = DialogResult.Yes;
             this.Dispose();
         }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

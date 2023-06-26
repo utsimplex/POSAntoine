@@ -42,7 +42,7 @@
             this.btnNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnNo.Image = ((System.Drawing.Image)(resources.GetObject("btnNo.Image")));
-            this.btnNo.Location = new System.Drawing.Point(46, 179);
+            this.btnNo.Location = new System.Drawing.Point(59, 179);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(124, 37);
             this.btnNo.TabIndex = 21;
@@ -57,7 +57,7 @@
             this.btnSi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSi.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSi.Image = ((System.Drawing.Image)(resources.GetObject("btnSi.Image")));
-            this.btnSi.Location = new System.Drawing.Point(215, 179);
+            this.btnSi.Location = new System.Drawing.Point(226, 179);
             this.btnSi.Name = "btnSi";
             this.btnSi.Size = new System.Drawing.Size(124, 37);
             this.btnSi.TabIndex = 20;
@@ -70,7 +70,7 @@
             // txtMonto
             // 
             this.txtMonto.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMonto.Location = new System.Drawing.Point(210, 112);
+            this.txtMonto.Location = new System.Drawing.Point(226, 12);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(148, 35);
             this.txtMonto.TabIndex = 22;
@@ -78,7 +78,7 @@
             // lblLabel
             // 
             this.lblLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLabel.Location = new System.Drawing.Point(12, 116);
+            this.lblLabel.Location = new System.Drawing.Point(11, 12);
             this.lblLabel.Name = "lblLabel";
             this.lblLabel.Size = new System.Drawing.Size(185, 29);
             this.lblLabel.TabIndex = 23;
@@ -88,7 +88,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 31);
+            this.label1.Location = new System.Drawing.Point(12, 85);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 29);
             this.label1.TabIndex = 25;
@@ -98,7 +98,7 @@
             // txtMotivo
             // 
             this.txtMotivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotivo.Location = new System.Drawing.Point(91, 12);
+            this.txtMotivo.Location = new System.Drawing.Point(111, 67);
             this.txtMotivo.Multiline = true;
             this.txtMotivo.Name = "txtMotivo";
             this.txtMotivo.Size = new System.Drawing.Size(267, 94);

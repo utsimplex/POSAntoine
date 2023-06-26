@@ -37,6 +37,7 @@ namespace UI.Desktop.Cajas
             txtCerradaPorUsr.Text = usr.usuario;
             dtpFechaCaja.Value = caja.FechaCaja;
             dtpFechaApertura.Value = caja.FechaApertura;
+            txtVentas.Text = Math.Round(Datos_CajasAdapter.GetVentas(caja.ID), 2).ToString();
             txtSaldoFinal.Text = Math.Round(Datos_CajasAdapter.GetSaldoFinal(caja.ID), 2).ToString();
             txtEfectivoRendir.Text = Math.Round(Datos_CajasAdapter.GetRendirEfectivo(caja.ID), 2).ToString();
         }

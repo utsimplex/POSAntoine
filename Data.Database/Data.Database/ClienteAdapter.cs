@@ -162,7 +162,7 @@ namespace Data.Database
 
         }
 
-        public Entidades.Cliente GetOne(string dni)
+        public Entidades.Cliente GetOne(long? dni)
         {
             Entidades.Cliente ClienteActual = new Entidades.Cliente();
 
@@ -171,7 +171,7 @@ namespace Data.Database
 
             // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
             SqlCommand Comando = new SqlCommand("SELECT * FROM Clientes WHERE Clientes.dni = @DNI", Con);
-            Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.BigInt));
             Comando.Parameters["@DNI"].Value = dni;
 
             try
