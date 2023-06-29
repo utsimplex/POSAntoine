@@ -136,7 +136,7 @@ namespace UI.Desktop.Artículos
                         Articulo.Descripcion = txtDescripcion.Text.Trim();
                         Articulo.Stock = Convert.ToInt32(txtStock.Text.Trim());
                         Articulo.StockMin = Convert.ToInt32(txtStockMin.Text.Trim());
-                        Articulo.Precio = Convert.ToDecimal(txtPrecio.Text.Trim());
+                        Articulo.Precio = String.IsNullOrEmpty(txtPrecio.Text.Trim())?0:Convert.ToDecimal(txtPrecio.Text.Trim());
                         Articulo.Proveedor = cbxProveedor.SelectedItem.ToString();
                         Articulo.Familia = (int)cbxFamilia.SelectedValue;
                         Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());

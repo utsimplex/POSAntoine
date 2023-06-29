@@ -53,6 +53,7 @@ namespace UI.Desktop.Ventas
             btnBuscarCliente.Visible = false;
             ventaLocal = vtaSelec;
              btnAgregarArt.Enabled = btnBuscarCliente.Enabled = btnQuitar.Enabled = txtDcto.Enabled = txtDctoPesos.Enabled=false;
+            btnReimprimir.Visible = true;
             //cbxMedioDePago.SelectedText = vtaSelec.TipoPago;
 
 
@@ -215,8 +216,8 @@ namespace UI.Desktop.Ventas
             {
                 if (!String.IsNullOrEmpty(this.txtDctoPesos.Text))
                     this.txtDctoPesos.Text = "";
-                AplicarDescuento();
             }
+                AplicarDescuento();
         }
         private void txtDctoPesos_Leave(object sender, EventArgs e)
         {
@@ -224,8 +225,8 @@ namespace UI.Desktop.Ventas
             {
                 if (!String.IsNullOrEmpty(this.txtDcto.Text))
                     this.txtDcto.Text = "";
-                AplicarDescuento();
             }
+                AplicarDescuento();
         }
 
         //BTN QUITAR CLICK
@@ -257,6 +258,7 @@ namespace UI.Desktop.Ventas
                     {
                         formListaArticulos.ListaArticulosVtaActual.Remove(artiDevuelto);
                         ActualizarVtaActual();
+                        AplicarDescuento();
                     }
             }
         }
@@ -399,6 +401,7 @@ namespace UI.Desktop.Ventas
             formListaArticulos.ShowDialog();
                      
             ActualizarVtaActual();
+            AplicarDescuento();
 
             }
 
@@ -874,6 +877,11 @@ namespace UI.Desktop.Ventas
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnReimprimir_Click(object sender, EventArgs e)
+        {
+            PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
         }
     }
 }

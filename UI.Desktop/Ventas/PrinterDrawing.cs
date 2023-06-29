@@ -35,9 +35,11 @@ namespace UI.Desktop.Ventas
             _venta_Actual = _venta;
             _venta_actual_articulos = _venta_articulos;
             _modo = modo;
-            _directorioLogo = "C:\\POSDataBase\\Drops.png";
-            nombreComandera = "80mm Thermal Printer";
-            _cabeceraComanda = "Antoine - Bebes y niños";
+            _directorioLogo = "C:\\ElArbolito\\ArbolitoDeAntoine.png";
+            nombreComandera = "GP-C80180 Series";
+            _cabeceraComanda = "El Arbolito de Antoine";
+            _direccionComanda = "Chacabuco 842 - Venado Tuerto";
+            _telefonoComanda = "Whatsapp: 3462-262000";
             //_direccionComanda = parametros.getOne("DIRECCION").Valor;
             //_telefonoComanda = parametros.getOne("TELEFONO").Valor;
             //_imprimeFechaEmision = parametros.getOne("EMISION").Valor;
@@ -52,7 +54,7 @@ namespace UI.Desktop.Ventas
         public static string PrinterName
         {
             //get { return nombreComandera.Valor; }
-            get { return "80mm Thermal Printer"; }
+            get { return "GP-C80180 Series"; }
             //get { return printer.FormatWith(Environment.MachineName); }
         }
 
@@ -79,9 +81,10 @@ namespace UI.Desktop.Ventas
             Font boldFont = new System.Drawing.Font("Calibri", 11, System.Drawing.FontStyle.Bold);
             Font normalFont = new System.Drawing.Font("Calibri", 11, System.Drawing.FontStyle.Regular);
             Font lessNormalFont = new System.Drawing.Font("Calibri", 8, System.Drawing.FontStyle.Regular);
-            Font numPedidoFont = new System.Drawing.Font("Calibri", 12, System.Drawing.FontStyle.Bold);
+            Font numPedidoFont = new System.Drawing.Font("Calibri", 14, System.Drawing.FontStyle.Bold);
             Font comandaNormalFont = new System.Drawing.Font("Calibri", 9, System.Drawing.FontStyle.Regular);
             Font comandaCocinaFont = new System.Drawing.Font("Calibri", 12, System.Drawing.FontStyle.Regular);
+            Font descuentoFont = new System.Drawing.Font("Calibri", 10, System.Drawing.FontStyle.Bold);
             Font totalFont = new System.Drawing.Font("Calibri", 12, System.Drawing.FontStyle.Bold);
             Font totalCocinaFont = new System.Drawing.Font("Calibri", 16, System.Drawing.FontStyle.Bold);
 
@@ -93,35 +96,35 @@ namespace UI.Desktop.Ventas
 
             if (_modo == "CLIENTE")
             {
-                Image img = Image.FromFile(@"C:\POSDataBase\Drops.png");
-                ev.Graphics.DrawImage(img, new PointF(75, height));
+                Image img = Image.FromFile(_directorioLogo);
+                ev.Graphics.DrawImage(img, new PointF(70, height));
                 img.Dispose();
-                height += 80;
+                height += 140;
                 //Print Cabecera
-                ev.Graphics.DrawString(_cabeceraComanda, headingFont, Brushes.Black, 20, height, new StringFormat());
+                ev.Graphics.DrawString(_cabeceraComanda, headingFont, Brushes.Black, 50, height, new StringFormat());
+                height += 30;
+                //Print Direccion
+                ev.Graphics.DrawString(_direccionComanda, lessNormalFont, Brushes.Black, 65, height, new StringFormat());
                 height += 20;
-                ////Print Direccion
-                //ev.Graphics.DrawString(_direccionComanda, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
-                //height += 20;
                 ////Print Telefono
-                //ev.Graphics.DrawString(_telefonoComanda, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
-                //height += 20;
+                ev.Graphics.DrawString(_telefonoComanda, lessNormalFont, Brushes.Black, 80, height, new StringFormat());
+                height += 20;
 
                 //Print Info
                 ev.Graphics.DrawString("X", numPedidoFont, Brushes.Black, 131, height, new StringFormat());
-                height += 15;
+                height += 20;
                 ev.Graphics.DrawString("Documento no valido como Factura", lessNormalFont, Brushes.Black, 60, height, new StringFormat());
                 height += 15;
 
                 //Print Receipt Date
-                ev.Graphics.DrawString("PEDIDO # " + _venta_Actual.NumeroVenta, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
+                ev.Graphics.DrawString("N° " + _venta_Actual.NumeroVenta, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
                 height += 20;
-                if (!String.IsNullOrWhiteSpace(_venta_Actual.Usuario))
-                {
-                    ev.Graphics.DrawString("Atendido por: "+_venta_Actual.Usuario, normalFont, Brushes.Black, 10, height, new StringFormat());
-                    height += 15;
+                //if (!String.IsNullOrWhiteSpace(_venta_Actual.Usuario))
+                //{
+                //    ev.Graphics.DrawString("Atendido por: "+_venta_Actual.Usuario, normalFont, Brushes.Black, 10, height, new StringFormat());
+                //    height += 15;
 
-                }
+                //}
                 // DATOS DEL CLIENTE
                 //if (!String.IsNullOrWhiteSpace(_venta_Actual.direccion_cliente))
                 //{
@@ -144,10 +147,10 @@ namespace UI.Desktop.Ventas
                 height += 20;
 
                 //Printe Table Headings
-                ev.Graphics.DrawString("Item", boldFont, Brushes.Black, 10, height, new StringFormat());
-                ev.Graphics.DrawString("Cant", boldFont, Brushes.Black, 100, height, new StringFormat());
-                ev.Graphics.DrawString("Precio", boldFont, Brushes.Black, 160, height, new StringFormat());
-                ev.Graphics.DrawString("Total", boldFont, Brushes.Black, 220, height, new StringFormat());
+                ev.Graphics.DrawString("Articulo", boldFont, Brushes.Black, 10, height, new StringFormat());
+                ev.Graphics.DrawString("Cant", boldFont, Brushes.Black, 110, height, new StringFormat());
+                ev.Graphics.DrawString("Precio", boldFont, Brushes.Black, 170, height, new StringFormat());
+                ev.Graphics.DrawString("Total", boldFont, Brushes.Black, 230, height, new StringFormat());
                 height += 20;
 
                 //Print Line
@@ -166,9 +169,9 @@ namespace UI.Desktop.Ventas
 
                     ev.Graphics.DrawString(item.DescripcionArticulo, comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
                     height += 15;
-                    ev.Graphics.DrawString(item.Cantidad.ToString(), comandaNormalFont, Brushes.Black, 100 + qtyWidth.Width, height, new StringFormat());
-                    ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 160 + (50 - priceWidth.Width), height, new StringFormat());
-                    ev.Graphics.DrawString("$ " + item.Subtotal.ToString(), comandaNormalFont, Brushes.Black, 220 + (50 - totalWidth.Width), height, new StringFormat());
+                    ev.Graphics.DrawString(item.Cantidad.ToString(), comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
+                    ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
+                    ev.Graphics.DrawString("$ " + item.Subtotal.ToString(), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
                     height += 20;
 
                 }
@@ -179,8 +182,13 @@ namespace UI.Desktop.Ventas
                 //Print Net Total
                 //ev.Graphics.DrawString("Total", normalFont, Brushes.Black, 160, height, new StringFormat());
 
-                SizeF netWidth = ev.Graphics.MeasureString("Total $" + _venta_Actual.Total.ToString(), totalFont);
-                ev.Graphics.DrawString("Total $" + _venta_Actual.Total.ToString(), totalFont, Brushes.Black, 200 + (50 - netWidth.Width), height, new StringFormat());
+                SizeF netWidth = ev.Graphics.MeasureString("$" + _venta_Actual.Total.ToString(), descuentoFont);
+                ev.Graphics.DrawString("Descuento", descuentoFont, Brushes.Black, 10, height, new StringFormat());
+                ev.Graphics.DrawString("$" + _venta_Actual.Descuento.ToString(), descuentoFont, Brushes.Black, 220 + (50 - netWidth.Width), height, new StringFormat());
+                height += 20;
+                SizeF netWidth2 = ev.Graphics.MeasureString("$" + _venta_Actual.Total.ToString(), totalFont);
+                ev.Graphics.DrawString("Total", totalFont, Brushes.Black, 10, height, new StringFormat());
+                ev.Graphics.DrawString("$" + _venta_Actual.Total.ToString(), totalFont, Brushes.Black, 230 + (50 - netWidth2.Width), height, new StringFormat());
                 height += 20;
 
                 //Print Line

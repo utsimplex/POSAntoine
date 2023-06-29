@@ -67,6 +67,7 @@
             this.lblNombreNegocio = new System.Windows.Forms.Label();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.btnFacturar = new System.Windows.Forms.Button();
+            this.btnReimprimir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
@@ -522,12 +523,26 @@
             this.btnFacturar.UseVisualStyleBackColor = true;
             this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
             // 
+            // btnReimprimir
+            // 
+            this.btnReimprimir.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
+            this.btnReimprimir.Location = new System.Drawing.Point(4, 502);
+            this.btnReimprimir.Name = "btnReimprimir";
+            this.btnReimprimir.Size = new System.Drawing.Size(119, 34);
+            this.btnReimprimir.TabIndex = 13;
+            this.btnReimprimir.Text = "Reimprimir";
+            this.btnReimprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnReimprimir.UseVisualStyleBackColor = true;
+            this.btnReimprimir.Visible = false;
+            this.btnReimprimir.Click += new System.EventHandler(this.btnReimprimir_Click);
+            // 
             // frmVenta
             // 
             this.AcceptButton = this.btnConfirmar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(649, 541);
+            this.Controls.Add(this.btnReimprimir);
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnConfirmar);
@@ -604,5 +619,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button btnReimprimir;
     }
 }

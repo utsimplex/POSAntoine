@@ -40,7 +40,7 @@ namespace UI.Desktop.Ventas
         private void ActualizarLista()
         {
             //Solamente voy a la base de datos si mi variable local de ventas esta vacia
-            if(ListaVentas != null)
+            if(ListaVentas == null)
             ListaVentas = Datos_VentasAdapter.GetAll();
 
             int ultimaCaja = ListaVentas.Max(x => x.CajaId);

@@ -187,6 +187,7 @@ namespace Data.Database
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // Agregar los parámetros al comando
+                cmd.Parameters.AddWithValue("@abre_usuario", usrActual);
                 cmd.Parameters.AddWithValue("@fecha_caja", fecha_caja);
                 cmd.Parameters.AddWithValue("@saldo_inicial", saldo_inicial);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
