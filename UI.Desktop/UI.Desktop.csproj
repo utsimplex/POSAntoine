@@ -20,7 +20,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Usuario\Desktop\Trabajo\UT\POS\</PublishUrl>
+    <PublishUrl>C:\Users\Dante\Desktop\POSINSTALADOR\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -85,7 +85,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AfipWsfeClient, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -616,7 +616,6 @@
       <DependentUpon>informeVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <None Include="UI.Desktop_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data.Database\Data.Database\Data.Database.csproj">

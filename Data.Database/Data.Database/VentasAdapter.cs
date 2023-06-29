@@ -401,6 +401,7 @@ namespace Data.Database
                     ventaActual.TipoPago = (string)drVentas["tipoPago"];
                     ventaActual.Usuario = (string)drVentas["usuario"];
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+                    ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
 
                     ListaVentas.Add(ventaActual);
                 }
