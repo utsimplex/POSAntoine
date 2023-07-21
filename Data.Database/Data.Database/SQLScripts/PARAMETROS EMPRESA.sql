@@ -1,0 +1,19 @@
+USE [POSUTSimplex]
+GO
+
+/****** Object:  Table [dbo].[PARAMETROS_AFIP]    Script Date: 20/06/2023 09:04:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PARAMETROS_EMPRESA](
+	[NOMBRE_EMPRESA] [varchar](100) NOT NULL,
+	[TELEFONO] [varchar](100) NOT NULL,
+	[DIRECCION][varchar](100) NOT NULL,
+) ON [PRIMARY]
+GO
+
+
+INSERT INTO PARAMETROS_EMPRESA VALUES('El Arbolito de Antoine','03462-15262000','Chacabuco 742 - Venado Tuerto')

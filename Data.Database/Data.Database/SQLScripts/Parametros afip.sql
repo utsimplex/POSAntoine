@@ -1,0 +1,45 @@
+--Parametros AFIP
+USE [POSUTSimplex]
+GO
+
+/****** Object:  Table [dbo].[PARAMETROS]    Script Date: 16/06/2023 17:06:05 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PARAMETROS_AFIP](
+	CATEGORIA varchar(40) NOT NULL,
+	ID int NOT NULL,
+	DESCRIPCION varchar (100) NOT NULL
+) ON [PRIMARY]
+GO
+
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',1,'Factura A')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',2,'Nota de Debito A')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',3,'Nota de Credito A')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',6,'Factura B')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',7,'Nota de Debito B')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',8,'Nota de Credito B')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',11,'Factura C')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',12,'Nota de Debito C')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoComprobante',13,'Nota de Credito C')
+
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',99,'Sin Identificar')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',96,'DNI')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',80,'CUIT')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',86,'CUIL')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',87,'CDI')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',89,'LE')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',90,'LC')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',91,'CI Extranjera')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',92,'En Tramite')
+INSERT INTO PARAMETROS_AFIP VALUES ('TipoDocumento',94,'Pasaporte')
+
+INSERT INTO PARAMETROS_AFIP VALUES ('SituacionFiscal',5,'Consumidor Final')
+INSERT INTO PARAMETROS_AFIP VALUES ('SituacionFiscal',1,'IVA Responsable Inscripto')
+INSERT INTO PARAMETROS_AFIP VALUES ('SituacionFiscal',4,'IVA Sujeto Exento')
+INSERT INTO PARAMETROS_AFIP VALUES ('SituacionFiscal',6,'Responsable Monotributo')
+INSERT INTO PARAMETROS_AFIP VALUES ('SituacionFiscal',7,'Sujeto No Categorizado')
+INSERT INTO PARAMETROS_AFIP VALUES ('SituacionFiscal',15,'IVA No Alcanzado')
