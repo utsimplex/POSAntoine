@@ -20,7 +20,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Dante\Desktop\POSINSTALADOR\</PublishUrl>
+    <PublishUrl>C:\Users\Usuario\Desktop\Trabajo\UT\POS\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -31,7 +31,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -176,7 +176,11 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\office.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.3.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
       <HintPath>..\packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\ShockwaveFlashObjects.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -223,6 +227,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Artículos\frmArticuloABM.cs">
@@ -333,6 +338,18 @@
     <Compile Include="Clientes\frmListadoClientes.Designer.cs">
       <DependentUpon>frmListadoClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuentasCorrientes\frmCuentaCorriente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasCorrientes\frmCuentaCorriente.Designer.cs">
+      <DependentUpon>frmCuentaCorriente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasCorrientes\frmRecibirPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasCorrientes\frmRecibirPago.Designer.cs">
+      <DependentUpon>frmRecibirPago.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBaseABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -441,6 +458,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Clientes\frmListadoClientes.resx">
       <DependentUpon>frmListadoClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasCorrientes\frmCuentaCorriente.resx">
+      <DependentUpon>frmCuentaCorriente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasCorrientes\frmRecibirPago.resx">
+      <DependentUpon>frmRecibirPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBaseABM.resx">
       <DependentUpon>frmBaseABM.cs</DependentUpon>

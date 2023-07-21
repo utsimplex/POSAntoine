@@ -34,6 +34,8 @@ namespace Data.Database
                 cmd.Parameters.AddWithValue("@pTipo", movimiento.Tipo.ToString());
                 cmd.Parameters.AddWithValue("@pMonto", movimiento.Monto);
                 cmd.Parameters.AddWithValue("@pUsuario", movimiento.Usuario);
+                cmd.Parameters.AddWithValue("@pNumVenta", movimiento.NumVenta);
+                
 
                 // Ejecutar el stored procedure
                 cmd.ExecuteNonQuery();

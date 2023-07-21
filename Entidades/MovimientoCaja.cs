@@ -10,13 +10,14 @@ namespace Entidades
     public class MovimientoCaja
     {
 
-        public MovimientoCaja(int caja_id, string motivo, Boolean ingreso, decimal monto, string usuario)
+        public MovimientoCaja(int caja_id, string motivo, Boolean ingreso, decimal monto, string usuario, string numVentas)
         {
             Caja_id = caja_id;
             Motivo = motivo;
             Tipo = ingreso ? TipoMovimiento.Ingreso : TipoMovimiento.Retiro;
             Monto = monto;
             Usuario = usuario;
+            NumVenta = numVentas;
 
         }
         public int ID { get; set; }
@@ -31,6 +32,7 @@ namespace Entidades
 
         public string Usuario { get; set; }
 
+        public string NumVenta { get; set; }
 
         public enum TipoMovimiento
         {

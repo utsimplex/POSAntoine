@@ -80,7 +80,7 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "UPDATE [Clientes] SET [nombre] = @NOMBRE, [apellido] = @APELLIDO, [direccion] = @DIRECCION, [telefono] = @TELEFONO, [email] = @EMAIL, [tipo] = @TIPO, [TipoDocumento]=@TIPODOCUMENTO,[SituacionFiscal]=@SITACIONFISCAL,[TipoComprobante]=@TIPOCOMPROBANTE WHERE (([dni] = @DNI))";
+            Comando.CommandText = "UPDATE [Clientes] SET [nombre] = @NOMBRE, [apellido] = @APELLIDO, [direccion] = @DIRECCION, [telefono] = @TELEFONO, [email] = @EMAIL, [tipo] = @TIPO, [TipoDocumento]=@TIPODOCUMENTO,[SituacionFiscal]=@SITUACIONFISCAL,[TipoComprobante]=@TIPOCOMPROBANTE WHERE (([dni] = @DNI))";
             Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
             Comando.Parameters["@DNI"].Value = cli.NumeroDocumento;
             Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
@@ -162,7 +162,7 @@ namespace Data.Database
 
         }
 
-        public Entidades.Cliente GetOne(long? dni)
+        public Entidades.Cliente GetOne(long dni)
         {
             Entidades.Cliente ClienteActual = new Entidades.Cliente();
 

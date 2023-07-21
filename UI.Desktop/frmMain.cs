@@ -52,8 +52,8 @@ namespace UI.Desktop
         }
 
         // VARIABLES
-        Entidades.Usuario usrActual = null;
-        Entidades.Caja cajaActual = null;
+        public Entidades.Usuario usrActual = null;
+        public Entidades.Caja cajaActual = null;
         Data.Database.ClienteAdapter Datos_ClienteAdapter = new Data.Database.ClienteAdapter();
         Data.Database.UsuarioAdapter Datos_UsuarioAdapter = new Data.Database.UsuarioAdapter();
         Data.Database.InformeArticulos Datos_InformeArticulosAdapter = new Data.Database.InformeArticulos();

@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter.cs" />
+    <Compile Include="CuentaCorrienteAdapter.cs" />
     <Compile Include="ArticuloAdapter.cs" />
     <Compile Include="ParametrosGeneralesAdapter.cs" />
     <Compile Include="ParametrosEmpresaAdapter.cs" />

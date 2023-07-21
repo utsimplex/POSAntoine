@@ -25,10 +25,10 @@ namespace Data.Database
 
             Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [descuento],[usuario], [tipooperacion], [caja_id],[Neto]"+
            ",[Iva]," +
-           "[TipoDocumentoCliente],[NumeroDocumentoCliente],[NombreCliente],[DireccionCliente],[SituacionFiscalCliente]" +
+           "[TipoDocumentoCliente],[NumeroDocumentoCliente],[NombreCliente],[DireccionCliente],[SituacionFiscalCliente],[Pagado],[Monto_pagado],TipoComprobante" +
            ") " +
                 "VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID,@NETO,@IVA," +
-                "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE"+
+                "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE,@pagado,@monto_pagado,@tipoComprobante"+
                 ")";
             Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
             Comando.Parameters["@NUMVENTA"].Value = ventaNueva.NumeroVenta;
@@ -62,6 +62,12 @@ namespace Data.Database
             Comando.Parameters["@DIRECCIONCLIENTE"].Value = ventaNueva.DireccionCliente;
             Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCALCLIENTE", SqlDbType.Int));
             Comando.Parameters["@SITUACIONFISCALCLIENTE"].Value = ventaNueva.SituacionFiscalCliente;
+            Comando.Parameters.Add(new SqlParameter("@Pagado", SqlDbType.Bit));
+            Comando.Parameters["@Pagado"].Value = ventaNueva.Pagado;
+            Comando.Parameters.Add(new SqlParameter("@monto_pagado", SqlDbType.Decimal));
+            Comando.Parameters["@monto_pagado"].Value = ventaNueva.MontoPagado;
+            Comando.Parameters.Add(new SqlParameter("@Tipocomprobante", SqlDbType.Int));
+            Comando.Parameters["@Tipocomprobante"].Value = ventaNueva.TipoComprobante;
             //Ejecuta el comando INSERT
             Comando.Connection.Open();
             Comando.ExecuteNonQuery();
@@ -136,7 +142,7 @@ namespace Data.Database
             Comando.Parameters["@NOMBRECLIENTE"].Value = VentaActual.NombreCliente;
             Comando.Parameters.Add(new SqlParameter("@CUITEMISOR", SqlDbType.BigInt));
             Comando.Parameters["@CUITEMISOR"].Value = VentaActual.CuitEmisor;
-            Comando.Parameters.Add(new SqlParameter("@DIRECCIONCLIENTE", SqlDbType.Int));
+            Comando.Parameters.Add(new SqlParameter("@DIRECCIONCLIENTE", SqlDbType.NVarChar));
             Comando.Parameters["@DIRECCIONCLIENTE"].Value = VentaActual.DireccionCliente;
             Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCALCLIENTE", SqlDbType.Int));
             Comando.Parameters["@SITUACIONFISCALCLIENTE"].Value = VentaActual.SituacionFiscalCliente;
@@ -170,6 +176,31 @@ namespace Data.Database
             Comando.ExecuteNonQuery();
             Comando.Connection.Close();
         }
+
+        public void ActualizarPago(int NumVenta, decimal Monto, bool Pagado)
+        {
+            //Crear Conexion y Abrirla
+            SqlConnection Con = CrearConexion();
+
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
+            Comando.Connection = Con;
+            Comando.CommandType = CommandType.Text;
+
+            Comando.CommandText = "UPDATE [VENTAs] SET pagado=@pagado,monto_pagado=@monto_pagado WHERE numVenta=@numVenta";
+            Comando.Parameters.Add(new SqlParameter("@pagado", SqlDbType.Bit));
+            Comando.Parameters["@pagado"].Value = Pagado;
+            Comando.Parameters.Add(new SqlParameter("@monto_pagado", SqlDbType.Decimal));
+            Comando.Parameters["@monto_pagado"].Value = Monto;
+            Comando.Parameters.Add(new SqlParameter("@numVenta", SqlDbType.Int));
+            Comando.Parameters["@numVenta"].Value = NumVenta;
+
+
+            //Ejecuta el comando INSERT
+            Comando.Connection.Open();
+            Comando.ExecuteNonQuery();
+            Comando.Connection.Close();
+        }
         public List<Venta> GetAll()
         {
             List<Venta> ListaVentas = new List<Venta>();
@@ -196,6 +227,8 @@ namespace Data.Database
                     vta.TipoPago = (string)drVentas["tipopago"];
                     vta.Total = (decimal)drVentas["total"];
                     vta.TipoOperacion = (string)drVentas["tipooperacion"];
+                    vta.Pagado = (bool)drVentas["pagado"];
+                    vta.MontoPagado = (decimal)drVentas["monto_pagado"];
                     //FALTAN TRAER DATOS FISCALES
                     vta.TipoComprobante = (drVentas["TIPOCOMPROBANTE"]!=DBNull.Value)?(int)drVentas["TIPOCOMPROBANTE"]:(int?)null;
                     vta.PuntoDeVenta = drVentas["PUNTODEVENTA"]!= DBNull.Value? (int)drVentas["PUNTODEVENTA"]:(int?)null;
@@ -261,6 +294,10 @@ namespace Data.Database
                     VentaBuscada.TipoPago = (string)drVentas["tipopago"];
                     VentaBuscada.Total = (decimal)drVentas["total"];
                     VentaBuscada.TipoOperacion = (string)drVentas["tipooperacion"];
+                    VentaBuscada.Pagado = (bool)drVentas["pagado"];
+                    VentaBuscada.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    VentaBuscada.Neto = Convert.ToDouble(drVentas["Neto"]);
+                    VentaBuscada.Iva = Convert.ToDouble(drVentas["Iva"]);
                     //FALTAN TRAER DATOS FISCALES
                     VentaBuscada.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
                     VentaBuscada.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
@@ -372,6 +409,138 @@ namespace Data.Database
 
         }
 
+        public List<Venta> GetVentasCliente(long documentoCliente)
+        {
+
+            List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
+            //Crear Conexion y Abrirla
+            SqlConnection Con = CrearConexion();
+
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.NumeroDocumentoCliente = @documentoCliente", Con);
+            Comando.Parameters.Add(new SqlParameter("@documentoCliente", SqlDbType.BigInt));
+            Comando.Parameters["@documentoCliente"].Value = documentoCliente;
+            try
+            {
+                Comando.Connection.Open();
+                SqlDataReader drVentas = Comando.ExecuteReader();
+
+                while (drVentas.Read())
+                {
+                    Entidades.Venta ventaActual = new Entidades.Venta();
+
+                    ventaActual.Descuento = (decimal)drVentas["descuento"];
+                    ventaActual.NumeroDocumentoCliente = (long)drVentas["NumeroDocumentoCliente"];
+                    ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
+                    ventaActual.NumeroVenta = (int)drVentas["numVenta"];
+                    ventaActual.CajaId = (int)drVentas["caja_id"];
+                    ventaActual.Total = (decimal)drVentas["total"];
+                    ventaActual.TipoPago = (string)drVentas["tipoPago"];
+                    ventaActual.Usuario = (string)drVentas["usuario"];
+                    ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+                    ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
+                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
+                    ventaActual.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
+                    ventaActual.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
+                    ventaActual.NumeroTicketFiscal = drVentas["TICKETFISCAL"] != DBNull.Value ? (string)drVentas["TICKETFISCAL"] : null;
+                    ventaActual.CAE = drVentas["CAE"] != DBNull.Value ? (string)drVentas["CAE"] : null;
+                    ventaActual.VencimientoCAE = drVentas["VENCIMIENTOCAE"] != DBNull.Value ? (DateTime)drVentas["VENCIMIENTOCAE"] : (DateTime?)null;
+                    ventaActual.TipoDocumentoCliente = drVentas["TIPODOCUMENTOCLIENTE"] != DBNull.Value ? (int)drVentas["TIPODOCUMENTOCLIENTE"] : (int?)null;
+                    ventaActual.NumeroDocumentoCliente = drVentas["NUMERODOCUMENTOCLIENTE"] != DBNull.Value ? (long?)drVentas["NUMERODOCUMENTOCLIENTE"] : (long?)null;
+                    ventaActual.NombreCliente = drVentas["NOMBRECLIENTE"] != DBNull.Value ? (string)drVentas["NOMBRECLIENTE"] : null;
+                    ventaActual.CuitEmisor = drVentas["CUITEMISOR"] != DBNull.Value ? (long?)drVentas["CUITEMISOR"] : (long?)null;
+                    ventaActual.DireccionCliente = drVentas["DIRECCIONCLIENTE"] != DBNull.Value ? (string)drVentas["DIRECCIONCLIENTE"] : null;
+                    ventaActual.SituacionFiscalCliente = drVentas["SITUACIONFISCALCLIENTE"] != DBNull.Value ? (int)drVentas["SITUACIONFISCALCLIENTE"] : (int?)null;
+
+                    ListaVentas.Add(ventaActual);
+                }
+                drVentas.Close();
+
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                Comando.Connection.Close();
+            }
+
+
+
+            return ListaVentas;
+
+
+
+
+        }
+        public List<Venta> GetAllPendientes()
+        {
+
+            List<Entidades.Venta> ListaVentas = new List<Entidades.Venta>();
+            //Crear Conexion y Abrirla
+            SqlConnection Con = CrearConexion();
+
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.Pagado = 0", Con);
+            try
+            {
+                Comando.Connection.Open();
+                SqlDataReader drVentas = Comando.ExecuteReader();
+
+                while (drVentas.Read())
+                {
+                    Entidades.Venta ventaActual = new Entidades.Venta();
+
+                    ventaActual.Descuento = (decimal)drVentas["descuento"];
+                    ventaActual.NumeroDocumentoCliente = (long)drVentas["NumeroDocumentoCliente"];
+                    ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
+                    ventaActual.NumeroVenta = (int)drVentas["numVenta"];
+                    ventaActual.CajaId = (int)drVentas["caja_id"];
+                    ventaActual.Total = (decimal)drVentas["total"];
+                    ventaActual.TipoPago = (string)drVentas["tipoPago"];
+                    ventaActual.Usuario = (string)drVentas["usuario"];
+                    ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+                    ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
+                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
+                    ventaActual.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
+                    ventaActual.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
+                    ventaActual.NumeroTicketFiscal = drVentas["TICKETFISCAL"] != DBNull.Value ? (string)drVentas["TICKETFISCAL"] : null;
+                    ventaActual.CAE = drVentas["CAE"] != DBNull.Value ? (string)drVentas["CAE"] : null;
+                    ventaActual.VencimientoCAE = drVentas["VENCIMIENTOCAE"] != DBNull.Value ? (DateTime)drVentas["VENCIMIENTOCAE"] : (DateTime?)null;
+                    ventaActual.TipoDocumentoCliente = drVentas["TIPODOCUMENTOCLIENTE"] != DBNull.Value ? (int)drVentas["TIPODOCUMENTOCLIENTE"] : (int?)null;
+                    ventaActual.NumeroDocumentoCliente = drVentas["NUMERODOCUMENTOCLIENTE"] != DBNull.Value ? (long?)drVentas["NUMERODOCUMENTOCLIENTE"] : (long?)null;
+                    ventaActual.NombreCliente = drVentas["NOMBRECLIENTE"] != DBNull.Value ? (string)drVentas["NOMBRECLIENTE"] : null;
+                    ventaActual.CuitEmisor = drVentas["CUITEMISOR"] != DBNull.Value ? (long?)drVentas["CUITEMISOR"] : (long?)null;
+                    ventaActual.DireccionCliente = drVentas["DIRECCIONCLIENTE"] != DBNull.Value ? (string)drVentas["DIRECCIONCLIENTE"] : null;
+                    ventaActual.SituacionFiscalCliente = drVentas["SITUACIONFISCALCLIENTE"] != DBNull.Value ? (int)drVentas["SITUACIONFISCALCLIENTE"] : (int?)null;
+
+                    ListaVentas.Add(ventaActual);
+                }
+                drVentas.Close();
+
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                Comando.Connection.Close();
+            }
+
+
+
+            return ListaVentas;
+
+
+
+
+        }
         public List<Entidades.Venta> Busqueda(string texto)
         {
 
@@ -399,7 +568,9 @@ namespace Data.Database
                     ventaActual.CajaId = (int)drVentas["caja_id"];
                     ventaActual.Total = (decimal)drVentas["total"];
                     ventaActual.TipoPago = (string)drVentas["tipoPago"];
-                    ventaActual.Usuario = (string)drVentas["usuario"];
+                    ventaActual.Usuario = (string)drVentas["usuario"]; 
+                    ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
+                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
                     ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
 
@@ -426,7 +597,6 @@ namespace Data.Database
 
 
         }
-
         public List<Entidades.Venta> BusquedaFechaDesde(DateTime fechaDesde)
         {
             DateTime fechaDsd = new DateTime(fechaDesde.Year, fechaDesde.Month, fechaDesde.Day);
@@ -467,6 +637,8 @@ namespace Data.Database
                     ventaActual.TipoPago = (string)drVentas["tipopago"];
                     ventaActual.Total = (decimal)drVentas["total"];
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+                    ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
+                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
                     //FALTAN TRAER DATOS FISCALES
                     ventaActual.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
                     ventaActual.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
@@ -536,6 +708,8 @@ namespace Data.Database
                     ventaActual.Usuario = (string)drVentas["usuario"];
 
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
+                    ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
+                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
 
                     ListaVentas.Add(ventaActual);
                 }
@@ -552,12 +726,7 @@ namespace Data.Database
                 Comando.Connection.Close();
             }
 
-
-
             return ListaVentas;
-
-
-
 
         }
 

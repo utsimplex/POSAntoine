@@ -34,7 +34,7 @@ namespace UI.Desktop.Cajas
 
         private void btnSi_Click(object sender, EventArgs e)
         {
-            movimientoAdapter.registrarMovimiento(new Entidades.MovimientoCaja(caja.ID, txtMotivo.Text, isIngreso, Convert.ToDecimal(txtMonto.Text), usrActual));
+            movimientoAdapter.registrarMovimiento(new Entidades.MovimientoCaja(caja.ID, txtMotivo.Text, isIngreso, Convert.ToDecimal(txtMonto.Text), usrActual,""));
         }
     }
 }

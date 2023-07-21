@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QRCoder;
 
 
 
@@ -28,6 +29,12 @@ namespace UI.Desktop.Ventas
         string _telefonoComanda = "";
         string _imprimeFechaEmision = "";
         string _imprimeFechaEntrega = "";
+        string _nombreFiscal = "";
+        string _situacionFiscal = "";
+        string _inicioActividades = "";
+        string _direccionFiscal = "";
+        string _ingBrutos = "";
+        string _cuit = "";
         string _modo = ""; //Modo: CLIENTE ; COCINA
         string _prefijoCaja = ""; //Modo: DELIVERY ; MOSTRADOR
         public PrinterDrawing(Venta _venta, List<Venta_Articulo> _venta_articulos, string modo)
@@ -40,6 +47,12 @@ namespace UI.Desktop.Ventas
             _cabeceraComanda = "El Arbolito de Antoine";
             _direccionComanda = "Chacabuco 842 - Venado Tuerto";
             _telefonoComanda = "Whatsapp: 3462-262000";
+            _nombreFiscal = "Florencia Anahi Polvaran";
+            _situacionFiscal = "Responsable Monotributo";
+            _inicioActividades = "01/07/2021";
+            _direccionFiscal = "Chacabuco 842 - Venado Tuerto";
+            _ingBrutos = "0324185027";
+            _cuit = "20350319250";
             //_direccionComanda = parametros.getOne("DIRECCION").Valor;
             //_telefonoComanda = parametros.getOne("TELEFONO").Valor;
             //_imprimeFechaEmision = parametros.getOne("EMISION").Valor;
@@ -206,7 +219,7 @@ namespace UI.Desktop.Ventas
                 //}
                 ev.HasMorePages = false;
             }
-            else
+            else if (_modo=="COCINA")
             {
                 //MODO COCINA
                 //Print Cabecera
@@ -252,6 +265,174 @@ namespace UI.Desktop.Ventas
                 ev.HasMorePages = false;
 
             }
+                 else if (_modo == "FISCAL")
+                {
+                    //Print Cabecera
+
+                    ev.Graphics.DrawString(_cabeceraComanda, headingFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 25;
+                    ev.Graphics.DrawString(_nombreFiscal, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    ev.Graphics.DrawString("C.U.I.T. " + _cuit, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    ev.Graphics.DrawString("Ing. Brutos: " + _ingBrutos, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    ev.Graphics.DrawString("Domicilio: " + _direccionFiscal, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    ev.Graphics.DrawString("Inicio de Actividades: " + _inicioActividades, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    ev.Graphics.DrawString(_situacionFiscal, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 10;
+
+                    //Print Line
+                    ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    ///DATOS CABECERA FACTURA
+                    ev.Graphics.DrawString("FACTURA '" + _venta_Actual.letraComprobateRO + "'     N° " + _venta_Actual.puntoDeVentaRO + "-" + _venta_Actual.numeroDeComprobanteFiscalRO, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    ev.Graphics.DrawString("Fecha: " + _venta_Actual.FechaHora.ToString("dd/MM/yyyy"), lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+                    //ev.Graphics.DrawString("Hora: " + _venta_Actual.fecha.ToString("HH:mm:ss"), lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    //height += 10;
+
+                    //Print Line
+                    ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+
+                    ///DATOS CLIENTE
+                    if (_venta_Actual.TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR)
+                    {
+                        string NroDNI = _venta_Actual.TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR ? "" : " Nro: " + _venta_Actual.NumeroDocumentoCliente.ToString();
+                        ev.Graphics.DrawString(_venta_Actual.tipoDocumentoClienteRO + NroDNI, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                        height += 15;
+                        ev.Graphics.DrawString("A " + _venta_Actual.situacionFiscalClienteRO, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                        height += 15;
+                    }
+                    else
+                    {
+                        ev.Graphics.DrawString(_venta_Actual.NombreCliente, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                        height += 15;
+                        ev.Graphics.DrawString(_venta_Actual.tipoDocumentoClienteRO + " Nro: " + _venta_Actual.NumeroDocumentoCliente.ToString(), lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                        height += 15;
+                        ev.Graphics.DrawString("A " + _venta_Actual.situacionFiscalClienteRO, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                        height += 15;
+                        ev.Graphics.DrawString(_venta_Actual.DireccionCliente, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                        height += 10;
+                    }
+
+                    //Print Line
+                    ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+
+                    ev.Graphics.DrawString("Ref:" + _venta_Actual.CajaId.ToString(), lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+
+                    //Print Receipt Date
+                    ev.Graphics.DrawString("N° " + _venta_Actual.NumeroVenta, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 20;
+                    //Print Line
+                    ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 15;
+
+                    //Printe Table Headings
+                    ev.Graphics.DrawString("Item", boldFont, Brushes.Black, 10, height, new StringFormat());
+                    ev.Graphics.DrawString("Cant", boldFont, Brushes.Black, 70, height, new StringFormat());
+                    ev.Graphics.DrawString("P. Unit", boldFont, Brushes.Black, 120, height, new StringFormat());
+                    ev.Graphics.DrawString("Total", boldFont, Brushes.Black, 230, height, new StringFormat());
+                    height += 10;
+
+                    //Print Line
+                    ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 20;
+
+                    //Printe Table Rows
+                    foreach (var item in _venta_actual_articulos)
+                    {
+                        SizeF qtyWidth = ev.Graphics.MeasureString(item.Cantidad.ToString(), comandaNormalFont);
+                        SizeF priceWidth = ev.Graphics.MeasureString("$ " + Convert.ToString(item.Subtotal / item.Cantidad), comandaNormalFont);
+                        SizeF netPriceWidth = ev.Graphics.MeasureString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont);
+                        SizeF totalWidth = ev.Graphics.MeasureString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont);
+                        SizeF netTotalWidth = ev.Graphics.MeasureString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont);
+
+                        //item.comanda = item.comanda ?? item.descripcion_linea.Replace("\r\n", string.Empty).Replace("1- ", "1 - ");
+                        //item.comanda = item.comanda.Replace("\r\n", string.Empty).Replace("1- ", "1 - ");
+
+                        ev.Graphics.DrawString(item.DescripcionArticulo, comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
+                        height += 15;
+                        ev.Graphics.DrawString(item.Cantidad.ToString(), comandaNormalFont, Brushes.Black, 80, height, new StringFormat());
+                        if (_venta_Actual.letraComprobateRO == "A")
+                        {
+                            //ev.Graphics.DrawString("$ " + item.monto_neto_unitario.ToString("0.00"), comandaNormalFont, Brushes.Black, 170 - netPriceWidth.Width, height, new StringFormat());
+                            //ev.Graphics.DrawString("(21)", comandaNormalFont, Brushes.Black, 180, height, new StringFormat());
+                            //ev.Graphics.DrawString("$ " + item.monto_neto.ToString("0.00"), comandaNormalFont, Brushes.Black, 275 - netTotalWidth.Width, height, new StringFormat());
+                            height += 15;
+                        }
+                        else
+                        {
+                            ev.Graphics.DrawString("$ " + item.Precio.ToString("0.00"), comandaNormalFont, Brushes.Black, 170 - priceWidth.Width, height, new StringFormat());
+                            ev.Graphics.DrawString("(21)", comandaNormalFont, Brushes.Black, 180, height, new StringFormat());
+                            ev.Graphics.DrawString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
+                            height += 15;
+                        }
+
+                    }
+                    //Print Line
+                if (_venta_Actual.Descuento != 0)
+                {
+                    SizeF descuentoWidth = ev.Graphics.MeasureString("$ " + _venta_Actual.Descuento.ToString("0.00"), comandaNormalFont);
+                    ev.Graphics.DrawString("DESCUENTO", comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    ev.Graphics.DrawString("- $ " + _venta_Actual.Descuento.ToString("0.00"), comandaNormalFont, Brushes.Black, 275- descuentoWidth.Width, height, new StringFormat());
+
+                    height += 15;
+                }
+                    ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                    height += 20;
+                    //Print Net Total
+                    //ev.Graphics.DrawString("Total", normalFont, Brushes.Black, 160, height, new StringFormat());
+                    if (_venta_Actual.letraComprobateRO == "A")
+                    {
+                        //SizeF netWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.neto).ToString("0.00"), netFont);
+                        //ev.Graphics.DrawString("SubTotal", netFont, Brushes.Black, 100, height, new StringFormat());
+                        //ev.Graphics.DrawString("$", netFont, Brushes.Black, 180, height, new StringFormat());
+                        //ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.neto).ToString("0.00"), netFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
+                        //height += 20;
+                        //SizeF ivaWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.iva).ToString("0.00"), netFont);
+                        //ev.Graphics.DrawString("IVA 21%", netFont, Brushes.Black, 100, height, new StringFormat());
+                        //ev.Graphics.DrawString("$", netFont, Brushes.Black, 180, height, new StringFormat());
+                        //ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.iva).ToString("0.00"), netFont, Brushes.Black, 275 - ivaWidth.Width, height, new StringFormat());
+                        //height += 20;
+                        //SizeF totalWidth = ev.Graphics.MeasureString(_venta_Actual.monto_total.ToString("0.00"), netFont);
+                        //ev.Graphics.DrawString("Total", netFont, Brushes.Black, 120, height, new StringFormat());
+                        //ev.Graphics.DrawString("$", netFont, Brushes.Black, 180, height, new StringFormat());
+                        //ev.Graphics.DrawString(_venta_Actual.monto_total.ToString("0.00"), netFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
+                        //height += 25;
+                    }
+                    else
+                    {
+                        SizeF netWidth = ev.Graphics.MeasureString("Total $" + _venta_Actual.Total.ToString(), totalFont);
+                        ev.Graphics.DrawString("Total $" + _venta_Actual.Total.ToString(), totalFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
+                        height += 25;
+                    }
+
+                    ev.Graphics.DrawString("*** FACTURACION ELECTRÓNICA ***", lessNormalFont, Brushes.Black, 60, height, new StringFormat());
+                    height += 15;
+                    //Print Line
+                    ev.Graphics.DrawString("CAE: " + _venta_Actual.CAE, lessNormalFont, Brushes.Black, 60, height, new StringFormat());
+                    height += 15;
+                    ev.Graphics.DrawString("Fecha Vto CAE: " + ((DateTime)_venta_Actual.VencimientoCAE).ToString("dd/MM/yyyy"), lessNormalFont, Brushes.Black, 60, height, new StringFormat());
+                    height += 15;
+
+                    byte[] encbuff = System.Text.Encoding.UTF8.GetBytes("JSON");
+                    Convert.ToBase64String(encbuff);
+                    QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(_venta_Actual.QRBase64RO, QRCodeGenerator.ECCLevel.Q);
+                    //pictureBoxQRCode.BackgroundImage = qrCodeData.GetGraphic(20);
+                    QRCode qrCode = new QRCode(qrCodeData);
+                    //Image qr = new Bitmap(qrCode.GetGraphic(20), new Size(100, 100));
+                    ev.Graphics.DrawImage(qrCode.GetGraphic(40), 70, height, 140, 140);
+
+                    ev.HasMorePages = false;
+                }
         }
 
 

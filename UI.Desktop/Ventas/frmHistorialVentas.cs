@@ -78,8 +78,7 @@ namespace UI.Desktop.Ventas
 
             if (dgvListado.SelectedRows[0].Cells["NumeroVenta"].Value.ToString() != "")
             {
-
-                frmVenta formModificarVenta = new frmVenta(usrActual,vtaSeleccionada);
+                frmVenta formModificarVenta = new frmVenta(usrActual, Datos_VentasAdapter.GetOne((int)dgvListado.SelectedRows[0].Cells["NumeroVenta"].Value));
                 formModificarVenta.Text = "Modificar Venta";
                 formModificarVenta.ShowDialog();
                 ActualizarLista();
@@ -121,9 +120,10 @@ namespace UI.Desktop.Ventas
         {
             int numVenta = Convert.ToInt32(this.dgvListado.SelectedRows[0].Cells["NumeroVenta"].Value.ToString());
 
-            //Venta ventaActual = Datos_VentasAdapter.GetOne(numVenta);
-            Venta ventaActual = ListaVentas.First(x=> x.NumeroVenta == numVenta);
-             frmVenta formVentaReadOnly = new frmVenta(usrActual, ventaActual);
+            //Venta ventaActual = ListaVentas.First(x=> x.NumeroVenta == numVenta);
+            Venta ventaActual = Datos_VentasAdapter.GetOne(numVenta);
+
+            frmVenta formVentaReadOnly = new frmVenta(usrActual, ventaActual);
             if(formVentaReadOnly.ShowDialog() != DialogResult.Cancel)
             {
             //TO-DO: si se factura habria que actualizar los datos fiscales

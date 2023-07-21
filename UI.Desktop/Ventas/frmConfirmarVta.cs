@@ -38,5 +38,10 @@ namespace UI.Desktop.Ventas
         {
             this.Close();
         }
+
+        private void frmConfirmarVta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

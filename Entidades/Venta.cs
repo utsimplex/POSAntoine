@@ -30,8 +30,10 @@ namespace Entidades
        //DNICLIENTE
        public string DniCliente { get; set; }
 
-       //IDEMPLEADO
-       public string Usuario { get; set; }
+        public bool Pagado { get; set; }
+        public decimal MontoPagado { get; set; }
+        //IDEMPLEADO
+        public string Usuario { get; set; }
         public int CajaId { get; set; }
 
         //modulo de facturacion
@@ -85,7 +87,7 @@ namespace Entidades
             get
             {
                 //TO-DO:Parameter
-                string url = "https://www.afip.gob.ar/fe/qr/?p=";
+                string url = "https://serviciosweb.afip.gob.ar/genericos/comprobantes/cae.aspx?p=";
                 string link;
                 AfipJsonQR Data = new AfipJsonQR()
                 {
@@ -143,6 +145,8 @@ namespace Entidades
                         return "A";
                     case (int)FeConstantes.TipoComprobante.FacturaB:
                         return "B";
+                    case (int)FeConstantes.TipoComprobante.FacturaC:
+                        return "C";
                     case (int)FeConstantes.TipoComprobante.NDA:
                         return "ND A";
                     case (int)FeConstantes.TipoComprobante.NCA:
@@ -151,6 +155,10 @@ namespace Entidades
                         return "ND B";
                     case (int)FeConstantes.TipoComprobante.NCB:
                         return "NC B";
+                    case (int)FeConstantes.TipoComprobante.NDC:
+                        return "ND C";
+                    case (int)FeConstantes.TipoComprobante.NCC:
+                        return "NC C";
                     default: return "";
                 }
             }

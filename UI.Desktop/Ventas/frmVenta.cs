@@ -42,7 +42,7 @@ namespace UI.Desktop.Ventas
             txtFechaHoraVta.Text = vtaSelec.FechaHora.ToString("dd ' de ' MMMM ', ' yyyy"); 
             txtDcto.Text = vtaSelec.Descuento.ToString();
             txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
-            txtNombRazCli.Text = Datos_ClienteAdapter.GetOne(vtaSelec.NumeroDocumentoCliente).Nombre;
+            txtNombRazCli.Text = Datos_ClienteAdapter.GetOne((long)vtaSelec.NumeroDocumentoCliente).Nombre;
             txtNumeroVenta.Text = vtaSelec.NumeroVenta.ToString();
             txtTotal.Text = vtaSelec.Total.ToString();
             dgvArticulosVtaActual.DataSource = Datos_VentasArticulosAdapter.GetAll(vtaSelec.NumeroVenta, vtaSelec.TipoOperacion);
@@ -272,8 +272,21 @@ namespace UI.Desktop.Ventas
                 if (this.dgvArticulosVtaActual.RowCount != 0)
                 {
                     this.setMedioPago();
-                    if (this.ConstruirVenta() != DialogResult.Cancel)
-                    { this.GuardarVenta(); }
+                    DialogResult construyeVenta = this.ConstruirVenta();
+                    if (construyeVenta != DialogResult.Cancel)
+                    { 
+                        this.GuardarVenta();
+                        if (construyeVenta == DialogResult.Yes)
+                        {
+                            ventaLocal = Datos_VentasAdapter.GetOne(ventaLocal.NumeroVenta);
+                            if (ventaLocal.NumeroTicketFiscal != null)
+                            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "FISCAL"); }
+                            else
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                            }
+                        }
+                    }
                     this.Dispose();
                 }
                 else
@@ -297,10 +310,21 @@ namespace UI.Desktop.Ventas
                 if (this.dgvArticulosVtaActual.RowCount != 0 && Convert.ToDouble(this.txtTotal.Text) > 0)
                 {
                     this.setMedioPago();
-                    if (this.ConstruirVenta() != DialogResult.Cancel)
+                    DialogResult construyeVenta = this.ConstruirVenta();
+                    if (construyeVenta != DialogResult.Cancel)
                     {
                         this.GuardarVenta();
                         await this.FacturarVentaAsync();
+                        if(construyeVenta == DialogResult.Yes)
+                        {
+                            ventaLocal = Datos_VentasAdapter.GetOne(ventaLocal.NumeroVenta);
+                            if (ventaLocal.NumeroTicketFiscal != null)
+                            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "FISCAL"); }
+                            else
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                            }
+                        }
                     this.Dispose();
                     }
                 }
@@ -617,6 +641,10 @@ namespace UI.Desktop.Ventas
                     ventaLocal.Neto = Convert.ToDouble(Neto.ToString("0.00"));
                     double Iva = Convert.ToDouble(ventaLocal.Total) - Neto;
                     ventaLocal.Iva = Convert.ToDouble(Iva.ToString("0.00"));
+
+                    //TO-DO:FIX ON CUENTAS CORRIENTES
+                    ventaLocal.Pagado = true;
+                    ventaLocal.MontoPagado = ventaLocal.Total;
                     //TO-DO: Evaluar parametro de Usuario para saber si el emisor es Monotributista
                     bool Monotributista = true;
                     if (Monotributista)
@@ -625,10 +653,11 @@ namespace UI.Desktop.Ventas
                     //    ventaLocal.TipoComprobante = lblTipoComprobante.Text == "FACTURA B" ? (int)FeConstantes.TipoComprobante.FacturaC : clienteActual.TipoComprobante; 
                 }
 
-                if (formConfirmarVenta == DialogResult.Yes)
-                {
-                    PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
-                }
+                //Se imprime afuera
+                //if (formConfirmarVenta == DialogResult.Yes)
+                //{
+                //    PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                //}
 
                 //if (formConfirmarVenta != DialogResult.Cancel)
                 //{
@@ -747,7 +776,8 @@ namespace UI.Desktop.Ventas
         
         private async Task FacturarVentaAsync()
         {
-            await Facturador.facturarAsync(ventaLocal);
+            //TO-DO: FIX TOMAR PARAMETRO GENERAL - segundo parametro si es monotributista
+            await Facturador.facturarAsync(ventaLocal, true);
         }
         private void setMedioPago()
         {
@@ -881,7 +911,12 @@ namespace UI.Desktop.Ventas
 
         private void btnReimprimir_Click(object sender, EventArgs e)
         {
-            PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+            if (ventaLocal.NumeroTicketFiscal != null)
+            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "FISCAL"); }
+            else
+            {
+                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+            }
         }
     }
 }

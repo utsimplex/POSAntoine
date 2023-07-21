@@ -23,6 +23,7 @@ namespace UI.Desktop.Clientes
         {
             InitializeComponent();
             ActualizarLista();
+            user = usr;
             rol = usr.Rol;
         }
 
@@ -30,6 +31,7 @@ namespace UI.Desktop.Clientes
         #region ///***///***///***/// V A R I A B L E S   L O C A L E S \\\***\\\***\\\***\\\
 
 
+        Usuario user;
         string rol;
         //PROPIEDAD MODOFORM
         TipoForm _modoForm;
@@ -96,7 +98,7 @@ namespace UI.Desktop.Clientes
 
             if (formConfirmar.ShowDialog() == DialogResult.Yes)
             {
-                string clienteToDelete = dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+                string clienteToDelete = dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString();
                 DatosClienteAdapter.Quitar(clienteToDelete);
             }
 
@@ -195,7 +197,7 @@ namespace UI.Desktop.Clientes
 
         private void SeleccionarCliente()
         {
-            dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["dni"].Value;
+            dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value;
             this.Close();
         }
         
@@ -276,7 +278,7 @@ namespace UI.Desktop.Clientes
             {
 
                 case Keys.Enter:
-                    dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["dni"].Value;
+                    dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value;
                     this.DialogResult = DialogResult.Yes;
                     this.Close();
 
@@ -311,15 +313,15 @@ namespace UI.Desktop.Clientes
         {
             tbxFiltro.Text = "";
         }
-       
-       
-       
-        
 
-      
-      
+        private void btnCtaCte_Click(object sender, EventArgs e)
+        {
+            if(this.dgvListado.SelectedRows.Count==1)
+            {
 
-        
-        
+            CuentasCorrientes.frmCuentaCorriente formCuentaCorriente= new CuentasCorrientes.frmCuentaCorriente(this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString(), this.user);
+            formCuentaCorriente.ShowDialog();
+            }
+        }
     }
 }

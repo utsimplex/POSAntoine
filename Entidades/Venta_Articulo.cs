@@ -40,16 +40,16 @@ namespace Entidades
         }
 
         // PRECIO DEL ARTICULO
-        SqlMoney _Precio;
-        public SqlMoney Precio
+        decimal _Precio;
+        public decimal Precio
         {
             get { return _Precio; }
             set { _Precio = value; }
         }
 
       // SUBTOTAL = PRECIO * CANTIDAD
-        SqlMoney _Subtotal;
-        public SqlMoney Subtotal
+        decimal _Subtotal;
+        public decimal Subtotal
         {
             get { return _Subtotal; }
             set { _Subtotal = value; }

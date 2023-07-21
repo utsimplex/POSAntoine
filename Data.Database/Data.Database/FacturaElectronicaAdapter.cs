@@ -21,13 +21,13 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "INSERT INTO [Ventas] ([VENTA_ID],[REQUEST],[REQUEST_DETALLE],[RESPONSE],[OBSERVACIONES],[RESULTADO]) VALUES (@VENTA_ID,@REQUEST,@REQUEST_DETALLE,@RESPONSE,@OBSERVACIONES,@RESULTADO)";
+            Comando.CommandText = "INSERT INTO [FacturaElectronica] ([VENTA_ID],[REQUEST],[REQUEST_DETALLE],[RESPONSE],[OBSERVACIONES],[RESULTADO]) VALUES (@VENTA_ID,@REQUEST,@REQUEST_DETALLE,@RESPONSE,@OBSERVACIONES,@RESULTADO)";
             Comando.Parameters.Add(new SqlParameter("@VENTA_ID", SqlDbType.Int));
             Comando.Parameters["@VENTA_ID"].Value = FacturaElectronica.IdVenta;
             Comando.Parameters.Add(new SqlParameter("@REQUEST", SqlDbType.NVarChar));
             Comando.Parameters["@REQUEST"].Value = FacturaElectronica.Request;
             Comando.Parameters.Add(new SqlParameter("@REQUEST_DETALLE", SqlDbType.NVarChar));
-            Comando.Parameters["@REQUEST_DET"].Value = FacturaElectronica.RequestDetalle;
+            Comando.Parameters["@REQUEST_DETALLE"].Value = FacturaElectronica.RequestDetalle;
             Comando.Parameters.Add(new SqlParameter("@RESPONSE", SqlDbType.NVarChar));
             Comando.Parameters["@RESPONSE"].Value = FacturaElectronica.Response;
             Comando.Parameters.Add(new SqlParameter("@OBSERVACIONES", SqlDbType.NVarChar));
