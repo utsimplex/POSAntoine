@@ -133,6 +133,7 @@
             this.chkbxVencidas.TabIndex = 4;
             this.chkbxVencidas.Text = "Pendientes +30 dias";
             this.chkbxVencidas.UseVisualStyleBackColor = true;
+            this.chkbxVencidas.CheckedChanged += new System.EventHandler(this.chkbxVencidas_CheckedChanged);
             // 
             // chkbxPendientes
             // 
@@ -143,6 +144,7 @@
             this.chkbxPendientes.TabIndex = 3;
             this.chkbxPendientes.Text = "Solo Pendientes";
             this.chkbxPendientes.UseVisualStyleBackColor = true;
+            this.chkbxPendientes.CheckedChanged += new System.EventHandler(this.chkbxPendientes_CheckedChanged);
             // 
             // btnBuscarCliente
             // 
@@ -232,7 +234,7 @@
             this.btnPagarSeleccion.Text = "Pagar Seleccionadas";
             this.btnPagarSeleccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPagarSeleccion.UseVisualStyleBackColor = true;
-            this.btnPagarSeleccion.Click += new System.EventHandler(this.btnImportar_Click);
+            this.btnPagarSeleccion.Click += new System.EventHandler(this.btnPagarSeleccion_Click);
             // 
             // label1
             // 

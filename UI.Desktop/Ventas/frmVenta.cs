@@ -286,8 +286,8 @@ namespace UI.Desktop.Ventas
                                 PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
                             }
                         }
-                    }
                     this.Dispose();
+                    }
                 }
                 else
                     MessageBox.Show("No se puede generar un comprobante sin lineas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -620,7 +620,8 @@ namespace UI.Desktop.Ventas
         //GENERAR VENTA a Variable Local
         private DialogResult ConstruirVenta()
         {
-            DialogResult formConfirmarVenta = this.ConfirmarVenta();
+            var formularioConfirmacion = this.ConfirmarVenta(); 
+            DialogResult formConfirmarVenta = formularioConfirmacion.ShowDialog();
             if (modo == "Alta")
             {
 
@@ -643,8 +644,16 @@ namespace UI.Desktop.Ventas
                     ventaLocal.Iva = Convert.ToDouble(Iva.ToString("0.00"));
 
                     //TO-DO:FIX ON CUENTAS CORRIENTES
+                    if (formularioConfirmacion.cuentaCorriente)
+                    {
+                        ventaLocal.Pagado = false;
+                        ventaLocal.MontoPagado = 0;
+                    }
+                    else
+                    {
                     ventaLocal.Pagado = true;
                     ventaLocal.MontoPagado = ventaLocal.Total;
+                    }
                     //TO-DO: Evaluar parametro de Usuario para saber si el emisor es Monotributista
                     bool Monotributista = true;
                     if (Monotributista)
@@ -802,14 +811,14 @@ namespace UI.Desktop.Ventas
             ventaLocal.TipoPago = this.cbxMedioDePago.Text;
         }
         //GUARDAR VENTA
-        private DialogResult ConfirmarVenta()
+        private frmConfirmarVta ConfirmarVenta()
         {
             frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
             formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
 
            
             formConfirmarVenta.txtTipoPago.Text = ventaLocal.TipoPago;
-            return formConfirmarVenta.ShowDialog();
+            return formConfirmarVenta;
         }
 
         private void SetDatosClienteEnVenta()

@@ -197,7 +197,7 @@ namespace UI.Desktop.Clientes
 
         private void SeleccionarCliente()
         {
-            dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value;
+            dniClienteSelecccionado = Convert.ToInt64(this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value);
             this.Close();
         }
         

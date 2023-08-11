@@ -187,7 +187,7 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "UPDATE [VENTAs] SET pagado=@pagado,monto_pagado=@monto_pagado WHERE numVenta=@numVenta";
+            Comando.CommandText = "UPDATE [VENTAs] SET pagado=@pagado,monto_pagado=monto_pagado+@monto_pagado WHERE numVenta=@numVenta";
             Comando.Parameters.Add(new SqlParameter("@pagado", SqlDbType.Bit));
             Comando.Parameters["@pagado"].Value = Pagado;
             Comando.Parameters.Add(new SqlParameter("@monto_pagado", SqlDbType.Decimal));

@@ -42,6 +42,7 @@
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnCtaCte = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -169,7 +170,6 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.Location = new System.Drawing.Point(457, 187);
             this.btnCancelar.Name = "btnCancelar";
@@ -191,12 +191,27 @@
             this.btnGuardar.Text = "Solo Guardar";
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnCtaCte
+            // 
+            this.btnCtaCte.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnCtaCte.Image = global::UI.Desktop.Properties.Resources.User_24x24;
+            this.btnCtaCte.Location = new System.Drawing.Point(457, 100);
+            this.btnCtaCte.Name = "btnCtaCte";
+            this.btnCtaCte.Size = new System.Drawing.Size(119, 34);
+            this.btnCtaCte.TabIndex = 10;
+            this.btnCtaCte.Text = "Cuenta Corriente";
+            this.btnCtaCte.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCtaCte.UseVisualStyleBackColor = true;
+            this.btnCtaCte.Click += new System.EventHandler(this.btnCtaCte_Click);
             // 
             // frmConfirmarVta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(583, 227);
+            this.Controls.Add(this.btnCtaCte);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
@@ -232,5 +247,6 @@
         private System.Windows.Forms.Button btnGuardar;
         public System.Windows.Forms.TextBox txtTotal;
         public System.Windows.Forms.TextBox txtTipoPago;
+        private System.Windows.Forms.Button btnCtaCte;
     }
 }

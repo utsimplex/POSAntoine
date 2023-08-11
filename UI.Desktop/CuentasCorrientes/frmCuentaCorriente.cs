@@ -139,10 +139,15 @@ namespace UI.Desktop.CuentasCorrientes
                 tbxPendiente.Text = "$" + cuentaCorrienteList.Sum(X => X.Pendiente).ToString();
                 dgvFacturas.DataSource = cuentaCorrienteList;
             }
+            else
+            {
+                tbxPendiente.Text = "$0.00";
+                dgvFacturas.DataSource = cuentaCorrienteList;
+            }
 
         }
 
-        private void btnImportar_Click(object sender, EventArgs e)
+        private void btnPagarSeleccion_Click(object sender, EventArgs e)
         {
             montoAPagar = 0;
             facturasSeleccionadas = "";
@@ -155,13 +160,17 @@ namespace UI.Desktop.CuentasCorrientes
                     montoAPagar += Convert.ToDecimal(row.Cells["Pendiente"].Value);
                     facturasSeleccionadas += String.IsNullOrEmpty(facturasSeleccionadas)? row.Cells["Venta"].Value.ToString(): " - "+ row.Cells["Venta"].Value.ToString();
                 }
-                frmRecibirPago formRecibePago = new frmRecibirPago(montoAPagar);
+                if(montoAPagar>0)
+                {
 
+                frmRecibirPago formRecibePago = new frmRecibirPago(montoAPagar);
                 recibePagoResult = formRecibePago.ShowDialog();
                 //evaluo dentro de cada metodo si corresponde realizar la accion o no
                 montoAPagar = formRecibePago.montoIngresado;
                 GuardarPago();
                 ImprimirPago();
+                    RefrescarGrilla();
+                }
             }
         }
 
@@ -176,14 +185,51 @@ namespace UI.Desktop.CuentasCorrientes
             facturasSeleccionadas = "";
             cuentaCorrienteSeleccionada = new List<CuentaCorriente>();//limpio la variable
 
-            frmRecibirPago formRecibePago = new frmRecibirPago(montoAPagar);
+            frmRecibirPago formRecibePago = new frmRecibirPago();
                 recibePagoResult = formRecibePago.ShowDialog();
             //buscar Facturas a Cancelar
                 montoAPagar = formRecibePago.montoIngresado;
+            if(montoAPagar>0)
+            {
+
                 BuscarFacturasACancelar(montoAPagar);
                 //evaluo dentro de cada metodo si corresponde realizar la accion o no
                 GuardarPago();
                 ImprimirPago();
+                RefrescarGrilla();
+            }
+        }
+        private void RefrescarGrilla()
+        {
+            if (clienteActual != null)
+            {
+                this.BuscarCuentaCorriente();
+            }
+                this.AsignaDatosClienteUI();
+        }
+
+        private void chkbxPendientes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxPendientes.Checked)
+            {
+                chkbxVencidas.Checked = false;
+                this.dgvFacturas.DataSource = cuentaCorrienteList.Where(x => x.Total != x.Pagado).ToList();
+            }
+            else
+                this.dgvFacturas.DataSource = cuentaCorrienteList;
+        }
+
+        private void chkbxVencidas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxVencidas.Checked)
+            {
+                chkbxPendientes.Checked = false;
+                this.dgvFacturas.DataSource = cuentaCorrienteList.Where(x => x.Total != x.Pagado && x.Fecha.Date.AddDays(30) <= DateTime.Today).ToList();
+            }
+            else
+            { 
+            this.dgvFacturas.DataSource = cuentaCorrienteList;
+            }
         }
     }
 }

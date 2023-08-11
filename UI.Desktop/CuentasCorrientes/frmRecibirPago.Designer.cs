@@ -30,14 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRecibirPago));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
             this.lbl1 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.lblTipoPago = new System.Windows.Forms.Label();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,27 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(143, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 24);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "$";
+            // 
+            // cbxMedioDePago
+            // 
+            this.cbxMedioDePago.BackColor = System.Drawing.SystemColors.Control;
+            this.cbxMedioDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxMedioDePago.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.cbxMedioDePago.FormattingEnabled = true;
+            this.cbxMedioDePago.Location = new System.Drawing.Point(142, 54);
+            this.cbxMedioDePago.Name = "cbxMedioDePago";
+            this.cbxMedioDePago.Size = new System.Drawing.Size(290, 30);
+            this.cbxMedioDePago.TabIndex = 4;
+            // 
             // lbl1
             // 
             this.lbl1.AutoSize = true;
@@ -66,11 +87,11 @@
             // 
             // txtTotal
             // 
+            this.txtTotal.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtTotal.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotal.ForeColor = System.Drawing.Color.DarkGreen;
             this.txtTotal.Location = new System.Drawing.Point(142, 18);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(290, 29);
             this.txtTotal.TabIndex = 2;
             this.txtTotal.TabStop = false;
@@ -124,27 +145,6 @@
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // cbxMedioDePago
-            // 
-            this.cbxMedioDePago.BackColor = System.Drawing.SystemColors.Control;
-            this.cbxMedioDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxMedioDePago.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.cbxMedioDePago.FormattingEnabled = true;
-            this.cbxMedioDePago.Location = new System.Drawing.Point(142, 54);
-            this.cbxMedioDePago.Name = "cbxMedioDePago";
-            this.cbxMedioDePago.Size = new System.Drawing.Size(290, 30);
-            this.cbxMedioDePago.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(143, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 24);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "$";
             // 
             // frmRecibirPago
             // 

@@ -24,6 +24,7 @@ namespace UI.Desktop.CuentasCorrientes
         {
             InitializeComponent();
             this.txtTotal.Enabled = true;
+            this.txtTotal.BackColor = Color.White;
         }
 
         public frmRecibirPago(decimal monto_indicado)
