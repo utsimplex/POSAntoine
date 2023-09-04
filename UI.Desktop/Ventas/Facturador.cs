@@ -67,34 +67,34 @@ namespace UI.Desktop.Ventas
                         PtoVta = (int)Pedido.PuntoDeVenta
                     },
                     FeDetReq = new List<AfipServiceReference.FECAEDetRequest>
-    {
-        new AfipServiceReference.FECAEDetRequest
-        {
-            CbteDesde = compNumber,
-            CbteHasta = compNumber,
-            CbteFch = Pedido.FechaHora.ToString("yyyyMMdd"),
-            //CbteFch = "20221013",
-            Concepto = 1,//1 productos  2 servicios  3 pds y ss
-            DocNro = (int)Pedido.TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR?0:(long)Pedido.NumeroDocumentoCliente,
-            DocTipo = (int)Pedido.TipoDocumentoCliente,
-            ImpNeto = (double)Pedido.Neto+(double)Pedido.Iva,
-            ImpTotal = (double)Pedido.Neto+(double)Pedido.Iva,
-            ImpIVA = 0,
-            //FchServDesde = "20221013",
-            //FchServHasta = "20221013",
-            MonCotiz = 1,
-            MonId = "PES",
-            //Iva = new List<AfipServiceReference.AlicIva>
-            //{
-            //    new AfipServiceReference.AlicIva
-            //    {
-            //        BaseImp = (double)Pedido.Neto,
-            //        Id = 5,//IVA 21%
-            //        Importe = (double)Pedido.Iva
-            //    }
-            //}
-        }
-    }
+                    {
+                        new AfipServiceReference.FECAEDetRequest
+                        {
+                            CbteDesde = compNumber,
+                            CbteHasta = compNumber,
+                            CbteFch = Pedido.FechaHora.ToString("yyyyMMdd"),
+                            //CbteFch = "20221013",
+                            Concepto = 1,//1 productos  2 servicios  3 pds y ss
+                            DocNro = (int)Pedido.TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR?0:(long)Pedido.NumeroDocumentoCliente,
+                            DocTipo = (int)Pedido.TipoDocumentoCliente,
+                            ImpNeto = (double)Pedido.Neto+(double)Pedido.Iva,
+                            ImpTotal = (double)Pedido.Neto+(double)Pedido.Iva,
+                            ImpIVA = 0,
+                            //FchServDesde = "20221013",
+                            //FchServHasta = "20221013",
+                            MonCotiz = 1,
+                            MonId = "PES",
+                            //Iva = new List<AfipServiceReference.AlicIva>
+                            //{
+                            //    new AfipServiceReference.AlicIva
+                            //    {
+                            //        BaseImp = (double)Pedido.Neto,
+                            //        Id = 5,//IVA 21%
+                            //        Importe = (double)Pedido.Iva
+                            //    }
+                            //}
+                        }
+                    }
                 };
             }
             else
@@ -110,34 +110,34 @@ namespace UI.Desktop.Ventas
                         PtoVta = (int)Pedido.PuntoDeVenta
                     },
                     FeDetReq = new List<AfipServiceReference.FECAEDetRequest>
-    {
-        new AfipServiceReference.FECAEDetRequest
-        {
-            CbteDesde = compNumber,
-            CbteHasta = compNumber,
-            CbteFch = Pedido.FechaHora.ToString("yyyyMMdd"),
-            //CbteFch = "20221013",
-            Concepto = 1,//1 productos  2 servicios  3 pds y ss
-            DocNro = (int)Pedido.TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR?0:(long)Pedido.NumeroDocumentoCliente,
-            DocTipo = (int)Pedido.TipoDocumentoCliente,
-            ImpNeto = (double)Pedido.Neto,
-            ImpTotal = (double)Pedido.Neto+(double)Pedido.Iva,
-            ImpIVA = (double)Pedido.Iva,
-            //FchServDesde = "20221013",
-            //FchServHasta = "20221013",
-            MonCotiz = 1,
-            MonId = "PES",
-            Iva = new List<AfipServiceReference.AlicIva>
-            {
-                new AfipServiceReference.AlicIva
-                {
-                    BaseImp = (double)Pedido.Neto,
-                    Id = 5,//IVA 21%
-                    Importe = (double)Pedido.Iva
-                }
-            }
-        }
-    }
+                    {
+                        new AfipServiceReference.FECAEDetRequest
+                        {
+                            CbteDesde = compNumber,
+                            CbteHasta = compNumber,
+                            CbteFch = Pedido.FechaHora.ToString("yyyyMMdd"),
+                            //CbteFch = "20221013",
+                            Concepto = 1,//1 productos  2 servicios  3 pds y ss
+                            DocNro = (int)Pedido.TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR?0:(long)Pedido.NumeroDocumentoCliente,
+                            DocTipo = (int)Pedido.TipoDocumentoCliente,
+                            ImpNeto = (double)Pedido.Neto,
+                            ImpTotal = (double)Pedido.Neto+(double)Pedido.Iva,
+                            ImpIVA = (double)Pedido.Iva,
+                            //FchServDesde = "20221013",
+                            //FchServHasta = "20221013",
+                            MonCotiz = 1,
+                            MonId = "PES",
+                            Iva = new List<AfipServiceReference.AlicIva>
+                            {
+                                new AfipServiceReference.AlicIva
+                                {
+                                    BaseImp = (double)Pedido.Neto,
+                                    Id = 5,//IVA 21%
+                                    Importe = (double)Pedido.Iva
+                                }
+                            }
+                        }
+                    }
                 };
             }
             //Call WSFE FECAESolicitar

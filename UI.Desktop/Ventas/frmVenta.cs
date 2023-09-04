@@ -152,16 +152,47 @@ namespace UI.Desktop.Ventas
             //if (dgvArticulosVtaActual.CurrentCell.ColumnIndex == 3 && modo == "Alta")
             //{
             //    dgvArticulosVtaActual.BeginEdit(true);
-                               
+
             //}
             //else
             //{
-                MessageBox.Show("No se puede editar esta columna", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            if (modo == "Alta")
+            {
 
-            
+                if (e.ColumnIndex != 6 && e.ColumnIndex != 7 && dgvArticulosVtaActual.Rows.Count > 0)
+                {
+                    MessageBox.Show("No se puede editar esta columna", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                if (e.ColumnIndex == 6 && dgvArticulosVtaActual.Rows.Count > 0)
+                {
+                    MessageBox.Show("Ingrese el monto de descuento", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    decimal precio = Convert.ToDecimal(dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Precio"].Value);
+                    int cantidad = Convert.ToInt32(dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Cantidad"].Value);
+                    frmIngresaDescuento descuento = new frmIngresaDescuento("$", precio * cantidad);
+                    if (descuento.ShowDialog() == DialogResult.OK)
+                    {
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento_porcentaje"].Value = Convert.ToDecimal(0);
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento"].Value = descuento.descuento;
+                    }
+                    AplicarDescuento();
+                }
+                else if (e.ColumnIndex == 7 && dgvArticulosVtaActual.Rows.Count > 0)
+                {
+                    MessageBox.Show("Ingrese el porcentaje de descuento", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    frmIngresaDescuento descuento = new frmIngresaDescuento("%", 0);
+                    if (descuento.ShowDialog() == DialogResult.OK)
+                    {
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento_porcentaje"].Value = descuento.descuento;
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento"].Value = Convert.ToDecimal(0);
+                    }
+                    AplicarDescuento();
+                }
+            }
 
-        }
+
+
+    }
 
 
         //TECLAS ACCESO RAPIDO
@@ -368,9 +399,16 @@ namespace UI.Desktop.Ventas
                        this.dgvArticulosVtaActual.Columns.Add(subTotal);
            */
             //Titulo de las columnas
+            this.dgvArticulosVtaActual.Columns["descuento"].HeaderText = "Descuento ($)";
+            this.dgvArticulosVtaActual.Columns["descuento"].DefaultCellStyle.Format = "c";
+            this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].HeaderText = "Descuento ($)";
+            this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].DefaultCellStyle.Format = "#.\\%";
             this.dgvArticulosVtaActual.Columns["CodigoArticulo"].HeaderText = "Código";
             this.dgvArticulosVtaActual.Columns["DescripcionArticulo"].HeaderText = "Descripción";
             this.dgvArticulosVtaActual.Columns["Precio"].HeaderText = "Precio ($)";
+            this.dgvArticulosVtaActual.Columns["Precio"].DefaultCellStyle.Format = "c";
+            this.dgvArticulosVtaActual.Columns["subtotal"].HeaderText = "SubTotal ($)";
+            this.dgvArticulosVtaActual.Columns["subtotal"].DefaultCellStyle.Format = "c";
 
             //Ancho de las columnas
             ConfigurarAnchoColumnas();
@@ -430,28 +468,28 @@ namespace UI.Desktop.Ventas
             }
 
         //QUITAR artículo a esta venta
-        private void ElimArticuloVtaActual()
-        {
-            if(dgvArticulosVtaActual.SelectedRows.Count > 0)
-            {
+        //private void ElimArticuloVtaActual()
+        //{
+        //    if(dgvArticulosVtaActual.SelectedRows.Count > 0)
+        //    {
 
-            string codArtToElim = dgvArticulosVtaActual.SelectedRows[0].Cells["CodigoArticulo"].Value.ToString();
-            Entidades.Venta_Articulo vtaArtToElim;
-            foreach (Entidades.Venta_Articulo vtaArti in formListaArticulos.ListaArticulosVtaActual)
-            {
-                if (vtaArti.CodigoArticulo == codArtToElim)
-                {
-                    vtaArtToElim = vtaArti;
-                    formListaArticulos.ListaArticulosVtaActual.Remove(vtaArtToElim);
-                    break;
-                }
-            }
+        //    string codArtToElim = dgvArticulosVtaActual.SelectedRows[0].Cells["CodigoArticulo"].Value.ToString();
+        //    Entidades.Venta_Articulo vtaArtToElim;
+        //    foreach (Entidades.Venta_Articulo vtaArti in formListaArticulos.ListaArticulosVtaActual)
+        //    {
+        //        if (vtaArti.CodigoArticulo == codArtToElim)
+        //        {
+        //            vtaArtToElim = vtaArti;
+        //            formListaArticulos.ListaArticulosVtaActual.Remove(vtaArtToElim);
+        //            break;
+        //        }
+        //    }
 
-            ActualizarVtaActual();
-            }
+        //    ActualizarVtaActual();
+        //    }
 
             
-        }
+        //}
         
         //Actualizar Grilla - Lista Vta Actual
         private void ActualizarVtaActual()
@@ -483,34 +521,51 @@ namespace UI.Desktop.Ventas
                 //Actualizar SUB-TOTAL
                 foreach (Entidades.Venta_Articulo filaArt in formListaArticulos.ListaArticulosVtaActual)
                 {
-                    filaArt.Subtotal = filaArt.Cantidad * Convert.ToDecimal(filaArt.Precio.ToString());
-                    total = Convert.ToDecimal(total + Convert.ToDecimal(filaArt.Subtotal.ToString()));
+                    var previoSubtotal = filaArt.Cantidad * Convert.ToDecimal(filaArt.Precio.ToString());
+                    //filaArt.Subtotal = filaArt.Cantidad * Convert.ToDecimal(filaArt.Precio.ToString());
+                    if (filaArt.Descuento_porcentaje != 0)
+                    {
+                        filaArt.Subtotal = previoSubtotal- (previoSubtotal * filaArt.Descuento_porcentaje/100);
+                    }
+                    else if (filaArt.Descuento != 0)
+                    {
+                        filaArt.Subtotal = previoSubtotal - filaArt.Descuento;
+
+                    }
+                    else
+                    {
+                        filaArt.Subtotal = previoSubtotal;
+                    }
+                    //filaArt.Descuento = (filaArt.Descuento_porcentaje/100)* filaArt.Subtotal;
+                    total = Math.Round(total + Convert.ToDecimal(filaArt.Subtotal.ToString()),2);
 
                 }
 
                 this.txtTotal.Text = total.ToString();
 
                 //Titulo de las columnas
+                this.dgvArticulosVtaActual.Columns["Descuento"].HeaderText = "Descuento ($)";
+                this.dgvArticulosVtaActual.Columns["Descuento_porcentaje"].HeaderText = "Descuento (%)";
                 this.dgvArticulosVtaActual.Columns["CodigoArticulo"].HeaderText = "Código";
                 this.dgvArticulosVtaActual.Columns["DescripcionArticulo"].HeaderText = "Descripción";
                 this.dgvArticulosVtaActual.Columns["Precio"].HeaderText = "Precio ($)";
             }
             else //SI EL MODO ES MODIFICACION
             {
-                Decimal total = 0;
+                //Decimal total = 0;
 
                 
-                //Actualizar TOTAL -           filaArtVtaActual ya tiene el subtotal negativo
-                foreach (Entidades.Venta_Articulo filaArtVtaActual in formListaArticulos.ListaArticulosVtaActual)
-                {
+                ////Actualizar TOTAL -           filaArtVtaActual ya tiene el subtotal negativo
+                //foreach (Entidades.Venta_Articulo filaArtVtaActual in formListaArticulos.ListaArticulosVtaActual)
+                //{
                     
-                        if(filaArtVtaActual.TipoOperacion == "D")
-                        {
-                            total = Convert.ToDecimal(total + Convert.ToDecimal(filaArtVtaActual.Subtotal.ToString()));
-                        }
+                //        if(filaArtVtaActual.TipoOperacion == "D")
+                //        {
+                //            total = Convert.ToDecimal(total + Convert.ToDecimal(filaArtVtaActual.Subtotal.ToString()));
+                //        }
                     
-                }//ESTO NO FUNCIONA
-                this.txtTotal.Text = Convert.ToString(total);
+                //}//ESTO NO FUNCIONA
+                //this.txtTotal.Text = Convert.ToString(total);
             }
             this.dgvArticulosVtaActual.Refresh();
         }
@@ -522,13 +577,13 @@ namespace UI.Desktop.Ventas
             
             Decimal total = Convert.ToDecimal(txtTotal.Text);
 
-            if (txtDcto.Text != "")
+            if (txtDcto.Text != "" && txtDcto.Text != "0")
             {
                 Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
                 ventaLocal.Descuento = descuentoTotal;
                 txtTotal.Text = Convert.ToString(total - descuentoTotal);
             }
-            else if (txtDctoPesos.Text != "")
+            else if (txtDctoPesos.Text != "" && txtDctoPesos.Text!="0")
             {
                 Decimal descuentoTotal = Convert.ToDecimal(txtDctoPesos.Text);
                 //Decimal total = Convert.ToDecimal(txtTotal.Text);
@@ -545,7 +600,7 @@ namespace UI.Desktop.Ventas
             }
             else
             {
-                ActualizarTotal();
+                //ActualizarTotal();
             }
         }
 
@@ -638,9 +693,9 @@ namespace UI.Desktop.Ventas
                     this.SetDatosClienteEnVenta();
 
                     ventaLocal.Total = Convert.ToDecimal(txtTotal.Text);
-                    double Neto = Convert.ToDouble(txtTotal.Text) / 1.21;
+                    double Neto = Math.Round(Convert.ToDouble(txtTotal.Text) / 1.21,2);
                     ventaLocal.Neto = Convert.ToDouble(Neto.ToString("0.00"));
-                    double Iva = Convert.ToDouble(ventaLocal.Total) - Neto;
+                    double Iva = Math.Round(Convert.ToDouble(ventaLocal.Total) - Neto,2);
                     ventaLocal.Iva = Convert.ToDouble(Iva.ToString("0.00"));
 
                     //TO-DO:FIX ON CUENTAS CORRIENTES
@@ -927,5 +982,7 @@ namespace UI.Desktop.Ventas
                 PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
             }
         }
+
+        
     }
 }

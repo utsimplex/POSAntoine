@@ -31,7 +31,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -399,6 +399,12 @@
       <DependentUpon>splashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\Facturador.cs" />
+    <Compile Include="Ventas\frmIngresaDescuento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\frmIngresaDescuento.Designer.cs">
+      <DependentUpon>frmIngresaDescuento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\PrinterDrawing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -531,6 +537,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\frmInformeVenta.resx">
       <DependentUpon>frmInformeVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\frmIngresaDescuento.resx">
+      <DependentUpon>frmIngresaDescuento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\frmVenta.resx">
       <DependentUpon>frmVenta.cs</DependentUpon>
@@ -688,6 +697,9 @@
     <None Include="Resources\3319632_chart_investment_stocks_graph_report_infographic.png" />
     <None Include="Resources\3319627_coin_money_banking_transfer_dollar.png" />
     <None Include="Resources\3319640_money_coin_dollar_save_lock.png" />
+    <None Include="Resources\EL ARBOLITO DE ANTOINE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\logoColor.jpg" />
     <Content Include="Resources\Persona.JPG" />
     <None Include="Resources\splash2blue.bmp" />

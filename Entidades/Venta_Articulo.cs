@@ -48,12 +48,6 @@ namespace Entidades
         }
 
       // SUBTOTAL = PRECIO * CANTIDAD
-        decimal _Subtotal;
-        public decimal Subtotal
-        {
-            get { return _Subtotal; }
-            set { _Subtotal = value; }
-        }
 
         //TIPO DE Operacion (Venta - Devolucion)
         string _TipoOperacion;
@@ -61,6 +55,18 @@ namespace Entidades
         {
             get { return _TipoOperacion; }
             set { _TipoOperacion = value; }
+        }
+
+        // SUBTOTAL = PRECIO * CANTIDAD
+        public decimal Descuento
+        { get;set;}
+        public decimal Descuento_porcentaje
+        { get;set;}
+        decimal _Subtotal;
+        public decimal Subtotal
+        {
+            get { return _Subtotal; }
+            set { _Subtotal = value; }
         }
     }
 }

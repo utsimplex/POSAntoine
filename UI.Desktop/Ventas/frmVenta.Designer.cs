@@ -57,17 +57,17 @@
             this.gbTotal = new System.Windows.Forms.GroupBox();
             this.lblSignoPeso = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblDireccion = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombreNegocio = new System.Windows.Forms.Label();
             this.btnConfirmar = new System.Windows.Forms.Button();
-            this.btnFacturar = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnReimprimir = new System.Windows.Forms.Button();
+            this.btnFacturar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
@@ -78,8 +78,8 @@
             this.gbTotal.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNroFactura
@@ -229,9 +229,9 @@
             // gbTipoPago
             // 
             this.gbTipoPago.Controls.Add(this.cbxMedioDePago);
-            this.gbTipoPago.Location = new System.Drawing.Point(350, 121);
+            this.gbTipoPago.Location = new System.Drawing.Point(547, 121);
             this.gbTipoPago.Name = "gbTipoPago";
-            this.gbTipoPago.Size = new System.Drawing.Size(288, 66);
+            this.gbTipoPago.Size = new System.Drawing.Size(299, 66);
             this.gbTipoPago.TabIndex = 1;
             this.gbTipoPago.TabStop = false;
             this.gbTipoPago.Text = "Medio de Pago";
@@ -255,7 +255,7 @@
             this.gbArticulosVenta.Controls.Add(this.gbTotal);
             this.gbArticulosVenta.Location = new System.Drawing.Point(14, 193);
             this.gbArticulosVenta.Name = "gbArticulosVenta";
-            this.gbArticulosVenta.Size = new System.Drawing.Size(624, 305);
+            this.gbArticulosVenta.Size = new System.Drawing.Size(835, 305);
             this.gbArticulosVenta.TabIndex = 2;
             this.gbArticulosVenta.TabStop = false;
             this.gbArticulosVenta.Text = "Detalle";
@@ -269,8 +269,9 @@
             this.dgvArticulosVtaActual.Location = new System.Drawing.Point(6, 19);
             this.dgvArticulosVtaActual.MultiSelect = false;
             this.dgvArticulosVtaActual.Name = "dgvArticulosVtaActual";
+            this.dgvArticulosVtaActual.RowHeadersVisible = false;
             this.dgvArticulosVtaActual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvArticulosVtaActual.Size = new System.Drawing.Size(612, 212);
+            this.dgvArticulosVtaActual.Size = new System.Drawing.Size(823, 212);
             this.dgvArticulosVtaActual.TabIndex = 0;
             this.dgvArticulosVtaActual.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulosVtaActual_CellEndEdit);
             this.dgvArticulosVtaActual.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvArticulosVtaActual_CellMouseDoubleClick);
@@ -302,7 +303,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox3.Location = new System.Drawing.Point(250, 238);
+            this.groupBox3.Location = new System.Drawing.Point(454, 237);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(214, 58);
             this.groupBox3.TabIndex = 3;
@@ -378,7 +379,7 @@
             this.gbTotal.Controls.Add(this.lblSignoPeso);
             this.gbTotal.Controls.Add(this.txtTotal);
             this.gbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbTotal.Location = new System.Drawing.Point(470, 237);
+            this.gbTotal.Location = new System.Drawing.Point(674, 236);
             this.gbTotal.Name = "gbTotal";
             this.gbTotal.Size = new System.Drawing.Size(148, 59);
             this.gbTotal.TabIndex = 9;
@@ -407,53 +408,29 @@
             this.txtTotal.Text = "0";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Image = global::UI.Desktop.Properties.Resources.close_24;
-            this.btnCancelar.Location = new System.Drawing.Point(519, 502);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(119, 34);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox4.Location = new System.Drawing.Point(350, 12);
+            this.groupBox4.Location = new System.Drawing.Point(547, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 1, 3, 3);
-            this.groupBox4.Size = new System.Drawing.Size(287, 103);
+            this.groupBox4.Size = new System.Drawing.Size(302, 103);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 14);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(281, 86);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(296, 86);
             this.tableLayoutPanel2.TabIndex = 4;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::UI.Desktop.Properties.Resources.antoine_transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(78, 71);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // tableLayoutPanel3
             // 
@@ -463,7 +440,7 @@
             this.tableLayoutPanel3.Controls.Add(this.lblDireccion, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.lblTelefono, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.lblNombreNegocio, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(115, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -478,18 +455,18 @@
             this.lblDireccion.AutoSize = true;
             this.lblDireccion.Location = new System.Drawing.Point(3, 20);
             this.lblDireccion.Name = "lblDireccion";
-            this.lblDireccion.Size = new System.Drawing.Size(73, 13);
+            this.lblDireccion.Size = new System.Drawing.Size(83, 13);
             this.lblDireccion.TabIndex = 1;
-            this.lblDireccion.Text = "Santa cruz 68";
+            this.lblDireccion.Text = "Chacabuco 842";
             // 
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
             this.lblTelefono.Location = new System.Drawing.Point(3, 40);
             this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(91, 13);
+            this.lblTelefono.Size = new System.Drawing.Size(94, 13);
             this.lblTelefono.TabIndex = 2;
-            this.lblTelefono.Text = "Tel.: 3416041858";
+            this.lblTelefono.Text = "Tel.: 3462-262000";
             // 
             // lblNombreNegocio
             // 
@@ -497,12 +474,12 @@
             this.lblNombreNegocio.Name = "lblNombreNegocio";
             this.lblNombreNegocio.Size = new System.Drawing.Size(157, 20);
             this.lblNombreNegocio.TabIndex = 0;
-            this.lblNombreNegocio.Text = "Alta pilcha viejo";
+            this.lblNombreNegocio.Text = "EL Arbolito de Antoine";
             // 
             // btnConfirmar
             // 
             this.btnConfirmar.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
-            this.btnConfirmar.Location = new System.Drawing.Point(396, 502);
+            this.btnConfirmar.Location = new System.Drawing.Point(607, 508);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(119, 34);
             this.btnConfirmar.TabIndex = 5;
@@ -511,17 +488,16 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
-            // btnFacturar
+            // pictureBox1
             // 
-            this.btnFacturar.Image = global::UI.Desktop.Properties.Resources.document_24;
-            this.btnFacturar.Location = new System.Drawing.Point(271, 502);
-            this.btnFacturar.Name = "btnFacturar";
-            this.btnFacturar.Size = new System.Drawing.Size(119, 34);
-            this.btnFacturar.TabIndex = 12;
-            this.btnFacturar.Text = "Facturar";
-            this.btnFacturar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnFacturar.UseVisualStyleBackColor = true;
-            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pictureBox1.Image = global::UI.Desktop.Properties.Resources.EL_ARBOLITO_DE_ANTOINE;
+            this.pictureBox1.Location = new System.Drawing.Point(396, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(110, 107);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // btnReimprimir
             // 
@@ -536,12 +512,38 @@
             this.btnReimprimir.Visible = false;
             this.btnReimprimir.Click += new System.EventHandler(this.btnReimprimir_Click);
             // 
+            // btnFacturar
+            // 
+            this.btnFacturar.Image = global::UI.Desktop.Properties.Resources.document_24;
+            this.btnFacturar.Location = new System.Drawing.Point(482, 508);
+            this.btnFacturar.Name = "btnFacturar";
+            this.btnFacturar.Size = new System.Drawing.Size(119, 34);
+            this.btnFacturar.TabIndex = 12;
+            this.btnFacturar.Text = "Facturar";
+            this.btnFacturar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Image = global::UI.Desktop.Properties.Resources.close_24;
+            this.btnCancelar.Location = new System.Drawing.Point(730, 508);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(119, 34);
+            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // frmVenta
             // 
             this.AcceptButton = this.btnConfirmar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 541);
+            this.ClientSize = new System.Drawing.Size(861, 554);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReimprimir);
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.groupBox4);
@@ -572,10 +574,11 @@
             this.gbTotal.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

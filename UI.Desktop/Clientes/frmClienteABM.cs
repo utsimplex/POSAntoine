@@ -205,7 +205,7 @@ namespace UI.Desktop.Clientes
             {
                 foreach (Entidades.Cliente cli in ListaClientes)
                 {
-                    if (cli.NumeroDocumento == txtNroDoc.Text)
+                    if (Convert.ToInt64(cli.NumeroDocumento) == Convert.ToInt64(txtNroDoc.Text))
                     {
                         mensaje += "Ya existe un cliente registrado con ese DNI." + "\n";
                     }
