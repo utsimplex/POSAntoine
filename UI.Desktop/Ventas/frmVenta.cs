@@ -284,7 +284,7 @@ namespace UI.Desktop.Ventas
             {
                 string codArtiQuitar = dgvArticulosVtaActual.SelectedRows[0].Cells["CodigoArticulo"].Value.ToString();
 
-                Venta_Articulo artiDevuelto = formListaArticulos.ListaArticulosVtaActual.TakeWhile(x => x.CodigoArticulo == codArtiQuitar).FirstOrDefault();
+                Venta_Articulo artiDevuelto = formListaArticulos.ListaArticulosVtaActual.Where(x => x.CodigoArticulo == codArtiQuitar).FirstOrDefault();
                     if (artiDevuelto != null)
                     {
                         formListaArticulos.ListaArticulosVtaActual.Remove(artiDevuelto);

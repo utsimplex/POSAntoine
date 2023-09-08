@@ -123,8 +123,48 @@ namespace Data.Database
                Comando.Connection.Close();
              
              }
-        
-             public System.ComponentModel.BindingList<Entidades.Articulo> GetAll()
+
+        public void ActualizarPrecio(List<Entidades.Articulo> listadoArticulos)
+        {
+            //Crear Conexion y Abrirla
+            SqlConnection Con = CrearConexion();
+
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
+            Comando.Connection = Con;
+            Comando.CommandType = CommandType.Text;
+
+            Comando.CommandText = "UPDATE Articulos SET precio = @PRECIO WHERE codigo = @CODIGO";
+            Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
+            //Comando.Parameters["@CODIGO"].Value = arti.Codigo;
+            //Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
+            //Comando.Parameters["@DESCRIPCION"].Value = arti.Descripcion;
+            //Comando.Parameters.Add(new SqlParameter("@STOCK", SqlDbType.Int));
+            //Comando.Parameters["@STOCK"].Value = arti.Stock;
+            //Comando.Parameters.Add(new SqlParameter("@STOCKMIN", SqlDbType.Int));
+            //Comando.Parameters["@STOCKMIN"].Value = arti.StockMin;
+            //Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Money));
+            //Comando.Parameters["@PRECIO"].Value = arti.Precio;
+            //Comando.Parameters.Add(new SqlParameter("@MARCA", SqlDbType.NVarChar));
+            //Comando.Parameters["@MARCA"].Value = arti.Proveedor;
+            //Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
+            //Comando.Parameters["@HABILITADO"].Value = arti.Habilitado;
+            //Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+            //Comando.Parameters["@FAMILIA"].Value = arti.Familia;
+            //Comando.Parameters.Add(new SqlParameter("@RANGO_ETARIO", SqlDbType.Int));
+            //Comando.Parameters["@RANGO_ETARIO"].Value = arti.RangoEtario;
+            //Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
+            //Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
+            //Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
+            //Comando.Parameters["@COSTO"].Value = arti.Costo;
+
+            //Ejecuta el comando INSERT
+            Comando.Connection.Open();
+            Comando.ExecuteNonQuery();
+            Comando.Connection.Close();
+
+        }
+        public System.ComponentModel.BindingList<Entidades.Articulo> GetAll()
              {
                  System.ComponentModel.BindingList<Entidades.Articulo> ListaArticulos = new System.ComponentModel.BindingList<Entidades.Articulo>();
                  //Crear Conexion y Abrirla

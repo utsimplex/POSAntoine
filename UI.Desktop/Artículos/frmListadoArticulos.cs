@@ -18,6 +18,7 @@ namespace UI.Desktop.Artículos
         {
             InitializeComponent();
             ActualizarLista();
+            completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
             this.dgvListado.Columns["codigo"].HeaderText = "Código";
             this.dgvListado.Columns["descripcion"].HeaderText = "Descripción";
@@ -26,16 +27,17 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stock"].Width = 45;
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
-            
 
 
-            
+
+
         }
 
         public frmListadoArticulos(Usuario usr)
         {
             InitializeComponent();
             ActualizarLista();
+            completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
             this.dgvListado.Columns["codigo"].HeaderText = "Código";
             this.dgvListado.Columns["descripcion"].HeaderText = "Descripción";
@@ -49,18 +51,18 @@ namespace UI.Desktop.Artículos
 
 
         }
-        
-       
-        
+
+
+
         #region ///***///***///***/// V A R I A B L E S   L O C A L E S \\\***\\\***\\\***\\\
-      
+
         //PROPIEDAD MODOFORM
         TipoForm _modoForm;
-       public TipoForm ModoForm
-          {
-              get { return _modoForm; }
-              set { _modoForm = value; }
-          }
+        public TipoForm ModoForm
+        {
+            get { return _modoForm; }
+            set { _modoForm = value; }
+        }
 
 
         //ENUMERADOR MODOFORM
@@ -74,13 +76,23 @@ namespace UI.Desktop.Artículos
         //LISTA DE ARTICULOS
         public BindingList<Entidades.Articulo> ListaArticulos;
 
+        public List<Entidades.Articulo> ListaArticulosFiltrados;
+
         //LISTA DE ARTICULOS Añadidos Venta Actual
         public BindingList<Entidades.Venta_Articulo> ListaArticulosVtaActual = new BindingList<Venta_Articulo>();
 
         // Lista de PROVEEDORES
-        public AutoCompleteStringCollection listaProveedoresExistentes; 
+        public AutoCompleteStringCollection listaProveedoresExistentes;
+
+        //Lista de Familias
+        List<Familia> familias = new List<Familia>();
+        //Lista de Proveedores
+        List<Proveedor> proveedores = new List<Proveedor>();
 
 
+        //Adapters
+        FamiliaAdapter Datos_FamiliaAdapter = new FamiliaAdapter();
+        ProveedorAdapter Datos_ProveedorAdapter = new ProveedorAdapter();
         //ROL
         string rol;
 
@@ -89,25 +101,56 @@ namespace UI.Desktop.Artículos
 
         #region ///***///***///***/// M E T O D O S \\\***\\\***\\\***\\\
 
+        //COMPLETAR COMBOBOXS
+
+        private void completaCombosBox()
+        {
+            //cbxFiltroFamilia.Items.Clear();
+            familias = Datos_FamiliaAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
+            if (familias != null)
+            {
+                //familias.Add(new Familia { Activo = true,Descripcion= "Seleccione Familia", id=0 });
+                cbxFiltroFamilia.DataSource = familias;
+                cbxFiltroFamilia.DisplayMember = "descripcion";
+                cbxFiltroFamilia.ValueMember = "id";
+                cbxFiltroFamilia.SelectedIndex = -1;
+                cbxFiltroFamilia.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
+                //cbxFiltroFamilia.Text= "";
+            }
+
+            //cbxFiltroProveedor.Items.Clear();
+            proveedores = Datos_ProveedorAdapter.GetAll().OrderBy(x => x.Nombre).ToList();
+            if (familias != null)
+            {
+                //proveedores.Add(new Proveedor {Nombre= "Seleccione Proveedor" });
+                cbxFiltroProveedor.DataSource = proveedores;
+                cbxFiltroProveedor.DisplayMember = "Nombre";
+                cbxFiltroProveedor.ValueMember = "Nombre";
+                cbxFiltroProveedor.SelectedIndex = -1;
+                cbxFiltroProveedor.SelectedValueChanged += cbxFiltroProveedor_SelectedValueChanged;
+            }
+        }
+
 
         // ACTUALIZAR LISTA DE ARTICULOS
         private void ActualizarLista()
         {
             ListaArticulos = DatosArticuloAdapter.GetAll();
-            
-            dgvListado.DataSource = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
+            ListaArticulosFiltrados = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
+
+            dgvListado.DataSource = ListaArticulosFiltrados;
             dgvListado.Columns["habilitado"].Visible = false;
             dgvListado.Columns["RangoEtario"].Visible = false;
             dgvListado.Columns["Familia"].Visible = false;
-            dgvListado.Columns["Costo"].Visible = rol =="Admin";
+            dgvListado.Columns["Costo"].Visible = rol == "Admin";
 
             this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
             this.dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
             this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
-            dgvListado.Size = new Size(960,429);
-            
-           
-            
+            dgvListado.Size = new Size(960, 429);
+
+
+
         }
 
 
@@ -122,7 +165,7 @@ namespace UI.Desktop.Artículos
             {
                 frmAltaArticulo.ShowDialog();
             }
-            
+
 
             //Completa la tabla con los datos nuevos
             ActualizarLista();
@@ -132,7 +175,7 @@ namespace UI.Desktop.Artículos
         private void EliminarArticulo()
         {
             //    Confirmación eliminación
-            Mensajes.frmConfirmar formConfirmar = new Mensajes.frmConfirmar("¿Está seguro que desea ELIMINAR el registro seleccionado?","");
+            Mensajes.frmConfirmar formConfirmar = new Mensajes.frmConfirmar("¿Está seguro que desea ELIMINAR el registro seleccionado?", "");
 
             if (formConfirmar.ShowDialog() == DialogResult.Yes)
             {
@@ -140,20 +183,20 @@ namespace UI.Desktop.Artículos
                 Articulo arti_a_Ocultar = DatosArticuloAdapter.BuscarArticulo(codigo_a_Borrar);
                 arti_a_Ocultar.Habilitado = "No";
                 DatosArticuloAdapter.Actualizar(arti_a_Ocultar);
-                
+
             }
             ActualizarLista();
         }
 
         // Modificar ARTICULO ************************ CONTINUAR ARREGLANDO MODIFICAR ARTICULO
         private void ModificarArticulo()
-        { 
-         
+        {
+
             // Artículo a modificar = artiToEdit
             Articulo artiToEdit = new Articulo();
 
             string Codigo = dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString();
-            artiToEdit = ListaArticulos.First(articulo => articulo.Codigo == Codigo);
+            artiToEdit = ListaArticulosFiltrados.First(articulo => articulo.Codigo == Codigo);
             //artiToEdit.Descripcion = dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString();
             //artiToEdit.Precio = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["precio"].Value.ToString());
             //artiToEdit.StockMin = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["stockMin"].Value);
@@ -164,24 +207,24 @@ namespace UI.Desktop.Artículos
             //artiToEdit.Costo = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["Costo"].Value != null ? dgvListado.SelectedRows[0].Cells["Costo"].Value.ToString() : "0");
             //artiToEdit.RangoEtario = dgvListado.SelectedRows[0].Cells["RangoEtario"].Value!=null? Convert.ToInt32(dgvListado.SelectedRows[0].Cells["RangoEtario"].Value.ToString()):(int?)null;
             //artiToEdit.CodigoArtiProveedor = dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value != null ? dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value.ToString() : "";
-            
+
             // Instanciación del formulario ABM Articulos EDICION
             frmArticuloABM formArticuloABM = new frmArticuloABM(artiToEdit);
             formArticuloABM.ModoForm = frmArticuloABM.TipoForm.Edicion;
-/*
-            //Carga el combo box con la lista de proveedores
-            formArticuloABM.cbxProveedor.DataSource = DatosProveedorAdapter.GetAll();
-            formArticuloABM.cbxProveedor.ValueMember = "nombre";
-            formArticuloABM.cbxProveedor.SelectedItem = null;
+            /*
+                        //Carga el combo box con la lista de proveedores
+                        formArticuloABM.cbxProveedor.DataSource = DatosProveedorAdapter.GetAll();
+                        formArticuloABM.cbxProveedor.ValueMember = "nombre";
+                        formArticuloABM.cbxProveedor.SelectedItem = null;
 
-            //Carga el AutoCompletar del comboBox
-            formArticuloABM.cbxProveedor.AutoCompleteCustomSource = ProveedorAdapter.GetListadoNombres();
+                        //Carga el AutoCompletar del comboBox
+                        formArticuloABM.cbxProveedor.AutoCompleteCustomSource = ProveedorAdapter.GetListadoNombres();
 
 
-            // Carga en la grilla los Proveedores del Articulo Seleccionado.
-            formArticuloABM.dgvProveedores_Articulos.DataSource = DatosProv_Art_Adapter.GetProveedoresArticulo(artiToEdit.Codigo);
-            
-  */           
+                        // Carga en la grilla los Proveedores del Articulo Seleccionado.
+                        formArticuloABM.dgvProveedores_Articulos.DataSource = DatosProv_Art_Adapter.GetProveedoresArticulo(artiToEdit.Codigo);
+
+              */
             //ABRIR FORMULARIO            
             formArticuloABM.ShowDialog();
             ActualizarLista();
@@ -192,7 +235,7 @@ namespace UI.Desktop.Artículos
         //Seleccionar artículo e Ingresar Cantidad
         private void SeleccionarArticulo()
         {
-            Artículos.frmIngresarCantidad formIngreseCantidad = new frmIngresarCantidad(dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString() +" - " + dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString());
+            Artículos.frmIngresarCantidad formIngreseCantidad = new frmIngresarCantidad(dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString() + " - " + dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString());
 
             //Ingreso la cantidad a agregar
             if (formIngreseCantidad.ShowDialog() == DialogResult.OK)
@@ -208,23 +251,23 @@ namespace UI.Desktop.Artículos
                 {
                     if (ValidarStock2(vta_arti.CodigoArticulo, vta_arti.Cantidad) == true)
                     {
-                        
+
                         ListaArticulosVtaActual.Add(vta_arti);
                     }
-                    
-                    
+
+
                 }
                 tbxFiltro.ResetText();
             }
-            
-            
+
+
         }
-       
+
         // VALIDAR ARTICULOS EN LA LISTA ACTUAL PARA NO REPETIR
         private bool ValidarListaVtaActual(Venta_Articulo vta_art_seleccionado)
         {
             bool añadir = true;
-            
+
             //Se saltea la validacion de stock, hasta que se normalice el uso del sistema
             //foreach (Venta_Articulo vta_art in ListaArticulosVtaActual)
             //{
@@ -234,12 +277,12 @@ namespace UI.Desktop.Artículos
             //        añadir = false;
             //        break;
             //    }
-             
-                
+
+
 
             //}
 
-           
+
             return añadir;
         }
 
@@ -253,82 +296,83 @@ namespace UI.Desktop.Artículos
         public void ModificarCantidadVtaActual(string codigo, int cant)
         {
             Articulo ArtBD = DatosArticuloAdapter.BuscarArticulo(codigo);
-                   
+
             //Busco el artículo que quiero modificar en la lista.
             foreach (Entidades.Venta_Articulo vtaArtEdit in ListaArticulosVtaActual)
             {
                 //Si coincide el código
                 if (vtaArtEdit.CodigoArticulo == codigo)
                 {
-                      do{
-                    // y si hay stock
-                    if (ValidarStock2(codigo,cant) == false)
+                    do
                     {
-                        Artículos.frmIngresarCantidad formCambiarCantidad = new frmIngresarCantidad();
-                        formCambiarCantidad.ShowDialog();
-                        cant = Convert.ToInt32(formCambiarCantidad.cantidad.Value);                    
-                    }
-                    
-                        } while(ArtBD.Stock < cant);
+                        // y si hay stock
+                        if (ValidarStock2(codigo, cant) == false)
+                        {
+                            Artículos.frmIngresarCantidad formCambiarCantidad = new frmIngresarCantidad();
+                            formCambiarCantidad.ShowDialog();
+                            cant = Convert.ToInt32(formCambiarCantidad.cantidad.Value);
+                        }
 
-                      vtaArtEdit.Cantidad = cant;
-                      MessageBox.Show("Se actualizó la cantidad de " + vtaArtEdit.CodigoArticulo);
-                      break;
-                    
-                   
-                 }
+                    } while (ArtBD.Stock < cant);
+
+                    vtaArtEdit.Cantidad = cant;
+                    MessageBox.Show("Se actualizó la cantidad de " + vtaArtEdit.CodigoArticulo);
+                    break;
+
+
                 }
-
-            MessageBox.Show("Fin modificar venta actual (de listadoArticulos)");
             }
 
-            
+            MessageBox.Show("Fin modificar venta actual (de listadoArticulos)");
+        }
+
+
         bool ValidarStock(Venta_Articulo vta_art_seleccionado)
         {
             bool unidadesDisponibles = true;
-            
-                Entidades.Articulo ArtBD = DatosArticuloAdapter.BuscarArticulo(vta_art_seleccionado.CodigoArticulo);
-               
-                if (ArtBD.Stock < vta_art_seleccionado.Cantidad)
-                {
-                  MessageBox.Show("No hay stock suficiente. \nCantidad actual en stock: " + ArtBD.Stock.ToString(), "Lista de Artículos: "+ArtBD.Codigo.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                  unidadesDisponibles = false;
-                }
-                return unidadesDisponibles;
-                
-            
+
+            Entidades.Articulo ArtBD = DatosArticuloAdapter.BuscarArticulo(vta_art_seleccionado.CodigoArticulo);
+
+            if (ArtBD.Stock < vta_art_seleccionado.Cantidad)
+            {
+                MessageBox.Show("No hay stock suficiente. \nCantidad actual en stock: " + ArtBD.Stock.ToString(), "Lista de Artículos: " + ArtBD.Codigo.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                unidadesDisponibles = false;
+            }
+            return unidadesDisponibles;
+
+
         }
 
         public bool ValidarStock2(string codigo, int cantidad)
         {
             //True si hay stock
             //False si no hay stock
-            
+
             bool unidadesDisponibles = true;
-            
+
             Articulo ArtBD = DatosArticuloAdapter.BuscarArticulo(codigo);
             if (ArtBD.Stock < cantidad)
             {
                 MessageBox.Show("No hay stock suficiente. \nCantidad actual en stock: " + ArtBD.Stock.ToString(), "Lista de Artículos: " + ArtBD.Codigo.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 unidadesDisponibles = false;
- 
+
             }
             return unidadesDisponibles;
- 
+
         }
-        
+
         #endregion
 
         #region ///***///***///***/// E V E N T O S \\\***\\\***\\\***\\\
 
 
-      
+
         // CLICK Añadir
         private void btnAñadirNuevo_Click(object sender, EventArgs e)
         {
             AñadirNuevoArticulo();
         }
-        
+
         // CLICK Modificar
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -348,10 +392,10 @@ namespace UI.Desktop.Artículos
         {
             if (this.ModoForm == TipoForm.Lista)
             { ModificarArticulo(); }
-            else if(this.ModoForm == TipoForm.SeleccionDeArticulo)
+            else if (this.ModoForm == TipoForm.SeleccionDeArticulo)
             { SeleccionarArticulo(); }
         }
-        
+
 
         // CLICK ELIMINAR
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -360,75 +404,76 @@ namespace UI.Desktop.Artículos
             {
                 MessageBox.Show("El usuario no posee permisos para realizar esta tarea.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            } 
+            }
             else if (dgvListado.SelectedRows.Count != 0)
             {
                 EliminarArticulo();
-            } 
+            }
         }
-        
+
 
         // MOFIFICAR EL FILTRO DE BUSQUEDA
-      
-       private void tbxFiltro_TextChanged_1(object sender, EventArgs e)
-       {
+
+        private void tbxFiltro_TextChanged_1(object sender, EventArgs e)
+        {
             // Transforma el searchTerm a minúsculas para hacer búsquedas comparables independientemente de la capitalización
             string searchTermLower = tbxFiltro.Text.ToLowerInvariant();
 
             if (searchTermLower == "")
-           {
-               dgvListado.DataSource = DatosArticuloAdapter.GetAll();
-           }
-           else
-           {
+            {
+                //dgvListado.DataSource = DatosArticuloAdapter.GetAll();
+                dgvListado.DataSource = ListaArticulosFiltrados;
+            }
+            else
+            {
                 // Filtro cada articulo en ListArticulos buscando coincidencias de código, descripción y proveedor del artículo
-                var articulosEncontrados = ListaArticulos.Where(
+                ListaArticulosFiltrados = ListaArticulos.Where(
                     a => a.Codigo.ToLowerInvariant().Contains(searchTermLower)
                       || a.Descripcion.ToLowerInvariant().Contains(searchTermLower)
                       || a.Proveedor.ToLowerInvariant().Contains(searchTermLower)
                       || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTermLower)
-                );
+                ).ToList();
 
                 // Devuelve el listado de Articulos resultantes
-                dgvListado.DataSource = articulosEncontrados.ToList();
+                dgvListado.DataSource = ListaArticulosFiltrados;
 
                 //dgvListado.DataSource = DatosArticuloAdapter.Busqueda(tbxFiltro.Text);
-               
-           }
-
-       }
-
-        // LOAD  -  CARGA MODO LISTA O SELECCION
-       private void frmListadoArticulos_Load(object sender, EventArgs e)
-       {
-           if (this.ModoForm == TipoForm.SeleccionDeArticulo)
-           {
-               btnEliminar.Visible = false;
-               btnExportar.Visible = false;
-               btnImportar.Visible = false;
-               btnSeleccionar.Visible = true;
-               dgvListado.TabStop = true;
-           }
-           else
-           {
-               btnEliminar.Visible = true;
-               btnExportar.Visible = true;
-               btnImportar.Visible = true;
-               btnSeleccionar.Visible = false ;
-               listaProveedoresExistentes = DatosProveedorAdapter.GetListadoNombres();
 
             }
-       }
+
+        }
+
+        // LOAD  -  CARGA MODO LISTA O SELECCION
+        private void frmListadoArticulos_Load(object sender, EventArgs e)
+        {
+            if (this.ModoForm == TipoForm.SeleccionDeArticulo)
+            {
+                btnEliminar.Visible = false;
+                btnExportar.Visible = false;
+                btnImportar.Visible = false;
+                btnSeleccionar.Visible = true;
+                dgvListado.TabStop = true;
+            }
+            else
+            {
+                btnEliminar.Visible = true;
+                btnExportar.Visible = true;
+                btnImportar.Visible = true;
+                btnSeleccionar.Visible = false;
+                listaProveedoresExistentes = DatosProveedorAdapter.GetListadoNombres();
+
+            }
+        }
 
         // CLICK Seleccionar Artículo
-       private void btnSeleccionar_Click(object sender, EventArgs e)
-       {
-           SeleccionarArticulo();
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            SeleccionarArticulo();
 
-       }
+        }
 
         // CLICK Salir
-       public void btnSalir_Click(object sender, EventArgs e)
+        public void btnSalir_Click(object sender, EventArgs e)
         {
             if (this.ModoForm == TipoForm.SeleccionDeArticulo)
             {
@@ -440,42 +485,43 @@ namespace UI.Desktop.Artículos
             }
         }
 
-       // CLICK - Exportar Articulos a EXCEL
-       private void btnExportar_Click(object sender, EventArgs e)
-       {
-           this.exportarArtículos();
-       }
+        // CLICK - Exportar Articulos a EXCEL
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            this.exportarArtículos();
+        }
 
-       // TECLAS ACCESO RAPIDO
-       protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-       {
-           switch (keyData)
-           {
+        // TECLAS ACCESO RAPIDO
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
 
-               case Keys.Enter:
-                   if (this.ModoForm == TipoForm.SeleccionDeArticulo)
-                   { SeleccionarArticulo(); }
-                   
-                   break;
+                case Keys.Enter:
+                    if (this.ModoForm == TipoForm.SeleccionDeArticulo)
+                    { SeleccionarArticulo(); }
 
-               case Keys.Escape:
-                   this.Close();
-                   break;
+                    break;
 
-               case Keys.Delete:
-                   if (dgvListado.SelectedRows.Count != 0)
-                   {
-                       EliminarArticulo();
-                   }
-                   break;
+                case Keys.Escape:
+                    this.Close();
+                    break;
 
-              
-               default:
+                //So dangerous
+                //case Keys.Delete:
+                //    if (dgvListado.SelectedRows.Count != 0)
+                //    {
+                //        EliminarArticulo();
+                //    }
+                //    break;
 
-                   break;
-           }
-           return base.ProcessCmdKey(ref msg, keyData);
-       }
+
+                default:
+
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
 
         #endregion
@@ -518,20 +564,52 @@ namespace UI.Desktop.Artículos
             }
         }
 
-       private void btnMostrarTodos_Click(object sender, EventArgs e)
-       {
-           tbxFiltro.Text = "";
-       }
+        private void btnMostrarTodos_Click(object sender, EventArgs e)
+        {
+            tbxFiltro.Text = "";
+            cbxFiltroFamilia.SelectedIndex = cbxFiltroProveedor.SelectedIndex = -1;
+            ListaArticulosFiltrados = ListaArticulos.ToList();
+        }
 
-      
-        
+        private void cbxFiltroProveedor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //if (cbxFiltroProveedor.SelectedIndex != -1)
+            ////if (cbxFiltroProveedor.SelectedText != "" && cbxFiltroProveedor.SelectedText != "Seleccione Proveedor")
+            //{
+            //    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString() && articulo.Familia == (int)cbxFiltroFamilia.SelectedValue).ToList();
+            //    dgvListado.DataSource = ListaArticulosFiltrados;
+            //}}
+            aplicaFiltros();
+        }
 
-      
+        private void cbxFiltroFamilia_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //if (cbxFiltroFamilia.SelectedIndex != -1)
+            //{
+            //    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Familia == (int)cbxFiltroFamilia.SelectedValue && articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString()).ToList();
+            //    dgvListado.DataSource = ListaArticulosFiltrados;
 
-     
+            //}
+            aplicaFiltros();
+        }
 
-
-
-
+        private void aplicaFiltros()
+        {
+            if (cbxFiltroProveedor.SelectedIndex != -1)
+            {
+                if (cbxFiltroFamilia.SelectedIndex != -1)
+                {
+                    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString() && articulo.Familia == (int)cbxFiltroFamilia.SelectedValue).ToList();
+                }
+                else
+                    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString()).ToList();
+            }
+            else if(cbxFiltroFamilia.SelectedIndex != -1)
+            {
+                ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Familia == (int)cbxFiltroFamilia.SelectedValue).ToList();
+            }
+                dgvListado.DataSource = ListaArticulosFiltrados;
+        }
     }
+
 }

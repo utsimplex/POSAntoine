@@ -46,6 +46,9 @@ namespace UI.Desktop.Artículos
         PrecioAdapter Datos_PrecioAdapter = new PrecioAdapter();
         ProveedorAdapter Datos_ProveedorAdapter = new ProveedorAdapter();
         Entidades.Articulo artiToEdit = new Entidades.Articulo();
+        List<Familia> listFamilias = new List<Familia>();
+        FamiliaAdapter Datos_FamiliaAdapter = new FamiliaAdapter();
+
 
 
         #endregion
@@ -79,18 +82,27 @@ namespace UI.Desktop.Artículos
 
         private void ItemsFamilia()
         {
+
             cbxFamilia.Items.Clear();
-            cbxFamilia.DisplayMember = "Description";
-            cbxFamilia.ValueMember = "Value";
-            cbxFamilia.DataSource = Enum.GetValues(typeof(ArticuloConstantes.TipoFamilia))
-                .Cast<Enum>()
-                .Select(value => new
-                {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.Description)
-                .ToList();
+            listFamilias = Datos_FamiliaAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
+            if (listFamilias != null)
+            {
+                cbxFamilia.DataSource = listFamilias;
+                cbxFamilia.DisplayMember = "descripcion";
+                cbxFamilia.ValueMember = "id";
+            }
+
+            //cbxFamilia.DisplayMember = "Description";
+            //cbxFamilia.ValueMember = "Value";
+            //cbxFamilia.DataSource = Enum.GetValues(typeof(ArticuloConstantes.TipoFamilia))
+            //    .Cast<Enum>()
+            //    .Select(value => new
+            //    {
+            //        (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+            //        value
+            //    })
+            //    .OrderBy(item => item.Description)
+            //    .ToList();
         }
 
         private void ItemsRangoEtario()
@@ -274,7 +286,8 @@ namespace UI.Desktop.Artículos
             txtStockMin.Text = artiToEdit.StockMin.ToString();
             txtCodigoArtiProveedor.Text = artiToEdit.CodigoArtiProveedor;
 
-            cbxFamilia.SelectedValue = artiToEdit.Familia != null ? (ArticuloConstantes.TipoFamilia)artiToEdit.Familia : ArticuloConstantes.TipoFamilia.PantalonL;
+            cbxFamilia.SelectedValue = (int)artiToEdit.Familia;
+            //cbxFamilia.SelectedValue = listFamilias.First(familia => familia.id == artiToEdit.Familia).id;
 
             cbxRangoEtario.SelectedValue = artiToEdit.RangoEtario != null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.Baby;
             
