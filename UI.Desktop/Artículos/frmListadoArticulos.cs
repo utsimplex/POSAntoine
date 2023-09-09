@@ -52,7 +52,11 @@ namespace UI.Desktop.Artículos
 
         }
 
+        // Fisica cuantica PARA PONERLE PLACEHOLDER AL CBX
+        private const int CB_SETCUEBANNER = 0x1703;
 
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string lParam);
 
         #region ///***///***///***/// V A R I A B L E S   L O C A L E S \\\***\\\***\\\***\\\
 
@@ -115,7 +119,7 @@ namespace UI.Desktop.Artículos
                 cbxFiltroFamilia.ValueMember = "id";
                 cbxFiltroFamilia.SelectedIndex = -1;
                 cbxFiltroFamilia.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
-                //cbxFiltroFamilia.Text= "";
+                
             }
 
             //cbxFiltroProveedor.Items.Clear();
@@ -129,6 +133,9 @@ namespace UI.Desktop.Artículos
                 cbxFiltroProveedor.SelectedIndex = -1;
                 cbxFiltroProveedor.SelectedValueChanged += cbxFiltroProveedor_SelectedValueChanged;
             }
+            SendMessage(this.cbxFiltroProveedor.Handle, CB_SETCUEBANNER, 0, "Filtrar por proveedor...");
+            SendMessage(this.cbxFiltroFamilia.Handle, CB_SETCUEBANNER, 0, "Filtrar por familia...");
+
         }
 
 
