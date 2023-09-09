@@ -52,12 +52,7 @@ namespace UI.Desktop.Artículos
 
         }
 
-        // Fisica cuantica PARA PONERLE PLACEHOLDER AL CBX
-        private const int CB_SETCUEBANNER = 0x1703;
-
-        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-        private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string lParam);
-
+        
         #region ///***///***///***/// V A R I A B L E S   L O C A L E S \\\***\\\***\\\***\\\
 
         //PROPIEDAD MODOFORM
@@ -80,6 +75,8 @@ namespace UI.Desktop.Artículos
         //LISTA DE ARTICULOS
         public BindingList<Entidades.Articulo> ListaArticulos;
 
+
+
         public List<Entidades.Articulo> ListaArticulosFiltrados;
 
         //LISTA DE ARTICULOS Añadidos Venta Actual
@@ -99,6 +96,13 @@ namespace UI.Desktop.Artículos
         ProveedorAdapter Datos_ProveedorAdapter = new ProveedorAdapter();
         //ROL
         string rol;
+
+        // Fisica cuantica PARA PONERLE PLACEHOLDER AL CBX
+        private const int CB_SETCUEBANNER = 0x1703;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPWStr)] string lParam);
+
 
 
         #endregion
@@ -419,37 +423,7 @@ namespace UI.Desktop.Artículos
         }
 
 
-        // MOFIFICAR EL FILTRO DE BUSQUEDA
-
-        private void tbxFiltro_TextChanged_1(object sender, EventArgs e)
-        {
-            // Transforma el searchTerm a minúsculas para hacer búsquedas comparables independientemente de la capitalización
-            string searchTermLower = tbxFiltro.Text.ToLowerInvariant();
-
-            if (searchTermLower == "")
-            {
-                //dgvListado.DataSource = DatosArticuloAdapter.GetAll();
-                dgvListado.DataSource = ListaArticulosFiltrados;
-            }
-            else
-            {
-                // Filtro cada articulo en ListArticulos buscando coincidencias de código, descripción y proveedor del artículo
-                ListaArticulosFiltrados = ListaArticulos.Where(
-                    a => a.Codigo.ToLowerInvariant().Contains(searchTermLower)
-                      || a.Descripcion.ToLowerInvariant().Contains(searchTermLower)
-                      || a.Proveedor.ToLowerInvariant().Contains(searchTermLower)
-                      || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTermLower)
-                ).ToList();
-
-                // Devuelve el listado de Articulos resultantes
-                dgvListado.DataSource = ListaArticulosFiltrados;
-
-                //dgvListado.DataSource = DatosArticuloAdapter.Busqueda(tbxFiltro.Text);
-
-            }
-
-        }
-
+        
         // LOAD  -  CARGA MODO LISTA O SELECCION
         private void frmListadoArticulos_Load(object sender, EventArgs e)
         {
@@ -573,49 +547,133 @@ namespace UI.Desktop.Artículos
 
         private void btnMostrarTodos_Click(object sender, EventArgs e)
         {
+            LimpiarFiltros();
+            RecargarArticulos();
+        }
+
+       
+        private void LimpiarFiltros()
+        {
             tbxFiltro.Text = "";
-            cbxFiltroFamilia.SelectedIndex = cbxFiltroProveedor.SelectedIndex = -1;
-            ListaArticulosFiltrados = ListaArticulos.ToList();
+            cbxFiltroFamilia.SelectedIndex = -1;
+            cbxFiltroProveedor.SelectedIndex = -1;
         }
 
-        private void cbxFiltroProveedor_SelectedValueChanged(object sender, EventArgs e)
+        private void AplicaFiltros()
         {
-            //if (cbxFiltroProveedor.SelectedIndex != -1)
-            ////if (cbxFiltroProveedor.SelectedText != "" && cbxFiltroProveedor.SelectedText != "Seleccione Proveedor")
-            //{
-            //    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString() && articulo.Familia == (int)cbxFiltroFamilia.SelectedValue).ToList();
-            //    dgvListado.DataSource = ListaArticulosFiltrados;
-            //}}
-            aplicaFiltros();
-        }
+            string searchTerm = tbxFiltro.Text.ToLowerInvariant();
 
-        private void cbxFiltroFamilia_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //if (cbxFiltroFamilia.SelectedIndex != -1)
-            //{
-            //    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Familia == (int)cbxFiltroFamilia.SelectedValue && articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString()).ToList();
-            //    dgvListado.DataSource = ListaArticulosFiltrados;
-
-            //}
-            aplicaFiltros();
-        }
-
-        private void aplicaFiltros()
-        {
-            if (cbxFiltroProveedor.SelectedIndex != -1)
+            if (searchTerm == "" && !FiltrandoPorProveedor() && !FiltrandoPorFamilia())
             {
-                if (cbxFiltroFamilia.SelectedIndex != -1)
+                RecargarArticulos();
+            }
+            else
+            {
+                if (FiltraSoloPorTexto(searchTerm))
                 {
-                    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString() && articulo.Familia == (int)cbxFiltroFamilia.SelectedValue).ToList();
+                    ListaArticulosFiltrados = AplicarFiltroTexto(searchTerm, ListaArticulos);
                 }
                 else
-                    ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString()).ToList();
-            }
-            else if(cbxFiltroFamilia.SelectedIndex != -1)
-            {
-                ListaArticulosFiltrados = ListaArticulos.Where(articulo => articulo.Familia == (int)cbxFiltroFamilia.SelectedValue).ToList();
-            }
+                {
+                   
+                    ListaArticulosFiltrados = ListaArticulos.ToList();
+
+                    if (FiltrandoPorProveedor())
+                    {
+                        ListaArticulosFiltrados = ListaArticulosFiltrados
+                            .Where(articulo => articulo.Proveedor == cbxFiltroProveedor.SelectedValue.ToString())
+                            .ToList();
+                    }
+
+                    if (FiltrandoPorFamilia())
+                    {
+                        ListaArticulosFiltrados = ListaArticulosFiltrados
+                            .Where(articulo => articulo.Familia == (int)cbxFiltroFamilia.SelectedValue)
+                            .ToList();
+                    }
+
+                    if (searchTerm != "")
+                    {
+                        ListaArticulosFiltrados = AplicarFiltroTexto(searchTerm, new BindingList<Articulo>(ListaArticulosFiltrados));
+                    }
+                }
                 dgvListado.DataSource = ListaArticulosFiltrados;
+            }
+
+
+        }
+
+        // MOFIFICAR EL FILTRO DE BUSQUEDA
+        private void tbxFiltro_TextChanged_1(object sender, EventArgs e)
+        {
+            AplicaFiltros();
+        }
+  
+        // Carga TODOS los articulos en la grilla
+        private void RecargarArticulos()
+        {
+            dgvListado.DataSource = ListaArticulos;
+        }
+
+        // Aplicar filtro segun el valor del search term, a la lista especificada
+        private List<Articulo> AplicarFiltroTexto(string searchTerm, BindingList<Articulo>listaAfiltrar)
+        {
+            return listaAfiltrar.Where(
+                   a => a.Codigo.ToLowerInvariant().Contains(searchTerm)
+                     || a.Descripcion.ToLowerInvariant().Contains(searchTerm)
+                     || a.Proveedor.ToLowerInvariant().Contains(searchTerm)
+                     || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTerm)
+               ).ToList();
+        }
+
+        // CAMBIO EL PROVEEDOR DESDE el combo box
+        private void cbxFiltroProveedor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            AplicaFiltros();
+        }
+
+        // CAMBIO LA FAMILIA DESDE el combo box
+        private void cbxFiltroFamilia_SelectedValueChanged(object sender, EventArgs e)
+        {
+            AplicaFiltros();
+        }
+
+        // Determina si actualmente se esta filtrando por proveedor
+        private bool FiltrandoPorProveedor() {
+            
+            if(cbxFiltroProveedor.SelectedIndex != -1) 
+            {
+                return true;
+            }else
+            {
+                return false;
+            };
+
+        }
+
+        // Determina si actualmente se esta filtrando por familia
+        private bool FiltrandoPorFamilia()
+        {
+
+            if (cbxFiltroFamilia.SelectedIndex != -1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            };
+
+        }
+
+        // Determina si se esta filtrando por texto, pero No se esta filtrando por proveedor ni familia
+        private bool FiltraSoloPorTexto(string searchTerm)
+        {
+            if (searchTerm != "" && !FiltrandoPorProveedor() && !FiltrandoPorFamilia())
+            {
+                return true;
+            }
+            return false;
         }
     }
 
