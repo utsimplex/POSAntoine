@@ -50,6 +50,7 @@ namespace UI.Desktop.Artículos
 
 
 
+
         }
 
         
@@ -158,7 +159,8 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
             this.dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
             this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
-            dgvListado.Size = new Size(960, 429);
+            dgvListado.Size = new Size(968, 490);
+            this.dgvListado.Location = new Point(7, 56);
 
 
 
@@ -674,6 +676,19 @@ namespace UI.Desktop.Artículos
                 return true;
             }
             return false;
+        }
+
+        private void btnActualizarPrecios_Click(object sender, EventArgs e)
+        {
+            if(rol == "Administrador")
+            {
+                frmModificarPrecios frmModificarPrecios = new frmModificarPrecios(ListaArticulos, ListaArticulosFiltrados);
+                frmModificarPrecios.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("El usuario no posee permisos para realizar esta tarea", "Se requiere un Administrador", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
         }
     }
 
