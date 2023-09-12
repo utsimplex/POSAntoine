@@ -9,8 +9,27 @@ namespace Entidades
     public class ParametrosEmpresa
     {
         //public int id { get; set; }
-        public string Nombre { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
+
+        //Datos Generales
+        public string Nombre { get; set; } //Propiedad que se va a mostrar en la UI(ej.Ventas) y en la cabecera de la comanda
+        public string Direccion { get; set; }//Propiedad que se va a mostrar en la UI(ej.Ventas) y en la cabecera de la comanda
+        public string Telefono { get; set; }//Propiedad que se va a mostrar en la UI(ej.Ventas) y en la cabecera de la comanda
+        public string ImagenPath { get; set; }//Imagen que se va a imprimir en comandas, facturas y en UI
+        public string Impresora1 { get; set; }//Path Impresora 1
+
+        //Datos Fiscales
+        public string CUIT { get; set; }
+        public string NombreFiscal { get; set; }
+        public string DireccionFiscal { get; set; }
+        public string SituacionFiscal { get; set; }
+        public string CertificadoDigital { get; set; }
+        public string ClaveCertificado { get; set; }
+        public string PuntoDeVenta { get; set; }
+        public string InicioDeActividades { get; set; }
+        public string IngresosBrutos { get; set; }
+        public bool EsProduccion {get; set; }
+        public string UrlQrAfip { get; set; }
+
+
     }
 }

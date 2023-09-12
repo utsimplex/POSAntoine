@@ -79,8 +79,7 @@
     <Compile Include="CuentaCorrienteAdapter.cs" />
     <Compile Include="ArticuloAdapter.cs" />
     <Compile Include="FamiliaAdapter.cs" />
-    <Compile Include="ParametrosGeneralesAdapter.cs" />
-    <Compile Include="ParametrosEmpresaAdapter.cs" />
+    <Compile Include="ParametrosAdapter.cs" />
     <Compile Include="MedioDePagoAdapter.cs" />
     <Compile Include="MovimientoCajaAdapter.cs" />
     <Compile Include="ClienteAdapter.cs" />
