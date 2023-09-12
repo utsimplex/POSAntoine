@@ -398,6 +398,12 @@
     <Compile Include="Mensajes\splashScreen.Designer.cs">
       <DependentUpon>splashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Parametros\frmParametros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Parametros\frmParametros.Designer.cs">
+      <DependentUpon>frmParametros.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\Facturador.cs" />
     <Compile Include="Ventas\frmIngresaDescuento.cs">
       <SubType>Form</SubType>
@@ -496,6 +502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mensajes\splashScreen.resx">
       <DependentUpon>splashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Parametros\frmParametros.resx">
+      <DependentUpon>frmParametros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
