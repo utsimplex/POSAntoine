@@ -71,7 +71,7 @@ namespace UI.Desktop.Ventas
         Data.Database.InformeVentaAdapter Datos_InformesAdapter = new Data.Database.InformeVentaAdapter();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
         Data.Database.MedioDePagoAdapter Datos_MedioDePagoAdapter = new Data.Database.MedioDePagoAdapter();
-        Data.Database.ParametrosEmpresaAdapter Datos_ParametrosEmpresaAdapter = new Data.Database.ParametrosEmpresaAdapter();
+        Data.Database.ParametrosAdapter Datos_ParametrosAdapter = new Data.Database.ParametrosAdapter();
         Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
         Artículos.frmListadoArticulos formListaArticulos;
         List<MedioDePago> listaMedioDePagos = new List<MedioDePago>();
@@ -887,10 +887,13 @@ namespace UI.Desktop.Ventas
         }
         private void ObtieneParametrosEmpresaAUI()
         {
-            parametrosEmpresa = Datos_ParametrosEmpresaAdapter.getOne();
-            lblDireccion.Text = parametrosEmpresa.Direccion;
-            lblNombreNegocio.Text = parametrosEmpresa.Nombre;
-            lblTelefono.Text = parametrosEmpresa.Telefono;
+            //parametrosEmpresa = Datos_ParametrosEmpresaAdapter.getOne();
+            //lblDireccion.Text = parametrosEmpresa.Direccion;
+            //lblNombreNegocio.Text = parametrosEmpresa.Nombre;
+            //lblTelefono.Text = parametrosEmpresa.Telefono;
+            lblDireccion.Text = "Av siempre viva 123";
+            lblNombreNegocio.Text = "Los Simpsons";
+            lblTelefono.Text = "030303";
         }
         private void ObtieneClienteGenerico()
         {

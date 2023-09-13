@@ -1091,5 +1091,11 @@ namespace UI.Desktop
             frmMovimientoCaja frmMovCaja = new frmMovimientoCaja(true, cajaActual, usrActual.usuario);
             frmMovCaja.ShowDialog();
         }
+
+        private void parametrosDeLaEmpresaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Parametros.frmParametros frmParametros =   new Parametros.frmParametros();
+            frmParametros.ShowDialog();
+        }
     }
 }

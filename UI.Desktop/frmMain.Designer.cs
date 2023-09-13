@@ -89,6 +89,8 @@
             this.btnCajaExtraer = new System.Windows.Forms.Button();
             this.btnCajaIngresar = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.configuracionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parametrosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msnPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -118,7 +120,8 @@
             // 
             this.mnuArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSalir,
-            this.configuracionesGeneralesToolStripMenuItem});
+            this.configuracionesGeneralesToolStripMenuItem,
+            this.configuracionesDeEmpresaToolStripMenuItem});
             this.mnuArchivo.Name = "mnuArchivo";
             this.mnuArchivo.Size = new System.Drawing.Size(50, 20);
             this.mnuArchivo.Text = "Menu";
@@ -126,7 +129,7 @@
             // mnuSalir
             // 
             this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(214, 22);
+            this.mnuSalir.Size = new System.Drawing.Size(225, 22);
             this.mnuSalir.Text = "Salir";
             this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
@@ -136,7 +139,7 @@
             this.mnuUsuarios,
             this.mnuEditarMiUsuario});
             this.configuracionesGeneralesToolStripMenuItem.Name = "configuracionesGeneralesToolStripMenuItem";
-            this.configuracionesGeneralesToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.configuracionesGeneralesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.configuracionesGeneralesToolStripMenuItem.Text = "Configuraciones generales";
             // 
             // mnuUsuarios
@@ -721,6 +724,21 @@
             this.btnCerrarCaja.UseVisualStyleBackColor = true;
             this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
+            // configuracionesDeEmpresaToolStripMenuItem
+            // 
+            this.configuracionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.parametrosDeLaEmpresaToolStripMenuItem});
+            this.configuracionesDeEmpresaToolStripMenuItem.Name = "configuracionesDeEmpresaToolStripMenuItem";
+            this.configuracionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.configuracionesDeEmpresaToolStripMenuItem.Text = "Configuraciones de Empresa";
+            // 
+            // parametrosDeLaEmpresaToolStripMenuItem
+            // 
+            this.parametrosDeLaEmpresaToolStripMenuItem.Name = "parametrosDeLaEmpresaToolStripMenuItem";
+            this.parametrosDeLaEmpresaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.parametrosDeLaEmpresaToolStripMenuItem.Text = "Parametros de la Empresa";
+            this.parametrosDeLaEmpresaToolStripMenuItem.Click += new System.EventHandler(this.parametrosDeLaEmpresaToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -820,6 +838,8 @@
         private System.Windows.Forms.Button btnCajaExtraer;
         private System.Windows.Forms.Button btnCajaIngresar;
         private System.Windows.Forms.TextBox txtCajaFecha;
+        private System.Windows.Forms.ToolStripMenuItem configuracionesDeEmpresaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem parametrosDeLaEmpresaToolStripMenuItem;
     }
 }
 

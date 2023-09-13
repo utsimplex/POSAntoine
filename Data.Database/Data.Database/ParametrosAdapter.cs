@@ -29,43 +29,43 @@ namespace Data.Database
             Comando.CommandType = CommandType.Text;
 
 
-            Comando.CommandText = "UPDATE [PARAMETROS_EMPRESA] SET NOMBRE_EMPRESA=@NOMBRE, DIRECCION=@DIRECCION, TELEFONO=@TELEFONO, IMAGENPATH=@IMAGENPATH, "
+            Comando.CommandText = "UPDATE [PARAMETROS_EMPRESA] SET NOMBRE=@NOMBRE, DIRECCION=@DIRECCION, TELEFONO=@TELEFONO, IMAGENPATH=@IMAGENPATH, "
                 +"IMPRESORA1=@IMPRESORA1, CUIT=@CUIT, NOMBREFISCAL=@NOMBREFISCAL, DIRECCIONFISCAL=@DIRECCIONFISCAL, SITUACIONFISCAL=@SITUACIONFISCAL, "
                 +"CERTIFICADODIGITAL=@CERTIFICADODIGITAL, CLAVECERTIFICADO=@CLAVECERTIFICADO, PUNTODEVENTA=@PUNTODEVENTA, INICIODEACTIVIDADES=@INICIODEACTIVIDADES, "
                 +"INGRESOSBRUTOS=@INGRESOSBRUTOS, ESPRODUCCION=@ESPRODUCCION, URLQRAFIP=@URLQRAFIP";
             Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
-            Comando.Parameters["@NOMBRE"].Value = _parametrosEmpresa.Nombre;
+            Comando.Parameters["@NOMBRE"].Value = _parametrosEmpresa.Nombre ?? String.Empty;
             Comando.Parameters.Add(new SqlParameter("@DIRECCION", SqlDbType.NVarChar));
-            Comando.Parameters["@DIRECCION"].Value = _parametrosEmpresa.Direccion;
+            Comando.Parameters["@DIRECCION"].Value = _parametrosEmpresa.Direccion ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@TELEFONO", SqlDbType.NVarChar));
-            Comando.Parameters["@TELEFONO"].Value = _parametrosEmpresa.Telefono;
+            Comando.Parameters["@TELEFONO"].Value = _parametrosEmpresa.Telefono ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@IMAGENPATH", SqlDbType.NVarChar));
-            Comando.Parameters["@IMAGENPATH"].Value = _parametrosEmpresa.ImagenPath;
+            Comando.Parameters["@IMAGENPATH"].Value = _parametrosEmpresa.ImagenPath ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@IMPRESORA1", SqlDbType.NVarChar));
-            Comando.Parameters["@IMPRESORA1"].Value = _parametrosEmpresa.Impresora1;
+            Comando.Parameters["@IMPRESORA1"].Value = _parametrosEmpresa.Impresora1 ?? string.Empty;
             //FISCAL
             Comando.Parameters.Add(new SqlParameter("@CUIT", SqlDbType.NVarChar));
-            Comando.Parameters["@CUIT"].Value = _parametrosEmpresa.CUIT;
+            Comando.Parameters["@CUIT"].Value = _parametrosEmpresa.CUIT ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@NOMBREFISCAL", SqlDbType.NVarChar));
-            Comando.Parameters["@NOMBREFISCAL"].Value = _parametrosEmpresa.NombreFiscal;
+            Comando.Parameters["@NOMBREFISCAL"].Value = _parametrosEmpresa.NombreFiscal ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@DIRECCIONFISCAL", SqlDbType.NVarChar));
-            Comando.Parameters["@DIRECCIONFISCAL"].Value = _parametrosEmpresa.DireccionFiscal;
+            Comando.Parameters["@DIRECCIONFISCAL"].Value = _parametrosEmpresa.DireccionFiscal ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCAL", SqlDbType.NVarChar));
-            Comando.Parameters["@SITUACIONFISCAL"].Value = _parametrosEmpresa.SituacionFiscal;
+            Comando.Parameters["@SITUACIONFISCAL"].Value = _parametrosEmpresa.SituacionFiscal ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@CERTIFICADODIGITAL", SqlDbType.NVarChar));
-            Comando.Parameters["@CERTIFICADODIGITAL"].Value = _parametrosEmpresa.CertificadoDigital;
+            Comando.Parameters["@CERTIFICADODIGITAL"].Value = _parametrosEmpresa.CertificadoDigital ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@CLAVECERTIFICADO", SqlDbType.NVarChar));
-            Comando.Parameters["@CLAVECERTIFICADO"].Value = _parametrosEmpresa.ClaveCertificado;
+            Comando.Parameters["@CLAVECERTIFICADO"].Value = _parametrosEmpresa.ClaveCertificado ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@PUNTODEVENTA", SqlDbType.NVarChar));
-            Comando.Parameters["@PUNTODEVENTA"].Value = _parametrosEmpresa.PuntoDeVenta;
+            Comando.Parameters["@PUNTODEVENTA"].Value = _parametrosEmpresa.PuntoDeVenta ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@INICIODEACTIVIDADES", SqlDbType.NVarChar));
-            Comando.Parameters["@INICIODEACTIVIDADES"].Value = _parametrosEmpresa.InicioDeActividades;
+            Comando.Parameters["@INICIODEACTIVIDADES"].Value = _parametrosEmpresa.InicioDeActividades ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@INGRESOSBRUTOS", SqlDbType.NVarChar));
-            Comando.Parameters["@INGRESOSBRUTOS"].Value = _parametrosEmpresa.IngresosBrutos;
+            Comando.Parameters["@INGRESOSBRUTOS"].Value = _parametrosEmpresa.IngresosBrutos ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@ESPRODUCCION", SqlDbType.Bit));
             Comando.Parameters["@ESPRODUCCION"].Value = _parametrosEmpresa.EsProduccion;
             Comando.Parameters.Add(new SqlParameter("@URLQRAFIP", SqlDbType.NVarChar));
-            Comando.Parameters["@URLQRAFIP"].Value = _parametrosEmpresa.UrlQrAfip;
+            Comando.Parameters["@URLQRAFIP"].Value = _parametrosEmpresa.UrlQrAfip ?? string.Empty;
 
 
 
@@ -86,7 +86,7 @@ namespace Data.Database
             comando.Connection = ConexionSQL;
             comando.CommandType = CommandType.Text;
             comando.CommandText =
-                "SELECT NOMBRE_EMPRESA, DIRECCION, TELEFONO, IMAGENPATH, IMPRESORA1, CUIT, NOMBREFISCAL, DIRECCIONFISCAL, SITUACIONFISCAL, "
+                "SELECT NOMBRE, DIRECCION, TELEFONO, IMAGENPATH, IMPRESORA1, CUIT, NOMBREFISCAL, DIRECCIONFISCAL, SITUACIONFISCAL, "
                 + "CERTIFICADODIGITAL, CLAVECERTIFICADO, PUNTODEVENTA, INICIODEACTIVIDADES, INGRESOSBRUTOS, ESPRODUCCION, URLQRAFIP "
                 + "FROM [PARAMETROS_EMPRESA] ";
             comando.Connection.Open();
@@ -96,7 +96,7 @@ namespace Data.Database
             while (drMedioPago.Read())
             {
                 lcl_parametrosEmpresa = new ParametrosEmpresa();
-                lcl_parametrosEmpresa.Nombre = (drMedioPago["NOMBRE_EMPRESA"] != DBNull.Value) ? (string)drMedioPago["NOMBRE_EMPRESA"] : null;
+                lcl_parametrosEmpresa.Nombre = (drMedioPago["NOMBRE"] != DBNull.Value) ? (string)drMedioPago["NOMBRE"] : null;
                 lcl_parametrosEmpresa.Direccion = (drMedioPago["DIRECCION"] != DBNull.Value) ? (string)drMedioPago["DIRECCION"] : null;
                 lcl_parametrosEmpresa.Telefono = (drMedioPago["TELEFONO"] != DBNull.Value) ? (string)drMedioPago["TELEFONO"] : null;
                 lcl_parametrosEmpresa.ImagenPath = (drMedioPago["IMAGENPATH"] != DBNull.Value) ? (string)drMedioPago["IMAGENPATH"] : null;
