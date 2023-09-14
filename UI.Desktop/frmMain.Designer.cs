@@ -89,7 +89,6 @@
             this.btnCajaExtraer = new System.Windows.Forms.Button();
             this.btnCajaIngresar = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.msnPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -731,7 +730,7 @@
             this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1107, 673);
-            this.Controls.Add(this.button1);
+           
             this.Controls.Add(this.scntCaja);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.groupBox1);
@@ -823,7 +822,6 @@
         private System.Windows.Forms.Button btnCajaExtraer;
         private System.Windows.Forms.Button btnCajaIngresar;
         private System.Windows.Forms.TextBox txtCajaFecha;
-        private System.Windows.Forms.Button button1;
     }
 }
 
