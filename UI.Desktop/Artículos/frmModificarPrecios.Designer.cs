@@ -71,6 +71,7 @@
             // 
             this.tbxFiltro.Location = new System.Drawing.Point(120, 15);
             this.tbxFiltro.Size = new System.Drawing.Size(187, 20);
+            this.tbxFiltro.TextChanged += new System.EventHandler(this.tbxFiltro_TextChanged_2);
             // 
             // groupBox2
             // 

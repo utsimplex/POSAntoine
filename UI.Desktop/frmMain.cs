@@ -10,6 +10,7 @@ using System.Data.OleDb;
 using Microsoft.Office.Interop;
 using System.Threading;
 using UI.Desktop.Cajas;
+using UI.Desktop.Artículos;
 
 namespace UI.Desktop
 {
@@ -1091,5 +1092,7 @@ namespace UI.Desktop
             frmMovimientoCaja frmMovCaja = new frmMovimientoCaja(true, cajaActual, usrActual.usuario);
             frmMovCaja.ShowDialog();
         }
+
+     
     }
 }

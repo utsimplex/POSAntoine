@@ -682,7 +682,7 @@ namespace UI.Desktop.Artículos
         {
             if(rol == "Administrador")
             {
-                frmModificarPrecios frmModificarPrecios = new frmModificarPrecios(ListaArticulos, ListaArticulosFiltrados);
+                frmModificarPrecios frmModificarPrecios = new frmModificarPrecios(ListaArticulos, ListaArticulosFiltrados, familias, proveedores);
                 frmModificarPrecios.ShowDialog();
             }
             else
