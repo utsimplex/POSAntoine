@@ -481,6 +481,16 @@ namespace UI.Desktop.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon utsimplex_ICON_transparent {
+            get {
+                object obj = ResourceManager.GetObject("utsimplex_ICON_transparent", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap utsimplex_monolitoytexto_700x700 {

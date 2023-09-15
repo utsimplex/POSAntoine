@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Database", "Data.Database\Data.Database\Data.Database.csproj", "{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{DAA3D215-C4D5-4A09-A56F-7975D32610E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -61,6 +63,14 @@ Global
 		{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{18D1C50F-58E0-4D94-B05B-4A95A146E6BB}.Release|x86.ActiveCfg = Release|Any CPU
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Debug|.NET.ActiveCfg = Debug
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Debug|Any CPU.ActiveCfg = Debug
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Debug|x86.ActiveCfg = Debug
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Release|.NET.ActiveCfg = Release
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Release|Any CPU.ActiveCfg = Release
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Release|Mixed Platforms.ActiveCfg = Release
+		{DAA3D215-C4D5-4A09-A56F-7975D32610E9}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

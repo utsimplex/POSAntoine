@@ -11,6 +11,10 @@ using Microsoft.Office.Interop;
 using System.Threading;
 using UI.Desktop.Cajas;
 using UI.Desktop.Artículos;
+using System.IO;
+using System.IO.Compression;
+using System.Net;
+using System.Diagnostics;
 
 namespace UI.Desktop
 {
@@ -40,10 +44,65 @@ namespace UI.Desktop
             //Thread tardar = new Thread(new ThreadStart(pantalla));
             //tardar.Start();
             //Thread.Sleep(3500);
-
-            InitializeComponent();
             //tardar.Abort();
+            InitializeComponent();
+            
+        }
 
+        private void BuscarActualizaciones()
+        {
+            WebClient webClient = new WebClient();
+            var client = new WebClient();
+
+            if(!webClient.DownloadString("https://utsimplex.com/wp-content/uploads/2023/09/Update.txt").Contains("3.0.0"))
+            {
+                if(MessageBox.Show("¿Querés instalarla ahora?", "Hay una nueva versión!",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
+                {
+                    try
+                    {
+                        MessageBox.Show("Se va a fijar si existe el archivo");
+                        // Si ya existe el archivo
+                        if(File.Exists(@".\InstaladorUtSimplexPOS.msi"))
+                        {
+                            MessageBox.Show("El instalador ya existe, asi que borra el archivo");
+                            // Lo borro
+                            File.Delete(@".\InstaladorUtSimplexPOS.msi");
+                        }
+
+                        MessageBox.Show("Se va a DESCARGAR el archivo");
+                        client.DownloadFile("https://utsimplex.com/wp-content/uploads/2023/09/InstaladorUtSimplexPOS.zip", @".\InstaladorUtSimplexPOS.zip");
+
+
+                        MessageBox.Show("Estoy FUERA del evento downloadCompleted");
+                        // Aquí continúa con el resto de la ejecución
+                        string zipPath = @".\InstaladorUtSimplexPOS.zip";
+                        string extractPath = @".\";
+                        ZipFile.ExtractToDirectory(zipPath, extractPath);
+                        Process process = new Process();
+                        process.StartInfo.FileName = "msiexec";
+                        process.StartInfo.Arguments = String.Format("/i InstaladorUtSimplexPOS.msi");
+                        MessageBox.Show("Ultima Linea, aca hace el start");
+                        process.Start();
+                        this.Close();
+                        client.DownloadFileCompleted += (sender, e) =>
+                        {
+                            MessageBox.Show("Estoy dentro del evento downloadCompleted");
+                            //// Aquí continúa con el resto de la ejecución
+                            //string zipPath = @".\InstaladorUtSimplexPOS.zip";
+                            //string extractPath = @".\";
+                            //ZipFile.ExtractToDirectory(zipPath, extractPath);
+                            //Process process = new Process();
+                            //process.StartInfo.FileName = "msiexec";
+                            //process.StartInfo.Arguments = String.Format("/i InstaladorUtSimplexPOS.msi");
+                            //MessageBox.Show("Ultima Linea, aca hace el start");
+                            //process.Start();
+                            //this.Close();
+                        };
+                    }
+                    catch { 
+                    }
+                }
+            }
         }
 
         public void pantalla()
@@ -66,7 +125,7 @@ namespace UI.Desktop
         private void frmMain_Load(object sender, EventArgs e)
         {
             bindUINoUser();
-
+            BuscarActualizaciones();
             IniciarSesion();
 
             if (usrActual != null)
