@@ -44,6 +44,7 @@
             this.lblPaso3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
+            this.cbRedondear = new System.Windows.Forms.CheckBox();
             this.panel12 = new System.Windows.Forms.Panel();
             this.txtMontoPorcentaje = new System.Windows.Forms.TextBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -199,6 +200,7 @@
             this.btnMostrarTodos.TabIndex = 35;
             this.btnMostrarTodos.Text = "Quitar Filtros";
             this.btnMostrarTodos.UseVisualStyleBackColor = true;
+            this.btnMostrarTodos.Click += new System.EventHandler(this.btnMostrarTodos_Click);
             // 
             // rbMontoFijo
             // 
@@ -227,11 +229,11 @@
             // 
             // lblResumen
             // 
-            this.lblResumen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResumen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResumen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblResumen.Location = new System.Drawing.Point(11, 8);
+            this.lblResumen.Location = new System.Drawing.Point(11, 39);
             this.lblResumen.Name = "lblResumen";
-            this.lblResumen.Size = new System.Drawing.Size(203, 60);
+            this.lblResumen.Size = new System.Drawing.Size(204, 29);
             this.lblResumen.TabIndex = 5;
             this.lblResumen.Text = "Debe seleccionar un método de actualización";
             this.lblResumen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -284,11 +286,23 @@
             // 
             // panel13
             // 
+            this.panel13.Controls.Add(this.cbRedondear);
             this.panel13.Controls.Add(this.lblResumen);
             this.panel13.Location = new System.Drawing.Point(3, 252);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(225, 73);
             this.panel13.TabIndex = 39;
+            // 
+            // cbRedondear
+            // 
+            this.cbRedondear.AutoSize = true;
+            this.cbRedondear.Location = new System.Drawing.Point(7, 3);
+            this.cbRedondear.Name = "cbRedondear";
+            this.cbRedondear.Size = new System.Drawing.Size(168, 17);
+            this.cbRedondear.TabIndex = 6;
+            this.cbRedondear.Text = "Redondear precio actualizado";
+            this.cbRedondear.UseVisualStyleBackColor = true;
+            this.cbRedondear.CheckedChanged += new System.EventHandler(this.cbRedondear_CheckedChanged);
             // 
             // panel12
             // 
@@ -385,6 +399,7 @@
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
             this.panel11.ResumeLayout(false);
@@ -422,5 +437,6 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox cbRedondear;
     }
 }

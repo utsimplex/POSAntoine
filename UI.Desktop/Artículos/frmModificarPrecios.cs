@@ -17,7 +17,13 @@ namespace UI.Desktop.Artículos
     public partial class frmModificarPrecios : frmBaseListado
     {
 
-        public frmModificarPrecios(BindingList<Entidades.Articulo> ListaArticulos, List<Entidades.Articulo> ListaArticulosFiltrados, List<Familia> familias, List<Proveedor> proveedores)
+        public frmModificarPrecios(
+            BindingList<Entidades.Articulo> ListaArticulos, 
+            List<Entidades.Articulo> ListaArticulosFiltrados, 
+            List<Familia> familias,
+            List<Proveedor> proveedores,
+            int selectedProveedorIdx,
+            int selectedFamiliaIdx)
         {
             InitializeComponent();
             this.familias = familias;
@@ -25,6 +31,8 @@ namespace UI.Desktop.Artículos
             this.ListaArticulos = ListaArticulos;
             this.ListaArticulosFiltrados = ListaArticulosFiltrados;
             completaCombosBox();
+            this.cbxFiltroFamilia.SelectedIndex = selectedFamiliaIdx;
+            this.cbxFiltroProveedor.SelectedIndex = selectedProveedorIdx;
          
 
 
@@ -52,6 +60,10 @@ namespace UI.Desktop.Artículos
 
             dgvListado.Location = new Point(7, 56);
             dgvListado.DataSource = ListaArticulosFiltrados;
+
+            // Si la columna precioActualizado no existe, añadir una columna nueva a la grilla, al lado de precio actual
+            AñadirColumnaPrecioNuevo();
+            
         }
 
 
@@ -66,6 +78,8 @@ namespace UI.Desktop.Artículos
         //Lista de Proveedores
         List<Proveedor> proveedores = new List<Proveedor>();
 
+        int selectedProveedorIdx;
+        int selectedFamiliaIdx;
 
         // Fisica cuantica PARA PONERLE PLACEHOLDER AL CBX
         private const int CB_SETCUEBANNER = 0x1703;
@@ -75,12 +89,11 @@ namespace UI.Desktop.Artículos
 
         #endregion
 
+
         private void completaCombosBox()
-        {
-            //cbxFiltroFamilia.Items.Clear();
+        {            
             if (familias != null)
             {
-                //familias.Add(new Familia { Activo = true,Descripcion= "Seleccione Familia", id=0 });
                 cbxFiltroFamilia.DataSource = familias;
                 cbxFiltroFamilia.DisplayMember = "descripcion";
                 cbxFiltroFamilia.ValueMember = "id";
@@ -89,11 +102,8 @@ namespace UI.Desktop.Artículos
 
             }
 
-            //cbxFiltroProveedor.Items.Clear();
-            
             if (proveedores != null)
             {
-                //proveedores.Add(new Proveedor {Nombre= "Seleccione Proveedor" });
                 cbxFiltroProveedor.DataSource = proveedores;
                 cbxFiltroProveedor.DisplayMember = "Nombre";
                 cbxFiltroProveedor.ValueMember = "Nombre";
@@ -105,7 +115,7 @@ namespace UI.Desktop.Artículos
 
         }
 
-
+        // RB AUMENTO ó REDUCCION
         private string cambiaOperacion()
         {
             if (rbAumento.Checked)
@@ -120,6 +130,7 @@ namespace UI.Desktop.Artículos
             };
         }
 
+        // RB PORCENTAJE O MONTO FIJO
         private string cambiaMetodo()
         {
             if (rbPorcentaje.Checked)
@@ -135,6 +146,7 @@ namespace UI.Desktop.Artículos
             
         }
 
+        // MENSAJE RESUMEN
         private void actualizarPaso3()
         {
             string mensaje = "";
@@ -153,31 +165,82 @@ namespace UI.Desktop.Artículos
             lblPaso3.Text = mensaje;
         }
 
+
+
+        #region EVENTOS DE CONTROLES DE UI
+
+        // RB OPCION PORCENTAJE CHECKED CHANGE
         private void rbPorcentaje_CheckedChanged(object sender, EventArgs e)
         {
             cambiaMetodo();
             actualizarPaso3();
+            CargarDatosPrecioNuevo();
         }
       
-
+        // RB OPCION MONTO FIJO CHECKED CHANGE
         private void rbMontoFijo_CheckedChanged(object sender, EventArgs e)
         {
             cambiaMetodo();
             actualizarPaso3();
+            CargarDatosPrecioNuevo();
         }
 
+        // RB AUMENTAR CHECKED CHANGE
         private void rbAumento_CheckedChanged(object sender, EventArgs e)
         {
             cambiaOperacion();
             actualizarPaso3();
+            CargarDatosPrecioNuevo();
         }
 
+        // RB REDUCIR CHECKED CHANGE
         private void rbReduccion_CheckedChanged(object sender, EventArgs e)
         {
             cambiaOperacion();
             actualizarPaso3();
+            CargarDatosPrecioNuevo();
+        }
+       
+        // CAMBIO VALOR
+        private void txtMontoPorcentaje_TextChanged(object sender, EventArgs e)
+        {
+            CargarDatosPrecioNuevo();
         }
 
+        // CAMBIO EL PROVEEDOR DESDE el combo box
+        private void cbxFiltroProveedor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            AplicaFiltros();
+        }
+
+        // CAMBIO LA FAMILIA DESDE el combo box
+        private void cbxFiltroFamilia_SelectedValueChanged(object sender, EventArgs e)
+        {
+            AplicaFiltros();
+        }
+
+        // MOFIFICAR EL FILTRO DE BUSQUEDA 
+        private void tbxFiltro_TextChanged_2(object sender, EventArgs e)
+        {
+            AplicaFiltros();
+        }
+
+        // MARCAR REDONDEAR PRECIO ACTUALIZADO
+        private void cbRedondear_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // CLICK LIMPIAR FILTROS
+
+        private void btnMostrarTodos_Click(object sender, EventArgs e)
+        {
+            LimpiarFiltros();
+        }
+
+        #endregion
+
+        // ELIMINAR ESTA PORQUERIA
         private void mostrarResumen()
         {
             string resumen = "";
@@ -198,28 +261,41 @@ namespace UI.Desktop.Artículos
 
             }
         }
-
-        private void txtMontoPorcentaje_TextChanged(object sender, EventArgs e)
+       
+        // Calcular los precios nuevos en funcion de las opciones seleccionadas
+        private void CargarDatosPrecioNuevo()
         {
-            // mostrarResumen();
-            actualizarGrillaPreciosNuevos();
-
-
-        }
-
-        private void actualizarGrillaPreciosNuevos()
-        {
-            // 1. Añadir una columna nueva a la grilla, al lado de precio actual
-            if(dgvListado.Columns["precioActualizado"] == null)
+            foreach (DataGridViewRow fila in dgvListado.Rows)
             {
-                AñadirColumnaPrecioNuevo();
+                if (fila.Cells["precio"].Value != null)
+                {
+                    if (this.txtMontoPorcentaje.Text != "")
+                    {
+                        double precioActual = Convert.ToDouble(fila.Cells["precio"].Value.ToString());
+                        double valor = Convert.ToInt32(this.txtMontoPorcentaje.Text);
+                        double precioActualizado = CalcularPrecioActualizado(precioActual, rbAumento.Checked, rbPorcentaje.Checked, valor);
+                        fila.Cells["precioActualizado"].Value = precioActualizado;
+                    }
+                }
             }
+        }
 
-            // 2. calcular los precios nuevos en funcion de las opciones seleccionadas
-            CalcularPrecioNuevo();
+        // Añade la columna PRECIO NUEVO
+        private void AñadirColumnaPrecioNuevo()
+        {
+            DataGridViewColumn columnaNuevoPrecio = new DataGridViewColumn();
+            columnaNuevoPrecio.Name = "precioActualizado";
+            columnaNuevoPrecio.HeaderText = "Precio Actualizado";
+            columnaNuevoPrecio.Width = 75;
+            columnaNuevoPrecio.CellTemplate = new DataGridViewTextBoxCell();
+            columnaNuevoPrecio.DefaultCellStyle.BackColor = Color.LightGreen;
+            int posicionPrecioNuevo = this.dgvListado.Columns["precio"].Index + 1;
+            this.dgvListado.Columns.Insert(posicionPrecioNuevo, columnaNuevoPrecio);
+            dgvListado.Columns["precio"].DefaultCellStyle.BackColor = Color.IndianRed;
         }
 
 
+        // Dado el precio actual, y las opciones seleccionadas en el formulario, calcula y devuelve el precio actualizado
         private Double CalcularPrecioActualizado(Double precioActual, Boolean aumenta, Boolean porcentaje, Double valor)
         {
             Double precioActualizado = 0;
@@ -233,41 +309,16 @@ namespace UI.Desktop.Artículos
                 precioActualizado = porcentaje ? precioActual - (precioActual * valor / 100) : precioActual - valor;
             }
 
+            if(cbRedondear.Checked)
+            {
+                precioActualizado = Math.Ceiling(precioActualizado / 10) * 10;
+            }
+
             return precioActualizado;
 
         }
-
-
-        private void CalcularPrecioNuevo()
-        {             
-            foreach (DataGridViewRow fila in dgvListado.Rows)
-            {
-                if (fila.Cells["precio"].Value != null )
-                {
-                    if(this.txtMontoPorcentaje.Text != "")
-                    {
-                        double precioActual = Convert.ToDouble(fila.Cells["precio"].Value.ToString());
-                        double valor = Convert.ToInt32(this.txtMontoPorcentaje.Text);
-                        double precioActualizado = CalcularPrecioActualizado(precioActual, rbAumento.Checked, rbPorcentaje.Checked, valor);
-                        fila.Cells["precioActualizado"].Value = precioActualizado;
-                    }
-                }
-            }
-        }
-
-        private void AñadirColumnaPrecioNuevo()
-        {
-            DataGridViewColumn columnaNuevoPrecio = new DataGridViewColumn();
-            columnaNuevoPrecio.Name = "precioActualizado";
-            columnaNuevoPrecio.HeaderText = "Precio Actualizado";
-            columnaNuevoPrecio.Width = 75;
-            columnaNuevoPrecio.CellTemplate = new DataGridViewTextBoxCell();
-            columnaNuevoPrecio.DefaultCellStyle.BackColor = Color.LightGreen;
-            int posicionPrecioNuevo = this.dgvListado.Columns["precio"].Index +1;
-            this.dgvListado.Columns.Insert(posicionPrecioNuevo, columnaNuevoPrecio);
-            dgvListado.Columns["precio"].DefaultCellStyle.BackColor = Color.IndianRed;
-        }
-
+    
+        // Limpia los filtros y muestra todos los articulos en la grilla
         private void LimpiarFiltros()
         {
             tbxFiltro.Text = "";
@@ -275,6 +326,7 @@ namespace UI.Desktop.Artículos
             cbxFiltroProveedor.SelectedIndex = -1;
         }
 
+        // Actualiza dgvDataSource en funcion de los filtros aplicados
         private void AplicaFiltros()
         {
             string searchTerm = tbxFiltro.Text.ToLowerInvariant();
@@ -318,14 +370,7 @@ namespace UI.Desktop.Artículos
 
 
         }
-
-
-        // Carga TODOS los articulos en la grilla
-        private void RecargarArticulos()
-        {
-            dgvListado.DataSource = ListaArticulos;
-        }
-
+      
         // Aplicar filtro segun el valor del search term, a la lista especificada
         private List<Articulo> AplicarFiltroTexto(string searchTerm, BindingList<Articulo> listaAfiltrar)
         {
@@ -336,19 +381,7 @@ namespace UI.Desktop.Artículos
                      || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTerm)
                ).ToList();
         }
-
-        // CAMBIO EL PROVEEDOR DESDE el combo box
-        private void cbxFiltroProveedor_SelectedValueChanged(object sender, EventArgs e)
-        {
-            AplicaFiltros();
-        }
-
-        // CAMBIO LA FAMILIA DESDE el combo box
-        private void cbxFiltroFamilia_SelectedValueChanged(object sender, EventArgs e)
-        {
-            AplicaFiltros();
-        }
-
+     
         // Determina si actualmente se esta filtrando por proveedor
         private bool FiltrandoPorProveedor()
         {
@@ -389,10 +422,11 @@ namespace UI.Desktop.Artículos
             return false;
         }
 
-            // MOFIFICAR EL FILTRO DE BUSQUEDA
-        private void tbxFiltro_TextChanged_2(object sender, EventArgs e)
+        // Carga TODOS los articulos en la grilla
+        private void RecargarArticulos()
         {
-            AplicaFiltros();
+            dgvListado.DataSource = ListaArticulos;
         }
+
     }
 }
