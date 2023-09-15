@@ -49,9 +49,12 @@ namespace UI.Desktop.Artículos
             dgvListado.Columns["Costo"].Visible = false;
             dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
             dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
-            dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
+            dgvListado.Columns["FamiliaTexto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Codigo proveedor";
+            dgvListado.Columns["CodigoArtiProveedor"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListado.Columns["descripcion"].Width = 280;
             dgvListado.Columns["codigo"].HeaderText = "Código";
+            dgvListado.Columns["codigo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListado.Columns["descripcion"].HeaderText = "Descripción";
             dgvListado.Columns["stockMin"].HeaderText = "Stock Min.";
             dgvListado.Columns["precio"].HeaderText = "Precio ($)";
