@@ -450,7 +450,7 @@ namespace UI.Desktop.Artículos
                             SqlMoney precioNuevo = Convert.ToDecimal(fila.Cells["precioActualizado"].Value.ToString());
 
                             // Obtengo artículo a modificar = artiToEdit desde la ListaArticulosFiltrados
-                            string Codigo = dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString();
+                            string Codigo = fila.Cells["codigo"].Value.ToString();
                             artiToEdit = ListaArticulosFiltrados.First(articulo => articulo.Codigo == Codigo);
 
                             // Seteo precio nuevo
