@@ -38,7 +38,6 @@
             this.btnMostrarTodos = new System.Windows.Forms.Button();
             this.rbMontoFijo = new System.Windows.Forms.RadioButton();
             this.rbPorcentaje = new System.Windows.Forms.RadioButton();
-            this.lblResumen = new System.Windows.Forms.Label();
             this.rbReduccion = new System.Windows.Forms.RadioButton();
             this.rbAumento = new System.Windows.Forms.RadioButton();
             this.lblPaso3 = new System.Windows.Forms.Label();
@@ -227,18 +226,6 @@
             this.rbPorcentaje.UseVisualStyleBackColor = true;
             this.rbPorcentaje.CheckedChanged += new System.EventHandler(this.rbPorcentaje_CheckedChanged);
             // 
-            // lblResumen
-            // 
-            this.lblResumen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResumen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblResumen.Location = new System.Drawing.Point(11, 39);
-            this.lblResumen.Name = "lblResumen";
-            this.lblResumen.Size = new System.Drawing.Size(204, 29);
-            this.lblResumen.TabIndex = 5;
-            this.lblResumen.Text = "Debe seleccionar un método de actualización";
-            this.lblResumen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblResumen.Visible = false;
-            // 
             // rbReduccion
             // 
             this.rbReduccion.AutoSize = true;
@@ -287,7 +274,6 @@
             // panel13
             // 
             this.panel13.Controls.Add(this.cbRedondear);
-            this.panel13.Controls.Add(this.lblResumen);
             this.panel13.Location = new System.Drawing.Point(3, 252);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(225, 73);
@@ -382,6 +368,7 @@
             this.btnActualizarPrecios.Text = "Guardar cambios";
             this.btnActualizarPrecios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnActualizarPrecios.UseVisualStyleBackColor = true;
+            this.btnActualizarPrecios.Click += new System.EventHandler(this.btnActualizarPrecios_Click);
             // 
             // frmModificarPrecios
             // 
@@ -421,7 +408,6 @@
         private System.Windows.Forms.ComboBox cbxFiltroProveedor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnMostrarTodos;
-        private System.Windows.Forms.Label lblResumen;
         private System.Windows.Forms.RadioButton rbMontoFijo;
         private System.Windows.Forms.RadioButton rbPorcentaje;
         private System.Windows.Forms.RadioButton rbReduccion;

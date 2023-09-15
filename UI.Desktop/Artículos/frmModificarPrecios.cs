@@ -1,4 +1,5 @@
-﻿using Data.Database;
+﻿using AfipWscdcServiceReference;
+using Data.Database;
 using Entidades;
 using Microsoft.VisualBasic.Logging;
 using System;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Desktop.Mensajes;
 
 namespace UI.Desktop.Artículos
 {
@@ -77,9 +79,13 @@ namespace UI.Desktop.Artículos
         List<Familia> familias = new List<Familia>();
         //Lista de Proveedores
         List<Proveedor> proveedores = new List<Proveedor>();
+        
+        //Articulo adapter
+        ArticuloAdapter Datos_ArticuloAdapter = new ArticuloAdapter();
 
         int selectedProveedorIdx;
         int selectedFamiliaIdx;
+        string mensajeConfirmacion;
 
         // Fisica cuantica PARA PONERLE PLACEHOLDER AL CBX
         private const int CB_SETCUEBANNER = 0x1703;
@@ -120,12 +126,12 @@ namespace UI.Desktop.Artículos
         {
             if (rbAumento.Checked)
             {
-                mostrarResumen();
+                actualizarMensajeConfirmacion();
                 return "aumento";
             }
             else 
             {
-                mostrarResumen();
+                actualizarMensajeConfirmacion();
                 return "reducción";
             };
         }
@@ -135,12 +141,12 @@ namespace UI.Desktop.Artículos
         {
             if (rbPorcentaje.Checked)
             {
-                mostrarResumen();
+                actualizarMensajeConfirmacion();
                 return "%" + txtMontoPorcentaje.Text.ToString();
             }
             else
             {
-                mostrarResumen();
+                actualizarMensajeConfirmacion();
                 return "$" + txtMontoPorcentaje.Text.ToString();
             };
             
@@ -153,12 +159,12 @@ namespace UI.Desktop.Artículos
 
             if (rbAumento.Checked)
             {
-                mostrarResumen();
+                actualizarMensajeConfirmacion();
                 mensaje = rbPorcentaje.Checked ? "Ingrese porcentaje de aumento" : "Ingrese el monto de aumento";
             }
             else
             {
-                mostrarResumen();
+                actualizarMensajeConfirmacion();
                 mensaje = rbPorcentaje.Checked ? "Ingrese porcentaje a reducir" : "Ingrese monto a reducir";
             }
 
@@ -241,23 +247,22 @@ namespace UI.Desktop.Artículos
         #endregion
 
         // ELIMINAR ESTA PORQUERIA
-        private void mostrarResumen()
+        private void actualizarMensajeConfirmacion()
         {
-            string resumen = "";
+            
             string valor = txtMontoPorcentaje.Text.ToString();
 
             if (txtMontoPorcentaje.Text.Length > 0)
             {
                 if (rbAumento.Checked)
                 {
-                    resumen = rbPorcentaje.Checked ? "Los precios aumentarán un %"+valor : "Se aplicará un aumento de $"+valor;
+                    mensajeConfirmacion = rbPorcentaje.Checked ? "Los precios aumentarán un %"+valor : "Se aplicará un aumento de $"+valor;
                 }
                 else
                 {
-                    resumen = rbPorcentaje.Checked ? "Los precios se reducirán un -%" + valor : "Se aplicará una reducción de -$" + valor;
+                    mensajeConfirmacion = rbPorcentaje.Checked ? "Los precios se reducirán un -%" + valor : "Se aplicará una reducción de -$" + valor;
                 }
-                lblResumen.Text = resumen;
-                lblResumen.Visible = true;
+               
 
             }
         }
@@ -313,7 +318,7 @@ namespace UI.Desktop.Artículos
             {
                 precioActualizado = (precioActualizado % 10 >= 5) ? Math.Ceiling(precioActualizado / 10) * 10 : Math.Floor(precioActualizado / 10) * 10;
             }
-
+            actualizarPaso3();
             return precioActualizado;
 
         }
@@ -428,5 +433,40 @@ namespace UI.Desktop.Artículos
             dgvListado.DataSource = ListaArticulos;
         }
 
+        private void btnActualizarPrecios_Click(object sender, EventArgs e)
+        {
+            frmConfirmar frmConfirmarActualizacion = new frmConfirmar( mensajeConfirmacion + ". ¿Está seguro que desea guardar estos cambios?", "");
+            if( frmConfirmarActualizacion.ShowDialog() == DialogResult.Yes) 
+            {
+                // LOGICA PARA GUARDAR LOS PRECIOS NUEVOS
+                foreach (DataGridViewRow fila in dgvListado.Rows)
+                {
+                    if (fila.Cells["precio"].Value != null)
+                    {
+                        if (fila.Cells["precioActualizado"].Value != null)
+                        {
+                            // Articulo y precioNuevo
+                            Articulo artiToEdit = new Articulo();
+                            SqlMoney precioNuevo = Convert.ToDecimal(fila.Cells["precioActualizado"].Value.ToString());
+
+                            // Obtengo artículo a modificar = artiToEdit desde la ListaArticulosFiltrados
+                            string Codigo = dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString();
+                            artiToEdit = ListaArticulosFiltrados.First(articulo => articulo.Codigo == Codigo);
+
+                            // Seteo precio nuevo
+                            artiToEdit.Precio = precioNuevo;
+
+                            Datos_ArticuloAdapter.Actualizar(artiToEdit);
+
+                        }
+                    }
+                }
+                this.DialogResult = DialogResult.Yes;
+                this.Close();
+                
+            }
+            
+            
+        }
     }
 }

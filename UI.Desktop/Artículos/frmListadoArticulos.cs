@@ -689,7 +689,10 @@ namespace UI.Desktop.Artículos
                     proveedores, 
                     cbxFiltroProveedor.SelectedIndex,
                     cbxFiltroFamilia.SelectedIndex);
-                frmModificarPrecios.ShowDialog();
+                if(frmModificarPrecios.ShowDialog() == DialogResult.Yes)
+                {
+                    ActualizarLista();
+                }
             }
             else
             {
