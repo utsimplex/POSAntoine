@@ -27,6 +27,7 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stock"].Width = 45;
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
+            this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
 
 
 
@@ -46,6 +47,7 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stock"].Width = 45;
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
+            this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
             rol = usr.Rol;
 
 

@@ -102,7 +102,7 @@ namespace Data.Database
                Comando.Parameters["@STOCK"].Value = arti.Stock;
                Comando.Parameters.Add(new SqlParameter("@STOCKMIN", SqlDbType.Int));
                Comando.Parameters["@STOCKMIN"].Value = arti.StockMin;
-               Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Money));
+               Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Decimal));
                Comando.Parameters["@PRECIO"].Value = arti.Precio;
                Comando.Parameters.Add(new SqlParameter("@MARCA", SqlDbType.NVarChar));
                Comando.Parameters["@MARCA"].Value = arti.Proveedor;

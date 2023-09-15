@@ -279,6 +279,7 @@ namespace UI.Desktop.Artículos
                         double precioActual = Convert.ToDouble(fila.Cells["precio"].Value.ToString());
                         double valor = Convert.ToInt32(this.txtMontoPorcentaje.Text);
                         double precioActualizado = CalcularPrecioActualizado(precioActual, rbAumento.Checked, rbPorcentaje.Checked, valor);
+                        
                         fila.Cells["precioActualizado"].Value = precioActualizado;
                     }
                 }
@@ -294,9 +295,11 @@ namespace UI.Desktop.Artículos
             columnaNuevoPrecio.Width = 75;
             columnaNuevoPrecio.CellTemplate = new DataGridViewTextBoxCell();
             columnaNuevoPrecio.DefaultCellStyle.BackColor = Color.LightGreen;
+            columnaNuevoPrecio.DefaultCellStyle.Format = "c";
             int posicionPrecioNuevo = this.dgvListado.Columns["precio"].Index + 1;
             this.dgvListado.Columns.Insert(posicionPrecioNuevo, columnaNuevoPrecio);
             dgvListado.Columns["precio"].DefaultCellStyle.BackColor = Color.IndianRed;
+            dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
         }
 
 
@@ -447,7 +450,7 @@ namespace UI.Desktop.Artículos
                         {
                             // Articulo y precioNuevo
                             Articulo artiToEdit = new Articulo();
-                            SqlMoney precioNuevo = Convert.ToDecimal(fila.Cells["precioActualizado"].Value.ToString());
+                            decimal precioNuevo = Convert.ToDecimal(fila.Cells["precioActualizado"].Value.ToString());
 
                             // Obtengo artículo a modificar = artiToEdit desde la ListaArticulosFiltrados
                             string Codigo = fila.Cells["codigo"].Value.ToString();
