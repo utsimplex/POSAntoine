@@ -228,7 +228,7 @@ namespace UI.Desktop.Artículos
         // MARCAR REDONDEAR PRECIO ACTUALIZADO
         private void cbRedondear_CheckedChanged(object sender, EventArgs e)
         {
-
+            CargarDatosPrecioNuevo();
         }
 
         // CLICK LIMPIAR FILTROS
@@ -311,7 +311,7 @@ namespace UI.Desktop.Artículos
 
             if(cbRedondear.Checked)
             {
-                precioActualizado = Math.Ceiling(precioActualizado / 10) * 10;
+                precioActualizado = (precioActualizado % 10 >= 5) ? Math.Ceiling(precioActualizado / 10) * 10 : Math.Floor(precioActualizado / 10) * 10;
             }
 
             return precioActualizado;
