@@ -51,6 +51,23 @@ namespace UI.Desktop.Parametros
         }
         private void completaSituacionFiscal()
         {
+            cbxSituacionFiscal.Items.Clear();
+
+            //cbxSituacionFiscal.DataSource = Enum.GetNames(typeof(SituacionFiscal));
+            //cbxSituacionFiscal.DisplayMember = "description";
+            //cbxSituacionFiscal.ValueMember = "value";
+            cbxSituacionFiscal.DisplayMember = "Description";
+            cbxSituacionFiscal.ValueMember = "Value";
+            cbxSituacionFiscal.DataSource = Enum.GetValues(typeof(FeConstantes.SituacionFiscal))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cbxSituacionFiscal.SelectedValue =  (FeConstantes.SituacionFiscal)Convert.ToInt32(parametrosEmpresa.SituacionFiscal);
             //String pkInstalledPrinters;
             //for (int i = 0; i < PrinterSettings.InstalledPrinters.Count; i++)
             //{
@@ -101,6 +118,9 @@ namespace UI.Desktop.Parametros
             parametrosEmpresa.Telefono = this.tbxTelefono.Text;
             parametrosEmpresa.UrlQrAfip = this.tbxURLAfip.Text;
             parametrosEmpresa.EsProduccion = this.chkbxProduccion.Checked;
+            parametrosEmpresa.Impresora1 = this.cbxImpresoras.SelectedItem.ToString();
+            parametrosEmpresa.SituacionFiscal = Convert.ToInt32(cbxSituacionFiscal.SelectedValue).ToString();
+            //parametrosEmpresa.SituacionFiscal = this.cbxSituacionFiscal.SelectedValue.ToString();
         }
         private void Guardar()
         {
