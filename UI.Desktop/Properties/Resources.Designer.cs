@@ -103,6 +103,16 @@ namespace UI.Desktop.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3319635_income_payment_finance_money_profit {
+            get {
+                object obj = ResourceManager.GetObject("3319635_income_payment_finance_money_profit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _3319640_money_coin_dollar_save_lock {
             get {
                 object obj = ResourceManager.GetObject("3319640_money_coin_dollar_save_lock", resourceCulture);

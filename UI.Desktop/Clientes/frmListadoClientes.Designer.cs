@@ -158,7 +158,7 @@
             // 
             this.btnCtaCte.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCtaCte.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.btnCtaCte.Image = global::UI.Desktop.Properties.Resources._3319627_coin_money_banking_transfer_dollar;
+            this.btnCtaCte.Image = global::UI.Desktop.Properties.Resources._3319635_income_payment_finance_money_profit;
             this.btnCtaCte.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCtaCte.Location = new System.Drawing.Point(11, 129);
             this.btnCtaCte.Name = "btnCtaCte";
