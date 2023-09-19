@@ -27,6 +27,7 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stock"].Width = 45;
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
+            this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
 
 
 
@@ -46,7 +47,9 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stock"].Width = 45;
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
+            this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
             rol = usr.Rol;
+
 
 
 
@@ -158,7 +161,8 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
             this.dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
             this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
-            dgvListado.Size = new Size(960, 429);
+            dgvListado.Size = new Size(968, 490);
+            this.dgvListado.Location = new Point(7, 56);
 
 
 
@@ -674,6 +678,28 @@ namespace UI.Desktop.Artículos
                 return true;
             }
             return false;
+        }
+
+        private void btnActualizarPrecios_Click(object sender, EventArgs e)
+        {
+            if(rol == "Administrador")
+            {
+                frmModificarPrecios frmModificarPrecios = new frmModificarPrecios(
+                    ListaArticulos, 
+                    ListaArticulosFiltrados, 
+                    familias, 
+                    proveedores, 
+                    cbxFiltroProveedor.SelectedIndex,
+                    cbxFiltroFamilia.SelectedIndex);
+                if(frmModificarPrecios.ShowDialog() == DialogResult.Yes)
+                {
+                    ActualizarLista();
+                }
+            }
+            else
+            {
+                MessageBox.Show("El usuario no posee permisos para realizar esta tarea", "Se requiere un Administrador", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
         }
     }
 

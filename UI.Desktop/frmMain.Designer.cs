@@ -142,14 +142,14 @@
             // mnuUsuarios
             // 
             this.mnuUsuarios.Name = "mnuUsuarios";
-            this.mnuUsuarios.Size = new System.Drawing.Size(180, 22);
+            this.mnuUsuarios.Size = new System.Drawing.Size(163, 22);
             this.mnuUsuarios.Text = "Usuarios";
             this.mnuUsuarios.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // mnuEditarMiUsuario
             // 
             this.mnuEditarMiUsuario.Name = "mnuEditarMiUsuario";
-            this.mnuEditarMiUsuario.Size = new System.Drawing.Size(180, 22);
+            this.mnuEditarMiUsuario.Size = new System.Drawing.Size(163, 22);
             this.mnuEditarMiUsuario.Text = "Editar mi usuario";
             this.mnuEditarMiUsuario.Click += new System.EventHandler(this.mnuEditarMiUsuario_Click);
             // 
@@ -720,6 +720,7 @@
             this.btnCerrarCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCerrarCaja.UseVisualStyleBackColor = true;
             this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
+         
             // 
             // frmMain
             // 
@@ -729,6 +730,7 @@
             this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1107, 673);
+           
             this.Controls.Add(this.scntCaja);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.groupBox1);

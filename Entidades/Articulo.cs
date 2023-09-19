@@ -46,8 +46,8 @@ namespace Entidades
         }
 
         // PRECIO
-        SqlMoney _Precio;
-        public SqlMoney Precio
+        decimal _Precio;
+        public decimal Precio
         {
             get { return _Precio; }
             set { _Precio = value; }
