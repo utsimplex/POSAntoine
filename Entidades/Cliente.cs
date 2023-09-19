@@ -11,63 +11,84 @@ namespace Entidades
         /*   D A T O S    D E L    C L I E N T E    */
         
         //DNI
-        string _Dni;
-        public string Dni
-        {
-            get { return _Dni; }
-            set { _Dni = value; }
-        }
+        public string NumeroDocumento { get; set; }
+        public int? TipoDocumento { get; set; }
 
         //NOMBRE
-        string _Nombre;
-        public string Nombre
-        {
-            get { return _Nombre; }
-            set { _Nombre = value; }
-        }
+        public string Nombre { get; set; }
 
         //APELLIDO
-        string _Apellido;
-        public string Apellido
-        {
-            get { return _Apellido; }
-            set { _Apellido = value; }
-        }
+        public string Apellido { get; set; }
 
         //TELEFONO
-        string _Telefono;
-        public string Telefono
-        {
-            get { return _Telefono; }
-            set { _Telefono = value; }
-        }
+        public string Telefono { get; set; }
 
         //DIRECCION
-        string _Direccion;
-        public string Direccion
-        {
-            get { return _Direccion; }
-            set { _Direccion = value; }
-        }
+        public string Direccion { get; set; }
 
         //EMAIL
-        string _email;
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
+        public string Email { get; set; }
 
         //TIPO
-        string _tipo;
-        public string TipoCliente
+        public string TipoCliente { get; set; }
+        public int? TipoComprobante { get; set; }
+        public int? SituacionFiscal { get; set; }
+
+        //READONLY
+        public string tipoDocumentoLetras
         {
-            get { return _tipo; }
-            set { _tipo = value; }
+            get
+            {
+                switch (TipoDocumento)
+                {
+                    case (int)FeConstantes.TipoDocumento.CUIL:
+                        return "CUIL";
+                    case (int)FeConstantes.TipoDocumento.CDI:
+                        return "CDI";
+                    case (int)FeConstantes.TipoDocumento.LC:
+                        return "LC";
+                    case (int)FeConstantes.TipoDocumento.CI_Extranjera:
+                        return "CI EXTRANJERA";
+                    case (int)FeConstantes.TipoDocumento.CUIT:
+                        return "CUIT";
+                    case (int)FeConstantes.TipoDocumento.DNI:
+                        return "DNI";
+                    case (int)FeConstantes.TipoDocumento.en_tramite:
+                        return "EN TRAMITE;";
+                    case (int)FeConstantes.TipoDocumento.LE:
+                        return "LE;";
+                    case (int)FeConstantes.TipoDocumento.Pasaporte:
+                        return "PASAPORTE";
+                    case (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR:
+                        return "SIN IDENTIFICAR";
+                    default: return "";
+                }
+            }
         }
-        
-        
-      
+
+        public string situacionFiscalLetras
+        {
+            get
+            {
+                switch (SituacionFiscal)
+                {
+                    case (int)FeConstantes.SituacionFiscal.ConsumidorFinal:
+                        return "CONSUMIDOR FINAL";
+                    case (int)FeConstantes.SituacionFiscal.EXENTO:
+                        return "EXENTO";
+                    case (int)FeConstantes.SituacionFiscal.MONOTRIBUTO:
+                        return "MONOTRIBUTO";
+                    case (int)FeConstantes.SituacionFiscal.NOALCANZADO:
+                        return "NO ALCANZADO";
+                    case (int)FeConstantes.SituacionFiscal.NOCATEGORIZADO:
+                        return "NO CATEGORIZADO";
+                    case (int)FeConstantes.SituacionFiscal.ResponsableInscripto:
+                        return "RESPONSABLE INSCRIPTO";
+                    default: return "";
+                }
+            }
+        }
+
 
     }
 }

@@ -8,12 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using Entidades;
 using System.Globalization;
-
+using System.Threading.Tasks;
+using System.Reflection;
 
 namespace UI.Desktop.Ventas
 {
     public partial class frmVenta : Form
     {
+        //Variables de Clase
         public frmVenta(Usuario usr)
         {
             InitializeComponent();
@@ -22,26 +24,40 @@ namespace UI.Desktop.Ventas
             string f = fecha.ToString("dd ' de ' MMMM ', ' yyyy");
             txtFechaHoraVta.Text = f;
             modo = "Alta";
-                   
+            ventaLocal = new Venta() { TipoOperacion="V",Usuario=usr.usuario};
+            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
+            this.ObtieneParametrosEmpresaAUI();
+            this.ObtieneClienteGenerico();
+            this.AsignaDatosClienteUI();
+            medioDePago = "";
+
         }
-        //MODO EDICION
+        //MODO READONLY -- SOLO PUEDE MODIFICAR EL MEDIO DE PAGO SI ES QUE LA CAJA NO ESTA CERRADA
         public frmVenta(Usuario usr,Venta vtaSelec)
         {
             InitializeComponent();
-            usuarioLogueado = usr;
+            ventaLocal = vtaSelec;
 
-            modo = "Modificacion";
+            usuarioLogueado = usr;
+            modo = "READONLY";
             txtFechaHoraVta.Text = vtaSelec.FechaHora.ToString("dd ' de ' MMMM ', ' yyyy"); 
             txtDcto.Text = vtaSelec.Descuento.ToString();
-            txtDniCuit.Text = vtaSelec.DniCliente.ToString();
-            txtNombRazCli.Text = Datos_ClienteAdapter.GetOne(vtaSelec.DniCliente).Nombre;
+            txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
+            txtNombRazCli.Text = Datos_ClienteAdapter.GetOne((long)vtaSelec.NumeroDocumentoCliente).Nombre;
             txtNumeroVenta.Text = vtaSelec.NumeroVenta.ToString();
             txtTotal.Text = vtaSelec.Total.ToString();
             dgvArticulosVtaActual.DataSource = Datos_VentasArticulosAdapter.GetAll(vtaSelec.NumeroVenta, vtaSelec.TipoOperacion);
+            cajaAbierta = Datos_CajasAdapter.GetEstadoCajaAbierta(vtaSelec.CajaId);
+            btnConfirmar.Enabled = cbxMedioDePago.Enabled=cajaAbierta;
+            btnFacturar.Enabled = cajaAbierta && vtaSelec.NumeroTicketFiscal == null;
             txtDcto.ReadOnly = true;
             btnBuscarCliente.Visible = false;
-            btnQuitar.Text = "Devolver";
-            vtaModificar = vtaSelec;
+            ventaLocal = vtaSelec;
+             btnAgregarArt.Enabled = btnBuscarCliente.Enabled = btnQuitar.Enabled = txtDcto.Enabled = txtDctoPesos.Enabled=false;
+            btnReimprimir.Visible = true;
+            //cbxMedioDePago.SelectedText = vtaSelec.TipoPago;
+
+
 
         }
 
@@ -55,11 +71,19 @@ namespace UI.Desktop.Ventas
         Data.Database.Ventas_Articulos Datos_VentasArticulosAdapter = new Data.Database.Ventas_Articulos();
         Data.Database.InformeVentaAdapter Datos_InformesAdapter = new Data.Database.InformeVentaAdapter();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
+        Data.Database.MedioDePagoAdapter Datos_MedioDePagoAdapter = new Data.Database.MedioDePagoAdapter();
+        Data.Database.ParametrosAdapter Datos_ParametrosAdapter = new Data.Database.ParametrosAdapter();
+        Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
         Artículos.frmListadoArticulos formListaArticulos;
+        List<MedioDePago> listaMedioDePagos = new List<MedioDePago>();
         string modo;
         Entidades.Usuario usuarioLogueado;
+        Entidades.Venta ventaLocal;
+        Entidades.ParametrosEmpresa parametrosEmpresa;
         Venta vtaModificar;
-         
+        bool cajaAbierta = false;
+        public string medioDePago;
+
         #endregion
 
 
@@ -74,8 +98,9 @@ namespace UI.Desktop.Ventas
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
                clienteActual = BuscarCliente();
-            txtNombRazCli.Text = clienteActual.Nombre + " " + clienteActual.Apellido;
-            txtDniCuit.Text = clienteActual.Dni;
+            this.AsignaDatosClienteUI();
+            //txtNombRazCli.Text = clienteActual.Nombre + " " + clienteActual.Apellido;
+            //txtDniCuit.Text = clienteActual.NumeroDocumento;
                
         }
 
@@ -85,17 +110,19 @@ namespace UI.Desktop.Ventas
             AñadirArticuloVtaActual();
         }
 
-        // CLICK - BOTON ACEPTAR
-        private void btnConfirmar_Click(object sender, EventArgs e)
-        {
-            ConfirmarVenta();
-        }
-
-  
 
         // EVENTO LOAD
         private void frmVenta_Load(object sender, EventArgs e)
         {
+            cbxMedioDePago.Items.Clear();
+            listaMedioDePagos = Datos_MedioDePagoAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x=>x.Default).OrderBy(x=>x.Descripcion).ToList();
+            if (listaMedioDePagos != null)
+            {
+                cbxMedioDePago.DataSource = listaMedioDePagos;
+                cbxMedioDePago.DisplayMember = "descripcion";
+                cbxMedioDePago.ValueMember = "id";
+                cbxMedioDePago.SelectedIndex = listaMedioDePagos.FindIndex(x => x.Default == true);
+            }
             txtTotal.ReadOnly = true;
             //EVALUO UN CAMPO PARA VER SI ES EDICION O ALTA DE VENTA NUEVA
             if (modo == "Alta")
@@ -105,28 +132,16 @@ namespace UI.Desktop.Ventas
                     ConfigurarGrillaDetalles();
 
                 int ultNroVta = Datos_VentasAdapter.getUltNroVenta();
-
+                ventaLocal.NumeroVenta = ultNroVta + 1;
                 this.txtNumeroVenta.Text = Convert.ToString(ultNroVta + 1);
             }
-            else //LOAD MODO MODIFICACION
+            else //LOAD MODO READONLY
             {
-                int statusVenta = Datos_VentasAdapter.getStatusVenta(vtaModificar.NumeroVenta);
-                if(statusVenta == 0)
-                {
-
+                cbxMedioDePago.SelectedValue = listaMedioDePagos.First(medioDePago=>medioDePago.Descripcion== ventaLocal.TipoPago).id;
                 formListaArticulos = new UI.Desktop.Artículos.frmListadoArticulos();
                 ConfigurarGrillaDetalles();
-                    this.Text = "Realizar Devolución";
-                    gbTotal.Text = "Total a devolver";
-                formListaArticulos.ListaArticulosVtaActual = Datos_VentasArticulosAdapter.GetAll(Convert.ToInt32(txtNumeroVenta.Text), vtaModificar.TipoOperacion);
-                btnAgregarArt.Visible = false;
-                }
-                else
-                {
-                    MessageBox.Show("Esta venta ya tiene devoluciones registradas. No puede modificarse", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.None;
-                    this.Close();
-                }
+                    this.Text = "VER VENTA";
+                formListaArticulos.ListaArticulosVtaActual = Datos_VentasArticulosAdapter.GetAll(Convert.ToInt32(txtNumeroVenta.Text), ventaLocal.TipoOperacion);
 
             }//ELSE---> ACA ESTA EN MODO MODIFICAR, x lo tanto no cargo nada de lo anterior
         }
@@ -138,16 +153,47 @@ namespace UI.Desktop.Ventas
             //if (dgvArticulosVtaActual.CurrentCell.ColumnIndex == 3 && modo == "Alta")
             //{
             //    dgvArticulosVtaActual.BeginEdit(true);
-                               
+
             //}
             //else
             //{
-                MessageBox.Show("No se puede editar esta columna", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            if (modo == "Alta")
+            {
 
-            
+                if (e.ColumnIndex != 6 && e.ColumnIndex != 7 && dgvArticulosVtaActual.Rows.Count > 0)
+                {
+                    MessageBox.Show("No se puede editar esta columna", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                if (e.ColumnIndex == 6 && dgvArticulosVtaActual.Rows.Count > 0)
+                {
+                    MessageBox.Show("Ingrese el monto de descuento", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    decimal precio = Convert.ToDecimal(dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Precio"].Value);
+                    int cantidad = Convert.ToInt32(dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Cantidad"].Value);
+                    frmIngresaDescuento descuento = new frmIngresaDescuento("$", precio * cantidad);
+                    if (descuento.ShowDialog() == DialogResult.OK)
+                    {
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento_porcentaje"].Value = Convert.ToDecimal(0);
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento"].Value = descuento.descuento;
+                    }
+                    AplicarDescuento();
+                }
+                else if (e.ColumnIndex == 7 && dgvArticulosVtaActual.Rows.Count > 0)
+                {
+                    MessageBox.Show("Ingrese el porcentaje de descuento", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    frmIngresaDescuento descuento = new frmIngresaDescuento("%", 0);
+                    if (descuento.ShowDialog() == DialogResult.OK)
+                    {
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento_porcentaje"].Value = descuento.descuento;
+                        dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento"].Value = Convert.ToDecimal(0);
+                    }
+                    AplicarDescuento();
+                }
+            }
 
-        }
+
+
+    }
 
 
         //TECLAS ACCESO RAPIDO
@@ -161,7 +207,7 @@ namespace UI.Desktop.Ventas
                 
                   clienteActual = BuscarCliente();
                     txtNombRazCli.Text = clienteActual.Nombre + " " + clienteActual.Apellido;
-                    txtDniCuit.Text = clienteActual.Dni;
+                    txtDniCuit.Text = clienteActual.NumeroDocumento;
                  
                     break;
 
@@ -198,7 +244,21 @@ namespace UI.Desktop.Ventas
         //DESCUENTO - Modificar valor del porcentaje de descuento.
         private void txtDcto_Leave(object sender, EventArgs e)
         {
-            AplicarDescuento();
+            if (!String.IsNullOrEmpty(this.txtDcto.Text))
+            {
+                if (!String.IsNullOrEmpty(this.txtDctoPesos.Text))
+                    this.txtDctoPesos.Text = "";
+            }
+                AplicarDescuento();
+        }
+        private void txtDctoPesos_Leave(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txtDctoPesos.Text))
+            {
+                if (!String.IsNullOrEmpty(this.txtDcto.Text))
+                    this.txtDcto.Text = "";
+            }
+                AplicarDescuento();
         }
 
         //BTN QUITAR CLICK
@@ -221,11 +281,104 @@ namespace UI.Desktop.Ventas
                 }
                 
             }
+            if(modo=="Alta" && dgvArticulosVtaActual.SelectedRows.Count==1)
+            {
+                string codArtiQuitar = dgvArticulosVtaActual.SelectedRows[0].Cells["CodigoArticulo"].Value.ToString();
+
+                Venta_Articulo artiDevuelto = formListaArticulos.ListaArticulosVtaActual.Where(x => x.CodigoArticulo == codArtiQuitar).FirstOrDefault();
+                    if (artiDevuelto != null)
+                    {
+                        formListaArticulos.ListaArticulosVtaActual.Remove(artiDevuelto);
+                        ActualizarVtaActual();
+                        AplicarDescuento();
+                    }
+            }
+        }
+
+        // CLICK - BOTON ACEPTAR
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            if (modo == "Alta")
+            {
+
+                if (this.dgvArticulosVtaActual.RowCount != 0)
+                {
+                    this.setMedioPago();
+                    DialogResult construyeVenta = this.ConstruirVenta();
+                    if (construyeVenta != DialogResult.Cancel)
+                    { 
+                        this.GuardarVenta();
+                        if (construyeVenta == DialogResult.Yes)
+                        {
+                            ventaLocal = Datos_VentasAdapter.GetOne(ventaLocal.NumeroVenta);
+                            if (ventaLocal.NumeroTicketFiscal != null)
+                            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "FISCAL"); }
+                            else
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                            }
+                        }
+                    this.Dispose();
+                    }
+                }
+                else
+                    MessageBox.Show("No se puede generar un comprobante sin lineas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                //actualizo el medio de pago
+                this.setMedioPago();
+                this.GuardarVenta();
+                this.Dispose();
+
+            }
+        }
+
+
+        private async void btnFacturar_Click(object sender, EventArgs e)
+        {
+            if (modo == "Alta")
+            {
+                if (this.dgvArticulosVtaActual.RowCount != 0 && Convert.ToDouble(this.txtTotal.Text) > 0)
+                {
+                    this.setMedioPago();
+                    DialogResult construyeVenta = this.ConstruirVenta();
+                    if (construyeVenta != DialogResult.Cancel)
+                    {
+                        this.GuardarVenta();
+                        await this.FacturarVentaAsync();
+                        if(construyeVenta == DialogResult.Yes)
+                        {
+                            ventaLocal = Datos_VentasAdapter.GetOne(ventaLocal.NumeroVenta);
+                            if (ventaLocal.NumeroTicketFiscal != null)
+                            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "FISCAL"); }
+                            else
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                            }
+                        }
+                    this.Dispose();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se puede emitir un comprobante en $0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                //actualizo el medio de pago
+                this.setMedioPago();
+                this.GuardarVenta();
+                await this.FacturarVentaAsync();
+                this.Dispose();
+
+            }
         }
 
         #endregion
-        
-    
+
+
         #region /*/*/*/ M E T O D O S \*\*\*\
 
         //Configurar Grilla Detalles
@@ -247,9 +400,16 @@ namespace UI.Desktop.Ventas
                        this.dgvArticulosVtaActual.Columns.Add(subTotal);
            */
             //Titulo de las columnas
+            this.dgvArticulosVtaActual.Columns["descuento"].HeaderText = "Descuento ($)";
+            this.dgvArticulosVtaActual.Columns["descuento"].DefaultCellStyle.Format = "c";
+            this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].HeaderText = "Descuento ($)";
+            this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].DefaultCellStyle.Format = "#.\\%";
             this.dgvArticulosVtaActual.Columns["CodigoArticulo"].HeaderText = "Código";
             this.dgvArticulosVtaActual.Columns["DescripcionArticulo"].HeaderText = "Descripción";
             this.dgvArticulosVtaActual.Columns["Precio"].HeaderText = "Precio ($)";
+            this.dgvArticulosVtaActual.Columns["Precio"].DefaultCellStyle.Format = "c";
+            this.dgvArticulosVtaActual.Columns["subtotal"].HeaderText = "SubTotal ($)";
+            this.dgvArticulosVtaActual.Columns["subtotal"].DefaultCellStyle.Format = "c";
 
             //Ancho de las columnas
             ConfigurarAnchoColumnas();
@@ -277,16 +437,17 @@ namespace UI.Desktop.Ventas
 
             if (formListaClientes.ShowDialog() == DialogResult.Yes)
             {
-                clienteActual = Datos_ClienteAdapter.GetOne(formListaClientes.dniClienteSelecccionado);
+                clienteActual = Datos_ClienteAdapter.GetOne((long)formListaClientes.dniClienteSelecccionado);
             }
             else
             {
-                clienteActual = new Entidades.Cliente();
-                clienteActual.Nombre = "No Registrado";
-                clienteActual.Apellido = " ";
-                clienteActual.Dni = "No Registrado";
-                clienteActual.Email = "No Registrado";
-                clienteActual.Telefono = "No Registrado";
+                //keep the original value
+                //clienteActual = new Entidades.Cliente();
+                //clienteActual.Nombre = "No Registrado";
+                //clienteActual.Apellido = " ";
+                //clienteActual.NumeroDocumento = "No Registrado";
+                //clienteActual.Email = "No Registrado";
+                //clienteActual.Telefono = "No Registrado";
             }
 
             return clienteActual;
@@ -303,32 +464,33 @@ namespace UI.Desktop.Ventas
             formListaArticulos.ShowDialog();
                      
             ActualizarVtaActual();
+            AplicarDescuento();
 
             }
 
         //QUITAR artículo a esta venta
-        private void ElimArticuloVtaActual()
-        {
-            if(dgvArticulosVtaActual.SelectedRows.Count > 0)
-            {
+        //private void ElimArticuloVtaActual()
+        //{
+        //    if(dgvArticulosVtaActual.SelectedRows.Count > 0)
+        //    {
 
-            string codArtToElim = dgvArticulosVtaActual.SelectedRows[0].Cells["CodigoArticulo"].Value.ToString();
-            Entidades.Venta_Articulo vtaArtToElim;
-            foreach (Entidades.Venta_Articulo vtaArti in formListaArticulos.ListaArticulosVtaActual)
-            {
-                if (vtaArti.CodigoArticulo == codArtToElim)
-                {
-                    vtaArtToElim = vtaArti;
-                    formListaArticulos.ListaArticulosVtaActual.Remove(vtaArtToElim);
-                    break;
-                }
-            }
+        //    string codArtToElim = dgvArticulosVtaActual.SelectedRows[0].Cells["CodigoArticulo"].Value.ToString();
+        //    Entidades.Venta_Articulo vtaArtToElim;
+        //    foreach (Entidades.Venta_Articulo vtaArti in formListaArticulos.ListaArticulosVtaActual)
+        //    {
+        //        if (vtaArti.CodigoArticulo == codArtToElim)
+        //        {
+        //            vtaArtToElim = vtaArti;
+        //            formListaArticulos.ListaArticulosVtaActual.Remove(vtaArtToElim);
+        //            break;
+        //        }
+        //    }
 
-            ActualizarVtaActual();
-            }
+        //    ActualizarVtaActual();
+        //    }
 
             
-        }
+        //}
         
         //Actualizar Grilla - Lista Vta Actual
         private void ActualizarVtaActual()
@@ -345,8 +507,8 @@ namespace UI.Desktop.Ventas
                 ConfigurarAnchoColumnas();
 
                 //Actualizar Total
-                ActualizarTotal();
             }
+                ActualizarTotal();
         }
 
         //Actualizar Total
@@ -360,34 +522,51 @@ namespace UI.Desktop.Ventas
                 //Actualizar SUB-TOTAL
                 foreach (Entidades.Venta_Articulo filaArt in formListaArticulos.ListaArticulosVtaActual)
                 {
-                    filaArt.Subtotal = filaArt.Cantidad * Convert.ToDecimal(filaArt.Precio.ToString());
-                    total = Convert.ToDecimal(total + Convert.ToDecimal(filaArt.Subtotal.ToString()));
+                    var previoSubtotal = filaArt.Cantidad * Convert.ToDecimal(filaArt.Precio.ToString());
+                    //filaArt.Subtotal = filaArt.Cantidad * Convert.ToDecimal(filaArt.Precio.ToString());
+                    if (filaArt.Descuento_porcentaje != 0)
+                    {
+                        filaArt.Subtotal = previoSubtotal- (previoSubtotal * filaArt.Descuento_porcentaje/100);
+                    }
+                    else if (filaArt.Descuento != 0)
+                    {
+                        filaArt.Subtotal = previoSubtotal - filaArt.Descuento;
+
+                    }
+                    else
+                    {
+                        filaArt.Subtotal = previoSubtotal;
+                    }
+                    //filaArt.Descuento = (filaArt.Descuento_porcentaje/100)* filaArt.Subtotal;
+                    total = Math.Round(total + Convert.ToDecimal(filaArt.Subtotal.ToString()),2);
 
                 }
 
                 this.txtTotal.Text = total.ToString();
 
                 //Titulo de las columnas
+                this.dgvArticulosVtaActual.Columns["Descuento"].HeaderText = "Descuento ($)";
+                this.dgvArticulosVtaActual.Columns["Descuento_porcentaje"].HeaderText = "Descuento (%)";
                 this.dgvArticulosVtaActual.Columns["CodigoArticulo"].HeaderText = "Código";
                 this.dgvArticulosVtaActual.Columns["DescripcionArticulo"].HeaderText = "Descripción";
                 this.dgvArticulosVtaActual.Columns["Precio"].HeaderText = "Precio ($)";
             }
             else //SI EL MODO ES MODIFICACION
             {
-                Decimal total = 0;
+                //Decimal total = 0;
 
                 
-                //Actualizar TOTAL -           filaArtVtaActual ya tiene el subtotal negativo
-                foreach (Entidades.Venta_Articulo filaArtVtaActual in formListaArticulos.ListaArticulosVtaActual)
-                {
+                ////Actualizar TOTAL -           filaArtVtaActual ya tiene el subtotal negativo
+                //foreach (Entidades.Venta_Articulo filaArtVtaActual in formListaArticulos.ListaArticulosVtaActual)
+                //{
                     
-                        if(filaArtVtaActual.TipoOperacion == "D")
-                        {
-                            total = Convert.ToDecimal(total + Convert.ToDecimal(filaArtVtaActual.Subtotal.ToString()));
-                        }
+                //        if(filaArtVtaActual.TipoOperacion == "D")
+                //        {
+                //            total = Convert.ToDecimal(total + Convert.ToDecimal(filaArtVtaActual.Subtotal.ToString()));
+                //        }
                     
-                }//ESTO NO FUNCIONA
-                this.txtTotal.Text = Convert.ToString(total);
+                //}//ESTO NO FUNCIONA
+                //this.txtTotal.Text = Convert.ToString(total);
             }
             this.dgvArticulosVtaActual.Refresh();
         }
@@ -397,15 +576,32 @@ namespace UI.Desktop.Ventas
         {
             ActualizarTotal();
             
-            if (txtDcto.Text != "")
+            Decimal total = Convert.ToDecimal(txtTotal.Text);
+
+            if (txtDcto.Text != "" && txtDcto.Text != "0")
             {
                 Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
-                Decimal total = Convert.ToDecimal(txtTotal.Text);
+                ventaLocal.Descuento = descuentoTotal;
                 txtTotal.Text = Convert.ToString(total - descuentoTotal);
+            }
+            else if (txtDctoPesos.Text != "" && txtDctoPesos.Text!="0")
+            {
+                Decimal descuentoTotal = Convert.ToDecimal(txtDctoPesos.Text);
+                //Decimal total = Convert.ToDecimal(txtTotal.Text);
+                if (descuentoTotal <= total)
+                {
+                    txtTotal.Text = Convert.ToString(total - descuentoTotal);
+                    ventaLocal.Descuento = descuentoTotal;
+                }
+                else
+                {
+                    MessageBox.Show("El monto de descuento es mayor al total. No puede aplicarse", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtDctoPesos.Text = "";
+                }
             }
             else
             {
-                ActualizarTotal();
+                //ActualizarTotal();
             }
         }
 
@@ -470,180 +666,251 @@ namespace UI.Desktop.Ventas
             }
 
         }
-
-        //GUARDAR VENTA
-        private void ConfirmarVenta()
+        
+        //VALIDAR VENTA
+        private bool ValidarVenta()
         {
+            //Este metodo devuelve true si la venta es valida
+            return Convert.ToDouble(this.ventaLocal.Total) != 0 ;
+        }
+        //GENERAR VENTA a Variable Local
+        private DialogResult ConstruirVenta()
+        {
+            var formularioConfirmacion = this.ConfirmarVenta(); 
+            DialogResult formConfirmarVenta = formularioConfirmacion.ShowDialog();
             if (modo == "Alta")
             {
-                Entidades.Venta vtaNueva = new Entidades.Venta();
-                vtaNueva.TipoOperacion = "V";
-                Ventas.frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
 
-                formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
-
-                string medio = null;
-
-                if (rbEfectivo.Checked)
+                if (formConfirmarVenta == DialogResult.OK || formConfirmarVenta == DialogResult.Yes)
                 {
-                    medio = "Efectivo";
-                    //vtaNueva.TipoPago = "Efectivo"; 
-                }
-                else if (rbTarjeta.Checked)
-                {
-                    medio = "Debito/Credito";
-                   // vtaNueva.TipoPago = "Debito/Credito";
-                } else if (rbMP.Checked)
-                {
-                    medio = "Mercado Pago";
-                }
-
-                vtaNueva.TipoPago = medio;
-
-                formConfirmarVenta.txtTipoPago.Text = vtaNueva.TipoPago;
-                formConfirmarVenta.ShowDialog();
-
-                if (formConfirmarVenta.DialogResult == DialogResult.OK || formConfirmarVenta.DialogResult == DialogResult.Yes)
-                {
-                    vtaNueva.NumeroVenta = Convert.ToInt32(txtNumeroVenta.Text);
-                    vtaNueva.FechaHora = Convert.ToDateTime(DateTime.Now);
-                    vtaNueva.DniCliente = txtDniCuit.Text;
-                    vtaNueva.Total = Convert.ToDecimal(txtTotal.Text);
-                    vtaNueva.Usuario = usuarioLogueado.usuario;
-
-                    if (txtDcto.Text == "")
+                    foreach (Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
                     {
-                        vtaNueva.Descuento = 0;
+                        lineaVta.NumeroVenta = ventaLocal.NumeroVenta;
+                        lineaVta.TipoOperacion = ventaLocal.TipoOperacion;
+                    }
+                    ventaLocal.FechaHora = Convert.ToDateTime(DateTime.Now);
+
+                    //#Data Fiscal
+                    this.SetDatosClienteEnVenta();
+
+                    ventaLocal.Total = Convert.ToDecimal(txtTotal.Text);
+                    double Neto = Math.Round(Convert.ToDouble(txtTotal.Text) / 1.21,2);
+                    ventaLocal.Neto = Convert.ToDouble(Neto.ToString("0.00"));
+                    double Iva = Math.Round(Convert.ToDouble(ventaLocal.Total) - Neto,2);
+                    ventaLocal.Iva = Convert.ToDouble(Iva.ToString("0.00"));
+
+                    //TO-DO:FIX ON CUENTAS CORRIENTES
+                    if (formularioConfirmacion.cuentaCorriente)
+                    {
+                        ventaLocal.Pagado = false;
+                        ventaLocal.MontoPagado = 0;
                     }
                     else
                     {
-                        vtaNueva.Descuento = Convert.ToInt32(txtDcto.Text);
+                    ventaLocal.Pagado = true;
+                    ventaLocal.MontoPagado = ventaLocal.Total;
                     }
-
-                    Datos_VentasAdapter.RegistrarVenta(vtaNueva);
-
-
-                    foreach (Entidades.Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
-                    {
-                        lineaVta.NumeroVenta = vtaNueva.NumeroVenta;
-                        lineaVta.TipoOperacion = vtaNueva.TipoOperacion;
-                        Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
-                    }
-                }
-
-                if (formConfirmarVenta.DialogResult == DialogResult.Yes)
-                {
-                    PrinterDrawing prt = new PrinterDrawing(vtaNueva, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
-                    //int numVenta = Convert.ToInt32(txtNumeroVenta.Text);
-
-                    //string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion  INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.tipooperacion = 'V' )";
-
-                    //if (Datos_InformesAdapter.BuscarRegistros(sql))
-                    // {
-                    //     System.IO.Directory.CreateDirectory("C:\\XML");
-                    //     string url = "C:\\XML\\informeVenta.xml";
-
-                        //     Datos_InformesAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
-
-                        // }
-
-                        // frmInformeVenta formInformeVenta = new frmInformeVenta();
-                        // formInformeVenta.ShowDialog();
-                        //System.IO.File.Delete("C:\\XML\\informeVenta.xml"); 
-
-                }
-
-                if (formConfirmarVenta.DialogResult != DialogResult.Cancel)
-                    {
-                        ActualizarStock();
-                    }
-            }else if (modo == "Modificacion")
-            {
-                Ventas.frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
-                formConfirmarVenta.Text = "Modificar Venta - Confirmar";
-                formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
-
-                string medio = null;
-
-                if (rbEfectivo.Checked)
-                {
-                    medio = "Efectivo";
-                    //vtaNueva.TipoPago = "Efectivo"; 
-                }
-                else if (rbTarjeta.Checked)
-                {
-                    medio = "Debito/Credito";
-                    // vtaNueva.TipoPago = "Debito/Credito";
-                }
-                else if (rbMP.Checked)
-                {
-                    medio = "Mercado Pago";
-                }
-
-                vtaModificar.TipoPago = medio;
-
-                formConfirmarVenta.txtTipoPago.Text = vtaModificar.TipoPago;
-                formConfirmarVenta.ShowDialog();
-
-                if (formConfirmarVenta.DialogResult == DialogResult.OK || formConfirmarVenta.DialogResult == DialogResult.Yes)
-                {
-                    vtaModificar.NumeroVenta = Convert.ToInt32(txtNumeroVenta.Text);
-                    vtaModificar.FechaHora = Convert.ToDateTime(DateTime.Now);
-                    vtaModificar.DniCliente = txtDniCuit.Text;
-                    vtaModificar.Total = Convert.ToDecimal(txtTotal.Text);
-                    vtaModificar.Usuario = usuarioLogueado.usuario;
-
-                    if (txtDcto.Text == "")
-                    {
-                        vtaModificar.Descuento = 0;
-                    }
+                    //TO-DO: Evaluar parametro de Usuario para saber si el emisor es Monotributista
+                    bool Monotributista = Convert.ToInt32(parametrosEmpresa.SituacionFiscal) == (int)FeConstantes.SituacionFiscal.MONOTRIBUTO;
+                    
+                    if (Monotributista)
+                        ventaLocal.TipoComprobante = (int)FeConstantes.TipoComprobante.FacturaC;
                     else
-                    {
-                        vtaModificar.Descuento = Convert.ToInt32(txtDcto.Text);
-                    }
-                   
-                    Datos_VentasAdapter.RegistrarVenta(vtaModificar);
-
-
-                    foreach (Entidades.Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
-                    {
-                      if(lineaVta.TipoOperacion == "D")
-                        {
-                        lineaVta.NumeroVenta = vtaModificar.NumeroVenta;
-                        Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
-                        }
-                    }
+                        ventaLocal.TipoComprobante = lblTipoComprobante.Text == "FACTURA B" ? (int)FeConstantes.TipoComprobante.FacturaB : clienteActual.TipoComprobante;
                 }
 
-                if (formConfirmarVenta.DialogResult == DialogResult.Yes)
-                {
-                    int numVenta = Convert.ToInt32(txtNumeroVenta.Text);
+                //Se imprime afuera
+                //if (formConfirmarVenta == DialogResult.Yes)
+                //{
+                //    PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+                //}
 
-                    string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni  WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.tipooperacion = 'D' )";
-
-                    if (Datos_InformesAdapter.BuscarRegistros(sql))
-                    {
-                        System.IO.Directory.CreateDirectory("C:\\XML");
-                        string url = "C:\\XML\\informeVenta.xml";
-
-                        Datos_InformesAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
-
-                    }
-
-                    frmInformeVenta formInformeVenta = new frmInformeVenta();
-                    formInformeVenta.ShowDialog();
-                    System.IO.File.Delete("C:\\XML\\informeVenta.xml");
-
-                }
-
-                if (formConfirmarVenta.DialogResult != DialogResult.Cancel)
-                {
-                    ActualizarStock();
-                }
+                //if (formConfirmarVenta != DialogResult.Cancel)
+                //{
+                //    ActualizarStock();
+                //}
             }
-            
+            else if (modo == "Devolucion")
+            {
+                //TODO:Devoluciones
+                //Ventas.frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
+                //formConfirmarVenta.Text = "Devolucion de Venta - Confirmar";
+                //formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
+
+                //string medio = null;
+
+                //if (rbEfectivo.Checked)
+                //{
+                //    medio = "Efectivo";
+                //    //vtaNueva.TipoPago = "Efectivo"; 
+                //}
+                //else if (rbTarjeta.Checked)
+                //{
+                //    medio = "Debito/Credito";
+                //    // vtaNueva.TipoPago = "Debito/Credito";
+                //}
+                //else if (rbMP.Checked)
+                //{
+                //    medio = "Mercado Pago";
+                //}
+
+                //vtaModificar.TipoPago = medio;
+
+                //formConfirmarVenta.txtTipoPago.Text = vtaModificar.TipoPago;
+                //formConfirmarVenta.ShowDialog();
+
+                //if (formConfirmarVenta.DialogResult == DialogResult.OK || formConfirmarVenta.DialogResult == DialogResult.Yes)
+                //{
+                //    vtaModificar.NumeroVenta = Convert.ToInt32(txtNumeroVenta.Text);
+                //    vtaModificar.FechaHora = Convert.ToDateTime(DateTime.Now);
+                //    vtaModificar.DniCliente = txtDniCuit.Text;
+                //    vtaModificar.Total = Convert.ToDecimal(txtTotal.Text);
+                //    vtaModificar.Usuario = usuarioLogueado.usuario;
+
+                //    if (txtDcto.Text == "")
+                //    {
+                //        vtaModificar.Descuento = 0;
+                //    }
+                //    else
+                //    {
+                //        vtaModificar.Descuento = Convert.ToDecimal(txtDcto.Text);
+                //    }
+
+                //    //Datos_VentasAdapter.RegistrarVenta(vtaModificar);
+
+
+                //    foreach (Entidades.Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
+                //    {
+                //        //    if (lineaVta.TipoOperacion == "D")
+                //        //    {
+                //        lineaVta.NumeroVenta = vtaModificar.NumeroVenta;
+                //        //        Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
+                //        //    }
+                //    }
+                //}
+
+                //if (formConfirmarVenta.DialogResult == DialogResult.Yes)
+                //{
+                //    int numVenta = Convert.ToInt32(txtNumeroVenta.Text);
+
+                //    string sql = "SELECT Ventas.numVenta, Ventas.fechaHora, Ventas.TipoPago, Ventas.Total, Clientes.dni, Clientes.apellido + ', ' + Clientes.nombre AS [Nombre y Apellido], Ventas_Articulos.CFARTCODIGO, Articulos.Descripcion, Ventas_Articulos.cantidad, Ventas_Articulos.precio FROM [Ventas] INNER JOIN [Ventas_Articulos] on Ventas.numVenta = Ventas_Articulos.CFVENNumVenta AND Ventas.TipoOperacion = Ventas_Articulos.TipoOperacion INNER JOIN [Articulos] on Ventas_Articulos.CFArtCodigo = Articulos.codigo LEFT JOIN [Clientes] on Ventas.dniCliente = Clientes.dni  WHERE (Ventas.numVenta =" + numVenta + " AND Ventas.tipooperacion = 'D' )";
+
+                //    if (Datos_InformesAdapter.BuscarRegistros(sql))
+                //    {
+                //        System.IO.Directory.CreateDirectory("C:\\XML");
+                //        string url = "C:\\XML\\informeVenta.xml";
+
+                //        Datos_InformesAdapter.tablas.WriteXml(url, XmlWriteMode.WriteSchema);
+
+                //    }
+
+                //    frmInformeVenta formInformeVenta = new frmInformeVenta();
+                //    formInformeVenta.ShowDialog();
+                //    System.IO.File.Delete("C:\\XML\\informeVenta.xml");
+
+                //}
+
+                //if (formConfirmarVenta.DialogResult != DialogResult.Cancel)
+                //{
+                //    ActualizarStock();
+                //}
+            }
+            return formConfirmarVenta;
         }
 
+
+        //GUARDAR VENTA desde Variable Local
+        private void GuardarVenta()
+        {
+            if(modo=="Alta")
+            {
+            Datos_VentasAdapter.RegistrarVenta(ventaLocal);
+
+            foreach (Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
+            {
+                //lineaVta.NumeroVenta = ventaLocal.NumeroVenta;
+                //lineaVta.TipoOperacion = ventaLocal.TipoOperacion;
+                Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
+            }
+            ActualizarStock();
+            }
+            else if(modo=="READONLY")
+            {
+                Datos_VentasAdapter.ActualizarMedioDePago(ventaLocal);
+            }
+        }
+        
+        private async Task FacturarVentaAsync()
+        {
+            //TO-DO: FIX TOMAR PARAMETRO GENERAL - segundo parametro si es monotributista
+            bool esMonotributo = Convert.ToInt32(parametrosEmpresa.SituacionFiscal) == (int)FeConstantes.SituacionFiscal.MONOTRIBUTO;
+            await Facturador.facturarAsync(ventaLocal, esMonotributo);
+        }
+        private void setMedioPago()
+        {
+
+            //if (rbEfectivo.Checked)
+            //{
+            //    ventaLocal.TipoPago = "Efectivo";
+            //    //vtaNueva.TipoPago = "Efectivo"; 
+            //}
+            //else if (rbTarjeta.Checked)
+            //{
+            //    ventaLocal.TipoPago = "Debito/Credito";
+            //    // vtaNueva.TipoPago = "Debito/Credito";
+            //}
+            //else if (rbMP.Checked)
+            //{
+            //    ventaLocal.TipoPago = "Mercado Pago";
+            //}
+            //else
+            //    ventaLocal.TipoPago = "";
+            medioDePago = cbxMedioDePago.Text;
+            ventaLocal.TipoPago = this.cbxMedioDePago.Text;
+        }
+        //GUARDAR VENTA
+        private frmConfirmarVta ConfirmarVenta()
+        {
+            frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
+            formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
+
+           
+            formConfirmarVenta.txtTipoPago.Text = ventaLocal.TipoPago;
+            return formConfirmarVenta;
+        }
+
+        private void SetDatosClienteEnVenta()
+        {
+            ventaLocal.NumeroDocumentoCliente = clienteActual != null ? Convert.ToInt64(clienteActual.NumeroDocumento) : 0;
+            //ventaLocal.SituacionFiscalCliente = clienteActual.TipoCliente; TO - DO: asignar id de situacion Fiscal
+            ventaLocal.SituacionFiscalCliente = (int)FeConstantes.SituacionFiscal.ConsumidorFinal;
+            ventaLocal.NombreCliente = clienteActual != null ? clienteActual.Nombre : "";
+            ventaLocal.DireccionCliente = clienteActual != null ? clienteActual.Direccion : "";
+            ventaLocal.TipoDocumentoCliente = clienteActual != null && clienteActual.TipoDocumento != null ? clienteActual.TipoDocumento : (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR;
+        }
+        private void ObtieneParametrosEmpresaAUI()
+        {
+            lblDireccion.Text = parametrosEmpresa.Direccion;
+            lblNombreNegocio.Text = parametrosEmpresa.Nombre;
+            lblTelefono.Text = parametrosEmpresa.Telefono;
+        }
+        private void ObtieneClienteGenerico()
+        {
+            //obtiene cliente generico para 
+            clienteActual = Datos_ClienteAdapter.GetOne(0);
+        }
+        private void AsignaDatosClienteUI()
+        {
+            txtNombRazCli.Text = clienteActual.Nombre + " " + clienteActual.Apellido;
+            txtDniCuit.Text = clienteActual.NumeroDocumento;
+            txtTipoComprobante.Text = GetEnumDescription((FeConstantes.TipoComprobante)clienteActual.TipoComprobante);
+        }
+        public static string GetEnumDescription(Enum value)
+        {
+            FieldInfo field = value.GetType().GetField(value.ToString());
+            DescriptionAttribute attribute = field.GetCustomAttribute<DescriptionAttribute>();
+            return attribute == null ? value.ToString() : attribute.Description;
+        }
 
         #endregion
 
@@ -703,46 +970,21 @@ namespace UI.Desktop.Ventas
 
         }
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnReimprimir_Click(object sender, EventArgs e)
+        {
+            if (ventaLocal.NumeroTicketFiscal != null)
+            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "FISCAL"); }
+            else
+            {
+                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
+            }
+        }
+
         
-
-
-        
-
-    
-
-      
-
-       
-
-       
-
-       
-
-    
-      
-
-       
-
-      
-        
-
-    
-     
-     
-        
-
-       
-
-      
-     
-
-       
-
-
-       
-
-
-
-
     }
 }

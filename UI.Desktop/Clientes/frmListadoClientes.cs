@@ -23,6 +23,7 @@ namespace UI.Desktop.Clientes
         {
             InitializeComponent();
             ActualizarLista();
+            user = usr;
             rol = usr.Rol;
         }
 
@@ -30,6 +31,7 @@ namespace UI.Desktop.Clientes
         #region ///***///***///***/// V A R I A B L E S   L O C A L E S \\\***\\\***\\\***\\\
 
 
+        Usuario user;
         string rol;
         //PROPIEDAD MODOFORM
         TipoForm _modoForm;
@@ -49,7 +51,7 @@ namespace UI.Desktop.Clientes
         }
 
         //CLIENTE ACTUAL/SELECCIONADO
-        public string dniClienteSelecccionado;
+        public long dniClienteSelecccionado;
 
         //LISTA DE ARTICULOS
         public List<Entidades.Cliente> ListaClientes;
@@ -66,11 +68,16 @@ namespace UI.Desktop.Clientes
             dgvListado.DataSource = ListaClientes;
             dgvListado.Width = 810;
             dgvListado.Columns["email"].Width = 160;
-            dgvListado.Columns["dni"].HeaderText = "D.N.I";
+            dgvListado.Columns["numeroDocumento"].HeaderText = "D.N.I";
             dgvListado.Columns["telefono"].HeaderText = "Teléfono";
             dgvListado.Columns["direccion"].HeaderText = "Dirección";
-            dgvListado.Columns["tipoCliente"].HeaderText = "Tipo";
-            dgvListado.Columns["tipoCliente"].Width = 145;
+            dgvListado.Columns["situacionFiscalLetras"].HeaderText = "Situacion Fiscal";
+            //dgvListado.Columns["tipoCliente"].Width = 145;
+            dgvListado.Columns["tipoDocumento"].Visible = false;
+            dgvListado.Columns["tipoCliente"].Visible = false;
+            dgvListado.Columns["TipoComprobante"].Visible = false;
+            dgvListado.Columns["SituacionFiscal"].Visible = false;
+            dgvListado.Columns["tipoDocumentoLetras"].HeaderText = "Tipo Documento";
         }
 
 
@@ -91,7 +98,7 @@ namespace UI.Desktop.Clientes
 
             if (formConfirmar.ShowDialog() == DialogResult.Yes)
             {
-                string clienteToDelete = dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+                string clienteToDelete = dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString();
                 DatosClienteAdapter.Quitar(clienteToDelete);
             }
 
@@ -104,12 +111,13 @@ namespace UI.Desktop.Clientes
             // Cliente a modificar = CliToEdit
             Cliente CliToEdit = new Cliente();
 
-            CliToEdit.Apellido= dgvListado.SelectedRows[0].Cells["apellido"].Value.ToString();
-            CliToEdit.Nombre = dgvListado.SelectedRows[0].Cells["nombre"].Value.ToString();
-            CliToEdit.Direccion = dgvListado.SelectedRows[0].Cells["direccion"].Value.ToString();
-            CliToEdit.Email= dgvListado.SelectedRows[0].Cells["email"].Value.ToString();
-            CliToEdit.Telefono = dgvListado.SelectedRows[0].Cells["telefono"].Value.ToString();
-            CliToEdit.Dni = dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+            CliToEdit = ListaClientes.FirstOrDefault(x => x.NumeroDocumento == dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString());
+            //CliToEdit.Apellido= dgvListado.SelectedRows[0].Cells["apellido"].Value.ToString();
+            //CliToEdit.Nombre = dgvListado.SelectedRows[0].Cells["nombre"].Value.ToString();
+            //CliToEdit.Direccion = dgvListado.SelectedRows[0].Cells["direccion"].Value.ToString();
+            //CliToEdit.Email= dgvListado.SelectedRows[0].Cells["email"].Value.ToString();
+            //CliToEdit.Telefono = dgvListado.SelectedRows[0].Cells["telefono"].Value.ToString();
+            //CliToEdit.NumeroDocumento = dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString();
 
             // Instanciación del formulario ABM Articulos EDICION
             Clientes.frmClienteABM formClienteABM = new Clientes.frmClienteABM(CliToEdit);
@@ -169,7 +177,7 @@ namespace UI.Desktop.Clientes
             }
             else if(ModoForm == TipoForm.SeleccionDeCliente)
             {
-                dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+                dniClienteSelecccionado = Convert.ToInt64(this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value);
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
@@ -189,7 +197,7 @@ namespace UI.Desktop.Clientes
 
         private void SeleccionarCliente()
         {
-            dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+            dniClienteSelecccionado = Convert.ToInt64(this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value);
             this.Close();
         }
         
@@ -270,7 +278,7 @@ namespace UI.Desktop.Clientes
             {
 
                 case Keys.Enter:
-                    dniClienteSelecccionado = this.dgvListado.SelectedRows[0].Cells["dni"].Value.ToString();
+                    dniClienteSelecccionado = (long)this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value;
                     this.DialogResult = DialogResult.Yes;
                     this.Close();
 
@@ -305,15 +313,15 @@ namespace UI.Desktop.Clientes
         {
             tbxFiltro.Text = "";
         }
-       
-       
-       
-        
 
-      
-      
+        private void btnCtaCte_Click(object sender, EventArgs e)
+        {
+            if(this.dgvListado.SelectedRows.Count==1)
+            {
 
-        
-        
+            CuentasCorrientes.frmCuentaCorriente formCuentaCorriente= new CuentasCorrientes.frmCuentaCorriente(this.dgvListado.SelectedRows[0].Cells["numeroDocumento"].Value.ToString(), this.user);
+            formCuentaCorriente.ShowDialog();
+            }
+        }
     }
 }

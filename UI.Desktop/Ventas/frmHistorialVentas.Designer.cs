@@ -35,6 +35,7 @@
             this.btnMostrarTodos = new System.Windows.Forms.Button();
             this.btnModificarComprobante = new System.Windows.Forms.Button();
             this.btnBuscarPorCliente = new System.Windows.Forms.Button();
+            this.chbxSoloCajaAbierta = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -47,6 +48,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chbxSoloCajaAbierta);
             this.groupBox2.Controls.Add(this.btnMostrarTodos);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Size = new System.Drawing.Size(835, 46);
@@ -54,6 +56,7 @@
             this.groupBox2.Controls.SetChildIndex(this.tbxFiltro, 0);
             this.groupBox2.Controls.SetChildIndex(this.label1, 0);
             this.groupBox2.Controls.SetChildIndex(this.btnMostrarTodos, 0);
+            this.groupBox2.Controls.SetChildIndex(this.chbxSoloCajaAbierta, 0);
             // 
             // groupBox1
             // 
@@ -132,6 +135,7 @@
             this.btnModificarComprobante.Text = "Realizar devolución";
             this.btnModificarComprobante.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnModificarComprobante.UseVisualStyleBackColor = true;
+            this.btnModificarComprobante.Visible = false;
             this.btnModificarComprobante.Click += new System.EventHandler(this.btnModificarComprobante_Click);
             // 
             // btnBuscarPorCliente
@@ -146,6 +150,19 @@
             this.btnBuscarPorCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnBuscarPorCliente.UseVisualStyleBackColor = true;
             this.btnBuscarPorCliente.Click += new System.EventHandler(this.btnBuscarPorCliente_Click);
+            // 
+            // chbxSoloCajaAbierta
+            // 
+            this.chbxSoloCajaAbierta.AutoSize = true;
+            this.chbxSoloCajaAbierta.Checked = true;
+            this.chbxSoloCajaAbierta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbxSoloCajaAbierta.Location = new System.Drawing.Point(728, 21);
+            this.chbxSoloCajaAbierta.Name = "chbxSoloCajaAbierta";
+            this.chbxSoloCajaAbierta.Size = new System.Drawing.Size(101, 17);
+            this.chbxSoloCajaAbierta.TabIndex = 32;
+            this.chbxSoloCajaAbierta.Text = "Sólo ultima Caja";
+            this.chbxSoloCajaAbierta.UseVisualStyleBackColor = true;
+            this.chbxSoloCajaAbierta.CheckedChanged += new System.EventHandler(this.chbxSoloCajaAbierta_CheckedChanged);
             // 
             // frmHistorialVentas
             // 
@@ -171,5 +188,6 @@
         private System.Windows.Forms.Button btnMostrarTodos;
         private System.Windows.Forms.Button btnModificarComprobante;
         private System.Windows.Forms.Button btnBuscarPorCliente;
+        private System.Windows.Forms.CheckBox chbxSoloCajaAbierta;
     }
 }

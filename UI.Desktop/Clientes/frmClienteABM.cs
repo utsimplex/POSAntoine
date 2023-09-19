@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using Data.Database;
 using System.Text.RegularExpressions;
+using Entidades;
+using System.Windows.Controls;
 
 namespace UI.Desktop.Clientes
 {
@@ -18,7 +20,9 @@ namespace UI.Desktop.Clientes
         public frmClienteABM()
         {
             InitializeComponent();
-
+            this.ItemsSituacionFiscal();
+            this.ItemsTiposComprobante();
+            this.ItemsTiposDocumento();
             this.Text = "Añadir nuevo Cliente";
             this.groupBox1.Text = "Ingreso de datos";
 
@@ -28,17 +32,24 @@ namespace UI.Desktop.Clientes
         public frmClienteABM(Entidades.Cliente cli)
         {
             InitializeComponent();
+            this.ItemsSituacionFiscal();
+            this.ItemsTiposComprobante();
+            this.ItemsTiposDocumento(); 
 
             this.Text = "Modificar datos del Cliente";
             this.groupBox1.Text = "Edición de datos";
             this.txtNroDoc.ReadOnly = true;
-            txtNroDoc.Text = cli.Dni;
+            txtNroDoc.Text = cli.NumeroDocumento;
             txtNombre.Text = cli.Nombre;
             txtApellido.Text = cli.Apellido;
             txtDireccion.Text = cli.Direccion;
             txtTelefono.Text = cli.Telefono;
             txtEmail.Text = cli.Email;
-            
+            cbxTipoComprobante.SelectedValue = cli.TipoComprobante != null ? (FeConstantes.TipoComprobante)cli.TipoComprobante : FeConstantes.TipoComprobante.FacturaB;
+            cbxSituacionFiscal.SelectedValue = cli.TipoCliente != null ? (FeConstantes.SituacionFiscal)cli.SituacionFiscal : FeConstantes.SituacionFiscal.ConsumidorFinal;
+            cbxTipoDocumento.SelectedValue = cli.TipoDocumento != null ? (FeConstantes.TipoDocumento)cli.TipoDocumento : FeConstantes.TipoDocumento.SIN_IDENTIFICAR;
+
+
             // BUSCAR SI EL CLIENTE TIENE DEUDA
             // 
             // ClienteAdapter DatosClienteAdapter = new ClienteAdapter();
@@ -100,12 +111,15 @@ namespace UI.Desktop.Clientes
                         // TXT to nuevoCliente
                         newCliente.Nombre = txtNombre.Text.Trim();
                         newCliente.Apellido = txtApellido.Text.Trim();
-                        newCliente.Dni = txtNroDoc.Text.Trim();
+                        newCliente.NumeroDocumento = txtNroDoc.Text.Trim();
                         newCliente.Direccion = txtDireccion.Text.Trim();
                         newCliente.Telefono = txtTelefono.Text.Trim();
                         newCliente.Email = txtEmail.Text.Trim();
-                        newCliente.TipoCliente = cbxCondicionCli.SelectedItem.ToString();
-                        
+                        newCliente.TipoCliente = cbxSituacionFiscal.SelectedValue.ToString();
+                        newCliente.SituacionFiscal = (int)cbxSituacionFiscal.SelectedValue;
+                        newCliente.TipoComprobante = (int)cbxTipoComprobante.SelectedValue;
+                        newCliente.TipoDocumento = (int)cbxTipoDocumento.SelectedValue;
+
                         // nuevoCliente to Base de Datos (capa de datos)
                         ClienteAdapter CapaDatos = new ClienteAdapter();
                         CapaDatos.AñadirNuevo(newCliente);
@@ -131,22 +145,25 @@ namespace UI.Desktop.Clientes
                 {
                     try
                     {
-                    cliToEdit.Dni = txtNroDoc.Text;
+                    cliToEdit.NumeroDocumento = txtNroDoc.Text;
                     cliToEdit.Nombre = txtNombre.Text;
                     cliToEdit.Apellido = txtApellido.Text;
                     cliToEdit.Direccion = txtDireccion.Text;
                     cliToEdit.Telefono = txtTelefono.Text;
                     cliToEdit.Email = txtEmail.Text;
-                    cliToEdit.TipoCliente = cbxCondicionCli.SelectedItem.ToString();
+                    cliToEdit.TipoCliente = cbxSituacionFiscal.SelectedText.ToString();
+                        cliToEdit.SituacionFiscal = (int)cbxSituacionFiscal.SelectedValue;
+                        cliToEdit.TipoComprobante = (int)cbxTipoComprobante.SelectedValue;
+                        cliToEdit.TipoDocumento = (int)cbxTipoDocumento.SelectedValue;
 
-                    //Si el cliente tiene deuda
-                    //
-                    // if (this.gbDeuda.Visible == true)
-                    // {
-                    //    Actualizar la Deuda
-                    //
-                    // }
-                    Datos_ClienteAdapter.Actualizar(cliToEdit);
+                        //Si el cliente tiene deuda
+                        //
+                        // if (this.gbDeuda.Visible == true)
+                        // {
+                        //    Actualizar la Deuda
+                        //
+                        // }
+                        Datos_ClienteAdapter.Actualizar(cliToEdit);
                     this.Close();
                     }
                     catch (Exception ex)
@@ -188,7 +205,7 @@ namespace UI.Desktop.Clientes
             {
                 foreach (Entidades.Cliente cli in ListaClientes)
                 {
-                    if (cli.Dni == txtNroDoc.Text)
+                    if (Convert.ToInt64(cli.NumeroDocumento) == Convert.ToInt64(txtNroDoc.Text))
                     {
                         mensaje += "Ya existe un cliente registrado con ese DNI." + "\n";
                     }
@@ -208,6 +225,73 @@ namespace UI.Desktop.Clientes
         }
         //************************Fin Validar Cliente
 
+        //Completar ComboBox
+
+        private void ItemsTiposDocumento()
+        {
+
+            cbxTipoDocumento.Items.Clear();
+            var list = Enum.GetValues(typeof(FeConstantes.TipoDocumento))
+       .Cast<FeConstantes.TipoDocumento>()
+       .Select(value => new
+       {
+           Description = (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute)?.Description ?? value.ToString(),
+           Value = value
+       })
+       .OrderBy(item => item.Value.ToString())
+       .ToList();
+            cbxTipoDocumento.DataSource = list;
+
+            cbxTipoDocumento.DisplayMember = "Description";
+            cbxTipoDocumento.ValueMember = "value";
+
+            cbxTipoDocumento.SelectedValue = FeConstantes.TipoDocumento.SIN_IDENTIFICAR;
+
+
+        }
+        private void ItemsTiposComprobante()
+        {
+
+            cbxTipoComprobante.Items.Clear();
+            var list = Enum.GetValues(typeof(FeConstantes.TipoComprobante))
+       .Cast<FeConstantes.TipoComprobante>()
+       .Select(value => new
+       {
+           Description = (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute)?.Description ?? value.ToString(),
+           Value = value
+       })
+       .OrderBy(item => item.Value.ToString())
+       .ToList();
+
+            cbxTipoComprobante.DataSource = list;
+
+            cbxTipoComprobante.DisplayMember = "Description";
+            cbxTipoComprobante.ValueMember = "value";
+
+            cbxTipoComprobante.SelectedValue = FeConstantes.TipoComprobante.FacturaB;
+
+        }
+        private void ItemsSituacionFiscal()
+        {
+
+            cbxSituacionFiscal.Items.Clear();
+
+            //cbxSituacionFiscal.DataSource = Enum.GetNames(typeof(SituacionFiscal));
+            //cbxSituacionFiscal.DisplayMember = "description";
+            //cbxSituacionFiscal.ValueMember = "value";
+            cbxSituacionFiscal.DisplayMember = "Description";
+            cbxSituacionFiscal.ValueMember = "Value";
+            cbxSituacionFiscal.DataSource = Enum.GetValues(typeof(FeConstantes.SituacionFiscal))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cbxSituacionFiscal.SelectedValue = FeConstantes.SituacionFiscal.ConsumidorFinal;
+        }
         #endregion
 
 
@@ -243,18 +327,18 @@ namespace UI.Desktop.Clientes
         private void frmClienteABM_Load(object sender, EventArgs e)
         {
             // CARGA ITEMS DEL COMBOBOX CONDICION DEL CLIENTE
-            cbxCondicionCli.Items.Add("CONSUMIDOR FINAL");
-            cbxCondicionCli.Items.Add("EXENTO");
-            cbxCondicionCli.Items.Add("MONOTRIBUTISTA");
-            cbxCondicionCli.Items.Add("NO CATEGORIZADO");
-            cbxCondicionCli.Items.Add("NO RESPONSABLE");
-            cbxCondicionCli.Items.Add("RESPONSABLE INSCRIPTO");
-            cbxCondicionCli.Items.Add("RESPONSABLE NO INSCRIPTO");
-            cbxCondicionCli.SelectedIndex = 0;
+            //cbxSituacionFiscal.Items.Add("CONSUMIDOR FINAL");
+            //cbxSituacionFiscal.Items.Add("EXENTO");
+            //cbxSituacionFiscal.Items.Add("MONOTRIBUTISTA");
+            //cbxSituacionFiscal.Items.Add("NO CATEGORIZADO");
+            //cbxSituacionFiscal.Items.Add("NO RESPONSABLE");
+            //cbxSituacionFiscal.Items.Add("RESPONSABLE INSCRIPTO");
+            //cbxSituacionFiscal.Items.Add("RESPONSABLE NO INSCRIPTO");
+            //cbxSituacionFiscal.SelectedIndex = 0;
             
-            cbxCondicionCli.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cbxCondicionCli.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cbxCondicionCli.DropDownStyle = ComboBoxStyle.DropDownList;
+            //cbxSituacionFiscal.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //cbxSituacionFiscal.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //cbxSituacionFiscal.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         #endregion

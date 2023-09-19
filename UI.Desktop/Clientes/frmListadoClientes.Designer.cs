@@ -32,6 +32,7 @@
             this.btnSeleccionarCli = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnMostrarTodos = new System.Windows.Forms.Button();
+            this.btnCtaCte = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +58,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCtaCte);
             this.groupBox1.Controls.Add(this.btnSeleccionarCli);
             this.groupBox1.Location = new System.Drawing.Point(822, 12);
             this.groupBox1.Size = new System.Drawing.Size(184, 469);
@@ -67,6 +69,7 @@
             this.groupBox1.Controls.SetChildIndex(this.btnAñadirNuevo, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnEliminar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificar, 0);
+            this.groupBox1.Controls.SetChildIndex(this.btnCtaCte, 0);
             // 
             // btnEliminar
             // 
@@ -151,6 +154,22 @@
             this.btnMostrarTodos.UseVisualStyleBackColor = true;
             this.btnMostrarTodos.Click += new System.EventHandler(this.btnMostrarTodos_Click);
             // 
+            // btnCtaCte
+            // 
+            this.btnCtaCte.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCtaCte.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.btnCtaCte.Image = global::UI.Desktop.Properties.Resources._3319627_coin_money_banking_transfer_dollar;
+            this.btnCtaCte.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCtaCte.Location = new System.Drawing.Point(11, 129);
+            this.btnCtaCte.Name = "btnCtaCte";
+            this.btnCtaCte.Size = new System.Drawing.Size(162, 46);
+            this.btnCtaCte.TabIndex = 27;
+            this.btnCtaCte.Text = "Cuenta Corriente";
+            this.btnCtaCte.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCtaCte.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCtaCte.UseVisualStyleBackColor = true;
+            this.btnCtaCte.Click += new System.EventHandler(this.btnCtaCte_Click);
+            // 
             // frmListadoClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -173,5 +192,6 @@
         public System.Windows.Forms.Button btnSeleccionarCli;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnMostrarTodos;
+        public System.Windows.Forms.Button btnCtaCte;
     }
 }

@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UI.Desktop</RootNamespace>
-    <AssemblyName>UI.Desktop</AssemblyName>
+    <AssemblyName>POSUTSimplex</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -20,7 +20,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\Usuario\Desktop\Trabajo\UT\POS\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -30,9 +30,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -73,7 +75,22 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2D7C557DB6EC67382396E6B504BCE6A0BC6C6153</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>UI.Desktop_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AfipWsfeClient, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AfipWsfeClient.1.1.0\lib\netstandard2.0\AfipWsfeClient.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\packages\CrystalReports.Design.13.0.4003\lib\net40\CrystalDecisions.CrystalReports.Design.dll</HintPath>
     </Reference>
@@ -151,10 +168,18 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\office.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.3.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
       <HintPath>..\packages\CrystalReports.FlashControlV71.13.0.3501\lib\net20\ShockwaveFlashObjects.dll</HintPath>
@@ -166,8 +191,27 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Design" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=4.0.3.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Pkcs.4.5.2\lib\net461\System.Security.Cryptography.Pkcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Duplex, Version=4.1.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceModel.Duplex.4.4.4\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Http, Version=4.1.2.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceModel.Http.4.4.4\lib\net461\System.ServiceModel.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.NetTcp, Version=4.1.2.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceModel.NetTcp.4.4.4\lib\net461\System.ServiceModel.NetTcp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives, Version=4.2.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceModel.Primitives.4.4.4\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\..\..\..\windows\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
@@ -183,6 +227,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Artículos\frmArticuloABM.cs">
@@ -233,6 +278,12 @@
     <Compile Include="Artículos\frmListadoArticulos.Designer.cs">
       <DependentUpon>frmListadoArticulos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Artículos\frmModificarPrecios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Artículos\frmModificarPrecios.Designer.cs">
+      <DependentUpon>frmModificarPrecios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Artículos\frmValorizacionDeInventario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +308,30 @@
       <DependentUpon>informeListaDePrecios.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Cajas\frmCierreCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmCierreCaja.Designer.cs">
+      <DependentUpon>frmCierreCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cajas\frmAperturaCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmAperturaCaja.Designer.cs">
+      <DependentUpon>frmAperturaCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cajas\frmCajas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmCajas.Designer.cs">
+      <DependentUpon>frmCajas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cajas\frmMovimientoCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cajas\frmMovimientoCaja.Designer.cs">
+      <DependentUpon>frmMovimientoCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clientes\frmClienteABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,6 +343,18 @@
     </Compile>
     <Compile Include="Clientes\frmListadoClientes.Designer.cs">
       <DependentUpon>frmListadoClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasCorrientes\frmCuentaCorriente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasCorrientes\frmCuentaCorriente.Designer.cs">
+      <DependentUpon>frmCuentaCorriente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasCorrientes\frmRecibirPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasCorrientes\frmRecibirPago.Designer.cs">
+      <DependentUpon>frmRecibirPago.cs</DependentUpon>
     </Compile>
     <Compile Include="frmBaseABM.cs">
       <SubType>Form</SubType>
@@ -317,6 +404,19 @@
     <Compile Include="Mensajes\splashScreen.Designer.cs">
       <DependentUpon>splashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Parametros\frmParametros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Parametros\frmParametros.Designer.cs">
+      <DependentUpon>frmParametros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\Facturador.cs" />
+    <Compile Include="Ventas\frmIngresaDescuento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\frmIngresaDescuento.Designer.cs">
+      <DependentUpon>frmIngresaDescuento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\PrinterDrawing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -344,6 +444,9 @@
     <EmbeddedResource Include="Artículos\frmListadoArticulos.resx">
       <DependentUpon>frmListadoArticulos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Artículos\frmModificarPrecios.resx">
+      <DependentUpon>frmModificarPrecios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Artículos\frmValorizacionDeInventario.resx">
       <DependentUpon>frmValorizacionDeInventario.cs</DependentUpon>
     </EmbeddedResource>
@@ -359,11 +462,29 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>informeListaDePrecios.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmCierreCaja.resx">
+      <DependentUpon>frmCierreCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmAperturaCaja.resx">
+      <DependentUpon>frmAperturaCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmCajas.resx">
+      <DependentUpon>frmCajas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cajas\frmMovimientoCaja.resx">
+      <DependentUpon>frmMovimientoCaja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Clientes\frmClienteABM.resx">
       <DependentUpon>frmClienteABM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Clientes\frmListadoClientes.resx">
       <DependentUpon>frmListadoClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasCorrientes\frmCuentaCorriente.resx">
+      <DependentUpon>frmCuentaCorriente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasCorrientes\frmRecibirPago.resx">
+      <DependentUpon>frmRecibirPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBaseABM.resx">
       <DependentUpon>frmBaseABM.cs</DependentUpon>
@@ -390,6 +511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mensajes\splashScreen.resx">
       <DependentUpon>splashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Parametros\frmParametros.resx">
+      <DependentUpon>frmParametros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -431,6 +555,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\frmInformeVenta.resx">
       <DependentUpon>frmInformeVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\frmIngresaDescuento.resx">
+      <DependentUpon>frmIngresaDescuento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\frmVenta.resx">
       <DependentUpon>frmVenta.cs</DependentUpon>
@@ -546,7 +673,7 @@
       <Name>Data.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{69725928-AA80-4EFE-A4D0-55B082587370}</Project>
+      <Project>{69725928-aa80-4efe-a4d0-55b082587370}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
   </ItemGroup>
@@ -579,6 +706,20 @@
     <None Include="Resources\antoine.png" />
     <None Include="Resources\antoine-transparent.png" />
     <None Include="Resources\fondoAntoineBlack.png" />
+    <None Include="Resources\3387295_shopping_finance_payment_machine_credit.png" />
+    <None Include="Resources\forward16.png" />
+    <None Include="Resources\back16.png" />
+    <None Include="Resources\back241.png" />
+    <None Include="Resources\forward32.png" />
+    <None Include="Resources\back32.png" />
+    <None Include="Resources\3319632_chart_investment_stocks_graph_report_infographic.png" />
+    <None Include="Resources\3319627_coin_money_banking_transfer_dollar.png" />
+    <None Include="Resources\3319640_money_coin_dollar_save_lock.png" />
+    <None Include="Resources\EL ARBOLITO DE ANTOINE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\3319608_persentage_pie chart_discount.png" />
+    <None Include="Resources\3319633_arrow_business_graph_coin_dollar.png" />
     <Content Include="Resources\logoColor.jpg" />
     <Content Include="Resources\Persona.JPG" />
     <None Include="Resources\splash2blue.bmp" />
@@ -599,6 +740,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,2 @@
+alter table cajas
+add fecha_modificacion datetime

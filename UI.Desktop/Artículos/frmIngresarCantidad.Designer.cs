@@ -53,10 +53,10 @@
             this.cantidad.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cantidad.Location = new System.Drawing.Point(33, 30);
             this.cantidad.Minimum = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
-            0});
+            -2147483648});
             this.cantidad.Name = "cantidad";
             this.cantidad.Size = new System.Drawing.Size(94, 33);
             this.cantidad.TabIndex = 0;
@@ -65,6 +65,7 @@
             0,
             0,
             0});
+            this.cantidad.ValueChanged += new System.EventHandler(this.cantidad_ValueChanged);
             // 
             // btnAceptar
             // 

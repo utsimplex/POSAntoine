@@ -35,39 +35,50 @@
             this.txtFechaHoraVta = new System.Windows.Forms.TextBox();
             this.txtNumeroVenta = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtTipoComprobante = new System.Windows.Forms.TextBox();
+            this.lblTipoComprobante = new System.Windows.Forms.Label();
             this.btnBuscarCliente = new System.Windows.Forms.Button();
             this.txtDniCuit = new System.Windows.Forms.TextBox();
             this.txtNombRazCli = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNombreCli = new System.Windows.Forms.Label();
             this.gbTipoPago = new System.Windows.Forms.GroupBox();
-            this.rbMP = new System.Windows.Forms.RadioButton();
-            this.rbTarjeta = new System.Windows.Forms.RadioButton();
-            this.rbEfectivo = new System.Windows.Forms.RadioButton();
+            this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
             this.gbArticulosVenta = new System.Windows.Forms.GroupBox();
             this.dgvArticulosVtaActual = new System.Windows.Forms.DataGridView();
             this.btnAgregarArt = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtDctoPesos = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtDcto = new System.Windows.Forms.TextBox();
             this.gbTotal = new System.Windows.Forms.GroupBox();
             this.lblSignoPeso = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblTelefono = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblDireccion = new System.Windows.Forms.Label();
+            this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombreNegocio = new System.Windows.Forms.Label();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnReimprimir = new System.Windows.Forms.Button();
+            this.btnFacturar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
             this.gbArticulosVenta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulosVtaActual)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.gbTotal.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,6 +140,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtTipoComprobante);
+            this.groupBox2.Controls.Add(this.lblTipoComprobante);
             this.groupBox2.Controls.Add(this.btnBuscarCliente);
             this.groupBox2.Controls.Add(this.txtDniCuit);
             this.groupBox2.Controls.Add(this.txtNombRazCli);
@@ -136,15 +149,35 @@
             this.groupBox2.Controls.Add(this.lblNombreCli);
             this.groupBox2.Location = new System.Drawing.Point(12, 90);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(332, 87);
+            this.groupBox2.Size = new System.Drawing.Size(332, 97);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del Cliente";
             // 
+            // txtTipoComprobante
+            // 
+            this.txtTipoComprobante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTipoComprobante.Location = new System.Drawing.Point(142, 67);
+            this.txtTipoComprobante.Name = "txtTipoComprobante";
+            this.txtTipoComprobante.ReadOnly = true;
+            this.txtTipoComprobante.Size = new System.Drawing.Size(104, 20);
+            this.txtTipoComprobante.TabIndex = 9;
+            this.txtTipoComprobante.TabStop = false;
+            this.txtTipoComprobante.Text = "FACTURA B";
+            // 
+            // lblTipoComprobante
+            // 
+            this.lblTipoComprobante.AutoSize = true;
+            this.lblTipoComprobante.Location = new System.Drawing.Point(24, 69);
+            this.lblTipoComprobante.Name = "lblTipoComprobante";
+            this.lblTipoComprobante.Size = new System.Drawing.Size(112, 13);
+            this.lblTipoComprobante.TabIndex = 8;
+            this.lblTipoComprobante.Text = "Tipo de Comprobante:";
+            // 
             // btnBuscarCliente
             // 
             this.btnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscarCliente.Image")));
-            this.btnBuscarCliente.Location = new System.Drawing.Point(252, 46);
+            this.btnBuscarCliente.Location = new System.Drawing.Point(252, 61);
             this.btnBuscarCliente.Name = "btnBuscarCliente";
             this.btnBuscarCliente.Size = new System.Drawing.Size(69, 29);
             this.btnBuscarCliente.TabIndex = 1;
@@ -156,7 +189,7 @@
             // txtDniCuit
             // 
             this.txtDniCuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDniCuit.Location = new System.Drawing.Point(142, 50);
+            this.txtDniCuit.Location = new System.Drawing.Point(142, 41);
             this.txtDniCuit.Name = "txtDniCuit";
             this.txtDniCuit.ReadOnly = true;
             this.txtDniCuit.Size = new System.Drawing.Size(104, 20);
@@ -167,7 +200,7 @@
             // txtNombRazCli
             // 
             this.txtNombRazCli.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNombRazCli.Location = new System.Drawing.Point(142, 20);
+            this.txtNombRazCli.Location = new System.Drawing.Point(142, 15);
             this.txtNombRazCli.Name = "txtNombRazCli";
             this.txtNombRazCli.ReadOnly = true;
             this.txtNombRazCli.Size = new System.Drawing.Size(144, 20);
@@ -178,7 +211,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(73, 52);
+            this.label1.Location = new System.Drawing.Point(73, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 6;
@@ -187,7 +220,7 @@
             // lblNombreCli
             // 
             this.lblNombreCli.AutoSize = true;
-            this.lblNombreCli.Location = new System.Drawing.Point(14, 22);
+            this.lblNombreCli.Location = new System.Drawing.Point(14, 17);
             this.lblNombreCli.Name = "lblNombreCli";
             this.lblNombreCli.Size = new System.Drawing.Size(122, 13);
             this.lblNombreCli.TabIndex = 5;
@@ -195,52 +228,23 @@
             // 
             // gbTipoPago
             // 
-            this.gbTipoPago.Controls.Add(this.rbMP);
-            this.gbTipoPago.Controls.Add(this.rbTarjeta);
-            this.gbTipoPago.Controls.Add(this.rbEfectivo);
-            this.gbTipoPago.Location = new System.Drawing.Point(350, 121);
+            this.gbTipoPago.Controls.Add(this.cbxMedioDePago);
+            this.gbTipoPago.Location = new System.Drawing.Point(547, 121);
             this.gbTipoPago.Name = "gbTipoPago";
-            this.gbTipoPago.Size = new System.Drawing.Size(288, 56);
+            this.gbTipoPago.Size = new System.Drawing.Size(299, 66);
             this.gbTipoPago.TabIndex = 1;
             this.gbTipoPago.TabStop = false;
-            this.gbTipoPago.Text = "Tipo de Pago";
+            this.gbTipoPago.Text = "Medio de Pago";
             // 
-            // rbMP
+            // cbxMedioDePago
             // 
-            this.rbMP.AutoSize = true;
-            this.rbMP.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbMP.Location = new System.Drawing.Point(102, 33);
-            this.rbMP.Name = "rbMP";
-            this.rbMP.Size = new System.Drawing.Size(95, 17);
-            this.rbMP.TabIndex = 2;
-            this.rbMP.TabStop = true;
-            this.rbMP.Text = "Mercado Pago";
-            this.rbMP.UseVisualStyleBackColor = true;
-            // 
-            // rbTarjeta
-            // 
-            this.rbTarjeta.AutoSize = true;
-            this.rbTarjeta.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbTarjeta.Location = new System.Drawing.Point(99, 15);
-            this.rbTarjeta.Name = "rbTarjeta";
-            this.rbTarjeta.Size = new System.Drawing.Size(98, 17);
-            this.rbTarjeta.TabIndex = 1;
-            this.rbTarjeta.TabStop = true;
-            this.rbTarjeta.Text = "Crédito - Débito";
-            this.rbTarjeta.UseVisualStyleBackColor = true;
-            // 
-            // rbEfectivo
-            // 
-            this.rbEfectivo.AutoSize = true;
-            this.rbEfectivo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbEfectivo.Checked = true;
-            this.rbEfectivo.Location = new System.Drawing.Point(7, 25);
-            this.rbEfectivo.Name = "rbEfectivo";
-            this.rbEfectivo.Size = new System.Drawing.Size(64, 17);
-            this.rbEfectivo.TabIndex = 0;
-            this.rbEfectivo.TabStop = true;
-            this.rbEfectivo.Text = "Efectivo";
-            this.rbEfectivo.UseVisualStyleBackColor = true;
+            this.cbxMedioDePago.BackColor = System.Drawing.SystemColors.Control;
+            this.cbxMedioDePago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxMedioDePago.FormattingEnabled = true;
+            this.cbxMedioDePago.Location = new System.Drawing.Point(16, 30);
+            this.cbxMedioDePago.Name = "cbxMedioDePago";
+            this.cbxMedioDePago.Size = new System.Drawing.Size(149, 21);
+            this.cbxMedioDePago.TabIndex = 3;
             // 
             // gbArticulosVenta
             // 
@@ -249,9 +253,9 @@
             this.gbArticulosVenta.Controls.Add(this.btnQuitar);
             this.gbArticulosVenta.Controls.Add(this.groupBox3);
             this.gbArticulosVenta.Controls.Add(this.gbTotal);
-            this.gbArticulosVenta.Location = new System.Drawing.Point(14, 180);
+            this.gbArticulosVenta.Location = new System.Drawing.Point(14, 193);
             this.gbArticulosVenta.Name = "gbArticulosVenta";
-            this.gbArticulosVenta.Size = new System.Drawing.Size(624, 303);
+            this.gbArticulosVenta.Size = new System.Drawing.Size(835, 305);
             this.gbArticulosVenta.TabIndex = 2;
             this.gbArticulosVenta.TabStop = false;
             this.gbArticulosVenta.Text = "Detalle";
@@ -265,8 +269,9 @@
             this.dgvArticulosVtaActual.Location = new System.Drawing.Point(6, 19);
             this.dgvArticulosVtaActual.MultiSelect = false;
             this.dgvArticulosVtaActual.Name = "dgvArticulosVtaActual";
+            this.dgvArticulosVtaActual.RowHeadersVisible = false;
             this.dgvArticulosVtaActual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvArticulosVtaActual.Size = new System.Drawing.Size(612, 212);
+            this.dgvArticulosVtaActual.Size = new System.Drawing.Size(823, 212);
             this.dgvArticulosVtaActual.TabIndex = 0;
             this.dgvArticulosVtaActual.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulosVtaActual_CellEndEdit);
             this.dgvArticulosVtaActual.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvArticulosVtaActual_CellMouseDoubleClick);
@@ -297,17 +302,71 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.txtDcto);
-            this.groupBox3.Location = new System.Drawing.Point(344, 238);
+            this.groupBox3.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox3.Location = new System.Drawing.Point(454, 237);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(120, 58);
+            this.groupBox3.Size = new System.Drawing.Size(214, 58);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Aplicar Descuento %";
+            this.groupBox3.Text = "Aplicar Descuento";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.txtDctoPesos, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtDcto, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(208, 39);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // txtDctoPesos
+            // 
+            this.txtDctoPesos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtDctoPesos.Location = new System.Drawing.Point(123, 18);
+            this.txtDctoPesos.Name = "txtDctoPesos";
+            this.txtDctoPesos.Size = new System.Drawing.Size(66, 20);
+            this.txtDctoPesos.TabIndex = 3;
+            this.txtDctoPesos.Text = "0";
+            this.txtDctoPesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDctoPesos.Leave += new System.EventHandler(this.txtDctoPesos_Leave);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(107, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "$";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "%";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtDcto
             // 
-            this.txtDcto.Location = new System.Drawing.Point(25, 24);
+            this.txtDcto.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtDcto.Location = new System.Drawing.Point(19, 18);
             this.txtDcto.Name = "txtDcto";
             this.txtDcto.Size = new System.Drawing.Size(66, 20);
             this.txtDcto.TabIndex = 0;
@@ -320,7 +379,7 @@
             this.gbTotal.Controls.Add(this.lblSignoPeso);
             this.gbTotal.Controls.Add(this.txtTotal);
             this.gbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbTotal.Location = new System.Drawing.Point(470, 237);
+            this.gbTotal.Location = new System.Drawing.Point(674, 236);
             this.gbTotal.Name = "gbTotal";
             this.gbTotal.Size = new System.Drawing.Size(148, 59);
             this.gbTotal.TabIndex = 9;
@@ -349,71 +408,78 @@
             this.txtTotal.Text = "0";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Image = global::UI.Desktop.Properties.Resources.close_24;
-            this.btnCancelar.Location = new System.Drawing.Point(518, 489);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(119, 34);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.pictureBox1);
-            this.groupBox4.Controls.Add(this.lblTelefono);
-            this.groupBox4.Controls.Add(this.lblDireccion);
-            this.groupBox4.Controls.Add(this.lblNombreNegocio);
-            this.groupBox4.Location = new System.Drawing.Point(350, 12);
+            this.groupBox4.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox4.Location = new System.Drawing.Point(547, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(287, 103);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 1, 3, 3);
+            this.groupBox4.Size = new System.Drawing.Size(302, 103);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             // 
-            // pictureBox1
+            // tableLayoutPanel2
             // 
-            this.pictureBox1.Image = global::UI.Desktop.Properties.Resources.antoine_transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(16, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(78, 71);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 14);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(296, 86);
+            this.tableLayoutPanel2.TabIndex = 4;
             // 
-            // lblTelefono
+            // tableLayoutPanel3
             // 
-            this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(137, 78);
-            this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(91, 13);
-            this.lblTelefono.TabIndex = 2;
-            this.lblTelefono.Text = "Tel.: 3416041858";
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.lblDireccion, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.lblTelefono, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.lblNombreNegocio, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(163, 78);
+            this.tableLayoutPanel3.TabIndex = 4;
             // 
             // lblDireccion
             // 
             this.lblDireccion.AutoSize = true;
-            this.lblDireccion.Location = new System.Drawing.Point(124, 59);
+            this.lblDireccion.Location = new System.Drawing.Point(3, 20);
             this.lblDireccion.Name = "lblDireccion";
-            this.lblDireccion.Size = new System.Drawing.Size(113, 13);
+            this.lblDireccion.Size = new System.Drawing.Size(83, 13);
             this.lblDireccion.TabIndex = 1;
-            this.lblDireccion.Text = "Houssay 1670 - Funes";
+            this.lblDireccion.Text = "Chacabuco 842";
+            // 
+            // lblTelefono
+            // 
+            this.lblTelefono.AutoSize = true;
+            this.lblTelefono.Location = new System.Drawing.Point(3, 40);
+            this.lblTelefono.Name = "lblTelefono";
+            this.lblTelefono.Size = new System.Drawing.Size(94, 13);
+            this.lblTelefono.TabIndex = 2;
+            this.lblTelefono.Text = "Tel.: 3462-262000";
             // 
             // lblNombreNegocio
             // 
-            this.lblNombreNegocio.Location = new System.Drawing.Point(110, 21);
+            this.lblNombreNegocio.Location = new System.Drawing.Point(3, 0);
             this.lblNombreNegocio.Name = "lblNombreNegocio";
-            this.lblNombreNegocio.Size = new System.Drawing.Size(170, 38);
+            this.lblNombreNegocio.Size = new System.Drawing.Size(157, 20);
             this.lblNombreNegocio.TabIndex = 0;
-            this.lblNombreNegocio.Text = "Mercado y autoservicio de comida saludable. Local or take away !";
+            this.lblNombreNegocio.Text = "EL Arbolito de Antoine";
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnConfirmar.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
-            this.btnConfirmar.Location = new System.Drawing.Point(396, 489);
+            this.btnConfirmar.Location = new System.Drawing.Point(607, 508);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(119, 34);
             this.btnConfirmar.TabIndex = 5;
@@ -422,12 +488,64 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pictureBox1.Image = global::UI.Desktop.Properties.Resources.EL_ARBOLITO_DE_ANTOINE;
+            this.pictureBox1.Location = new System.Drawing.Point(396, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(110, 107);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnReimprimir
+            // 
+            this.btnReimprimir.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
+            this.btnReimprimir.Location = new System.Drawing.Point(4, 502);
+            this.btnReimprimir.Name = "btnReimprimir";
+            this.btnReimprimir.Size = new System.Drawing.Size(119, 34);
+            this.btnReimprimir.TabIndex = 13;
+            this.btnReimprimir.Text = "Reimprimir";
+            this.btnReimprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnReimprimir.UseVisualStyleBackColor = true;
+            this.btnReimprimir.Visible = false;
+            this.btnReimprimir.Click += new System.EventHandler(this.btnReimprimir_Click);
+            // 
+            // btnFacturar
+            // 
+            this.btnFacturar.Image = global::UI.Desktop.Properties.Resources.document_24;
+            this.btnFacturar.Location = new System.Drawing.Point(482, 508);
+            this.btnFacturar.Name = "btnFacturar";
+            this.btnFacturar.Size = new System.Drawing.Size(119, 34);
+            this.btnFacturar.TabIndex = 12;
+            this.btnFacturar.Text = "Facturar";
+            this.btnFacturar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Image = global::UI.Desktop.Properties.Resources.close_24;
+            this.btnCancelar.Location = new System.Drawing.Point(730, 508);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(119, 34);
+            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // frmVenta
             // 
             this.AcceptButton = this.btnConfirmar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 529);
+            this.ClientSize = new System.Drawing.Size(861, 554);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.btnReimprimir);
+            this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnCancelar);
@@ -447,17 +565,20 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.gbTipoPago.ResumeLayout(false);
-            this.gbTipoPago.PerformLayout();
             this.gbArticulosVenta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulosVtaActual)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.gbTotal.ResumeLayout(false);
             this.gbTotal.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -475,8 +596,6 @@
         private System.Windows.Forms.Button btnBuscarCliente;
         private System.Windows.Forms.TextBox txtDniCuit;
         private System.Windows.Forms.GroupBox gbTipoPago;
-        private System.Windows.Forms.RadioButton rbEfectivo;
-        private System.Windows.Forms.RadioButton rbTarjeta;
         private System.Windows.Forms.GroupBox gbArticulosVenta;
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnAgregarArt;
@@ -493,6 +612,16 @@
         private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.Label lblNombreNegocio;
         private System.Windows.Forms.Label lblSignoPeso;
-        private System.Windows.Forms.RadioButton rbMP;
+        private System.Windows.Forms.Button btnFacturar;
+        private System.Windows.Forms.TextBox txtTipoComprobante;
+        private System.Windows.Forms.Label lblTipoComprobante;
+        private System.Windows.Forms.ComboBox cbxMedioDePago;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox txtDctoPesos;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button btnReimprimir;
     }
 }

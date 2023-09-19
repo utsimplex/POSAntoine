@@ -9,13 +9,17 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using Microsoft.Office.Interop;
 using System.Threading;
+using UI.Desktop.Cajas;
+using UI.Desktop.Artículos;
 
 namespace UI.Desktop
 {
     public partial class frmMain : Form
     {
         #region PROPIEDADES Y ENUMERADORES
+
         TipoForm _modoForm;
+
         public TipoForm ModoForm
         {
             get { return _modoForm; }
@@ -28,43 +32,77 @@ namespace UI.Desktop
             Edicion
 
         }
+        
         #endregion
 
         public frmMain()
         {
-            Thread tardar = new Thread(new ThreadStart(pantalla));
-            tardar.Start();
-            Thread.Sleep(3500);
+            //Thread tardar = new Thread(new ThreadStart(pantalla));
+            //tardar.Start();
+            //Thread.Sleep(3500);
 
             InitializeComponent();
-            tardar.Abort();
+            //tardar.Abort();
 
         }
 
         public void pantalla()
         {
+            // SPLASH SCREEN
             Application.Run(new UI.Desktop.Mensajes.splashScreen());
         }
-        
+
         // VARIABLES
+        public Entidades.Usuario usrActual = null;
+        public Entidades.Caja cajaActual = null;
         Data.Database.ClienteAdapter Datos_ClienteAdapter = new Data.Database.ClienteAdapter();
-        Entidades.Usuario usrActual;
         Data.Database.UsuarioAdapter Datos_UsuarioAdapter = new Data.Database.UsuarioAdapter();
         Data.Database.InformeArticulos Datos_InformeArticulosAdapter = new Data.Database.InformeArticulos();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
-       
-        
-        
+        Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
+
+
         // EVENTO LOAD
         private void frmMain_Load(object sender, EventArgs e)
         {
+            bindUINoUser();
+
             IniciarSesion();
 
-   
+            if (usrActual != null)
+            {
+                //bindUIUsuario();
+                
+            }
+            else
+            {
+                this.Dispose();
+            }
+
         }
 
         // INICIAR SESION
-        private void IniciarSesion()
+        private Entidades.Usuario IniciarSesion()
+        {
+            
+            frmLogin appLogin = new frmLogin();
+            if (appLogin.ShowDialog() != DialogResult.OK)
+            {
+                return null;
+            }
+            else
+            {
+                usrActual = appLogin.usrActual;
+                InicializarCaja();
+                bindUIUsuario();
+                return appLogin.usrActual;
+                
+            }
+
+        }
+
+        // Bind UI No User
+        private void bindUINoUser()
         {
             NI.BalloonTipIcon = ToolTipIcon.Info;
             NI.BalloonTipText = "- PUNTO DE VENTA -";
@@ -75,27 +113,50 @@ namespace UI.Desktop
             NI.ShowBalloonTip(100);
             lblNombreUsuario.Text = "";
             lblRol.Text = "";
-            frmLogin appLogin = new frmLogin();
-            if (appLogin.ShowDialog() != DialogResult.OK)
-            {
-                this.Dispose();
-            }
-            else
-            {
-                usrActual = appLogin.usrActual;
-                lblNombreUsuario.Text = usrActual.usuario;
-                lblRol.Text = usrActual.Rol;
-                if (usrActual.Rol == "Empleado")
-                { mnuUsuarios.Visible = false; }
-
-                NI.BalloonTipIcon = ToolTipIcon.Info;
-                NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
-                NI.BalloonTipTitle = "Ut Simplex";
-                NI.Visible = true;
-                NI.ContextMenu = this.ContextMenu;
-                NI.ShowBalloonTip(100);
-            }
+            scntCaja.Visible = false;
+        }
+        
+        // Bind UI Usuario
+        private void bindUIUsuario()
+        {
             
+            lblNombreUsuario.Text = usrActual.usuario;
+            lblRol.Text = usrActual.Rol;
+            if (usrActual.Rol == "Empleado")
+            { mnuUsuarios.Visible = false; }
+
+            NI.BalloonTipIcon = ToolTipIcon.Info;
+            NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
+            NI.BalloonTipTitle = "Ut Simplex";
+            NI.Visible = true;
+            NI.ContextMenu = this.ContextMenu;
+            NI.ShowBalloonTip(100);
+        }
+
+        // Bind UI Caja
+        private void bindUICaja()
+        {
+            Boolean isAbierta = cajaActual != null? true : false;
+
+            lblCajaAbierta.Visible = isAbierta;
+            lblCajaCerrada.Visible = !isAbierta;
+            btnCerrarCaja.Enabled = isAbierta;
+            btnAbrirCaja.Enabled = !isAbierta;
+            btnAbrirCaja.Visible = !isAbierta;
+            lblNroCaja.Visible = isAbierta;
+            lblCajaFecha.Visible = isAbierta;
+
+            txtCajaFecha.Visible = isAbierta;
+            txtCajaNro.Visible = isAbierta;
+            txtCajaNro.Text = isAbierta ? cajaActual.ID.ToString() : "";
+            txtCajaFecha.Text =  isAbierta ? cajaActual.FechaCaja.ToString() : "";
+
+            btnCajaExtraer.Visible = isAbierta;
+            btnCajaIngresar.Visible = isAbierta;
+            btnCerrarCaja.Visible = isAbierta;
+            scntCaja.Visible = true;
+            scntCaja.Height = isAbierta ? 273 : 135;
+
         }
 
         // CLICK MENU>>Salir
@@ -107,8 +168,15 @@ namespace UI.Desktop
         // CLICK BTN Lista Clientes
         private void btnListaClientes_Click(object sender, EventArgs e)
         {
-             Clientes.frmListadoClientes frmClientes = new Clientes.frmListadoClientes(usrActual);
-             frmClientes.ShowDialog();
+            Clientes.frmListadoClientes frmClientes = new Clientes.frmListadoClientes(usrActual);
+            frmClientes.ShowDialog();
+        }
+
+        // CLICK BTN Cajas
+        private void btnCajas_Click(object sender, EventArgs e)
+        {
+            Cajas.frmCajas frmCajas = new Cajas.frmCajas(usrActual);
+            frmCajas.ShowDialog();
         }
 
         // CLICK BTN Lista Articulos
@@ -123,56 +191,52 @@ namespace UI.Desktop
         {
 
             Proveedores.frmListadoProveedores frmProveedores = new Proveedores.frmListadoProveedores(usrActual);
-             frmProveedores.ShowDialog();
+            frmProveedores.ShowDialog();
         }
 
         // CLICK BTN Nueva Venta
         private void btnNuevaVenta_Click(object sender, EventArgs e)
         {
-            Ventas.frmVenta formNuevaVenta = new Ventas.frmVenta(usrActual);
-            formNuevaVenta.ShowDialog();
+            if(cajaActual != null)
+            {
+                Ventas.frmVenta formNuevaVenta = new Ventas.frmVenta(usrActual);
+                formNuevaVenta.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Debe abrir una caja antes de realizar ventas.", "Caja CERRADA - Ventas no permitidas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         // CLICK BTN Cerrar SISTEMA
         private void btnCerrarSistema_Click(object sender, EventArgs e)
         {
-           this.Close();
+            this.Close();
         }
-     
+
         // CLICK BTN Historial de ventas
-         private void btnHistorialVentas_Click(object sender, EventArgs e)
+        private void btnHistorialVentas_Click(object sender, EventArgs e)
         {
-           
-                Ventas.frmHistorialVentas formListaVentas = new UI.Desktop.Ventas.frmHistorialVentas(usrActual);
-                formListaVentas.ShowDialog();
-            
-          
-            }
 
-        // CLICK LBL CERRAR SESION
-        private void lblCerrarSesión_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Mensajes.frmConfirmar formConfirmar = new Mensajes.frmConfirmar("¿Está seguro que desea cerrar la sesión iniciada?","");
+            Ventas.frmHistorialVentas formListaVentas = new UI.Desktop.Ventas.frmHistorialVentas(usrActual);
+            formListaVentas.ShowDialog();
 
-            if (formConfirmar.ShowDialog() == DialogResult.Yes)
-            {
-                IniciarSesion();
-            }
-            
+
         }
-        
+
       
+
         //TECLAS ACCESO RAPIDO
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
             {
 
-               case Keys.F12:
+                case Keys.F12:
                     this.ConsultaRapida();
                     break;
 
-               
+
 
                 default:
 
@@ -181,15 +245,27 @@ namespace UI.Desktop
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        
-        
+        //CLICK ABRIR CAJA
+        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        {
+            AbrirCajaNueva();
+        }
+
+        //CLICK CERRAR CAJA
+        private void btnCerrarCaja_Click(object sender, EventArgs e)
+        {
+            CerrarCaja();
+        }
+
+
+
         #region /*/* M E T O D O S *\*\
 
 
         #region METODOS PARA EXPORTAR e IMPORTAR
 
         // EXPORTAR =================================
-        
+
         public void exportarArtículos()
         {
 
@@ -206,7 +282,7 @@ namespace UI.Desktop
             drArt.FileName = "Artículos " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString();
             drArt.Filter = "Excel files (*.xls)|*.xls";
             drArt.Title = "ARTICULOS";
-            
+
 
 
             if (drArt.ShowDialog() == DialogResult.OK)
@@ -251,35 +327,35 @@ namespace UI.Desktop
             drFileDialog.FileName = "Artículos " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + ".xls";
             drFileDialog.Filter = "Excel files (*.xls)|*.xls";
             drFileDialog.Title = "ARTICULOS";
-            
+
 
             drFileDialog.FileName = drBackUpCompleto + "\\" + drFileDialog.FileName;
-            
-            
-                for (int i = 1; i < frmListaArticulos.dgvListado.Columns.Count + 1; i++)
+
+
+            for (int i = 1; i < frmListaArticulos.dgvListado.Columns.Count + 1; i++)
+            {
+                ExcelAppArt.Cells[1, i] = frmListaArticulos.dgvListado.Columns[i - 1].HeaderText;
+            }
+
+            for (int i = 0; i < frmListaArticulos.dgvListado.Rows.Count; i++)
+            {
+                for (int j = 0; j < frmListaArticulos.dgvListado.Columns.Count; j++)
                 {
-                    ExcelAppArt.Cells[1, i] = frmListaArticulos.dgvListado.Columns[i - 1].HeaderText;
+                    ExcelAppArt.Cells[i + 2, j + 1] = frmListaArticulos.dgvListado.Rows[i].Cells[j].Value.ToString();
                 }
-
-                for (int i = 0; i < frmListaArticulos.dgvListado.Rows.Count; i++)
-                {
-                    for (int j = 0; j < frmListaArticulos.dgvListado.Columns.Count; j++)
-                    {
-                        ExcelAppArt.Cells[i + 2, j + 1] = frmListaArticulos.dgvListado.Rows[i].Cells[j].Value.ToString();
-                    }
-                }
+            }
 
 
-                ExcelAppArt.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
-                ExcelAppArt.ActiveWorkbook.Saved = true;
-                ExcelAppArt.Quit();
-            
+            ExcelAppArt.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
+            ExcelAppArt.ActiveWorkbook.Saved = true;
+            ExcelAppArt.Quit();
+
 
             int cantArti = frmListaArticulos.dgvListado.Rows.Count;
             return cantArti;
 
         }
-              
+
 
         public void exportarClientes()
         {
@@ -334,40 +410,40 @@ namespace UI.Desktop
             ExcelAppCli.Application.Workbooks.Add(Type.Missing);
 
             SaveFileDialog drFileDialog = new SaveFileDialog();
-            drFileDialog.FileName = "Clientes " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() +".xls";
+            drFileDialog.FileName = "Clientes " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + ".xls";
             drFileDialog.Filter = "Excel files (*.xls)|*.xls";
             drFileDialog.Title = "CLIENTES";
 
             drFileDialog.FileName = drBackUpCompleto + "\\" + drFileDialog.FileName;
-            
-                for (int i = 1; i < frmListaClientes.dgvListado.Columns.Count + 1; i++)
+
+            for (int i = 1; i < frmListaClientes.dgvListado.Columns.Count + 1; i++)
+            {
+                ExcelAppCli.Cells[1, i] = frmListaClientes.dgvListado.Columns[i - 1].HeaderText;
+            }
+
+            for (int i = 0; i < frmListaClientes.dgvListado.Rows.Count; i++)
+            {
+                for (int j = 0; j < frmListaClientes.dgvListado.Columns.Count; j++)
                 {
-                    ExcelAppCli.Cells[1, i] = frmListaClientes.dgvListado.Columns[i - 1].HeaderText;
+                    ExcelAppCli.Cells[i + 2, j + 1] = frmListaClientes.dgvListado.Rows[i].Cells[j].Value.ToString();
                 }
-
-                for (int i = 0; i < frmListaClientes.dgvListado.Rows.Count; i++)
-                {
-                    for (int j = 0; j < frmListaClientes.dgvListado.Columns.Count; j++)
-                    {
-                        ExcelAppCli.Cells[i + 2, j + 1] = frmListaClientes.dgvListado.Rows[i].Cells[j].Value.ToString();
-                    }
-                }
+            }
 
 
-                ExcelAppCli.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
-                ExcelAppCli.ActiveWorkbook.Saved = true;
-                ExcelAppCli.Quit();
-            
+            ExcelAppCli.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
+            ExcelAppCli.ActiveWorkbook.Saved = true;
+            ExcelAppCli.Quit();
+
             int cantCli = frmListaClientes.dgvListado.Rows.Count;
             return cantCli;
         }
 
-      
+
 
         public void exportarComprobantes()
         {
             Ventas.frmHistorialVentas formHistorialVentas = new UI.Desktop.Ventas.frmHistorialVentas(usrActual);
-        
+
             formHistorialVentas.Show();
             formHistorialVentas.Hide();
 
@@ -409,7 +485,7 @@ namespace UI.Desktop
         public int exportarComprobantes(string drBackUpCompleto)
         {
             Ventas.frmHistorialVentas formHistorialVentas = new UI.Desktop.Ventas.frmHistorialVentas(usrActual);
-        
+
             formHistorialVentas.Show();
             formHistorialVentas.Hide();
 
@@ -417,39 +493,39 @@ namespace UI.Desktop
             ExcelAppComprobantes.Application.Workbooks.Add(Type.Missing);
 
             SaveFileDialog drFileDialog = new SaveFileDialog();
-            drFileDialog.FileName = "Comprobantes " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString()+".xls";
+            drFileDialog.FileName = "Comprobantes " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + ".xls";
             drFileDialog.Filter = "Excel files (*.xls)|*.xls";
             drFileDialog.Title = "COMPROBANTES";
 
             drFileDialog.FileName = drBackUpCompleto + "\\" + drFileDialog.FileName;
-            
-                for (int i = 1; i < formHistorialVentas.dgvListado.Columns.Count + 1; i++)
+
+            for (int i = 1; i < formHistorialVentas.dgvListado.Columns.Count + 1; i++)
+            {
+                ExcelAppComprobantes.Cells[1, i] = formHistorialVentas.dgvListado.Columns[i - 1].HeaderText;
+            }
+
+            for (int i = 0; i < formHistorialVentas.dgvListado.Rows.Count; i++)
+            {
+                for (int j = 0; j < formHistorialVentas.dgvListado.Columns.Count; j++)
                 {
-                    ExcelAppComprobantes.Cells[1, i] = formHistorialVentas.dgvListado.Columns[i - 1].HeaderText;
+                    ExcelAppComprobantes.Cells[i + 2, j + 1] = formHistorialVentas.dgvListado.Rows[i].Cells[j].Value.ToString();
                 }
-
-                for (int i = 0; i < formHistorialVentas.dgvListado.Rows.Count; i++)
-                {
-                    for (int j = 0; j < formHistorialVentas.dgvListado.Columns.Count; j++)
-                    {
-                        ExcelAppComprobantes.Cells[i + 2, j + 1] = formHistorialVentas.dgvListado.Rows[i].Cells[j].Value.ToString();
-                    }
-                }
+            }
 
 
-                ExcelAppComprobantes.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
-                ExcelAppComprobantes.ActiveWorkbook.Saved = true;
-                ExcelAppComprobantes.Quit();
-            
+            ExcelAppComprobantes.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
+            ExcelAppComprobantes.ActiveWorkbook.Saved = true;
+            ExcelAppComprobantes.Quit();
+
             int cantComp = formHistorialVentas.dgvListado.Rows.Count;
             exportarDetallesComprobantes(drBackUpCompleto);
             return cantComp;
-           
+
         }
 
         public void exportarDetallesComprobantes()
         {
-         
+
             Ventas.frmDetallesVentas formDetalles = new UI.Desktop.Ventas.frmDetallesVentas();
             formDetalles.Show();
             formDetalles.Hide();
@@ -470,16 +546,16 @@ namespace UI.Desktop
                     if (formDetalles.dgvListado.Columns[i - 1].Visible == true)
                     {
                         if (i == 5)
-                        { 
+                        {
                             ExcelAppDetallesComp.Cells[1, i - 1] = formDetalles.dgvListado.Columns[i - 1].HeaderText;
                         }
-                        
+
                         if (i == 4)
                         { ExcelAppDetallesComp.Cells[1, i - 1] = formDetalles.dgvListado.Columns[i - 1].HeaderText; }
 
                         if (i != 5 && i != 4)
                         { ExcelAppDetallesComp.Cells[1, i] = formDetalles.dgvListado.Columns[i - 1].HeaderText; }
-                        
+
                     }
                 }
 
@@ -497,8 +573,8 @@ namespace UI.Desktop
                             else
                             {
                                 if (j == 3)
-                                { ExcelAppDetallesComp.Cells[i + 2, j ] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
-                                else if (j==4)
+                                { ExcelAppDetallesComp.Cells[i + 2, j] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
+                                else if (j == 4)
                                 { ExcelAppDetallesComp.Cells[i + 2, j] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
 
                                 if (j != 3 && j != 4)
@@ -519,7 +595,7 @@ namespace UI.Desktop
 
         public void exportarDetallesComprobantes(string drBackUpCompleto)
         {
-         
+
             Ventas.frmDetallesVentas formDetalles = new UI.Desktop.Ventas.frmDetallesVentas();
             formDetalles.Show();
             formDetalles.Hide();
@@ -534,55 +610,55 @@ namespace UI.Desktop
 
             drFileDialog.FileName = drBackUpCompleto + "\\" + drFileDialog.FileName;
 
-            
-                for (int i = 1; i < formDetalles.dgvListado.Columns.Count + 1; i++)
-                {
-                    if (formDetalles.dgvListado.Columns[i - 1].Visible == true)
-                    {
-                        if (i == 5)
-                        { 
-                            ExcelAppDetallesComp.Cells[1, i - 1] = formDetalles.dgvListado.Columns[i - 1].HeaderText;
-                        }
-                        
-                        if (i == 4)
-                        { ExcelAppDetallesComp.Cells[1, i - 1] = formDetalles.dgvListado.Columns[i - 1].HeaderText; }
 
-                        if (i != 5 && i != 4)
-                        { ExcelAppDetallesComp.Cells[1, i] = formDetalles.dgvListado.Columns[i - 1].HeaderText; }
-                        
+            for (int i = 1; i < formDetalles.dgvListado.Columns.Count + 1; i++)
+            {
+                if (formDetalles.dgvListado.Columns[i - 1].Visible == true)
+                {
+                    if (i == 5)
+                    {
+                        ExcelAppDetallesComp.Cells[1, i - 1] = formDetalles.dgvListado.Columns[i - 1].HeaderText;
                     }
-                }
 
-                for (int i = 0; i < formDetalles.dgvListado.Rows.Count; i++)
+                    if (i == 4)
+                    { ExcelAppDetallesComp.Cells[1, i - 1] = formDetalles.dgvListado.Columns[i - 1].HeaderText; }
+
+                    if (i != 5 && i != 4)
+                    { ExcelAppDetallesComp.Cells[1, i] = formDetalles.dgvListado.Columns[i - 1].HeaderText; }
+
+                }
+            }
+
+            for (int i = 0; i < formDetalles.dgvListado.Rows.Count; i++)
+            {
+                for (int j = 0; j < formDetalles.dgvListado.Columns.Count; j++)
                 {
-                    for (int j = 0; j < formDetalles.dgvListado.Columns.Count; j++)
+                    if (formDetalles.dgvListado.Columns[j].Visible == true)
                     {
-                        if (formDetalles.dgvListado.Columns[j].Visible == true)
+
+                        if (formDetalles.dgvListado.Rows[i].Cells[j].Value == null)
                         {
+                            ExcelAppDetallesComp.Cells[i + 2, j + 1] = "Vacio";
+                        }
+                        else
+                        {
+                            if (j == 3)
+                            { ExcelAppDetallesComp.Cells[i + 2, j] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
+                            else if (j == 4)
+                            { ExcelAppDetallesComp.Cells[i + 2, j] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
 
-                            if (formDetalles.dgvListado.Rows[i].Cells[j].Value == null)
-                            {
-                                ExcelAppDetallesComp.Cells[i + 2, j + 1] = "Vacio";
-                            }
-                            else
-                            {
-                                if (j == 3)
-                                { ExcelAppDetallesComp.Cells[i + 2, j ] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
-                                else if (j==4)
-                                { ExcelAppDetallesComp.Cells[i + 2, j] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
-
-                                if (j != 3 && j != 4)
-                                { ExcelAppDetallesComp.Cells[i + 2, j + 1] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
-                            }
+                            if (j != 3 && j != 4)
+                            { ExcelAppDetallesComp.Cells[i + 2, j + 1] = formDetalles.dgvListado.Rows[i].Cells[j].Value.ToString(); }
                         }
                     }
                 }
+            }
 
 
-                ExcelAppDetallesComp.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
-                ExcelAppDetallesComp.ActiveWorkbook.Saved = true;
-                ExcelAppDetallesComp.Quit();
-            
+            ExcelAppDetallesComp.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
+            ExcelAppDetallesComp.ActiveWorkbook.Saved = true;
+            ExcelAppDetallesComp.Quit();
+
             int cantDetalles = formDetalles.dgvListado.Rows.Count;
 
         }
@@ -642,37 +718,37 @@ namespace UI.Desktop
             ExcelAppProveedores.Application.Workbooks.Add(Type.Missing);
 
             SaveFileDialog drFileDialog = new SaveFileDialog();
-            drFileDialog.FileName = "Proveedores " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString()+ ".xls";
+            drFileDialog.FileName = "Proveedores " + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Year.ToString() + ".xls";
             drFileDialog.Filter = "Excel files (*.xls)|*.xls";
             drFileDialog.Title = "PROVEEDORES";
 
             drFileDialog.FileName = drBackUpCompleto + "\\" + drFileDialog.FileName;
 
-            
-                for (int i = 1; i < formListaProveedores.dgvListado.Columns.Count + 1; i++)
+
+            for (int i = 1; i < formListaProveedores.dgvListado.Columns.Count + 1; i++)
+            {
+                ExcelAppProveedores.Cells[1, i] = formListaProveedores.dgvListado.Columns[i - 1].HeaderText;
+            }
+
+            for (int i = 0; i < formListaProveedores.dgvListado.Rows.Count; i++)
+            {
+                for (int j = 0; j < formListaProveedores.dgvListado.Columns.Count; j++)
                 {
-                    ExcelAppProveedores.Cells[1, i] = formListaProveedores.dgvListado.Columns[i - 1].HeaderText;
+                    ExcelAppProveedores.Cells[i + 2, j + 1] = formListaProveedores.dgvListado.Rows[i].Cells[j].Value.ToString();
                 }
-
-                for (int i = 0; i < formListaProveedores.dgvListado.Rows.Count; i++)
-                {
-                    for (int j = 0; j < formListaProveedores.dgvListado.Columns.Count; j++)
-                    {
-                        ExcelAppProveedores.Cells[i + 2, j + 1] = formListaProveedores.dgvListado.Rows[i].Cells[j].Value.ToString();
-                    }
-                }
+            }
 
 
-                ExcelAppProveedores.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
-                ExcelAppProveedores.ActiveWorkbook.Saved = true;
-                ExcelAppProveedores.Quit();
-            
+            ExcelAppProveedores.ActiveWorkbook.SaveCopyAs(drFileDialog.FileName);
+            ExcelAppProveedores.ActiveWorkbook.Saved = true;
+            ExcelAppProveedores.Quit();
+
             int cantProv = formListaProveedores.dgvListado.Rows.Count;
             return cantProv;
 
         }
 
-       
+
         // IMPORTAR =================================     
         public void importarClientes()
         {
@@ -700,34 +776,34 @@ namespace UI.Desktop
                     Entidades.Cliente clienteExcel = new Entidades.Cliente();
 
 
-                    clienteExcel.Dni = ExDataSet.Tables[0].Rows[i].Field<String>(0);
+                    clienteExcel.NumeroDocumento = ExDataSet.Tables[0].Rows[i].Field<String>(0);
                     clienteExcel.Nombre = ExDataSet.Tables[0].Rows[i].Field<String>(1);
                     clienteExcel.Apellido = ExDataSet.Tables[0].Rows[i].Field<String>(3);
                     clienteExcel.Telefono = ExDataSet.Tables[0].Rows[i].Field<String>(2);
-                    clienteExcel.Direccion = ExDataSet.Tables[0].Rows[i].Field<String>(3); 
+                    clienteExcel.Direccion = ExDataSet.Tables[0].Rows[i].Field<String>(3);
                     clienteExcel.Email = ExDataSet.Tables[0].Rows[i].Field<String>(4);
 
                     Datos_ClienteAdapter.AñadirNuevo(clienteExcel);
 
                 }
-            
+
 
             }
         }
 
 
 
-      
 
 
-        #endregion 
 
-        
-        //////////////////////INFORMES////////////////////
-              
+        #endregion
+
+
+        #region //////////////////////INFORMES////////////////////
+
         //Informe STOCK CRITICO
 
-        //Informe Stock Crítico - Artículos a Reponer
+
         private void informeStockCritico()
         {
             string sql = "SELECT * FROM Articulos WHERE Articulos.stock <= Articulos.stockmin AND Articulos.habilitado = 'Si'";
@@ -748,12 +824,10 @@ namespace UI.Desktop
 
         }
 
-     
-
         //Informe Lista de Precios
         private void informeListaDePrecios()
-        { 
-            
+        {
+
             string sql = "SELECT * FROM Articulos WHERE Articulos.habilitado = 'Si'";
 
             if (Datos_InformeArticulosAdapter.BuscarRegistrosListaPrecios(sql))
@@ -762,19 +836,19 @@ namespace UI.Desktop
                 string url = "C:\\XML\\informeListaDePrecios.xml";
 
                 Datos_InformeArticulosAdapter.tablaArticulos.WriteXml(url, XmlWriteMode.WriteSchema);
-            
+
             }
 
 
-            Artículos.frmInformeListadePrecios formListaDePrecios= new UI.Desktop.Artículos.frmInformeListadePrecios();
+            Artículos.frmInformeListadePrecios formListaDePrecios = new UI.Desktop.Artículos.frmInformeListadePrecios();
             formListaDePrecios.ShowDialog();
             System.IO.File.Delete("C:\\XML\\informeListaDePrecios.xml");
-             
+
         }
 
 
         //Valorizar Inventario
-        private  void ValorizarInventario()
+        private void ValorizarInventario()
         {
             BindingList<Entidades.Articulo> ListaArticulos = Datos_ArticulosAdapter.GetAll();
             decimal valorización = 0;
@@ -795,22 +869,82 @@ namespace UI.Desktop
             Artículos.frmValorizacionDeInventario formValorización = new UI.Desktop.Artículos.frmValorizacionDeInventario(artOfrecidos, artStock, valorización);
             formValorización.ShowDialog();
         }
-        
+
+        #endregion
+
         //CONSULTA RÁPIDA STOCK Y PRECIO
         private void ConsultaRapida()
         {
             Artículos.frmConsultaRapidaStockPrecio formConsultaRapida = new UI.Desktop.Artículos.frmConsultaRapidaStockPrecio();
             formConsultaRapida.ShowDialog();
         }
-        
 
+        //INICIALIZAR CAJA
+        private void InicializarCaja()
+        {
+            Entidades.Caja cajaAbierta = Datos_CajasAdapter.GetCajaAbierta();
+
+            if(cajaAbierta != null)
+            {
+                this.cajaActual = cajaAbierta;
+            }
+            else
+            {
+                this.cajaActual = null;
+            }
+            
+            bindUICaja();
+
+        }
+
+        //CERRAR CAJA
+        private void CerrarCaja()
+        {
+            if (cajaActual != null)
+            {
+                Cajas.frmCierreCaja frmAperturaCaja = new Cajas.frmCierreCaja(usrActual, cajaActual);
+
+                if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
+                {
+                    cajaActual = null;
+                    bindUICaja();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("No existe una caja abierta. Debe abrirla antes de intentar cerrarla.", "Cerrar caja no permitido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+       
+        //ABRIR CAJA NUEVA
+        private void AbrirCajaNueva()
+        {
+            if(cajaActual == null)
+            {
+                Cajas.frmAperturaCaja frmAperturaCaja = new Cajas.frmAperturaCaja(usrActual);
+                
+                if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
+                {
+                    cajaActual = frmAperturaCaja.caja;
+                    bindUICaja();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ya existe una caja abierta. Debe cerrarla antes de abrir una nueva.", "Abrir caja no permitido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
 
         #endregion
 
 
+
+
         // BARRA DE MENU 
-        
-        //     MENU > BACKUP 
+        #region BARRA DE MENU
+        // MENU > BACKUP 
 
         private void artículosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -878,7 +1012,8 @@ namespace UI.Desktop
 
             if (formConfirmar.ShowDialog() == DialogResult.Yes)
             {
-                IniciarSesion();
+               bindUINoUser();
+               usrActual= IniciarSesion();
             }
         }
 
@@ -942,6 +1077,26 @@ namespace UI.Desktop
         private void porFechaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mensajeNoDisponible();
+        }
+
+        #endregion
+
+        private void btnCajaExtraer_Click(object sender, EventArgs e)
+        {
+            frmMovimientoCaja frmMovCaja = new frmMovimientoCaja(false, cajaActual, usrActual.usuario);
+            frmMovCaja.ShowDialog();
+        }
+
+        private void btnCajaIngresar_Click(object sender, EventArgs e)
+        {
+            frmMovimientoCaja frmMovCaja = new frmMovimientoCaja(true, cajaActual, usrActual.usuario);
+            frmMovCaja.ShowDialog();
+        }
+
+        private void parametrosDeLaEmpresaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Parametros.frmParametros frmParametros =   new Parametros.frmParametros();
+            frmParametros.ShowDialog();
         }
     }
 }

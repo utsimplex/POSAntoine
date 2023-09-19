@@ -21,9 +21,9 @@ namespace Data.Database
           Comando.Connection = Con;
           Comando.CommandType = CommandType.Text;
 
-          Comando.CommandText = "INSERT INTO [Clientes] ([dni], [nombre], [apellido], [direccion], [telefono], [email], [tipo]) VALUES (@DNI, @NOMBRE, @APELLIDO, @DIRECCION, @TELEFONO, @EMAIL, @TIPO)";
+          Comando.CommandText = "INSERT INTO [Clientes] ([dni], [nombre], [apellido], [direccion], [telefono], [email], [tipo],[TipoDocumento],[SituacionFiscal],[TipoComprobante]) VALUES (@DNI, @NOMBRE, @APELLIDO, @DIRECCION, @TELEFONO, @EMAIL, @TIPO,@TIPODOCUMENTO,@SITUACIONFISCAL,@TIPOCOMPROBANTE)";
           Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
-          Comando.Parameters["@DNI"].Value = cli.Dni;
+          Comando.Parameters["@DNI"].Value = cli.NumeroDocumento;
           Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
           Comando.Parameters["@NOMBRE"].Value = cli.Nombre;
           Comando.Parameters.Add(new SqlParameter("@APELLIDO", SqlDbType.NVarChar));
@@ -36,7 +36,12 @@ namespace Data.Database
           Comando.Parameters["@EMAIL"].Value = cli.Email;
           Comando.Parameters.Add(new SqlParameter("@TIPO", SqlDbType.NVarChar));
           Comando.Parameters["@TIPO"].Value = cli.TipoCliente;
-
+          Comando.Parameters.Add(new SqlParameter("@TIPODOCUMENTO", SqlDbType.Int));
+          Comando.Parameters["@TIPODOCUMENTO"].Value = cli.TipoDocumento;
+          Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCAL", SqlDbType.Int));
+          Comando.Parameters["@SITUACIONFISCAL"].Value = cli.SituacionFiscal;
+          Comando.Parameters.Add(new SqlParameter("@TIPOCOMPROBANTE", SqlDbType.NVarChar));
+          Comando.Parameters["@TIPOCOMPROBANTE"].Value = cli.TipoComprobante;
           //Ejecuta el comando INSERT
           Comando.Connection.Open();
           Comando.ExecuteNonQuery();
@@ -75,9 +80,9 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "UPDATE [Clientes] SET [nombre] = @NOMBRE, [apellido] = @APELLIDO, [direccion] = @DIRECCION, [telefono] = @TELEFONO, [email] = @EMAIL, [tipo] = @TIPO WHERE (([dni] = @DNI))";
+            Comando.CommandText = "UPDATE [Clientes] SET [nombre] = @NOMBRE, [apellido] = @APELLIDO, [direccion] = @DIRECCION, [telefono] = @TELEFONO, [email] = @EMAIL, [tipo] = @TIPO, [TipoDocumento]=@TIPODOCUMENTO,[SituacionFiscal]=@SITUACIONFISCAL,[TipoComprobante]=@TIPOCOMPROBANTE WHERE (([dni] = @DNI))";
             Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
-            Comando.Parameters["@DNI"].Value = cli.Dni;
+            Comando.Parameters["@DNI"].Value = cli.NumeroDocumento;
             Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
             Comando.Parameters["@NOMBRE"].Value = cli.Nombre;
             Comando.Parameters.Add(new SqlParameter("@APELLIDO", SqlDbType.NVarChar));
@@ -90,6 +95,12 @@ namespace Data.Database
             Comando.Parameters["@EMAIL"].Value = cli.Email;
             Comando.Parameters.Add(new SqlParameter("@TIPO", SqlDbType.NVarChar));
             Comando.Parameters["@TIPO"].Value = cli.TipoCliente;
+            Comando.Parameters.Add(new SqlParameter("@TIPODOCUMENTO", SqlDbType.Int));
+            Comando.Parameters["@TIPODOCUMENTO"].Value = cli.TipoDocumento;
+            Comando.Parameters.Add(new SqlParameter("@SITUACIONFISCAL", SqlDbType.Int));
+            Comando.Parameters["@SITUACIONFISCAL"].Value = cli.SituacionFiscal;
+            Comando.Parameters.Add(new SqlParameter("@TIPOCOMPROBANTE", SqlDbType.NVarChar));
+            Comando.Parameters["@TIPOCOMPROBANTE"].Value = cli.TipoComprobante;
 
 
             //Ejecuta el comando INSERT
@@ -118,12 +129,15 @@ namespace Data.Database
                     cli.Apellido= (string)drClientes["apellido"];
                     cli.Nombre = (string)drClientes["nombre"];
                     cli.Direccion = (string)drClientes["direccion"];
-                    cli.Dni = (string)drClientes["dni"];
+                    cli.NumeroDocumento = (string)drClientes["dni"];
                     cli.Email = (string)drClientes["email"];
                     cli.Telefono = (string)drClientes["telefono"];
                     cli.TipoCliente = (string)drClientes["tipo"];
+                    cli.TipoDocumento = drClientes["TipoDocumento"]!=DBNull.Value? Convert.ToInt32(drClientes["TipoDocumento"]):(int?)null;
+                    cli.SituacionFiscal = drClientes["SituacionFiscal"] != DBNull.Value ? Convert.ToInt32(drClientes["SituacionFiscal"]) : (int?)null;
+                    cli.TipoComprobante = drClientes["TipoComprobante"] != DBNull.Value ? Convert.ToInt32(drClientes["TipoComprobante"]) : (int?)null;
 
-                    
+
                     ListaClientes.Add(cli);
                 }
                 drClientes.Close();
@@ -148,7 +162,7 @@ namespace Data.Database
 
         }
 
-        public Entidades.Cliente GetOne(string dni)
+        public Entidades.Cliente GetOne(long dni)
         {
             Entidades.Cliente ClienteActual = new Entidades.Cliente();
 
@@ -157,7 +171,7 @@ namespace Data.Database
 
             // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
             SqlCommand Comando = new SqlCommand("SELECT * FROM Clientes WHERE Clientes.dni = @DNI", Con);
-            Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.NVarChar));
+            Comando.Parameters.Add(new SqlParameter("@DNI", SqlDbType.BigInt));
             Comando.Parameters["@DNI"].Value = dni;
 
             try
@@ -173,12 +187,15 @@ namespace Data.Database
                     ClienteActual.Apellido = (string)drClientes["apellido"];
                     ClienteActual.Nombre = (string)drClientes["nombre"];
                     ClienteActual.Direccion = (string)drClientes["direccion"];
-                    ClienteActual.Dni = (string)drClientes["dni"];
+                    ClienteActual.NumeroDocumento = (string)drClientes["dni"];
                     ClienteActual.Email = (string)drClientes["email"];
                     ClienteActual.Telefono = (string)drClientes["telefono"];
+                    ClienteActual.TipoDocumento = drClientes["TipoDocumento"] != DBNull.Value ? Convert.ToInt32(drClientes["TipoDocumento"]) : (int?)null;
+                    ClienteActual.SituacionFiscal = drClientes["SituacionFiscal"] != DBNull.Value ? Convert.ToInt32(drClientes["SituacionFiscal"]) : (int?)null;
+                    ClienteActual.TipoComprobante = drClientes["TipoComprobante"] != DBNull.Value ? Convert.ToInt32(drClientes["TipoComprobante"]) : (int?)null;
 
 
-                    
+
                 }
                 drClientes.Close();
 
@@ -226,9 +243,12 @@ namespace Data.Database
                     cli.Apellido = (string)drClientes["apellido"];
                     cli.Nombre = (string)drClientes["nombre"];
                     cli.Direccion = (string)drClientes["direccion"];
-                    cli.Dni = (string)drClientes["dni"];
+                    cli.NumeroDocumento = (string)drClientes["dni"];
                     cli.Email = (string)drClientes["email"];
                     cli.Telefono = (string)drClientes["telefono"];
+                    cli.TipoDocumento = drClientes["TipoDocumento"] != DBNull.Value ? Convert.ToInt32(drClientes["TipoDocumento"]) : (int?)null;
+                    cli.SituacionFiscal = drClientes["SituacionFiscal"] != DBNull.Value ? Convert.ToInt32(drClientes["SituacionFiscal"]) : (int?)null;
+                    cli.TipoComprobante = drClientes["TipoComprobante"] != DBNull.Value ? Convert.ToInt32(drClientes["TipoComprobante"]) : (int?)null;
 
 
                     ListaClientes.Add(cli);

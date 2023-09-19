@@ -11,6 +11,7 @@ namespace UI.Desktop.Ventas
 {
     public partial class frmConfirmarVta : Form
     {
+        public bool cuentaCorriente=false;
         public frmConfirmarVta()
         {
             InitializeComponent();
@@ -32,6 +33,27 @@ namespace UI.Desktop.Ventas
         {
             this.DialogResult = DialogResult.Yes;
             this.Dispose();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void frmConfirmarVta_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCtaCte_Click(object sender, EventArgs e)
+        {
+            this.cuentaCorriente = true;
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
         }
     }
 }
