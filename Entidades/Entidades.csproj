@@ -85,6 +85,7 @@
     <Compile Include="AfipJsonQR.cs" />
     <Compile Include="Articulo.cs" />
     <Compile Include="CuentaCorriente.cs" />
+    <Compile Include="CobroCuentaCorriente.cs" />
     <Compile Include="Familia.cs" />
     <Compile Include="ParametrosEmpresa.cs" />
     <Compile Include="MedioDePago.cs" />

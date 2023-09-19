@@ -16,7 +16,9 @@ namespace UI.Desktop.CuentasCorrientes
 
         Entidades.Cliente clienteActual;
         Entidades.Caja cajaActual;
+        Entidades.CobroCuentaCorriente cobroCuentaCorriente;
         List<CuentaCorriente> cuentaCorrienteList;
+        List<CobroCuentaCorriente> cobroCuentaCorrienteList;
         List<CuentaCorriente> cuentaCorrienteSeleccionada;
         Usuario User;
 
@@ -25,6 +27,7 @@ namespace UI.Desktop.CuentasCorrientes
         Data.Database.CajasAdapter Datos_CajaAdapter = new Data.Database.CajasAdapter();
         Data.Database.CuentaCorrienteAdapter Datos_CuentaCorrienteAdapter = new Data.Database.CuentaCorrienteAdapter();
         Data.Database.MovimientoCajaAdapter Datos_MovimientoCaja = new Data.Database.MovimientoCajaAdapter();
+        Data.Database.CobroCuentaCorrienteAdapter Datos_CobroCuentaCorriente = new Data.Database.CobroCuentaCorrienteAdapter();
         DialogResult recibePagoResult;
         string facturasSeleccionadas = "";
         decimal montoAPagar = 0;
@@ -49,6 +52,7 @@ namespace UI.Desktop.CuentasCorrientes
             if (clienteActual != null)
             {
                 this.BuscarCuentaCorriente();
+                this.BuscarCobrosCuentaCorriente();
             }
             this.AsignaDatosClienteUI();
         }
@@ -80,16 +84,30 @@ namespace UI.Desktop.CuentasCorrientes
 
 
         }
+        private void RegistrarPagoCuentaCorriente()
+        {
+            if (recibePagoResult == DialogResult.OK || recibePagoResult == DialogResult.Yes)
+            {
+
+                Datos_CobroCuentaCorriente.AñadirNuevo(cobroCuentaCorriente);
+
+                //cuentaCorrienteSeleccionada.ForEach(CC =>
+                //{
+                //    ActualizaFactura(CC.Venta, CC.Pendiente, true);
+                //});
+            }
+        }
         private void GuardarPago()
         {
             if(recibePagoResult == DialogResult.OK || recibePagoResult== DialogResult.Yes)
             {
-                Datos_MovimientoCaja.registrarMovimiento(new Entidades.MovimientoCaja(cajaActual.ID, facturasSeleccionadas, true, montoAPagar, User.usuario, facturasSeleccionadas));
+                
+                Datos_MovimientoCaja.registrarMovimiento(new Entidades.MovimientoCaja(cajaActual.ID, "Pago Cta Cte", true, montoAPagar, User.usuario, facturasSeleccionadas));
 
-                cuentaCorrienteSeleccionada.ForEach(CC =>
-                {
-                    ActualizaFactura(CC.Venta, CC.Pendiente, true);
-                });
+                //cuentaCorrienteSeleccionada.ForEach(CC =>
+                //{
+                //    ActualizaFactura(CC.Venta, CC.Pendiente, true);
+                //});
             }
         }
         private void ImprimirPago()
@@ -106,7 +124,8 @@ namespace UI.Desktop.CuentasCorrientes
         private void BuscarFacturasACancelar ( decimal monto)
         {
             //hago un ordenamiento de facturas para pagar desde la mas vieja a la mas nueva cuando se recibe unpago
-            cuentaCorrienteList.OrderBy(x => x.Fecha)
+            cuentaCorrienteList.Where(x=>x.Pendiente>0)
+                .OrderBy(x => x.Fecha)
                 .ToList()
                 .ForEach(CC => {
                     if(monto>=CC.Pendiente)
@@ -131,10 +150,18 @@ namespace UI.Desktop.CuentasCorrientes
             return cuentaCorrienteList;
 
         }
+        private List<Entidades.CobroCuentaCorriente> BuscarCobrosCuentaCorriente()
+        {
+
+            cobroCuentaCorrienteList = Datos_CobroCuentaCorriente.GetMultipleCliente(clienteActual.NumeroDocumento);
+
+            return cobroCuentaCorrienteList;
+
+        }
         private void AsignaDatosClienteUI()
         {
             tbxCliente.Text = clienteActual.Nombre + " " + clienteActual.Apellido;
-            if (cuentaCorrienteList != null & cuentaCorrienteList.Count > 0)
+            if (cuentaCorrienteList != null && cuentaCorrienteList.Count > 0)
             {
                 tbxPendiente.Text = "$" + cuentaCorrienteList.Sum(X => X.Pendiente).ToString();
                 dgvFacturas.DataSource = cuentaCorrienteList;
@@ -144,13 +171,18 @@ namespace UI.Desktop.CuentasCorrientes
                 tbxPendiente.Text = "$0.00";
                 dgvFacturas.DataSource = cuentaCorrienteList;
             }
-
+            if (cobroCuentaCorrienteList != null && cobroCuentaCorrienteList.Count > 0)
+            {
+                dgvCobros.DataSource = cobroCuentaCorrienteList;
+                dgvCobros.Columns[0].Visible = false;
+            }
         }
 
         private void btnPagarSeleccion_Click(object sender, EventArgs e)
         {
             montoAPagar = 0;
             facturasSeleccionadas = "";
+            cobroCuentaCorriente = new CobroCuentaCorriente();
             cuentaCorrienteSeleccionada = new List<CuentaCorriente>();
             if (dgvFacturas.SelectedRows.Count>0)
             {
@@ -160,15 +192,24 @@ namespace UI.Desktop.CuentasCorrientes
                     montoAPagar += Convert.ToDecimal(row.Cells["Pendiente"].Value);
                     facturasSeleccionadas += String.IsNullOrEmpty(facturasSeleccionadas)? row.Cells["Venta"].Value.ToString(): " - "+ row.Cells["Venta"].Value.ToString();
                 }
-                if(montoAPagar>0)
+                if (montoAPagar > 0)
                 {
-
-                frmRecibirPago formRecibePago = new frmRecibirPago(montoAPagar);
-                recibePagoResult = formRecibePago.ShowDialog();
-                //evaluo dentro de cada metodo si corresponde realizar la accion o no
-                montoAPagar = formRecibePago.montoIngresado;
-                GuardarPago();
-                ImprimirPago();
+                    frmRecibirPago formRecibePago = new frmRecibirPago(montoAPagar);
+                    recibePagoResult = formRecibePago.ShowDialog();
+                    //evaluo dentro de cada metodo si corresponde realizar la accion o no
+                    montoAPagar = formRecibePago.montoIngresado;
+                    cobroCuentaCorriente = new CobroCuentaCorriente()
+                    {
+                        FacturasAfectadas = facturasSeleccionadas,
+                        FechaHora = DateTime.Now,
+                        MedioDePago = formRecibePago.MedioDePago,
+                        MontoRecibido = formRecibePago.montoIngresado,
+                        NumeroDocumentoCliente = clienteActual.NumeroDocumento
+                    };
+                    RegistrarPagoCuentaCorriente();
+                    if (formRecibePago.MedioDePago.ToLower() == "efectivo")
+                        GuardarPago();
+                    ImprimirPago();
                     RefrescarGrilla();
                 }
             }
@@ -186,15 +227,25 @@ namespace UI.Desktop.CuentasCorrientes
             cuentaCorrienteSeleccionada = new List<CuentaCorriente>();//limpio la variable
 
             frmRecibirPago formRecibePago = new frmRecibirPago();
-                recibePagoResult = formRecibePago.ShowDialog();
+            recibePagoResult = formRecibePago.ShowDialog();
             //buscar Facturas a Cancelar
-                montoAPagar = formRecibePago.montoIngresado;
-            if(montoAPagar>0)
+            montoAPagar = formRecibePago.montoIngresado;
+            if (montoAPagar > 0)
             {
-
                 BuscarFacturasACancelar(montoAPagar);
                 //evaluo dentro de cada metodo si corresponde realizar la accion o no
+                cobroCuentaCorriente = new CobroCuentaCorriente()
+                {
+                    FacturasAfectadas = facturasSeleccionadas,
+                    FechaHora = DateTime.Now,
+                    MedioDePago = formRecibePago.MedioDePago,
+                    MontoRecibido = formRecibePago.montoIngresado,
+                    NumeroDocumentoCliente = clienteActual.NumeroDocumento
+                };
+                RegistrarPagoCuentaCorriente();
+                if(formRecibePago.MedioDePago.ToLower()=="efectivo")
                 GuardarPago();
+
                 ImprimirPago();
                 RefrescarGrilla();
             }
@@ -204,6 +255,7 @@ namespace UI.Desktop.CuentasCorrientes
             if (clienteActual != null)
             {
                 this.BuscarCuentaCorriente();
+                this.BuscarCobrosCuentaCorriente();
             }
                 this.AsignaDatosClienteUI();
         }
@@ -230,6 +282,19 @@ namespace UI.Desktop.CuentasCorrientes
             { 
             this.dgvFacturas.DataSource = cuentaCorrienteList;
             }
+        }
+
+        private void tabCobros_Selected(object sender, TabControlEventArgs e)
+        {
+            
+        }
+
+        private void tabGeneral_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(this.tabGeneral.SelectedTab.Name == "tabCobros")
+                this.btnPagarSeleccion.Enabled = this.btnRecibirPago.Enabled = false;
+            else
+                this.btnPagarSeleccion.Enabled = this.btnRecibirPago.Enabled = true;
         }
     }
 }
