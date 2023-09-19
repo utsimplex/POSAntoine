@@ -13,14 +13,12 @@ namespace UI.Desktop.Ventas
 {
     public static class Facturador
     {
-        private static int PuntoDeVenta = 4;
-        private static long CUIT = 27350319250;
-        private static string RutaCertificado= @"C:\certificados\ElArbolito.p12";
-        private static string ClaveCertificado= "AntonioRicardo21";
-        private static bool FEProduccion=true;
+        
         static FacturaElectronicaAdapter FacturaElectronicaAdapter = new FacturaElectronicaAdapter();
         static VentasAdapter VentasAdapter = new VentasAdapter();
 
+        static ParametrosAdapter Datos_ParametrosAdapter = new ParametrosAdapter();
+        static ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
         //public Facturador()
         //{
         //TO-DO: Parameters
@@ -32,6 +30,13 @@ namespace UI.Desktop.Ventas
         //}
         public async static Task facturarAsync(Venta Pedido, bool Monotributista)
         {
+            parametrosEmpresa = Datos_ParametrosAdapter.getOne();
+            int PuntoDeVenta = Convert.ToInt32(parametrosEmpresa.PuntoDeVenta);
+            long CUIT = Convert.ToInt64(parametrosEmpresa.CUIT);
+            string RutaCertificado = parametrosEmpresa.CertificadoDigital;
+            string ClaveCertificado = parametrosEmpresa.ClaveCertificado;
+            bool FEProduccion = parametrosEmpresa.EsProduccion;
+
             //set ptoVta
             Pedido.PuntoDeVenta = PuntoDeVenta;
 
@@ -46,7 +51,7 @@ namespace UI.Desktop.Ventas
             var wsfeClient = new WsfeClient
             {
                 IsProdEnvironment = FEProduccion,
-                Cuit = CUIT,//cuit DROPS
+                Cuit = CUIT,
                 Sign = ticket.Sign,
                 Token = ticket.Token
             };

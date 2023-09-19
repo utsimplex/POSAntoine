@@ -137,10 +137,22 @@ namespace UI.Desktop.Parametros
         private void btnBuscaImagen_Click(object sender, EventArgs e)
         {
             OpenFileDialog ImagenDialog = new OpenFileDialog();
-            ImagenDialog.Filter = "*.png";
-            if(ImagenDialog.ShowDialog() == DialogResult.OK)
+            ImagenDialog.Filter = "PNG files(*.png)| *.png| JPG files(*.jpg)| *.jpg| JPEG files(*.jpeg)| *.jpeg";
+            ImagenDialog.CheckFileExists = true;
+            if (ImagenDialog.ShowDialog() == DialogResult.OK)
             {
                 this.tbxImagePath.Text = ImagenDialog.FileName;
+            }
+        }
+
+        private void btnBuscaCertificado_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog CertificadoDialog = new OpenFileDialog();
+            CertificadoDialog.Filter = "Intercambio de información persona (*.p12)| *.p12| PFX Certificate files (*.pfx)| *.pfx";
+            CertificadoDialog.CheckFileExists = true;
+            if (CertificadoDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.tbxPathCertificado.Text = CertificadoDialog.FileName;
             }
         }
     }

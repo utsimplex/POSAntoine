@@ -39,6 +39,8 @@
             this.tbxTelefono = new System.Windows.Forms.TextBox();
             this.tbxImagePath = new System.Windows.Forms.TextBox();
             this.tbxDireccion = new System.Windows.Forms.TextBox();
+            this.btnBuscaImagen = new System.Windows.Forms.Button();
+            this.cbxImpresoras = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -63,14 +65,12 @@
             this.tbxNombreFiscal = new System.Windows.Forms.TextBox();
             this.tbxClaveCertificado = new System.Windows.Forms.TextBox();
             this.tbxInicioActividades = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnBuscaImagen = new System.Windows.Forms.Button();
-            this.cbxImpresoras = new System.Windows.Forms.ComboBox();
             this.btnBuscaCertificado = new System.Windows.Forms.Button();
             this.cbxSituacionFiscal = new System.Windows.Forms.ComboBox();
             this.chkbxProduccion = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -89,7 +89,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.8705F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.1295F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 1, 2);
@@ -189,6 +189,7 @@
             this.tbxImagePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxImagePath.Location = new System.Drawing.Point(153, 82);
             this.tbxImagePath.Name = "tbxImagePath";
+            this.tbxImagePath.ReadOnly = true;
             this.tbxImagePath.Size = new System.Drawing.Size(204, 20);
             this.tbxImagePath.TabIndex = 12;
             // 
@@ -197,8 +198,29 @@
             this.tbxDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxDireccion.Location = new System.Drawing.Point(482, 16);
             this.tbxDireccion.Name = "tbxDireccion";
-            this.tbxDireccion.Size = new System.Drawing.Size(262, 20);
+            this.tbxDireccion.Size = new System.Drawing.Size(261, 20);
             this.tbxDireccion.TabIndex = 14;
+            // 
+            // btnBuscaImagen
+            // 
+            this.btnBuscaImagen.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBuscaImagen.Location = new System.Drawing.Point(363, 81);
+            this.btnBuscaImagen.Name = "btnBuscaImagen";
+            this.btnBuscaImagen.Size = new System.Drawing.Size(25, 23);
+            this.btnBuscaImagen.TabIndex = 17;
+            this.btnBuscaImagen.Text = "...";
+            this.btnBuscaImagen.UseVisualStyleBackColor = true;
+            this.btnBuscaImagen.Click += new System.EventHandler(this.btnBuscaImagen_Click);
+            // 
+            // cbxImpresoras
+            // 
+            this.cbxImpresoras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxImpresoras.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxImpresoras.FormattingEnabled = true;
+            this.cbxImpresoras.Location = new System.Drawing.Point(482, 49);
+            this.cbxImpresoras.Name = "cbxImpresoras";
+            this.cbxImpresoras.Size = new System.Drawing.Size(261, 21);
+            this.cbxImpresoras.TabIndex = 18;
             // 
             // tabControl1
             // 
@@ -244,7 +266,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.23647F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.76353F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.tableLayoutPanel3.Controls.Add(this.label6, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.label7, 5, 1);
             this.tableLayoutPanel3.Controls.Add(this.label8, 1, 2);
@@ -416,6 +438,7 @@
             this.tbxPathCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxPathCertificado.Location = new System.Drawing.Point(139, 82);
             this.tbxPathCertificado.Name = "tbxPathCertificado";
+            this.tbxPathCertificado.ReadOnly = true;
             this.tbxPathCertificado.Size = new System.Drawing.Size(219, 20);
             this.tbxPathCertificado.TabIndex = 13;
             // 
@@ -443,7 +466,7 @@
             this.tableLayoutPanel3.SetColumnSpan(this.tbxURLAfip, 5);
             this.tbxURLAfip.Location = new System.Drawing.Point(139, 181);
             this.tbxURLAfip.Name = "tbxURLAfip";
-            this.tbxURLAfip.Size = new System.Drawing.Size(605, 20);
+            this.tbxURLAfip.Size = new System.Drawing.Size(604, 20);
             this.tbxURLAfip.TabIndex = 17;
             // 
             // tbxNombreFiscal
@@ -451,7 +474,7 @@
             this.tbxNombreFiscal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxNombreFiscal.Location = new System.Drawing.Point(520, 16);
             this.tbxNombreFiscal.Name = "tbxNombreFiscal";
-            this.tbxNombreFiscal.Size = new System.Drawing.Size(224, 20);
+            this.tbxNombreFiscal.Size = new System.Drawing.Size(223, 20);
             this.tbxNombreFiscal.TabIndex = 18;
             // 
             // tbxClaveCertificado
@@ -459,7 +482,7 @@
             this.tbxClaveCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxClaveCertificado.Location = new System.Drawing.Point(520, 82);
             this.tbxClaveCertificado.Name = "tbxClaveCertificado";
-            this.tbxClaveCertificado.Size = new System.Drawing.Size(224, 20);
+            this.tbxClaveCertificado.Size = new System.Drawing.Size(223, 20);
             this.tbxClaveCertificado.TabIndex = 21;
             // 
             // tbxInicioActividades
@@ -467,8 +490,38 @@
             this.tbxInicioActividades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxInicioActividades.Location = new System.Drawing.Point(520, 115);
             this.tbxInicioActividades.Name = "tbxInicioActividades";
-            this.tbxInicioActividades.Size = new System.Drawing.Size(224, 20);
+            this.tbxInicioActividades.Size = new System.Drawing.Size(223, 20);
             this.tbxInicioActividades.TabIndex = 20;
+            // 
+            // btnBuscaCertificado
+            // 
+            this.btnBuscaCertificado.Location = new System.Drawing.Point(364, 79);
+            this.btnBuscaCertificado.Name = "btnBuscaCertificado";
+            this.btnBuscaCertificado.Size = new System.Drawing.Size(24, 23);
+            this.btnBuscaCertificado.TabIndex = 23;
+            this.btnBuscaCertificado.Text = "...";
+            this.btnBuscaCertificado.UseVisualStyleBackColor = true;
+            this.btnBuscaCertificado.Click += new System.EventHandler(this.btnBuscaCertificado_Click);
+            // 
+            // cbxSituacionFiscal
+            // 
+            this.cbxSituacionFiscal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxSituacionFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxSituacionFiscal.FormattingEnabled = true;
+            this.cbxSituacionFiscal.Location = new System.Drawing.Point(520, 49);
+            this.cbxSituacionFiscal.Name = "cbxSituacionFiscal";
+            this.cbxSituacionFiscal.Size = new System.Drawing.Size(223, 21);
+            this.cbxSituacionFiscal.TabIndex = 24;
+            // 
+            // chkbxProduccion
+            // 
+            this.chkbxProduccion.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkbxProduccion.AutoSize = true;
+            this.chkbxProduccion.Location = new System.Drawing.Point(520, 151);
+            this.chkbxProduccion.Name = "chkbxProduccion";
+            this.chkbxProduccion.Size = new System.Drawing.Size(15, 14);
+            this.chkbxProduccion.TabIndex = 25;
+            this.chkbxProduccion.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
@@ -518,56 +571,6 @@
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnBuscaImagen
-            // 
-            this.btnBuscaImagen.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnBuscaImagen.Location = new System.Drawing.Point(363, 81);
-            this.btnBuscaImagen.Name = "btnBuscaImagen";
-            this.btnBuscaImagen.Size = new System.Drawing.Size(25, 23);
-            this.btnBuscaImagen.TabIndex = 17;
-            this.btnBuscaImagen.Text = "...";
-            this.btnBuscaImagen.UseVisualStyleBackColor = true;
-            this.btnBuscaImagen.Click += new System.EventHandler(this.btnBuscaImagen_Click);
-            // 
-            // cbxImpresoras
-            // 
-            this.cbxImpresoras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxImpresoras.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxImpresoras.FormattingEnabled = true;
-            this.cbxImpresoras.Location = new System.Drawing.Point(482, 49);
-            this.cbxImpresoras.Name = "cbxImpresoras";
-            this.cbxImpresoras.Size = new System.Drawing.Size(262, 21);
-            this.cbxImpresoras.TabIndex = 18;
-            // 
-            // btnBuscaCertificado
-            // 
-            this.btnBuscaCertificado.Location = new System.Drawing.Point(364, 79);
-            this.btnBuscaCertificado.Name = "btnBuscaCertificado";
-            this.btnBuscaCertificado.Size = new System.Drawing.Size(24, 23);
-            this.btnBuscaCertificado.TabIndex = 23;
-            this.btnBuscaCertificado.Text = "...";
-            this.btnBuscaCertificado.UseVisualStyleBackColor = true;
-            // 
-            // cbxSituacionFiscal
-            // 
-            this.cbxSituacionFiscal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxSituacionFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxSituacionFiscal.FormattingEnabled = true;
-            this.cbxSituacionFiscal.Location = new System.Drawing.Point(520, 49);
-            this.cbxSituacionFiscal.Name = "cbxSituacionFiscal";
-            this.cbxSituacionFiscal.Size = new System.Drawing.Size(224, 21);
-            this.cbxSituacionFiscal.TabIndex = 24;
-            // 
-            // chkbxProduccion
-            // 
-            this.chkbxProduccion.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkbxProduccion.AutoSize = true;
-            this.chkbxProduccion.Location = new System.Drawing.Point(520, 151);
-            this.chkbxProduccion.Name = "chkbxProduccion";
-            this.chkbxProduccion.Size = new System.Drawing.Size(15, 14);
-            this.chkbxProduccion.TabIndex = 25;
-            this.chkbxProduccion.UseVisualStyleBackColor = true;
             // 
             // frmParametros
             // 

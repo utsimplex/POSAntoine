@@ -25,11 +25,12 @@ namespace UI.Desktop.Ventas
             txtFechaHoraVta.Text = f;
             modo = "Alta";
             ventaLocal = new Venta() { TipoOperacion="V",Usuario=usr.usuario};
+            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
             this.ObtieneParametrosEmpresaAUI();
             this.ObtieneClienteGenerico();
             this.AsignaDatosClienteUI();
             medioDePago = "";
-                   
+
         }
         //MODO READONLY -- SOLO PUEDE MODIFICAR EL MEDIO DE PAGO SI ES QUE LA CAJA NO ESTA CERRADA
         public frmVenta(Usuario usr,Venta vtaSelec)
@@ -710,11 +711,12 @@ namespace UI.Desktop.Ventas
                     ventaLocal.MontoPagado = ventaLocal.Total;
                     }
                     //TO-DO: Evaluar parametro de Usuario para saber si el emisor es Monotributista
-                    bool Monotributista = true;
+                    bool Monotributista = Convert.ToInt32(parametrosEmpresa.SituacionFiscal) == (int)FeConstantes.SituacionFiscal.MONOTRIBUTO;
+                    
                     if (Monotributista)
                         ventaLocal.TipoComprobante = (int)FeConstantes.TipoComprobante.FacturaC;
-                    //else
-                    //    ventaLocal.TipoComprobante = lblTipoComprobante.Text == "FACTURA B" ? (int)FeConstantes.TipoComprobante.FacturaC : clienteActual.TipoComprobante; 
+                    else
+                        ventaLocal.TipoComprobante = lblTipoComprobante.Text == "FACTURA B" ? (int)FeConstantes.TipoComprobante.FacturaB : clienteActual.TipoComprobante;
                 }
 
                 //Se imprime afuera
@@ -841,7 +843,8 @@ namespace UI.Desktop.Ventas
         private async Task FacturarVentaAsync()
         {
             //TO-DO: FIX TOMAR PARAMETRO GENERAL - segundo parametro si es monotributista
-            await Facturador.facturarAsync(ventaLocal, true);
+            bool esMonotributo = Convert.ToInt32(parametrosEmpresa.SituacionFiscal) == (int)FeConstantes.SituacionFiscal.MONOTRIBUTO;
+            await Facturador.facturarAsync(ventaLocal, esMonotributo);
         }
         private void setMedioPago()
         {
@@ -887,13 +890,9 @@ namespace UI.Desktop.Ventas
         }
         private void ObtieneParametrosEmpresaAUI()
         {
-            //parametrosEmpresa = Datos_ParametrosEmpresaAdapter.getOne();
-            //lblDireccion.Text = parametrosEmpresa.Direccion;
-            //lblNombreNegocio.Text = parametrosEmpresa.Nombre;
-            //lblTelefono.Text = parametrosEmpresa.Telefono;
-            lblDireccion.Text = "Av siempre viva 123";
-            lblNombreNegocio.Text = "Los Simpsons";
-            lblTelefono.Text = "030303";
+            lblDireccion.Text = parametrosEmpresa.Direccion;
+            lblNombreNegocio.Text = parametrosEmpresa.Nombre;
+            lblTelefono.Text = parametrosEmpresa.Telefono;
         }
         private void ObtieneClienteGenerico()
         {

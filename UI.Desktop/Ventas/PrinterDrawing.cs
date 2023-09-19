@@ -10,8 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QRCoder;
-
-
+using Data.Database;
 
 namespace UI.Desktop.Ventas
 {
@@ -22,13 +21,15 @@ namespace UI.Desktop.Ventas
         //public CatalogoCaja caja = new CatalogoCaja();
         public Venta _venta_Actual = new Venta();
         public List<Venta_Articulo> _venta_actual_articulos = new List<Venta_Articulo>();
+        ParametrosAdapter Datos_ParametrosAdapter = new ParametrosAdapter();
+        ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
         string nombreComandera = "";
         string _cabeceraComanda = "";
         string _directorioLogo = "";
         string _direccionComanda = "";
         string _telefonoComanda = "";
-        string _imprimeFechaEmision = "";
-        string _imprimeFechaEntrega = "";
+        //string _imprimeFechaEmision = "";
+        //string _imprimeFechaEntrega = "";
         string _nombreFiscal = "";
         string _situacionFiscal = "";
         string _inicioActividades = "";
@@ -39,25 +40,32 @@ namespace UI.Desktop.Ventas
         string _prefijoCaja = ""; //Modo: DELIVERY ; MOSTRADOR
         public PrinterDrawing(Venta _venta, List<Venta_Articulo> _venta_articulos, string modo)
         {
+            parametrosEmpresa =  this.Datos_ParametrosAdapter.getOne();
             _venta_Actual = _venta;
             _venta_actual_articulos = _venta_articulos;
             _modo = modo;
-            _directorioLogo = "C:\\ElArbolito\\ArbolitoDeAntoine.png";
-            nombreComandera = "GP-C80180 Series";
-            _cabeceraComanda = "El Arbolito de Antoine";
-            _direccionComanda = "Chacabuco 842 - Venado Tuerto";
-            _telefonoComanda = "Whatsapp: 3462-262000";
-            _nombreFiscal = "Florencia Anahi Polvaran";
-            _situacionFiscal = "Responsable Monotributo";
-            _inicioActividades = "01/07/2021";
-            _direccionFiscal = "Chacabuco 842 - Venado Tuerto";
-            _ingBrutos = "0324185027";
-            _cuit = "20350319250";
-            //_direccionComanda = parametros.getOne("DIRECCION").Valor;
-            //_telefonoComanda = parametros.getOne("TELEFONO").Valor;
-            //_imprimeFechaEmision = parametros.getOne("EMISION").Valor;
-            //_imprimeFechaEntrega = parametros.getOne("ENTREGA").Valor;
-            //_prefijoCaja = tipoCaja.getOne(caja.getOne(_venta.caja).idTipoCaja).prefijo;
+            //_directorioLogo = "C:\\ElArbolito\\ArbolitoDeAntoine.png";
+            //nombreComandera = "GP-C80180 Series";
+            //_cabeceraComanda = "El Arbolito de Antoine";
+            //_direccionComanda = "Chacabuco 842 - Venado Tuerto";
+            //_telefonoComanda = "Whatsapp: 3462-262000";
+            //_nombreFiscal = "Florencia Anahi Polvaran";
+            //_situacionFiscal = "Responsable Monotributo";
+            //_inicioActividades = "01/07/2021";
+            //_direccionFiscal = "Chacabuco 842 - Venado Tuerto";
+            //_ingBrutos = "0324185027";
+            //_cuit = "20350319250";
+            _directorioLogo = parametrosEmpresa.ImagenPath;
+            nombreComandera = parametrosEmpresa.Impresora1;
+            _cabeceraComanda = parametrosEmpresa.Nombre;
+            _direccionComanda = parametrosEmpresa.Direccion;
+            _telefonoComanda = parametrosEmpresa.Telefono;
+            _nombreFiscal = parametrosEmpresa.NombreFiscal;
+            _situacionFiscal = FeConstantes.GetEnumDescription((FeConstantes.SituacionFiscal)Convert.ToInt32(parametrosEmpresa.SituacionFiscal));
+            _inicioActividades = parametrosEmpresa.InicioDeActividades;
+            _direccionFiscal = parametrosEmpresa.DireccionFiscal;
+            _ingBrutos = parametrosEmpresa.IngresosBrutos;
+            _cuit = parametrosEmpresa.CUIT;
             this.PrintTicket();
             //Print(nombreComandera.Valor, GetDocument());
 
@@ -423,22 +431,22 @@ namespace UI.Desktop.Ventas
                     //ev.Graphics.DrawString("Total", normalFont, Brushes.Black, 160, height, new StringFormat());
                     if (_venta_Actual.letraComprobateRO == "A")
                     {
-                        //SizeF netWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.neto).ToString("0.00"), netFont);
-                        //ev.Graphics.DrawString("SubTotal", netFont, Brushes.Black, 100, height, new StringFormat());
-                        //ev.Graphics.DrawString("$", netFont, Brushes.Black, 180, height, new StringFormat());
-                        //ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.neto).ToString("0.00"), netFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
-                        //height += 20;
-                        //SizeF ivaWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.iva).ToString("0.00"), netFont);
-                        //ev.Graphics.DrawString("IVA 21%", netFont, Brushes.Black, 100, height, new StringFormat());
-                        //ev.Graphics.DrawString("$", netFont, Brushes.Black, 180, height, new StringFormat());
-                        //ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.iva).ToString("0.00"), netFont, Brushes.Black, 275 - ivaWidth.Width, height, new StringFormat());
-                        //height += 20;
-                        //SizeF totalWidth = ev.Graphics.MeasureString(_venta_Actual.monto_total.ToString("0.00"), netFont);
-                        //ev.Graphics.DrawString("Total", netFont, Brushes.Black, 120, height, new StringFormat());
-                        //ev.Graphics.DrawString("$", netFont, Brushes.Black, 180, height, new StringFormat());
-                        //ev.Graphics.DrawString(_venta_Actual.monto_total.ToString("0.00"), netFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
-                        //height += 25;
-                    }
+                    SizeF netWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.Neto).ToString("0.00"), totalFont);
+                    ev.Graphics.DrawString("SubTotal", totalFont, Brushes.Black, 100, height, new StringFormat());
+                    ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
+                    ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.Neto).ToString("0.00"), totalFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
+                    height += 20;
+                    SizeF ivaWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.Iva).ToString("0.00"), totalFont);
+                    ev.Graphics.DrawString("IVA 21%", totalFont, Brushes.Black, 100, height, new StringFormat());
+                    ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
+                    ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.Iva).ToString("0.00"), totalFont, Brushes.Black, 275 - ivaWidth.Width, height, new StringFormat());
+                    height += 20;
+                    SizeF totalWidth = ev.Graphics.MeasureString(_venta_Actual.Total.ToString("0.00"), totalFont);
+                    ev.Graphics.DrawString("Total", totalFont, Brushes.Black, 120, height, new StringFormat());
+                    ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
+                    ev.Graphics.DrawString(_venta_Actual.Total.ToString("0.00"), totalFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
+                    height += 25;
+                }
                     else
                     {
                         SizeF netWidth = ev.Graphics.MeasureString("Total $" + _venta_Actual.Total.ToString(), totalFont);
