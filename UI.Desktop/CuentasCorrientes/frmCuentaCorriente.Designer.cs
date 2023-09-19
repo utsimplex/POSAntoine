@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCuentaCorriente));
-            this.gpbxCC = new System.Windows.Forms.GroupBox();
             this.dgvFacturas = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,23 +43,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbxPendiente = new System.Windows.Forms.TextBox();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.gpbxCC.SuspendLayout();
+            this.tabGeneral = new System.Windows.Forms.TabControl();
+            this.tabCuentaCorriente = new System.Windows.Forms.TabPage();
+            this.tabCobros = new System.Windows.Forms.TabPage();
+            this.dgvCobros = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacturas)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tabGeneral.SuspendLayout();
+            this.tabCuentaCorriente.SuspendLayout();
+            this.tabCobros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCobros)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gpbxCC
-            // 
-            this.gpbxCC.Controls.Add(this.dgvFacturas);
-            this.gpbxCC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpbxCC.Location = new System.Drawing.Point(3, 63);
-            this.gpbxCC.Name = "gpbxCC";
-            this.gpbxCC.Size = new System.Drawing.Size(849, 513);
-            this.gpbxCC.TabIndex = 0;
-            this.gpbxCC.TabStop = false;
-            this.gpbxCC.Text = "Cuenta Corriente";
             // 
             // dgvFacturas
             // 
@@ -68,12 +63,12 @@
             this.dgvFacturas.AllowUserToDeleteRows = false;
             this.dgvFacturas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFacturas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvFacturas.Location = new System.Drawing.Point(3, 16);
+            this.dgvFacturas.Location = new System.Drawing.Point(3, 3);
             this.dgvFacturas.Name = "dgvFacturas";
             this.dgvFacturas.ReadOnly = true;
             this.dgvFacturas.RowHeadersVisible = false;
             this.dgvFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFacturas.Size = new System.Drawing.Size(843, 494);
+            this.dgvFacturas.Size = new System.Drawing.Size(785, 481);
             this.dgvFacturas.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -81,10 +76,10 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240F));
-            this.tableLayoutPanel1.Controls.Add(this.gpbxCC, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnSalir, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tabGeneral, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -92,7 +87,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1095, 639);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1045, 639);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // groupBox1
@@ -105,7 +100,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(849, 54);
+            this.groupBox1.Size = new System.Drawing.Size(799, 54);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cliente";
@@ -168,12 +163,12 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.btnRecibirPago, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.btnPagarSeleccion, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.btnRecibirPago, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.btnPagarSeleccion, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tbxPendiente, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(858, 63);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(808, 63);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 12;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -199,7 +194,7 @@
             this.btnRecibirPago.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnRecibirPago.Image = global::UI.Desktop.Properties.Resources._3387295_shopping_finance_payment_machine_credit;
             this.btnRecibirPago.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRecibirPago.Location = new System.Drawing.Point(3, 153);
+            this.btnRecibirPago.Location = new System.Drawing.Point(3, 203);
             this.btnRecibirPago.Name = "btnRecibirPago";
             this.btnRecibirPago.Size = new System.Drawing.Size(228, 44);
             this.btnRecibirPago.TabIndex = 29;
@@ -214,7 +209,7 @@
             this.btnPagarSeleccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPagarSeleccion.Image = ((System.Drawing.Image)(resources.GetObject("btnPagarSeleccion.Image")));
             this.btnPagarSeleccion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPagarSeleccion.Location = new System.Drawing.Point(3, 303);
+            this.btnPagarSeleccion.Location = new System.Drawing.Point(3, 353);
             this.btnPagarSeleccion.Name = "btnPagarSeleccion";
             this.btnPagarSeleccion.Size = new System.Drawing.Size(228, 44);
             this.btnPagarSeleccion.TabIndex = 26;
@@ -254,7 +249,7 @@
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(858, 586);
+            this.btnSalir.Location = new System.Drawing.Point(808, 586);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(234, 46);
             this.btnSalir.TabIndex = 28;
@@ -262,31 +257,81 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // tabGeneral
+            // 
+            this.tabGeneral.Controls.Add(this.tabCuentaCorriente);
+            this.tabGeneral.Controls.Add(this.tabCobros);
+            this.tabGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabGeneral.Location = new System.Drawing.Point(3, 63);
+            this.tabGeneral.Name = "tabGeneral";
+            this.tabGeneral.SelectedIndex = 0;
+            this.tabGeneral.Size = new System.Drawing.Size(799, 513);
+            this.tabGeneral.TabIndex = 29;
+            this.tabGeneral.SelectedIndexChanged += new System.EventHandler(this.tabGeneral_SelectedIndexChanged);
+            this.tabGeneral.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabCobros_Selected);
+            // 
+            // tabCuentaCorriente
+            // 
+            this.tabCuentaCorriente.Controls.Add(this.dgvFacturas);
+            this.tabCuentaCorriente.Location = new System.Drawing.Point(4, 22);
+            this.tabCuentaCorriente.Name = "tabCuentaCorriente";
+            this.tabCuentaCorriente.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCuentaCorriente.Size = new System.Drawing.Size(791, 487);
+            this.tabCuentaCorriente.TabIndex = 0;
+            this.tabCuentaCorriente.Text = "Cuenta Corriente";
+            this.tabCuentaCorriente.UseVisualStyleBackColor = true;
+            // 
+            // tabCobros
+            // 
+            this.tabCobros.Controls.Add(this.dgvCobros);
+            this.tabCobros.Location = new System.Drawing.Point(4, 22);
+            this.tabCobros.Name = "tabCobros";
+            this.tabCobros.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCobros.Size = new System.Drawing.Size(791, 487);
+            this.tabCobros.TabIndex = 1;
+            this.tabCobros.Text = "Cobros Recibidos";
+            this.tabCobros.UseVisualStyleBackColor = true;
+            // 
+            // dgvCobros
+            // 
+            this.dgvCobros.AllowUserToAddRows = false;
+            this.dgvCobros.AllowUserToDeleteRows = false;
+            this.dgvCobros.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCobros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCobros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCobros.Location = new System.Drawing.Point(3, 3);
+            this.dgvCobros.Name = "dgvCobros";
+            this.dgvCobros.ReadOnly = true;
+            this.dgvCobros.RowHeadersVisible = false;
+            this.dgvCobros.Size = new System.Drawing.Size(785, 481);
+            this.dgvCobros.TabIndex = 0;
+            // 
             // frmCuentaCorriente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1095, 639);
+            this.ClientSize = new System.Drawing.Size(1045, 639);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmCuentaCorriente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cuenta Corriente";
-            this.gpbxCC.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacturas)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tabGeneral.ResumeLayout(false);
+            this.tabCuentaCorriente.ResumeLayout(false);
+            this.tabCobros.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCobros)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox gpbxCC;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dgvFacturas;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -301,5 +346,9 @@
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnRecibirPago;
+        private System.Windows.Forms.TabControl tabGeneral;
+        private System.Windows.Forms.TabPage tabCuentaCorriente;
+        private System.Windows.Forms.TabPage tabCobros;
+        private System.Windows.Forms.DataGridView dgvCobros;
     }
 }
