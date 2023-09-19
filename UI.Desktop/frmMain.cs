@@ -10,6 +10,7 @@ using System.Data.OleDb;
 using Microsoft.Office.Interop;
 using System.Threading;
 using UI.Desktop.Cajas;
+using UI.Desktop.Artículos;
 
 namespace UI.Desktop
 {

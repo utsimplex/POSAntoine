@@ -63,6 +63,16 @@ namespace UI.Desktop.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3319608_persentage_pie_chart_discount {
+            get {
+                object obj = ResourceManager.GetObject("3319608_persentage_pie chart_discount", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _3319627_coin_money_banking_transfer_dollar {
             get {
                 object obj = ResourceManager.GetObject("3319627_coin_money_banking_transfer_dollar", resourceCulture);
@@ -76,6 +86,16 @@ namespace UI.Desktop.Properties {
         internal static System.Drawing.Bitmap _3319632_chart_investment_stocks_graph_report_infographic {
             get {
                 object obj = ResourceManager.GetObject("3319632_chart_investment_stocks_graph_report_infographic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _3319633_arrow_business_graph_coin_dollar {
+            get {
+                object obj = ResourceManager.GetObject("3319633_arrow_business_graph_coin_dollar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

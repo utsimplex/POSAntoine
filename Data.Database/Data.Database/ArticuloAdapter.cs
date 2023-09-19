@@ -83,7 +83,7 @@ namespace Data.Database
      }
 */ //ESTO ELIMINA DE LA BASE DE DATOS
 
-             public void Actualizar(Entidades.Articulo arti)
+        public void Actualizar(Entidades.Articulo arti)
              {
                //Crear Conexion y Abrirla
                SqlConnection Con = CrearConexion();
@@ -102,7 +102,7 @@ namespace Data.Database
                Comando.Parameters["@STOCK"].Value = arti.Stock;
                Comando.Parameters.Add(new SqlParameter("@STOCKMIN", SqlDbType.Int));
                Comando.Parameters["@STOCKMIN"].Value = arti.StockMin;
-               Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Money));
+               Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Decimal));
                Comando.Parameters["@PRECIO"].Value = arti.Precio;
                Comando.Parameters.Add(new SqlParameter("@MARCA", SqlDbType.NVarChar));
                Comando.Parameters["@MARCA"].Value = arti.Proveedor;
@@ -164,6 +164,7 @@ namespace Data.Database
             Comando.Connection.Close();
 
         }
+       
         public System.ComponentModel.BindingList<Entidades.Articulo> GetAll()
              {
                  System.ComponentModel.BindingList<Entidades.Articulo> ListaArticulos = new System.ComponentModel.BindingList<Entidades.Articulo>();
@@ -222,7 +223,7 @@ namespace Data.Database
 
              }
 
-             public List<Entidades.Articulo> Busqueda(string texto)
+        public List<Entidades.Articulo> Busqueda(string texto)
              {
                  List<Entidades.Articulo> ListaArticulos = new List<Entidades.Articulo>();
                  //Crear Conexion y Abrirla
@@ -276,7 +277,7 @@ namespace Data.Database
 
              }
         
-             public List<Entidades.Articulo> GetStockBajoMinimo()
+        public List<Entidades.Articulo> GetStockBajoMinimo()
              {
                  List<Entidades.Articulo> ListaArticulosReponer = new List<Entidades.Articulo>();
                  //Crear Conexion y Abrirla
@@ -327,9 +328,9 @@ namespace Data.Database
 
 
              }
-             //GetOne
-                 
-             public Entidades.Articulo BuscarArticulo(string texto)
+             
+        //GetOne        
+        public Entidades.Articulo BuscarArticulo(string texto)
              {
                  Entidades.Articulo arti = new Entidades.Articulo();
                  //Crear Conexion y Abrirla
@@ -379,8 +380,8 @@ namespace Data.Database
 
              }
 
-             //Contar Cantidad de Artículos
-             public int ContarArticulos()
+        //Contar Cantidad de Artículos
+        public int ContarArticulos()
              {
                  int canti;
                  
@@ -413,8 +414,8 @@ namespace Data.Database
 
              }
 
-             //Contar cantidad de Artículos en Stock
-             public int ContarArticulosStock()
+        //Contar cantidad de Artículos en Stock
+        public int ContarArticulosStock()
              {
                  int canti;
 
@@ -447,8 +448,8 @@ namespace Data.Database
 
              }
         
-             // GET LISTADO MARCAS
-             public List<string> GetListadoMarcas()
+        // GET LISTADO MARCAS
+        public List<string> GetListadoMarcas()
              {
                  
                  List<string> ListaMarcas = new List<string>();

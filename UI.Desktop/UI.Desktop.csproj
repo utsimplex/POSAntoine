@@ -278,6 +278,12 @@
     <Compile Include="Artículos\frmListadoArticulos.Designer.cs">
       <DependentUpon>frmListadoArticulos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Artículos\frmModificarPrecios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Artículos\frmModificarPrecios.Designer.cs">
+      <DependentUpon>frmModificarPrecios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Artículos\frmValorizacionDeInventario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -437,6 +443,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Artículos\frmListadoArticulos.resx">
       <DependentUpon>frmListadoArticulos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Artículos\frmModificarPrecios.resx">
+      <DependentUpon>frmModificarPrecios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Artículos\frmValorizacionDeInventario.resx">
       <DependentUpon>frmValorizacionDeInventario.cs</DependentUpon>
@@ -709,6 +718,8 @@
     <None Include="Resources\EL ARBOLITO DE ANTOINE.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\3319608_persentage_pie chart_discount.png" />
+    <None Include="Resources\3319633_arrow_business_graph_coin_dollar.png" />
     <Content Include="Resources\logoColor.jpg" />
     <Content Include="Resources\Persona.JPG" />
     <None Include="Resources\splash2blue.bmp" />
