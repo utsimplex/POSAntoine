@@ -37,7 +37,8 @@ namespace UI.Desktop.Ventas
         {
             InitializeComponent();
             ventaLocal = vtaSelec;
-
+            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
+            this.ObtieneParametrosEmpresaAUI();
             usuarioLogueado = usr;
             modo = "READONLY";
             txtFechaHoraVta.Text = vtaSelec.FechaHora.ToString("dd ' de ' MMMM ', ' yyyy"); 
@@ -45,7 +46,7 @@ namespace UI.Desktop.Ventas
             txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
             txtNombRazCli.Text = Datos_ClienteAdapter.GetOne((long)vtaSelec.NumeroDocumentoCliente).Nombre;
             txtNumeroVenta.Text = vtaSelec.NumeroVenta.ToString();
-            txtTotal.Text = vtaSelec.Total.ToString();
+            txtTotal.Text = vtaSelec.Total.ToString("c");
             dgvArticulosVtaActual.DataSource = Datos_VentasArticulosAdapter.GetAll(vtaSelec.NumeroVenta, vtaSelec.TipoOperacion);
             cajaAbierta = Datos_CajasAdapter.GetEstadoCajaAbierta(vtaSelec.CajaId);
             btnConfirmar.Enabled = cbxMedioDePago.Enabled=cajaAbierta;
@@ -542,7 +543,7 @@ namespace UI.Desktop.Ventas
 
                 }
 
-                this.txtTotal.Text = total.ToString();
+                this.txtTotal.Text = total.ToString("c");
 
                 //Titulo de las columnas
                 this.dgvArticulosVtaActual.Columns["Descuento"].HeaderText = "Descuento ($)";
@@ -582,7 +583,7 @@ namespace UI.Desktop.Ventas
             {
                 Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
                 ventaLocal.Descuento = descuentoTotal;
-                txtTotal.Text = Convert.ToString(total - descuentoTotal);
+                txtTotal.Text = (total - descuentoTotal).ToString("c");
             }
             else if (txtDctoPesos.Text != "" && txtDctoPesos.Text!="0")
             {
@@ -590,7 +591,7 @@ namespace UI.Desktop.Ventas
                 //Decimal total = Convert.ToDecimal(txtTotal.Text);
                 if (descuentoTotal <= total)
                 {
-                    txtTotal.Text = Convert.ToString(total - descuentoTotal);
+                    txtTotal.Text = (total - descuentoTotal).ToString("c");
                     ventaLocal.Descuento = descuentoTotal;
                 }
                 else
@@ -884,7 +885,7 @@ namespace UI.Desktop.Ventas
             ventaLocal.NumeroDocumentoCliente = clienteActual != null ? Convert.ToInt64(clienteActual.NumeroDocumento) : 0;
             //ventaLocal.SituacionFiscalCliente = clienteActual.TipoCliente; TO - DO: asignar id de situacion Fiscal
             ventaLocal.SituacionFiscalCliente = (int)FeConstantes.SituacionFiscal.ConsumidorFinal;
-            ventaLocal.NombreCliente = clienteActual != null ? clienteActual.Nombre : "";
+            ventaLocal.NombreCliente = clienteActual != null ? clienteActual.Nombre + " " + clienteActual.Apellido : "";
             ventaLocal.DireccionCliente = clienteActual != null ? clienteActual.Direccion : "";
             ventaLocal.TipoDocumentoCliente = clienteActual != null && clienteActual.TipoDocumento != null ? clienteActual.TipoDocumento : (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR;
         }

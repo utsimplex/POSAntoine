@@ -182,35 +182,27 @@ namespace UI.Desktop.Ventas
                 foreach (var item in _venta_actual_articulos)
                 {
                     SizeF qtyWidth = ev.Graphics.MeasureString(item.Cantidad.ToString(), comandaNormalFont);
-                    SizeF priceWidth = ev.Graphics.MeasureString("$ " + Convert.ToString(item.Precio), comandaNormalFont);
-                    SizeF totalWidth = ev.Graphics.MeasureString("$ " + item.Subtotal.ToString(), comandaNormalFont);
+                    SizeF priceWidth = ev.Graphics.MeasureString(item.Precio.ToString("c"), comandaNormalFont);
+                    SizeF totalWidth = ev.Graphics.MeasureString(item.Subtotal.ToString("c"), comandaNormalFont);
 
-                    //item.comanda = item.comanda ?? item.descripcion_linea.Replace("\r\n", string.Empty).Replace("1- ", "1 - ");
-                    //item.comanda = item.comanda.Replace("\r\n", string.Empty).Replace("1- ", "1 - ");
 
                     ev.Graphics.DrawString(item.DescripcionArticulo, comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
                     height += 15;
-                    ev.Graphics.DrawString(item.Cantidad.ToString(), comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
-                    ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
-                    ev.Graphics.DrawString("$ " + item.Subtotal.ToString(), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
+                    ev.Graphics.DrawString(item.Cantidad.ToString(), comandaNormalFont, Brushes.Black, 105 + qtyWidth.Width, height, new StringFormat());
+                    ev.Graphics.DrawString(item.Precio.ToString("c"), comandaNormalFont, Brushes.Black, 16 + (50 - priceWidth.Width), height, new StringFormat());
+                    ev.Graphics.DrawString(item.Subtotal.ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
                     if (item.Descuento != 0)
                     {
                         height += 15;
                         ev.Graphics.DrawString("Descuento", comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
-                        //ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
-                        ev.Graphics.DrawString("$ " + item.Descuento.ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
+                        ev.Graphics.DrawString((item.Descuento *-1).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
                     }
                     else if(item.Descuento_porcentaje !=0)
                     {
                         height += 15;
                         ev.Graphics.DrawString("Descuento", comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
-                        //ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
-                        ev.Graphics.DrawString("$ " + (item.Descuento_porcentaje/100*item.Cantidad).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
+                        ev.Graphics.DrawString((item.Descuento_porcentaje/100*item.Cantidad * item.Precio *-1).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
                     }
-                    height += 20;
-                    ev.Graphics.DrawString(item.Cantidad.ToString(), comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
-                    ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
-                    ev.Graphics.DrawString("$ " + item.Subtotal.ToString(), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
                     height += 20;
 
                 }
@@ -221,13 +213,13 @@ namespace UI.Desktop.Ventas
                 //Print Net Total
                 //ev.Graphics.DrawString("Total", normalFont, Brushes.Black, 160, height, new StringFormat());
 
-                SizeF netWidth = ev.Graphics.MeasureString("$" + _venta_Actual.Total.ToString(), descuentoFont);
+                SizeF netWidth = ev.Graphics.MeasureString((_venta_Actual.Total*-1).ToString("c"), descuentoFont);
                 ev.Graphics.DrawString("Descuento", descuentoFont, Brushes.Black, 10, height, new StringFormat());
-                ev.Graphics.DrawString("$" + _venta_Actual.Descuento.ToString(), descuentoFont, Brushes.Black, 220 + (50 - netWidth.Width), height, new StringFormat());
+                ev.Graphics.DrawString((_venta_Actual.Descuento *-1).ToString("c"), descuentoFont, Brushes.Black, 220 + (50 - netWidth.Width), height, new StringFormat());
                 height += 20;
-                SizeF netWidth2 = ev.Graphics.MeasureString("$" + _venta_Actual.Total.ToString(), totalFont);
+                SizeF netWidth2 = ev.Graphics.MeasureString(_venta_Actual.Total.ToString("c"), totalFont);
                 ev.Graphics.DrawString("Total", totalFont, Brushes.Black, 10, height, new StringFormat());
-                ev.Graphics.DrawString("$" + _venta_Actual.Total.ToString(), totalFont, Brushes.Black, 230 + (50 - netWidth2.Width), height, new StringFormat());
+                ev.Graphics.DrawString(_venta_Actual.Total.ToString("c"), totalFont, Brushes.Black, 230 + (50 - netWidth2.Width), height, new StringFormat());
                 height += 20;
 
                 //Print Line
@@ -375,10 +367,10 @@ namespace UI.Desktop.Ventas
                     foreach (var item in _venta_actual_articulos)
                     {
                         SizeF qtyWidth = ev.Graphics.MeasureString(item.Cantidad.ToString(), comandaNormalFont);
-                        SizeF priceWidth = ev.Graphics.MeasureString("$ " + Convert.ToString(item.Subtotal / item.Cantidad), comandaNormalFont);
-                        SizeF netPriceWidth = ev.Graphics.MeasureString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont);
-                        SizeF totalWidth = ev.Graphics.MeasureString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont);
-                        SizeF netTotalWidth = ev.Graphics.MeasureString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont);
+                        SizeF priceWidth = ev.Graphics.MeasureString((item.Subtotal / item.Cantidad).ToString("c"), comandaNormalFont);
+                        SizeF netPriceWidth = ev.Graphics.MeasureString(item.Subtotal.ToString("c"), comandaNormalFont);
+                        SizeF totalWidth = ev.Graphics.MeasureString(item.Subtotal.ToString("c"), comandaNormalFont);
+                        SizeF netTotalWidth = ev.Graphics.MeasureString(item.Subtotal.ToString("c"), comandaNormalFont);
 
                         //item.comanda = item.comanda ?? item.descripcion_linea.Replace("\r\n", string.Empty).Replace("1- ", "1 - ");
                         //item.comanda = item.comanda.Replace("\r\n", string.Empty).Replace("1- ", "1 - ");
@@ -395,23 +387,23 @@ namespace UI.Desktop.Ventas
                         }
                         else
                         {
-                            ev.Graphics.DrawString("$ " + item.Precio.ToString("0.00"), comandaNormalFont, Brushes.Black, 170 - priceWidth.Width, height, new StringFormat());
+                            ev.Graphics.DrawString(item.Precio.ToString("c"), comandaNormalFont, Brushes.Black, 170 - priceWidth.Width, height, new StringFormat());
                             ev.Graphics.DrawString("(21)", comandaNormalFont, Brushes.Black, 180, height, new StringFormat());
-                            ev.Graphics.DrawString("$ " + item.Subtotal.ToString("0.00"), comandaNormalFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
+                            ev.Graphics.DrawString(item.Subtotal.ToString("c"), comandaNormalFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
                             height += 15;
                         if (item.Descuento != 0)
                         {
                             height += 15;
                             ev.Graphics.DrawString("Descuento", comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
                             //ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
-                            ev.Graphics.DrawString("$ " + item.Descuento.ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
+                            ev.Graphics.DrawString("- " +  (item.Descuento *-1).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
                         }
                         else if (item.Descuento_porcentaje != 0)
                         {
                             height += 15;
                             ev.Graphics.DrawString("Descuento", comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
                             //ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
-                            ev.Graphics.DrawString("$ " + (item.Descuento_porcentaje / 100 * item.Cantidad).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
+                            ev.Graphics.DrawString((item.Descuento_porcentaje / 100 * item.Cantidad * item.Precio *-1).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
                         }
                     }
 
@@ -419,40 +411,40 @@ namespace UI.Desktop.Ventas
                     //Print Line
                 if (_venta_Actual.Descuento != Convert.ToDecimal(0))
                 {
-                    SizeF descuentoWidth = ev.Graphics.MeasureString("$ " + _venta_Actual.Descuento.ToString("0.00"), comandaNormalFont);
+                    SizeF descuentoWidth = ev.Graphics.MeasureString((_venta_Actual.Descuento *-1).ToString("c"), comandaNormalFont);
                     ev.Graphics.DrawString("DESCUENTO", comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
-                    ev.Graphics.DrawString("- $ " + _venta_Actual.Descuento.ToString("0.00"), comandaNormalFont, Brushes.Black, 275- descuentoWidth.Width, height, new StringFormat());
+                    ev.Graphics.DrawString((_venta_Actual.Descuento *-1).ToString("c"), comandaNormalFont, Brushes.Black, 275- descuentoWidth.Width, height, new StringFormat());
 
                     height += 15;
                 }
                     ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
                     height += 20;
-                    //Print Net Total
-                    //ev.Graphics.DrawString("Total", normalFont, Brushes.Black, 160, height, new StringFormat());
-                    if (_venta_Actual.letraComprobateRO == "A")
-                    {
-                    SizeF netWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.Neto).ToString("0.00"), totalFont);
+                //Print Net Total
+                //ev.Graphics.DrawString("Total", normalFont, Brushes.Black, 160, height, new StringFormat());
+                if (_venta_Actual.letraComprobateRO == "A")
+                {
+                    SizeF netWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.Neto).ToString("c"), totalFont);
                     ev.Graphics.DrawString("SubTotal", totalFont, Brushes.Black, 100, height, new StringFormat());
-                    ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
-                    ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.Neto).ToString("0.00"), totalFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
+                    //ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
+                    ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.Neto).ToString("c"), totalFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
                     height += 20;
-                    SizeF ivaWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.Iva).ToString("0.00"), totalFont);
+                    SizeF ivaWidth = ev.Graphics.MeasureString(Convert.ToDouble(_venta_Actual.Iva).ToString("c"), totalFont);
                     ev.Graphics.DrawString("IVA 21%", totalFont, Brushes.Black, 100, height, new StringFormat());
-                    ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
-                    ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.Iva).ToString("0.00"), totalFont, Brushes.Black, 275 - ivaWidth.Width, height, new StringFormat());
+                    //ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
+                    ev.Graphics.DrawString(Convert.ToDouble(_venta_Actual.Iva).ToString("c"), totalFont, Brushes.Black, 275 - ivaWidth.Width, height, new StringFormat());
                     height += 20;
-                    SizeF totalWidth = ev.Graphics.MeasureString(_venta_Actual.Total.ToString("0.00"), totalFont);
+                    SizeF totalWidth = ev.Graphics.MeasureString(_venta_Actual.Total.ToString("c"), totalFont);
                     ev.Graphics.DrawString("Total", totalFont, Brushes.Black, 120, height, new StringFormat());
                     ev.Graphics.DrawString("$", totalFont, Brushes.Black, 180, height, new StringFormat());
-                    ev.Graphics.DrawString(_venta_Actual.Total.ToString("0.00"), totalFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
+                    ev.Graphics.DrawString(_venta_Actual.Total.ToString("c"), totalFont, Brushes.Black, 275 - totalWidth.Width, height, new StringFormat());
                     height += 25;
                 }
-                    else
-                    {
-                        SizeF netWidth = ev.Graphics.MeasureString("Total $" + _venta_Actual.Total.ToString(), totalFont);
-                        ev.Graphics.DrawString("Total $" + _venta_Actual.Total.ToString(), totalFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
-                        height += 25;
-                    }
+                else
+                {
+                    SizeF netWidth = ev.Graphics.MeasureString("Total " + _venta_Actual.Total.ToString("c"), totalFont);
+                    ev.Graphics.DrawString("Total " + _venta_Actual.Total.ToString("c"), totalFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
+                    height += 25;
+                }
 
                     ev.Graphics.DrawString("*** FACTURACION ELECTRÓNICA ***", lessNormalFont, Brushes.Black, 60, height, new StringFormat());
                     height += 15;
