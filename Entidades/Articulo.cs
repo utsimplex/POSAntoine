@@ -69,6 +69,22 @@ namespace Entidades
             set { _Habilitado = value; }
         }
 
+        // CAMPO PERSONALIZADO 1
+        string _CampoPersonalizado1;
+        public string CampoPersonalizado1
+        {
+            get { return _CampoPersonalizado1; }
+            set { _CampoPersonalizado1 = value; }
+        }
+       
+        // CAMPO PERSONALIZADO 2
+        string _CampoPersonalizado2;
+        public string CampoPersonalizado2
+        {
+            get { return _CampoPersonalizado2; }
+            set { _CampoPersonalizado2 = value; }
+        }
+
         public int? RangoEtario { get; set; }
 
         public int? Familia { get; set; }

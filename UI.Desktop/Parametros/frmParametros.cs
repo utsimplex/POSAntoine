@@ -100,6 +100,10 @@ namespace UI.Desktop.Parametros
             this.completaImpresoras();
             //this.cbxSituacionFiscal.SelectedText = "";
             this.completaSituacionFiscal();
+
+            //Campos Personalizados Articulo
+            this.txtCampoPersonalizadoArticulo1.Text = parametrosEmpresa.CampoPersonalizadoArticulo1;
+            this.txtCampoPersonalizadoArticulo2.Text = parametrosEmpresa.CampoPersonalizadoArticulo2;
         }
         private void ControlesAParametro()
         {
@@ -121,6 +125,19 @@ namespace UI.Desktop.Parametros
             parametrosEmpresa.Impresora1 = this.cbxImpresoras.SelectedItem.ToString();
             parametrosEmpresa.SituacionFiscal = Convert.ToInt32(cbxSituacionFiscal.SelectedValue).ToString();
             //parametrosEmpresa.SituacionFiscal = this.cbxSituacionFiscal.SelectedValue.ToString();
+
+            //Campos Personalizados Articulo
+            parametrosEmpresa.CampoPersonalizadoArticulo1 = this.txtCampoPersonalizadoArticulo1.Text.ToString();
+            parametrosEmpresa.CampoPersonalizadoArticulo2 = this.txtCampoPersonalizadoArticulo2.Text.ToString();
+
+            //Campos Personalizados Cliente
+            parametrosEmpresa.CampoPersonalizadoCliente1 = this.txtCampoPersonalizadoCliente1.Text.ToString();
+            parametrosEmpresa.CampoPersonalizadoCliente2 = this.txtCampoPersonalizadoCliente2.Text.ToString();
+
+            //Campos Personalizados Proveedor
+            parametrosEmpresa.CampoPersonalizadoProveedor1= this.txtCampoPersonalizadoProveedor1.Text.ToString();
+            parametrosEmpresa.CampoPersonalizadoProveedor2 = this.txtCampoPersonalizadoProveedor2.Text.ToString();
+
         }
         private void Guardar()
         {

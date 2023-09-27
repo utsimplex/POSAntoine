@@ -30,6 +30,17 @@ namespace Entidades
         public bool EsProduccion {get; set; }
         public string UrlQrAfip { get; set; }
 
+        //Campos personalizados Artículos
+        public string CampoPersonalizadoArticulo1 { get; set; }
+        public string CampoPersonalizadoArticulo2 { get; set; }
+
+        //Campos personalizados Clientes
+        public string CampoPersonalizadoCliente1 { get; set; }
+        public string CampoPersonalizadoCliente2 { get; set; }
+
+        //Campos personalizados Proveedores
+        public string CampoPersonalizadoProveedor1 { get; set; }
+        public string CampoPersonalizadoProveedor2 { get; set; }
 
     }
 }

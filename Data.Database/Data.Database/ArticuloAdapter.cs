@@ -180,19 +180,21 @@ namespace Data.Database
 
                      while (drArticulos.Read())
                      {
-                         Entidades.Articulo arti = new Entidades.Articulo();
+                        Entidades.Articulo arti = new Entidades.Articulo();
 
-                         arti.Codigo = (string)drArticulos["codigo"];
-                         arti.Descripcion = (string)drArticulos["descripcion"];
-                         arti.Precio = (decimal)drArticulos["precio"];
-                         arti.Stock = (int)drArticulos["stock"];
-                         arti.StockMin = (int)drArticulos["stockmin"];
-                         arti.Proveedor = (string)drArticulos["marca"];
-                         arti.Habilitado = (string)drArticulos["habilitado"];
-                    arti.Familia = drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
-                    arti.RangoEtario = drArticulos["rango_etario"] != DBNull.Value ? Convert.ToInt32(drArticulos["rango_etario"]) : (int?)null;
-                    arti.Costo = drArticulos["costo"] != DBNull.Value ? Convert.ToDecimal(drArticulos["costo"]) : (decimal?)null;
-                    arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
+                        arti.Codigo = (string)drArticulos["codigo"];
+                        arti.Descripcion = (string)drArticulos["descripcion"];
+                        arti.Precio = (decimal)drArticulos["precio"];
+                        arti.Stock = (int)drArticulos["stock"];
+                        arti.StockMin = (int)drArticulos["stockmin"];
+                        arti.Proveedor = (string)drArticulos["marca"];
+                        arti.Habilitado = (string)drArticulos["habilitado"];
+                        arti.Familia = drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
+                        arti.RangoEtario = drArticulos["rango_etario"] != DBNull.Value ? Convert.ToInt32(drArticulos["rango_etario"]) : (int?)null;
+                        arti.Costo = drArticulos["costo"] != DBNull.Value ? Convert.ToDecimal(drArticulos["costo"]) : (decimal?)null;
+                        arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
+                        arti.CampoPersonalizado1 = drArticulos["CampoPersonalizado1"] != DBNull.Value ? Convert.ToString(drArticulos["CampoPersonalizado1"]) : (string)null;
+                        arti.CampoPersonalizado2 = drArticulos["CampoPersonalizado2"] != DBNull.Value ? Convert.ToString(drArticulos["CampoPersonalizado2"]) : (string)null;
 
 
                     //if (arti.Habilitado == "Si")
