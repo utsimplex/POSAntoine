@@ -404,6 +404,12 @@
     <Compile Include="Mensajes\splashScreen.Designer.cs">
       <DependentUpon>splashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Parametros\Articulos\frmListadoFamiliasABM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Parametros\Articulos\frmListadoFamiliasABM.Designer.cs">
+      <DependentUpon>frmListadoFamiliasABM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parametros\frmParametros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -511,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mensajes\splashScreen.resx">
       <DependentUpon>splashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Parametros\Articulos\frmListadoFamiliasABM.resx">
+      <DependentUpon>frmListadoFamiliasABM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Parametros\frmParametros.resx">
       <DependentUpon>frmParametros.cs</DependentUpon>

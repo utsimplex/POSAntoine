@@ -172,5 +172,10 @@ namespace UI.Desktop.Parametros
                 this.tbxPathCertificado.Text = CertificadoDialog.FileName;
             }
         }
+
+        private void btnEditarFamilia1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

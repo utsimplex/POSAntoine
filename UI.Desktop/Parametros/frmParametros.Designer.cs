@@ -700,21 +700,21 @@
             // 
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(54, 185);
+            this.label18.Location = new System.Drawing.Point(45, 185);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(79, 13);
+            this.label18.Size = new System.Drawing.Size(88, 13);
             this.label18.TabIndex = 25;
-            this.label18.Text = "Título Familia 1";
+            this.label18.Text = "Nombre Familia 1";
             // 
             // label22
             // 
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(54, 221);
+            this.label22.Location = new System.Drawing.Point(45, 221);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(79, 13);
+            this.label22.Size = new System.Drawing.Size(88, 13);
             this.label22.TabIndex = 26;
-            this.label22.Text = "Título Familia 2";
+            this.label22.Text = "Nombre Familia 2";
             // 
             // txtFamilia2Titulo
             // 
@@ -741,6 +741,7 @@
             this.btnEditarFamilia1.TabIndex = 29;
             this.btnEditarFamilia1.Text = "Editar";
             this.btnEditarFamilia1.UseVisualStyleBackColor = true;
+            this.btnEditarFamilia1.Click += new System.EventHandler(this.btnEditarFamilia1_Click);
             // 
             // btnEditarFamilia2
             // 
