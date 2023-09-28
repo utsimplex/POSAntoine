@@ -70,24 +70,21 @@
             this.chkbxProduccion = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label19 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.txtCampoPersonalizadoArticulo1 = new System.Windows.Forms.TextBox();
+            this.txtCampoPersonalizadoArticulo2 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.txtCampoPersonalizadoArticulo2 = new System.Windows.Forms.TextBox();
-            this.txtCampoPersonalizadoCliente1 = new System.Windows.Forms.TextBox();
-            this.txtCampoPersonalizadoCliente2 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.txtCampoPersonalizadoProveedor1 = new System.Windows.Forms.TextBox();
-            this.txtCampoPersonalizadoProveedor2 = new System.Windows.Forms.TextBox();
+            this.txtFamilia2Titulo = new System.Windows.Forms.TextBox();
+            this.txtFamilia1Titulo = new System.Windows.Forms.TextBox();
+            this.btnEditarFamilia1 = new System.Windows.Forms.Button();
+            this.btnEditarFamilia2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -108,7 +105,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.8705F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.1295F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 1, 2);
@@ -139,7 +136,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(99, 20);
+            this.label1.Location = new System.Drawing.Point(98, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
@@ -149,7 +146,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(417, 20);
+            this.label2.Location = new System.Drawing.Point(416, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 1;
@@ -159,7 +156,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(94, 53);
+            this.label3.Location = new System.Drawing.Point(93, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 2;
@@ -169,7 +166,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(416, 53);
+            this.label4.Location = new System.Drawing.Point(415, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 3;
@@ -179,7 +176,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(95, 86);
+            this.label5.Location = new System.Drawing.Point(94, 86);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 13);
             this.label5.TabIndex = 4;
@@ -189,7 +186,7 @@
             // 
             this.tbxNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.tbxNombre, 2);
-            this.tbxNombre.Location = new System.Drawing.Point(152, 16);
+            this.tbxNombre.Location = new System.Drawing.Point(151, 16);
             this.tbxNombre.Name = "tbxNombre";
             this.tbxNombre.Size = new System.Drawing.Size(233, 20);
             this.tbxNombre.TabIndex = 15;
@@ -198,7 +195,7 @@
             // 
             this.tbxTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.tbxTelefono, 2);
-            this.tbxTelefono.Location = new System.Drawing.Point(152, 49);
+            this.tbxTelefono.Location = new System.Drawing.Point(151, 49);
             this.tbxTelefono.Name = "tbxTelefono";
             this.tbxTelefono.Size = new System.Drawing.Size(233, 20);
             this.tbxTelefono.TabIndex = 13;
@@ -206,7 +203,7 @@
             // tbxImagePath
             // 
             this.tbxImagePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxImagePath.Location = new System.Drawing.Point(152, 82);
+            this.tbxImagePath.Location = new System.Drawing.Point(151, 82);
             this.tbxImagePath.Name = "tbxImagePath";
             this.tbxImagePath.ReadOnly = true;
             this.tbxImagePath.Size = new System.Drawing.Size(202, 20);
@@ -215,15 +212,15 @@
             // tbxDireccion
             // 
             this.tbxDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxDireccion.Location = new System.Drawing.Point(478, 16);
+            this.tbxDireccion.Location = new System.Drawing.Point(477, 16);
             this.tbxDireccion.Name = "tbxDireccion";
-            this.tbxDireccion.Size = new System.Drawing.Size(259, 20);
+            this.tbxDireccion.Size = new System.Drawing.Size(258, 20);
             this.tbxDireccion.TabIndex = 14;
             // 
             // btnBuscaImagen
             // 
             this.btnBuscaImagen.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnBuscaImagen.Location = new System.Drawing.Point(360, 81);
+            this.btnBuscaImagen.Location = new System.Drawing.Point(359, 81);
             this.btnBuscaImagen.Name = "btnBuscaImagen";
             this.btnBuscaImagen.Size = new System.Drawing.Size(25, 23);
             this.btnBuscaImagen.TabIndex = 17;
@@ -236,9 +233,9 @@
             this.cbxImpresoras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxImpresoras.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxImpresoras.FormattingEnabled = true;
-            this.cbxImpresoras.Location = new System.Drawing.Point(478, 49);
+            this.cbxImpresoras.Location = new System.Drawing.Point(477, 49);
             this.cbxImpresoras.Name = "cbxImpresoras";
-            this.cbxImpresoras.Size = new System.Drawing.Size(259, 21);
+            this.cbxImpresoras.Size = new System.Drawing.Size(258, 21);
             this.cbxImpresoras.TabIndex = 18;
             // 
             // tabControl1
@@ -286,7 +283,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.23647F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.76353F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel3.Controls.Add(this.label6, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.label7, 5, 1);
             this.tableLayoutPanel3.Controls.Add(this.label8, 1, 2);
@@ -339,7 +336,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(431, 20);
+            this.label7.Location = new System.Drawing.Point(430, 20);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 13);
             this.label7.TabIndex = 1;
@@ -359,7 +356,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(424, 53);
+            this.label9.Location = new System.Drawing.Point(423, 53);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(84, 13);
             this.label9.TabIndex = 3;
@@ -379,7 +376,7 @@
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(418, 86);
+            this.label11.Location = new System.Drawing.Point(417, 86);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 13);
             this.label11.TabIndex = 5;
@@ -399,7 +396,7 @@
             // 
             this.label13.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(400, 119);
+            this.label13.Location = new System.Drawing.Point(399, 119);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(108, 13);
             this.label13.TabIndex = 7;
@@ -419,7 +416,7 @@
             // 
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(400, 152);
+            this.label15.Location = new System.Drawing.Point(399, 152);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(108, 13);
             this.label15.TabIndex = 9;
@@ -441,7 +438,7 @@
             this.tableLayoutPanel3.SetColumnSpan(this.tbxCuit, 2);
             this.tbxCuit.Location = new System.Drawing.Point(137, 16);
             this.tbxCuit.Name = "tbxCuit";
-            this.tbxCuit.Size = new System.Drawing.Size(247, 20);
+            this.tbxCuit.Size = new System.Drawing.Size(246, 20);
             this.tbxCuit.TabIndex = 11;
             // 
             // tbxDireccionFiscal
@@ -450,7 +447,7 @@
             this.tableLayoutPanel3.SetColumnSpan(this.tbxDireccionFiscal, 2);
             this.tbxDireccionFiscal.Location = new System.Drawing.Point(137, 49);
             this.tbxDireccionFiscal.Name = "tbxDireccionFiscal";
-            this.tbxDireccionFiscal.Size = new System.Drawing.Size(247, 20);
+            this.tbxDireccionFiscal.Size = new System.Drawing.Size(246, 20);
             this.tbxDireccionFiscal.TabIndex = 12;
             // 
             // tbxPathCertificado
@@ -459,7 +456,7 @@
             this.tbxPathCertificado.Location = new System.Drawing.Point(137, 82);
             this.tbxPathCertificado.Name = "tbxPathCertificado";
             this.tbxPathCertificado.ReadOnly = true;
-            this.tbxPathCertificado.Size = new System.Drawing.Size(217, 20);
+            this.tbxPathCertificado.Size = new System.Drawing.Size(216, 20);
             this.tbxPathCertificado.TabIndex = 13;
             // 
             // tbxPuntoDeVenta
@@ -468,7 +465,7 @@
             this.tableLayoutPanel3.SetColumnSpan(this.tbxPuntoDeVenta, 2);
             this.tbxPuntoDeVenta.Location = new System.Drawing.Point(137, 115);
             this.tbxPuntoDeVenta.Name = "tbxPuntoDeVenta";
-            this.tbxPuntoDeVenta.Size = new System.Drawing.Size(247, 20);
+            this.tbxPuntoDeVenta.Size = new System.Drawing.Size(246, 20);
             this.tbxPuntoDeVenta.TabIndex = 14;
             // 
             // tbxIngresosBrutos
@@ -477,7 +474,7 @@
             this.tableLayoutPanel3.SetColumnSpan(this.tbxIngresosBrutos, 2);
             this.tbxIngresosBrutos.Location = new System.Drawing.Point(137, 148);
             this.tbxIngresosBrutos.Name = "tbxIngresosBrutos";
-            this.tbxIngresosBrutos.Size = new System.Drawing.Size(247, 20);
+            this.tbxIngresosBrutos.Size = new System.Drawing.Size(246, 20);
             this.tbxIngresosBrutos.TabIndex = 16;
             // 
             // tbxURLAfip
@@ -486,36 +483,36 @@
             this.tableLayoutPanel3.SetColumnSpan(this.tbxURLAfip, 5);
             this.tbxURLAfip.Location = new System.Drawing.Point(137, 181);
             this.tbxURLAfip.Name = "tbxURLAfip";
-            this.tbxURLAfip.Size = new System.Drawing.Size(599, 20);
+            this.tbxURLAfip.Size = new System.Drawing.Size(597, 20);
             this.tbxURLAfip.TabIndex = 17;
             // 
             // tbxNombreFiscal
             // 
             this.tbxNombreFiscal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxNombreFiscal.Location = new System.Drawing.Point(514, 16);
+            this.tbxNombreFiscal.Location = new System.Drawing.Point(513, 16);
             this.tbxNombreFiscal.Name = "tbxNombreFiscal";
-            this.tbxNombreFiscal.Size = new System.Drawing.Size(222, 20);
+            this.tbxNombreFiscal.Size = new System.Drawing.Size(221, 20);
             this.tbxNombreFiscal.TabIndex = 18;
             // 
             // tbxClaveCertificado
             // 
             this.tbxClaveCertificado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxClaveCertificado.Location = new System.Drawing.Point(514, 82);
+            this.tbxClaveCertificado.Location = new System.Drawing.Point(513, 82);
             this.tbxClaveCertificado.Name = "tbxClaveCertificado";
-            this.tbxClaveCertificado.Size = new System.Drawing.Size(222, 20);
+            this.tbxClaveCertificado.Size = new System.Drawing.Size(221, 20);
             this.tbxClaveCertificado.TabIndex = 21;
             // 
             // tbxInicioActividades
             // 
             this.tbxInicioActividades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxInicioActividades.Location = new System.Drawing.Point(514, 115);
+            this.tbxInicioActividades.Location = new System.Drawing.Point(513, 115);
             this.tbxInicioActividades.Name = "tbxInicioActividades";
-            this.tbxInicioActividades.Size = new System.Drawing.Size(222, 20);
+            this.tbxInicioActividades.Size = new System.Drawing.Size(221, 20);
             this.tbxInicioActividades.TabIndex = 20;
             // 
             // btnBuscaCertificado
             // 
-            this.btnBuscaCertificado.Location = new System.Drawing.Point(360, 79);
+            this.btnBuscaCertificado.Location = new System.Drawing.Point(359, 79);
             this.btnBuscaCertificado.Name = "btnBuscaCertificado";
             this.btnBuscaCertificado.Size = new System.Drawing.Size(24, 23);
             this.btnBuscaCertificado.TabIndex = 23;
@@ -528,16 +525,16 @@
             this.cbxSituacionFiscal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxSituacionFiscal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSituacionFiscal.FormattingEnabled = true;
-            this.cbxSituacionFiscal.Location = new System.Drawing.Point(514, 49);
+            this.cbxSituacionFiscal.Location = new System.Drawing.Point(513, 49);
             this.cbxSituacionFiscal.Name = "cbxSituacionFiscal";
-            this.cbxSituacionFiscal.Size = new System.Drawing.Size(222, 21);
+            this.cbxSituacionFiscal.Size = new System.Drawing.Size(221, 21);
             this.cbxSituacionFiscal.TabIndex = 24;
             // 
             // chkbxProduccion
             // 
             this.chkbxProduccion.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkbxProduccion.AutoSize = true;
-            this.chkbxProduccion.Location = new System.Drawing.Point(514, 151);
+            this.chkbxProduccion.Location = new System.Drawing.Point(513, 151);
             this.chkbxProduccion.Name = "chkbxProduccion";
             this.chkbxProduccion.Size = new System.Drawing.Size(15, 14);
             this.chkbxProduccion.TabIndex = 25;
@@ -551,35 +548,32 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(770, 253);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Campos Personalizados";
+            this.tabPage3.Text = "Configuración de Artículos";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 8;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.17647F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.90756F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.5879F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.4121F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel4.Controls.Add(this.label19, 1, 2);
             this.tableLayoutPanel4.Controls.Add(this.label21, 1, 3);
             this.tableLayoutPanel4.Controls.Add(this.txtCampoPersonalizadoArticulo1, 2, 2);
             this.tableLayoutPanel4.Controls.Add(this.txtCampoPersonalizadoArticulo2, 2, 3);
             this.tableLayoutPanel4.Controls.Add(this.label20, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label18, 1, 7);
-            this.tableLayoutPanel4.Controls.Add(this.label17, 1, 6);
-            this.tableLayoutPanel4.Controls.Add(this.txtCampoPersonalizadoCliente2, 2, 7);
-            this.tableLayoutPanel4.Controls.Add(this.txtCampoPersonalizadoCliente1, 2, 6);
-            this.tableLayoutPanel4.Controls.Add(this.label22, 1, 5);
-            this.tableLayoutPanel4.Controls.Add(this.label23, 5, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label24, 5, 2);
-            this.tableLayoutPanel4.Controls.Add(this.label25, 5, 3);
-            this.tableLayoutPanel4.Controls.Add(this.txtCampoPersonalizadoProveedor1, 6, 2);
-            this.tableLayoutPanel4.Controls.Add(this.txtCampoPersonalizadoProveedor2, 6, 3);
+            this.tableLayoutPanel4.Controls.Add(this.label17, 1, 5);
+            this.tableLayoutPanel4.Controls.Add(this.label18, 1, 6);
+            this.tableLayoutPanel4.Controls.Add(this.label22, 1, 7);
+            this.tableLayoutPanel4.Controls.Add(this.txtFamilia2Titulo, 2, 7);
+            this.tableLayoutPanel4.Controls.Add(this.txtFamilia1Titulo, 2, 6);
+            this.tableLayoutPanel4.Controls.Add(this.btnEditarFamilia1, 3, 6);
+            this.tableLayoutPanel4.Controls.Add(this.btnEditarFamilia2, 3, 7);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -595,11 +589,21 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(764, 247);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(15, 53);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(118, 13);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Campo Personalizado 1";
+            // 
             // label21
             // 
             this.label21.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(28, 86);
+            this.label21.Location = new System.Drawing.Point(15, 86);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(118, 13);
             this.label21.TabIndex = 4;
@@ -608,11 +612,29 @@
             // txtCampoPersonalizadoArticulo1
             // 
             this.txtCampoPersonalizadoArticulo1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel4.SetColumnSpan(this.txtCampoPersonalizadoArticulo1, 2);
-            this.txtCampoPersonalizadoArticulo1.Location = new System.Drawing.Point(152, 49);
+            this.txtCampoPersonalizadoArticulo1.Location = new System.Drawing.Point(139, 49);
             this.txtCampoPersonalizadoArticulo1.Name = "txtCampoPersonalizadoArticulo1";
-            this.txtCampoPersonalizadoArticulo1.Size = new System.Drawing.Size(233, 20);
+            this.txtCampoPersonalizadoArticulo1.Size = new System.Drawing.Size(166, 20);
             this.txtCampoPersonalizadoArticulo1.TabIndex = 13;
+            // 
+            // txtCampoPersonalizadoArticulo2
+            // 
+            this.txtCampoPersonalizadoArticulo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCampoPersonalizadoArticulo2.Location = new System.Drawing.Point(139, 82);
+            this.txtCampoPersonalizadoArticulo2.Name = "txtCampoPersonalizadoArticulo2";
+            this.txtCampoPersonalizadoArticulo2.Size = new System.Drawing.Size(166, 20);
+            this.txtCampoPersonalizadoArticulo2.TabIndex = 20;
+            // 
+            // label20
+            // 
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(75, 20);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(58, 13);
+            this.label20.TabIndex = 23;
+            this.label20.Text = "Artículos";
             // 
             // tableLayoutPanel2
             // 
@@ -667,126 +689,68 @@
             // 
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(28, 185);
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(81, 152);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(118, 13);
-            this.label17.TabIndex = 18;
-            this.label17.Text = "Campo Personalizado 1";
+            this.label17.Size = new System.Drawing.Size(52, 13);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "Familias";
             // 
             // label18
             // 
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(28, 221);
+            this.label18.Location = new System.Drawing.Point(54, 185);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(118, 13);
-            this.label18.TabIndex = 19;
-            this.label18.Text = "Campo Personalizado 2";
-            // 
-            // txtCampoPersonalizadoArticulo2
-            // 
-            this.txtCampoPersonalizadoArticulo2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel4.SetColumnSpan(this.txtCampoPersonalizadoArticulo2, 2);
-            this.txtCampoPersonalizadoArticulo2.Location = new System.Drawing.Point(152, 82);
-            this.txtCampoPersonalizadoArticulo2.Name = "txtCampoPersonalizadoArticulo2";
-            this.txtCampoPersonalizadoArticulo2.Size = new System.Drawing.Size(233, 20);
-            this.txtCampoPersonalizadoArticulo2.TabIndex = 20;
-            // 
-            // txtCampoPersonalizadoCliente1
-            // 
-            this.txtCampoPersonalizadoCliente1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel4.SetColumnSpan(this.txtCampoPersonalizadoCliente1, 2);
-            this.txtCampoPersonalizadoCliente1.Location = new System.Drawing.Point(152, 181);
-            this.txtCampoPersonalizadoCliente1.Name = "txtCampoPersonalizadoCliente1";
-            this.txtCampoPersonalizadoCliente1.Size = new System.Drawing.Size(233, 20);
-            this.txtCampoPersonalizadoCliente1.TabIndex = 21;
-            // 
-            // txtCampoPersonalizadoCliente2
-            // 
-            this.txtCampoPersonalizadoCliente2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel4.SetColumnSpan(this.txtCampoPersonalizadoCliente2, 2);
-            this.txtCampoPersonalizadoCliente2.Location = new System.Drawing.Point(152, 217);
-            this.txtCampoPersonalizadoCliente2.Name = "txtCampoPersonalizadoCliente2";
-            this.txtCampoPersonalizadoCliente2.Size = new System.Drawing.Size(233, 20);
-            this.txtCampoPersonalizadoCliente2.TabIndex = 22;
-            // 
-            // label20
-            // 
-            this.label20.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(97, 20);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(49, 13);
-            this.label20.TabIndex = 23;
-            this.label20.Text = "Artículos";
+            this.label18.Size = new System.Drawing.Size(79, 13);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "Título Familia 1";
             // 
             // label22
             // 
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(102, 152);
+            this.label22.Location = new System.Drawing.Point(54, 221);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(44, 13);
-            this.label22.TabIndex = 24;
-            this.label22.Text = "Clientes";
+            this.label22.Size = new System.Drawing.Size(79, 13);
+            this.label22.TabIndex = 26;
+            this.label22.Text = "Título Familia 2";
             // 
-            // label23
+            // txtFamilia2Titulo
             // 
-            this.label23.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(452, 20);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(67, 13);
-            this.label23.TabIndex = 25;
-            this.label23.Text = "Proveedores";
+            this.txtFamilia2Titulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFamilia2Titulo.Location = new System.Drawing.Point(139, 217);
+            this.txtFamilia2Titulo.Name = "txtFamilia2Titulo";
+            this.txtFamilia2Titulo.Size = new System.Drawing.Size(166, 20);
+            this.txtFamilia2Titulo.TabIndex = 27;
             // 
-            // label19
+            // txtFamilia1Titulo
             // 
-            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(28, 53);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(118, 13);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "Campo Personalizado 1";
+            this.txtFamilia1Titulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFamilia1Titulo.Location = new System.Drawing.Point(139, 181);
+            this.txtFamilia1Titulo.Name = "txtFamilia1Titulo";
+            this.txtFamilia1Titulo.Size = new System.Drawing.Size(166, 20);
+            this.txtFamilia1Titulo.TabIndex = 28;
             // 
-            // label24
+            // btnEditarFamilia1
             // 
-            this.label24.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(401, 53);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(118, 13);
-            this.label24.TabIndex = 26;
-            this.label24.Text = "Campo Personalizado 1";
+            this.btnEditarFamilia1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEditarFamilia1.Location = new System.Drawing.Point(330, 180);
+            this.btnEditarFamilia1.Name = "btnEditarFamilia1";
+            this.btnEditarFamilia1.Size = new System.Drawing.Size(83, 23);
+            this.btnEditarFamilia1.TabIndex = 29;
+            this.btnEditarFamilia1.Text = "Editar";
+            this.btnEditarFamilia1.UseVisualStyleBackColor = true;
             // 
-            // label25
+            // btnEditarFamilia2
             // 
-            this.label25.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(401, 86);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(118, 13);
-            this.label25.TabIndex = 27;
-            this.label25.Text = "Campo Personalizado 2";
-            // 
-            // txtCampoPersonalizadoProveedor1
-            // 
-            this.txtCampoPersonalizadoProveedor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel4.SetColumnSpan(this.txtCampoPersonalizadoProveedor1, 2);
-            this.txtCampoPersonalizadoProveedor1.Location = new System.Drawing.Point(525, 49);
-            this.txtCampoPersonalizadoProveedor1.Name = "txtCampoPersonalizadoProveedor1";
-            this.txtCampoPersonalizadoProveedor1.Size = new System.Drawing.Size(236, 20);
-            this.txtCampoPersonalizadoProveedor1.TabIndex = 28;
-            // 
-            // txtCampoPersonalizadoProveedor2
-            // 
-            this.txtCampoPersonalizadoProveedor2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel4.SetColumnSpan(this.txtCampoPersonalizadoProveedor2, 2);
-            this.txtCampoPersonalizadoProveedor2.Location = new System.Drawing.Point(525, 82);
-            this.txtCampoPersonalizadoProveedor2.Name = "txtCampoPersonalizadoProveedor2";
-            this.txtCampoPersonalizadoProveedor2.Size = new System.Drawing.Size(236, 20);
-            this.txtCampoPersonalizadoProveedor2.TabIndex = 29;
+            this.btnEditarFamilia2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnEditarFamilia2.Location = new System.Drawing.Point(330, 216);
+            this.btnEditarFamilia2.Name = "btnEditarFamilia2";
+            this.btnEditarFamilia2.Size = new System.Drawing.Size(83, 23);
+            this.btnEditarFamilia2.TabIndex = 30;
+            this.btnEditarFamilia2.Text = "Editar";
+            this.btnEditarFamilia2.UseVisualStyleBackColor = true;
             // 
             // frmParametros
             // 
@@ -861,18 +825,15 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox txtCampoPersonalizadoArticulo1;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtCampoPersonalizadoArticulo2;
-        private System.Windows.Forms.TextBox txtCampoPersonalizadoCliente1;
-        private System.Windows.Forms.TextBox txtCampoPersonalizadoCliente2;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox txtCampoPersonalizadoProveedor1;
-        private System.Windows.Forms.TextBox txtCampoPersonalizadoProveedor2;
+        private System.Windows.Forms.TextBox txtFamilia2Titulo;
+        private System.Windows.Forms.TextBox txtFamilia1Titulo;
+        private System.Windows.Forms.Button btnEditarFamilia1;
+        private System.Windows.Forms.Button btnEditarFamilia2;
     }
 }

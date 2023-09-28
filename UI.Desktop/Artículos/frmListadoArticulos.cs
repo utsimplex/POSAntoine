@@ -17,6 +17,7 @@ namespace UI.Desktop.Artículos
         public frmListadoArticulos()
         {
             InitializeComponent();
+            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
             ActualizarLista();
             completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
@@ -28,7 +29,7 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
             this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
-            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
+           
 
 
 
@@ -37,6 +38,8 @@ namespace UI.Desktop.Artículos
         public frmListadoArticulos(Usuario usr)
         {
             InitializeComponent();
+
+            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
             ActualizarLista();
             completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
@@ -50,7 +53,6 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
             rol = usr.Rol;
 
-            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
 
 
         }
@@ -166,8 +168,10 @@ namespace UI.Desktop.Artículos
             dgvListado.Size = new Size(968, 490);
             this.dgvListado.Location = new Point(7, 56);
 
-            this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1);
-            this.dgvListado.Columns["CampoPersonalizado2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2);
+            this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1.Trim());
+
+            this.dgvListado.Columns["CampoPersonalizado1"].HeaderText= parametrosEmpresa.CampoPersonalizadoArticulo1.Trim();
+            this.dgvListado.Columns["CampoPersonalizado2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2.Trim());
 
 
         }

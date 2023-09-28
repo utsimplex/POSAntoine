@@ -130,13 +130,13 @@ namespace UI.Desktop.Parametros
             parametrosEmpresa.CampoPersonalizadoArticulo1 = this.txtCampoPersonalizadoArticulo1.Text.ToString();
             parametrosEmpresa.CampoPersonalizadoArticulo2 = this.txtCampoPersonalizadoArticulo2.Text.ToString();
 
-            //Campos Personalizados Cliente
-            parametrosEmpresa.CampoPersonalizadoCliente1 = this.txtCampoPersonalizadoCliente1.Text.ToString();
-            parametrosEmpresa.CampoPersonalizadoCliente2 = this.txtCampoPersonalizadoCliente2.Text.ToString();
+            ////Campos Personalizados Cliente
+            //parametrosEmpresa.CampoPersonalizadoCliente1 = this.txtCampoPersonalizadoCliente1.Text.ToString();
+            //parametrosEmpresa.CampoPersonalizadoCliente2 = this.txtCampoPersonalizadoCliente2.Text.ToString();
 
-            //Campos Personalizados Proveedor
-            parametrosEmpresa.CampoPersonalizadoProveedor1= this.txtCampoPersonalizadoProveedor1.Text.ToString();
-            parametrosEmpresa.CampoPersonalizadoProveedor2 = this.txtCampoPersonalizadoProveedor2.Text.ToString();
+            ////Campos Personalizados Proveedor
+            //parametrosEmpresa.CampoPersonalizadoProveedor1= this.txtCampoPersonalizadoProveedor1.Text.ToString();
+            //parametrosEmpresa.CampoPersonalizadoProveedor2 = this.txtCampoPersonalizadoProveedor2.Text.ToString();
 
         }
         private void Guardar()
