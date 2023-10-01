@@ -13,10 +13,80 @@ namespace Data.Database
 {
     public class ParametrosAdapter : Adapter
     {
+        private static ParametrosAdapter instance;
+
+        private ParametrosAdapter()
+        {
+            // Obtener los parámetros de la empresa de la base de datos
+            parametrosEmpresa = obtenerParametrosEmpresa();
+        }
+
+        // Método estático público para obtener la única instancia de la clase
+        public static ParametrosAdapter GetInstance()
+        {
+            // Verificar si la propiedad estática privada es nula
+            if (instance == null)
+            {
+                // Crear una nueva instancia de la clase y asignarla a la propiedad estática privada
+                instance = new ParametrosAdapter();
+            }
+
+            // Devolver la propiedad estática privada
+            return instance;
+        }
+
+
+        public ParametrosEmpresa obtenerParametrosEmpresa()
+        {
+            ParametrosEmpresa lcl_parametrosEmpresa = null;
+            //Creo la conexion y la abro
+            SqlConnection ConexionSQL = CrearConexion();
+
+            //crea SQL command
+            SqlCommand comando = new SqlCommand();
+            comando.Connection = ConexionSQL;
+            comando.CommandType = CommandType.Text;
+            comando.CommandText =
+                "SELECT NOMBRE, DIRECCION, TELEFONO, IMAGENPATH, IMPRESORA1, CUIT, NOMBREFISCAL, DIRECCIONFISCAL, SITUACIONFISCAL, "
+                + "CERTIFICADODIGITAL, CLAVECERTIFICADO, PUNTODEVENTA, INICIODEACTIVIDADES, INGRESOSBRUTOS, ESPRODUCCION, URLQRAFIP, "
+                + "CAMPOPERSONALIZADOARTICULO1, CAMPOPERSONALIZADOARTICULO2 "
+                + "FROM [PARAMETROS_EMPRESA] ";
+            comando.Connection.Open();
+
+            SqlDataReader drMedioPago = comando.ExecuteReader();
+
+            while (drMedioPago.Read())
+            {
+                lcl_parametrosEmpresa = new ParametrosEmpresa();
+                lcl_parametrosEmpresa.Nombre = (drMedioPago["NOMBRE"] != DBNull.Value) ? (string)drMedioPago["NOMBRE"] : null;
+                lcl_parametrosEmpresa.Direccion = (drMedioPago["DIRECCION"] != DBNull.Value) ? (string)drMedioPago["DIRECCION"] : null;
+                lcl_parametrosEmpresa.Telefono = (drMedioPago["TELEFONO"] != DBNull.Value) ? (string)drMedioPago["TELEFONO"] : null;
+                lcl_parametrosEmpresa.ImagenPath = (drMedioPago["IMAGENPATH"] != DBNull.Value) ? (string)drMedioPago["IMAGENPATH"] : null;
+                lcl_parametrosEmpresa.Impresora1 = (drMedioPago["IMPRESORA1"] != DBNull.Value) ? (string)drMedioPago["IMPRESORA1"] : null;
+                lcl_parametrosEmpresa.CUIT = (drMedioPago["CUIT"] != DBNull.Value) ? (string)drMedioPago["CUIT"] : null;
+                lcl_parametrosEmpresa.NombreFiscal = (drMedioPago["NOMBREFISCAL"] != DBNull.Value) ? (string)drMedioPago["NOMBREFISCAL"] : null;
+                lcl_parametrosEmpresa.DireccionFiscal = (drMedioPago["DIRECCIONFISCAL"] != DBNull.Value) ? (string)drMedioPago["DIRECCIONFISCAL"] : null;
+                lcl_parametrosEmpresa.SituacionFiscal = (drMedioPago["SITUACIONFISCAL"] != DBNull.Value) ? (string)drMedioPago["SITUACIONFISCAL"] : null;
+                lcl_parametrosEmpresa.CertificadoDigital = (drMedioPago["CERTIFICADODIGITAL"] != DBNull.Value) ? (string)drMedioPago["CERTIFICADODIGITAL"] : null;
+                lcl_parametrosEmpresa.ClaveCertificado = (drMedioPago["CLAVECERTIFICADO"] != DBNull.Value) ? (string)drMedioPago["CLAVECERTIFICADO"] : null;
+                lcl_parametrosEmpresa.PuntoDeVenta = (drMedioPago["PUNTODEVENTA"] != DBNull.Value) ? (string)drMedioPago["PUNTODEVENTA"] : null;
+                lcl_parametrosEmpresa.InicioDeActividades = (drMedioPago["INICIODEACTIVIDADES"] != DBNull.Value) ? (string)drMedioPago["INICIODEACTIVIDADES"] : null;
+                lcl_parametrosEmpresa.IngresosBrutos = (drMedioPago["INGRESOSBRUTOS"] != DBNull.Value) ? (string)drMedioPago["INGRESOSBRUTOS"] : null;
+                lcl_parametrosEmpresa.EsProduccion = (drMedioPago["ESPRODUCCION"] != DBNull.Value) ? (bool)drMedioPago["ESPRODUCCION"] : false;
+                lcl_parametrosEmpresa.UrlQrAfip = (drMedioPago["URLQRAFIP"] != DBNull.Value) ? (string)drMedioPago["URLQRAFIP"] : null;
+                lcl_parametrosEmpresa.CampoPersonalizadoArticulo1 = (drMedioPago["CAMPOPERSONALIZADOARTICULO1"] != DBNull.Value) ? (string)drMedioPago["CAMPOPERSONALIZADOARTICULO1"] : null;
+                lcl_parametrosEmpresa.CampoPersonalizadoArticulo2 = (drMedioPago["CAMPOPERSONALIZADOARTICULO2"] != DBNull.Value) ? (string)drMedioPago["CAMPOPERSONALIZADOARTICULO2"] : null;
+
+
+            }
+            drMedioPago.Close();
+            comando.Connection.Close();
+
+            return lcl_parametrosEmpresa;
+        }
 
 
         public ParametrosEmpresa parametrosEmpresa { get; set; }
-
 
         public void Actualizar(ParametrosEmpresa _parametrosEmpresa)
         {
@@ -81,53 +151,6 @@ namespace Data.Database
             Comando.Connection.Close();
 
         }
-        public ParametrosEmpresa getOne()
-        {
-            ParametrosEmpresa lcl_parametrosEmpresa = null;
-            //Creo la conexion y la abro
-            SqlConnection ConexionSQL = CrearConexion();
-
-            //crea SQL command
-            SqlCommand comando = new SqlCommand();
-            comando.Connection = ConexionSQL;
-            comando.CommandType = CommandType.Text;
-            comando.CommandText =
-                "SELECT NOMBRE, DIRECCION, TELEFONO, IMAGENPATH, IMPRESORA1, CUIT, NOMBREFISCAL, DIRECCIONFISCAL, SITUACIONFISCAL, "
-                + "CERTIFICADODIGITAL, CLAVECERTIFICADO, PUNTODEVENTA, INICIODEACTIVIDADES, INGRESOSBRUTOS, ESPRODUCCION, URLQRAFIP, "
-                + "CAMPOPERSONALIZADOARTICULO1, CAMPOPERSONALIZADOARTICULO2 "
-                + "FROM [PARAMETROS_EMPRESA] ";
-            comando.Connection.Open();
-
-            SqlDataReader drMedioPago = comando.ExecuteReader();
-
-            while (drMedioPago.Read())
-            {
-                lcl_parametrosEmpresa = new ParametrosEmpresa();
-                lcl_parametrosEmpresa.Nombre = (drMedioPago["NOMBRE"] != DBNull.Value) ? (string)drMedioPago["NOMBRE"] : null;
-                lcl_parametrosEmpresa.Direccion = (drMedioPago["DIRECCION"] != DBNull.Value) ? (string)drMedioPago["DIRECCION"] : null;
-                lcl_parametrosEmpresa.Telefono = (drMedioPago["TELEFONO"] != DBNull.Value) ? (string)drMedioPago["TELEFONO"] : null;
-                lcl_parametrosEmpresa.ImagenPath = (drMedioPago["IMAGENPATH"] != DBNull.Value) ? (string)drMedioPago["IMAGENPATH"] : null;
-                lcl_parametrosEmpresa.Impresora1 = (drMedioPago["IMPRESORA1"] != DBNull.Value) ? (string)drMedioPago["IMPRESORA1"] : null;
-                lcl_parametrosEmpresa.CUIT = (drMedioPago["CUIT"] != DBNull.Value) ? (string)drMedioPago["CUIT"] : null;
-                lcl_parametrosEmpresa.NombreFiscal = (drMedioPago["NOMBREFISCAL"] != DBNull.Value) ? (string)drMedioPago["NOMBREFISCAL"] : null;
-                lcl_parametrosEmpresa.DireccionFiscal = (drMedioPago["DIRECCIONFISCAL"] != DBNull.Value) ? (string)drMedioPago["DIRECCIONFISCAL"] : null;
-                lcl_parametrosEmpresa.SituacionFiscal = (drMedioPago["SITUACIONFISCAL"] != DBNull.Value) ? (string)drMedioPago["SITUACIONFISCAL"] : null;
-                lcl_parametrosEmpresa.CertificadoDigital = (drMedioPago["CERTIFICADODIGITAL"] != DBNull.Value) ? (string)drMedioPago["CERTIFICADODIGITAL"] : null;
-                lcl_parametrosEmpresa.ClaveCertificado = (drMedioPago["CLAVECERTIFICADO"] != DBNull.Value) ? (string)drMedioPago["CLAVECERTIFICADO"] : null;
-                lcl_parametrosEmpresa.PuntoDeVenta = (drMedioPago["PUNTODEVENTA"] != DBNull.Value) ? (string)drMedioPago["PUNTODEVENTA"] : null;
-                lcl_parametrosEmpresa.InicioDeActividades = (drMedioPago["INICIODEACTIVIDADES"] != DBNull.Value) ? (string)drMedioPago["INICIODEACTIVIDADES"] : null;
-                lcl_parametrosEmpresa.IngresosBrutos = (drMedioPago["INGRESOSBRUTOS"] != DBNull.Value) ? (string)drMedioPago["INGRESOSBRUTOS"] : null;
-                lcl_parametrosEmpresa.EsProduccion = (drMedioPago["ESPRODUCCION"] != DBNull.Value) ? (bool)drMedioPago["ESPRODUCCION"] : false;
-                lcl_parametrosEmpresa.UrlQrAfip = (drMedioPago["URLQRAFIP"] != DBNull.Value) ? (string)drMedioPago["URLQRAFIP"] : null;
-                lcl_parametrosEmpresa.CampoPersonalizadoArticulo1 = (drMedioPago["CAMPOPERSONALIZADOARTICULO1"] != DBNull.Value) ? (string)drMedioPago["CAMPOPERSONALIZADOARTICULO1"] : null;
-                lcl_parametrosEmpresa.CampoPersonalizadoArticulo2 = (drMedioPago["CAMPOPERSONALIZADOARTICULO2"] != DBNull.Value) ? (string)drMedioPago["CAMPOPERSONALIZADOARTICULO2"] : null;
-
-            }
-            drMedioPago.Close();
-            comando.Connection.Close();
-
-            return lcl_parametrosEmpresa;
-        }
-
+       
     }
 }

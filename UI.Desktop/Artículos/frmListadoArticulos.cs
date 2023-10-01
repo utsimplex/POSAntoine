@@ -17,7 +17,7 @@ namespace UI.Desktop.Artículos
         public frmListadoArticulos()
         {
             InitializeComponent();
-            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
+            parametrosEmpresa = ParametrosEmpresaController.GetInstance().parametrosEmpresaObj;
             ActualizarLista();
             completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
@@ -39,7 +39,7 @@ namespace UI.Desktop.Artículos
         {
             InitializeComponent();
 
-            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
+            parametrosEmpresa  = ParametrosEmpresaController.GetInstance().parametrosEmpresaObj;
             ActualizarLista();
             completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
@@ -98,7 +98,6 @@ namespace UI.Desktop.Artículos
         ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
 
         //Adapters
-        ParametrosAdapter Datos_ParametrosAdapter = new ParametrosAdapter();
         FamiliaAdapter Datos_FamiliaAdapter = new FamiliaAdapter();
         ProveedorAdapter Datos_ProveedorAdapter = new ProveedorAdapter();
         //ROL

@@ -86,6 +86,7 @@
     <Compile Include="ClienteAdapter.cs" />
     <Compile Include="InformeArticulos.cs" />
     <Compile Include="InformeVentaAdapter.cs" />
+    <Compile Include="ParametrosEmpresaController.cs" />
     <Compile Include="PrecioAdapter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -21,7 +21,7 @@ namespace UI.Desktop.Ventas
         //public CatalogoCaja caja = new CatalogoCaja();
         public Venta _venta_Actual = new Venta();
         public List<Venta_Articulo> _venta_actual_articulos = new List<Venta_Articulo>();
-        ParametrosAdapter Datos_ParametrosAdapter = new ParametrosAdapter();
+        ParametrosAdapter Datos_ParametrosAdapter = ParametrosAdapter.GetInstance();
         ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
         string nombreComandera = "";
         string _cabeceraComanda = "";
@@ -40,7 +40,7 @@ namespace UI.Desktop.Ventas
         string _prefijoCaja = ""; //Modo: DELIVERY ; MOSTRADOR
         public PrinterDrawing(Venta _venta, List<Venta_Articulo> _venta_articulos, string modo)
         {
-            parametrosEmpresa =  this.Datos_ParametrosAdapter.getOne();
+            parametrosEmpresa =  this.Datos_ParametrosAdapter.obtenerParametrosEmpresa();
             _venta_Actual = _venta;
             _venta_actual_articulos = _venta_articulos;
             _modo = modo;

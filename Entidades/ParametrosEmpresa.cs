@@ -34,13 +34,21 @@ namespace Entidades
         public string CampoPersonalizadoArticulo1 { get; set; }
         public string CampoPersonalizadoArticulo2 { get; set; }
 
-        //Campos personalizados Clientes
-        public string CampoPersonalizadoCliente1 { get; set; }
-        public string CampoPersonalizadoCliente2 { get; set; }
+        // Familias de artículos
+        public string FamiliaNombre1 { get; set; }
+        public string FamiliaNombre2 { get; set; }
 
-        //Campos personalizados Proveedores
-        public string CampoPersonalizadoProveedor1 { get; set; }
-        public string CampoPersonalizadoProveedor2 { get; set; }
+        public List<Familia> ListadoFamilia1 { get; set; }
+        
+        public List<Familia> ListadoFamilia2 { get; set; }
+
+        ////Campos personalizados Clientes
+        //public string CampoPersonalizadoCliente1 { get; set; }
+        //public string CampoPersonalizadoCliente2 { get; set; }
+
+        ////Campos personalizados Proveedores
+        //public string CampoPersonalizadoProveedor1 { get; set; }
+        //public string CampoPersonalizadoProveedor2 { get; set; }
 
     }
 }

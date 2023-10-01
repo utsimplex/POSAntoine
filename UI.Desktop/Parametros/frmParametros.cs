@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Data.Database;
 using Entidades;
+using UI.Desktop.Parametros.Articulos;
 
 namespace UI.Desktop.Parametros
 {
@@ -17,16 +18,16 @@ namespace UI.Desktop.Parametros
     {
         #region ///***///***///***/// V A R I A B L E S \\\***\\\***\\\***\\\
 
-        ParametrosAdapter Datos_ParametrosAdapter = new ParametrosAdapter();
-        ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
 
-
+        ParametrosEmpresa parametrosEmpresa;
+        ParametrosEmpresaController parametrosEmpresaController;
 
         #endregion
         public frmParametros()
         {
             InitializeComponent();
-            parametrosEmpresa =  this.Datos_ParametrosAdapter.getOne();
+            parametrosEmpresaController = ParametrosEmpresaController.GetInstance();
+            parametrosEmpresa = parametrosEmpresaController.parametrosEmpresaObj;
             ParametrosAControles();
         }
 
@@ -142,7 +143,8 @@ namespace UI.Desktop.Parametros
         private void Guardar()
         {
             this.ControlesAParametro();
-            this.Datos_ParametrosAdapter.Actualizar(parametrosEmpresa);
+            this.parametrosEmpresaController.Actualizar(parametrosEmpresa);
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -175,7 +177,28 @@ namespace UI.Desktop.Parametros
 
         private void btnEditarFamilia1_Click(object sender, EventArgs e)
         {
+            EditarFamiliaArticulos("Familia1");
+        }
 
+        private void btnEditarFamilia2_Click(object sender, EventArgs e)
+        {
+            EditarFamiliaArticulos("Familia2");
+        }
+
+        private void EditarFamiliaArticulos(string familiaSeleccionada)
+        {
+            frmListadoFamiliasABM formFamilia = new frmListadoFamiliasABM(familiaSeleccionada);
+            if(formFamilia.ShowDialog() == DialogResult.OK)
+            {
+                if(familiaSeleccionada == "Familia1")
+                {
+                    this.txtFamilia1Titulo.Text = formFamilia.txtNombreFamilia.Text.Trim();
+                }
+                if(familiaSeleccionada == "Familia2")
+                {
+                    this.txtFamilia2Titulo.Text = formFamilia.txtNombreFamilia.Text.Trim();
+                }
+            }
         }
     }
 }

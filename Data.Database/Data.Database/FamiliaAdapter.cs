@@ -13,7 +13,21 @@ namespace Data.Database
 {
     public class FamiliaAdapter : Adapter
     {
+        private static FamiliaAdapter instance;
 
+        // Método estático público para obtener la única instancia de la clase
+        public static FamiliaAdapter GetInstance()
+        {
+            // Verificar si la propiedad estática privada es nula
+            if (instance == null)
+            {
+                // Crear una nueva instancia de la clase y asignarla a la propiedad estática privada
+                instance = new FamiliaAdapter();
+            }
+
+            // Devolver la propiedad estática privada
+            return instance;
+        }
 
         public Familia familia { get; set; }
 
@@ -52,7 +66,6 @@ namespace Data.Database
             }
         }
 
-
         public void Actualizar(Familia _familia)
         {
             
@@ -80,6 +93,7 @@ namespace Data.Database
             Comando.Connection.Close();
 
         }
+        
         public void ActualizarNoDefault()
         {
             //Crear Conexion y Abrirla
@@ -140,6 +154,60 @@ namespace Data.Database
 
             return lst_MedioPagos;
         }
+
+
+        public System.ComponentModel.BindingList<Familia> GetFamilias(string pFamiliaSeleccionada, string p_Descripcion)
+        {
+            //Creo la conexion y la abro
+            SqlConnection Con = CrearConexion();
+
+            //crea SQL command
+            SqlCommand comando = new SqlCommand();
+            comando.Connection = Con;
+            comando.CommandType = CommandType.Text;
+            if(pFamiliaSeleccionada == "Familia1")
+            {
+            comando.CommandText =
+                "SELECT ID, DESCRIPCION, ACTIVO " +
+                    " FROM FAMILIA " +
+                    " WHERE DESCRIPCION LIKE @DESCRIPCION";
+            }else if(pFamiliaSeleccionada == "Familia2")
+            {
+                comando.CommandText =
+                "SELECT ID, DESCRIPCION, ACTIVO " +
+                    " FROM FAMILIA_DOS " +
+                    " WHERE DESCRIPCION LIKE @DESCRIPCION";
+            }
+
+            comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.VarChar));
+            comando.Parameters["@DESCRIPCION"].Value = p_Descripcion == null ? "%" : p_Descripcion + "%";
+            comando.Connection.Open();
+
+            SqlDataReader drFamilia = comando.ExecuteReader();
+
+            BindingList<Familia> lst_Familias = new BindingList<Familia>();
+            Familia lcl_Familia = null;
+
+            while (drFamilia.Read())
+            {
+                lcl_Familia = new Familia();
+                lcl_Familia.id = (int)drFamilia["ID"];
+                //Si algún valor esta null en Base de datos, se asigna null en el objeto
+                //Caso contrario hay una string, y se asigna string
+                lcl_Familia.Descripcion = (drFamilia["DESCRIPCION"] != DBNull.Value) ? (string)drFamilia["DESCRIPCION"] : null;
+                lcl_Familia.Activo = (drFamilia["ACTIVO"] != DBNull.Value) ? (bool)(drFamilia["ACTIVO"]) : false; ;
+
+
+                lst_Familias.Add(lcl_Familia);
+            }
+            drFamilia.Close();
+            comando.Connection.Dispose();
+
+            return lst_Familias;
+        }
+
+
+
         public Familia getOne(int p_idMedioPago)
         {
             Familia lcl_MedioPago = null;
@@ -174,6 +242,7 @@ namespace Data.Database
 
             return lcl_MedioPago;
         }
+        
         public AutoCompleteStringCollection GetListadoFamilias()
         {
 

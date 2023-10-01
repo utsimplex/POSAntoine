@@ -10,6 +10,7 @@ using Entidades;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Reflection;
+using Data.Database;
 
 namespace UI.Desktop.Ventas
 {
@@ -25,7 +26,7 @@ namespace UI.Desktop.Ventas
             txtFechaHoraVta.Text = f;
             modo = "Alta";
             ventaLocal = new Venta() { TipoOperacion="V",Usuario=usr.usuario};
-            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
+            parametrosEmpresa = this.Datos_ParametrosAdapter.obtenerParametrosEmpresa();
             this.ObtieneParametrosEmpresaAUI();
             this.ObtieneClienteGenerico();
             this.AsignaDatosClienteUI();
@@ -37,7 +38,7 @@ namespace UI.Desktop.Ventas
         {
             InitializeComponent();
             ventaLocal = vtaSelec;
-            parametrosEmpresa = this.Datos_ParametrosAdapter.getOne();
+            parametrosEmpresa = this.Datos_ParametrosAdapter.obtenerParametrosEmpresa();
             this.ObtieneParametrosEmpresaAUI();
             usuarioLogueado = usr;
             modo = "READONLY";
@@ -73,7 +74,7 @@ namespace UI.Desktop.Ventas
         Data.Database.InformeVentaAdapter Datos_InformesAdapter = new Data.Database.InformeVentaAdapter();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
         Data.Database.MedioDePagoAdapter Datos_MedioDePagoAdapter = new Data.Database.MedioDePagoAdapter();
-        Data.Database.ParametrosAdapter Datos_ParametrosAdapter = new Data.Database.ParametrosAdapter();
+        Data.Database.ParametrosAdapter Datos_ParametrosAdapter = ParametrosAdapter.GetInstance();
         Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
         Artículos.frmListadoArticulos formListaArticulos;
         List<MedioDePago> listaMedioDePagos = new List<MedioDePago>();

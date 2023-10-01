@@ -17,7 +17,7 @@ namespace UI.Desktop.Ventas
         static FacturaElectronicaAdapter FacturaElectronicaAdapter = new FacturaElectronicaAdapter();
         static VentasAdapter VentasAdapter = new VentasAdapter();
 
-        static ParametrosAdapter Datos_ParametrosAdapter = new ParametrosAdapter();
+        static ParametrosAdapter Datos_ParametrosAdapter = ParametrosAdapter.GetInstance();
         static ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
         //public Facturador()
         //{
@@ -30,7 +30,7 @@ namespace UI.Desktop.Ventas
         //}
         public async static Task facturarAsync(Venta Pedido, bool Monotributista)
         {
-            parametrosEmpresa = Datos_ParametrosAdapter.getOne();
+            parametrosEmpresa = Datos_ParametrosAdapter.obtenerParametrosEmpresa();
             int PuntoDeVenta = Convert.ToInt32(parametrosEmpresa.PuntoDeVenta);
             long CUIT = Convert.ToInt64(parametrosEmpresa.CUIT);
             string RutaCertificado = parametrosEmpresa.CertificadoDigital;
