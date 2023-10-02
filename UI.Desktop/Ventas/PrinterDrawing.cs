@@ -396,17 +396,17 @@ namespace UI.Desktop.Ventas
                             height += 15;
                         if (item.Descuento != 0)
                         {
-                            height += 15;
                             ev.Graphics.DrawString("Descuento", comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
                             //ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
                             ev.Graphics.DrawString("- " +  (item.Descuento *-1).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
+                            height += 15;
                         }
                         else if (item.Descuento_porcentaje != 0)
                         {
-                            height += 15;
                             ev.Graphics.DrawString("Descuento", comandaNormalFont, Brushes.Black, 110 + qtyWidth.Width, height, new StringFormat());
                             //ev.Graphics.DrawString("$ " + Convert.ToString(item.Precio), comandaNormalFont, Brushes.Black, 170 + (50 - priceWidth.Width), height, new StringFormat());
                             ev.Graphics.DrawString((item.Descuento_porcentaje / 100 * item.Cantidad * item.Precio *-1).ToString("c"), comandaNormalFont, Brushes.Black, 230 + (50 - totalWidth.Width), height, new StringFormat());
+                            height += 15;
                         }
                     }
 
