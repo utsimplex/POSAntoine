@@ -25,16 +25,19 @@ namespace UI.Desktop.Artículos
             List<Familia> familias,
             List<Proveedor> proveedores,
             int selectedProveedorIdx,
-            int selectedFamiliaIdx)
+            int selectedFamiliaIdx,
+            ParametrosEmpresa pParametrosEmpresa)
         {
             InitializeComponent();
+            this.dgvListado.CellFormatting += dgvListado_CellFormatting;
             this.familias = familias;
             this.proveedores = proveedores;
             this.ListaArticulos = ListaArticulos;
             this.ListaArticulosFiltrados = ListaArticulosFiltrados;
             completaCombosBox();
-            this.cbxFiltroFamilia.SelectedIndex = selectedFamiliaIdx;
+            this.cbxFiltroFamilia1.SelectedIndex = selectedFamiliaIdx;
             this.cbxFiltroProveedor.SelectedIndex = selectedProveedorIdx;
+            this.parametrosEmpresa = pParametrosEmpresa;
          
 
 
@@ -43,13 +46,28 @@ namespace UI.Desktop.Artículos
 
             // GRILLA
             dgvListado.DataSource = ListaArticulosFiltrados;
+
             dgvListado.Columns["habilitado"].Visible = false;
             dgvListado.Columns["RangoEtario"].Visible = false;
-            dgvListado.Columns["Familia"].Visible = false;
+
+            // FAMILIAS
+            this.dgvListado.Columns["Familia1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre1.Trim());
+            this.dgvListado.Columns["Familia1"].HeaderText = parametrosEmpresa.FamiliaNombre1;
+
+            this.dgvListado.Columns["Familia2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre2.Trim());
+            this.dgvListado.Columns["Familia2"].HeaderText = parametrosEmpresa.FamiliaNombre2;
+
+            // CAMPOS PERSONALIZADOS
+            this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1.Trim());
+            this.dgvListado.Columns["CampoPersonalizado1"].HeaderText = parametrosEmpresa.CampoPersonalizadoArticulo1.Trim();
+
+            this.dgvListado.Columns["CampoPersonalizado2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2.Trim());
+            this.dgvListado.Columns["CampoPersonalizado2"].HeaderText = parametrosEmpresa.CampoPersonalizadoArticulo2.Trim();
+
+
             dgvListado.Columns["Costo"].Visible = false;
             dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
-            dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
-            dgvListado.Columns["FamiliaTexto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+           
             dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Codigo proveedor";
             dgvListado.Columns["CodigoArtiProveedor"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListado.Columns["descripcion"].Width = 280;
@@ -64,13 +82,24 @@ namespace UI.Desktop.Artículos
             dgvListado.Size = new Size(960, 380);
 
             dgvListado.Location = new Point(7, 56);
-            dgvListado.DataSource = ListaArticulosFiltrados;
+            //dgvListado.DataSource = ListaArticulosFiltrados;
 
             // Si la columna precioActualizado no existe, añadir una columna nueva a la grilla, al lado de precio actual
             AñadirColumnaPrecioNuevo();
             
         }
 
+        override public void dgvListado_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if ((e.ColumnIndex == dgvListado.Columns["Familia1"].Index && e.Value != null) 
+                || (e.ColumnIndex == dgvListado.Columns["Familia2"].Index && e.Value != null))
+            {
+                if (e.Value is Familia familia)
+                {
+                    e.Value = familia.Descripcion;
+                }
+            }
+        }
 
         #region Variables Locales
 
@@ -89,6 +118,7 @@ namespace UI.Desktop.Artículos
         int selectedProveedorIdx;
         int selectedFamiliaIdx;
         string mensajeConfirmacion;
+        private ParametrosEmpresa parametrosEmpresa;
 
         // Fisica cuantica PARA PONERLE PLACEHOLDER AL CBX
         private const int CB_SETCUEBANNER = 0x1703;
@@ -103,11 +133,11 @@ namespace UI.Desktop.Artículos
         {            
             if (familias != null)
             {
-                cbxFiltroFamilia.DataSource = familias;
-                cbxFiltroFamilia.DisplayMember = "descripcion";
-                cbxFiltroFamilia.ValueMember = "id";
-                cbxFiltroFamilia.SelectedIndex = -1;
-                cbxFiltroFamilia.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
+                cbxFiltroFamilia1.DataSource = familias;
+                cbxFiltroFamilia1.DisplayMember = "descripcion";
+                cbxFiltroFamilia1.ValueMember = "id";
+                cbxFiltroFamilia1.SelectedIndex = -1;
+                cbxFiltroFamilia1.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
 
             }
 
@@ -119,8 +149,13 @@ namespace UI.Desktop.Artículos
                 cbxFiltroProveedor.SelectedIndex = -1;
                 cbxFiltroProveedor.SelectedValueChanged += cbxFiltroProveedor_SelectedValueChanged;
             }
+
+            string placeholderFamilia1 = "Filtrar por " + parametrosEmpresa.FamiliaNombre1 + "...";
+            string placeholderFamilia2 = "Filtrar por " + parametrosEmpresa.FamiliaNombre2 + "...";
+
             SendMessage(this.cbxFiltroProveedor.Handle, CB_SETCUEBANNER, 0, "Filtrar por proveedor...");
-            SendMessage(this.cbxFiltroFamilia.Handle, CB_SETCUEBANNER, 0, "Filtrar por familia...");
+            SendMessage(this.cbxFiltroFamilia1.Handle, CB_SETCUEBANNER, 0, placeholderFamilia1);
+            //SendMessage(this.cbxFiltroFamilia2.Handle, CB_SETCUEBANNER, 0, placeholderFamilia2);
 
         }
 
@@ -333,7 +368,7 @@ namespace UI.Desktop.Artículos
         private void LimpiarFiltros()
         {
             tbxFiltro.Text = "";
-            cbxFiltroFamilia.SelectedIndex = -1;
+            cbxFiltroFamilia1.SelectedIndex = -1;
             cbxFiltroProveedor.SelectedIndex = -1;
         }
 
@@ -367,7 +402,7 @@ namespace UI.Desktop.Artículos
                     if (FiltrandoPorFamilia())
                     {
                         ListaArticulosFiltrados = ListaArticulosFiltrados
-                            .Where(articulo => articulo.Familia == (int)cbxFiltroFamilia.SelectedValue)
+                            .Where(articulo => articulo.Familia1.id == (int)cbxFiltroFamilia1.SelectedValue)
                             .ToList();
                     }
 
@@ -412,7 +447,7 @@ namespace UI.Desktop.Artículos
         private bool FiltrandoPorFamilia()
         {
 
-            if (cbxFiltroFamilia.SelectedIndex != -1)
+            if (cbxFiltroFamilia1.SelectedIndex != -1)
             {
                 return true;
             }

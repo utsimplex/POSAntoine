@@ -45,7 +45,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.125F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 97.875F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153F));
             this.tableLayoutPanel1.Controls.Add(this.dgvFamiliasListado, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtNombreFamilia, 2, 0);
@@ -69,7 +69,7 @@
             this.dgvFamiliasListado.Location = new System.Drawing.Point(8, 53);
             this.dgvFamiliasListado.Name = "dgvFamiliasListado";
             this.tableLayoutPanel1.SetRowSpan(this.dgvFamiliasListado, 2);
-            this.dgvFamiliasListado.Size = new System.Drawing.Size(448, 421);
+            this.dgvFamiliasListado.Size = new System.Drawing.Size(447, 421);
             this.dgvFamiliasListado.TabIndex = 0;
             // 
             // label1
@@ -78,14 +78,14 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(256, 26);
+            this.label1.Size = new System.Drawing.Size(255, 26);
             this.label1.TabIndex = 1;
             this.label1.Text = "Título de Familia (será el título en la lista de artículos)";
             // 
             // txtNombreFamilia
             // 
             this.txtNombreFamilia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombreFamilia.Location = new System.Drawing.Point(270, 15);
+            this.txtNombreFamilia.Location = new System.Drawing.Point(269, 15);
             this.txtNombreFamilia.Name = "txtNombreFamilia";
             this.txtNombreFamilia.Size = new System.Drawing.Size(186, 20);
             this.txtNombreFamilia.TabIndex = 2;
@@ -93,10 +93,11 @@
             // btnGuardar
             // 
             this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(462, 6);
+            this.btnGuardar.Location = new System.Drawing.Point(461, 6);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(147, 37);
+            this.btnGuardar.Size = new System.Drawing.Size(148, 37);
             this.btnGuardar.TabIndex = 11;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -107,10 +108,11 @@
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
-            this.btnCancelar.Location = new System.Drawing.Point(462, 437);
+            this.btnCancelar.Location = new System.Drawing.Point(461, 437);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(147, 37);
+            this.btnCancelar.Size = new System.Drawing.Size(148, 37);
             this.btnCancelar.TabIndex = 12;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

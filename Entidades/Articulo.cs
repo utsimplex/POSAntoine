@@ -11,6 +11,12 @@ namespace Entidades
 {
     public class Articulo
     {
+        public Articulo()
+        {
+            // Inicializa el objeto Familia en el constructor
+            Familia1 = new Familia();
+            Familia2 = new Familia();
+        }
 
         // CODIGO
         string _Codigo;
@@ -87,21 +93,16 @@ namespace Entidades
 
         public int? RangoEtario { get; set; }
 
-        public int? Familia { get; set; }
+
+        public Familia Familia1 { get; set; }
+
+        public Familia Familia2 { get; set; }
 
         public string CodigoArtiProveedor { get; set; }
 
         public decimal? Costo { get; set; }
 
-
-
-        public string FamiliaTexto
-        {
-            get
-            {
-                return GetEnumDescription((ArticuloConstantes.TipoFamilia)Familia);
-            }
-        }
+              
         public static string GetEnumDescription(Enum value)
         {
             FieldInfo field = value.GetType().GetField(value.ToString());
@@ -119,97 +120,97 @@ namespace Entidades
     }
     public class ArticuloConstantes
     {
-        public enum TipoFamilia
-        {
-            //[Description("BUZOS")]
-            //BUZOS,
-            //[Description("CAMPERAS")]
-            //CAMPERAS,
-            //[Description("MEDIAS")]
-            //MEDIAS,
-            //[Description("PANTALONES")]
-            //PANTALONES
-            [Description("Remera Manga Corta")]
-            RemeraMC = 1,
-            [Description("Remera Manga Larga")]
-            RemeraML,
-            [Description("Pantalon Corto")]
-            PantalonC,
-            [Description("Pantalon Largo")]
-            PantalonL,
-            [Description("Buzo")]
-            Buzo,
-            [Description("Sweater")]
-            Sweater,
-            [Description("Campera")]
-            Campera,
-            [Description("Vestido Corto Manga Larga")]
-            VestidoCortoML,
-            [Description("Vestido Largo Manga Larga")]
-            VestidoLargoML,
-            [Description("Vestido Corto Manga Corta")]
-            VestidoCortoMC,
-            [Description("Vestido Largo Manga Corta")]
-            VestidoLargoMC,
-            [Description("Camisa Manga Larga")]
-            CamisaML,
-            [Description("Camisa Manga Corta")]
-            CamisaMC,
-            [Description("Polainas")]
-            Polainas,
-            [Description("Mantas")]
-            Mantas,
-            [Description("Frazada")]
-            Frazada,
-            [Description("Gorros")]
-            Gorros,
-            [Description("Bufanda")]
-            Bufanda,
-            [Description("Guantes")]
-            Guantes,
-            [Description("Cuellera")]
-            Cuellera,
-            [Description("Jumper")]
-            Jumper,
-            [Description("Calza")]
-            Calza,
-            [Description("Enterito")]
-            Enterito,
-            [Description("Accesorios")]
-            Accesorios,
-            [Description("Body Manga Larga")]
-            BodyML,
-            [Description("Pollera")]
-            Pollera,
-            [Description("Ropa Interior")]
-            RopaInterior,
-            [Description("Ranitas")]
-            Ranitas,
-            [Description("Ajuares")]
-            Ajuares,
-            [Description("Chaleco")]
-            Chaleco,
-            [Description("Zapatillas")]
-            Zapatillas,
-            [Description("Panchas")]
-            Panchas,
-            [Description("Gorros")]
-            Botita,
-            [Description("Borcegos")]
-            Borcegos,
-            [Description("Sandalia")]
-            Sandalia,
-            [Description("Cochecitos")]
-            Cochecitos,
-            [Description("Accesorios Carestino")]
-            AccesoriosCarestino,
-            [Description("Butaca")]
-            Butaca,
-            [Description("Silla de Comer")]
-            SillaComer,
-            [Description("Conjuntos")]
-            Conjuntos
-        }
+        //public enum TipoFamilia
+        //{
+        //    //[Description("BUZOS")]
+        //    //BUZOS,
+        //    //[Description("CAMPERAS")]
+        //    //CAMPERAS,
+        //    //[Description("MEDIAS")]
+        //    //MEDIAS,
+        //    //[Description("PANTALONES")]
+        //    //PANTALONES
+        //    [Description("Remera Manga Corta")]
+        //    RemeraMC = 1,
+        //    [Description("Remera Manga Larga")]
+        //    RemeraML,
+        //    [Description("Pantalon Corto")]
+        //    PantalonC,
+        //    [Description("Pantalon Largo")]
+        //    PantalonL,
+        //    [Description("Buzo")]
+        //    Buzo,
+        //    [Description("Sweater")]
+        //    Sweater,
+        //    [Description("Campera")]
+        //    Campera,
+        //    [Description("Vestido Corto Manga Larga")]
+        //    VestidoCortoML,
+        //    [Description("Vestido Largo Manga Larga")]
+        //    VestidoLargoML,
+        //    [Description("Vestido Corto Manga Corta")]
+        //    VestidoCortoMC,
+        //    [Description("Vestido Largo Manga Corta")]
+        //    VestidoLargoMC,
+        //    [Description("Camisa Manga Larga")]
+        //    CamisaML,
+        //    [Description("Camisa Manga Corta")]
+        //    CamisaMC,
+        //    [Description("Polainas")]
+        //    Polainas,
+        //    [Description("Mantas")]
+        //    Mantas,
+        //    [Description("Frazada")]
+        //    Frazada,
+        //    [Description("Gorros")]
+        //    Gorros,
+        //    [Description("Bufanda")]
+        //    Bufanda,
+        //    [Description("Guantes")]
+        //    Guantes,
+        //    [Description("Cuellera")]
+        //    Cuellera,
+        //    [Description("Jumper")]
+        //    Jumper,
+        //    [Description("Calza")]
+        //    Calza,
+        //    [Description("Enterito")]
+        //    Enterito,
+        //    [Description("Accesorios")]
+        //    Accesorios,
+        //    [Description("Body Manga Larga")]
+        //    BodyML,
+        //    [Description("Pollera")]
+        //    Pollera,
+        //    [Description("Ropa Interior")]
+        //    RopaInterior,
+        //    [Description("Ranitas")]
+        //    Ranitas,
+        //    [Description("Ajuares")]
+        //    Ajuares,
+        //    [Description("Chaleco")]
+        //    Chaleco,
+        //    [Description("Zapatillas")]
+        //    Zapatillas,
+        //    [Description("Panchas")]
+        //    Panchas,
+        //    [Description("Gorros")]
+        //    Botita,
+        //    [Description("Borcegos")]
+        //    Borcegos,
+        //    [Description("Sandalia")]
+        //    Sandalia,
+        //    [Description("Cochecitos")]
+        //    Cochecitos,
+        //    [Description("Accesorios Carestino")]
+        //    AccesoriosCarestino,
+        //    [Description("Butaca")]
+        //    Butaca,
+        //    [Description("Silla de Comer")]
+        //    SillaComer,
+        //    [Description("Conjuntos")]
+        //    Conjuntos
+        //}
 
         public enum RangoEtario
         {

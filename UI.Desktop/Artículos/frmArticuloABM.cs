@@ -150,7 +150,7 @@ namespace UI.Desktop.Artículos
                         Articulo.StockMin = Convert.ToInt32(txtStockMin.Text.Trim());
                         Articulo.Precio = String.IsNullOrEmpty(txtPrecio.Text.Trim())?0:Convert.ToDecimal(txtPrecio.Text.Trim());
                         Articulo.Proveedor = cbxProveedor.SelectedItem.ToString();
-                        Articulo.Familia = (int)cbxFamilia.SelectedValue;
+                        Articulo.Familia1.id = (int)cbxFamilia.SelectedValue;
                         Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
                         Articulo.RangoEtario = (int)cbxRangoEtario.SelectedValue;
                         Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
@@ -196,13 +196,15 @@ namespace UI.Desktop.Artículos
             }//Fin Alta
             else if (ModoForm == TipoForm.Edicion)
             {
+                try
+                {
 
                 artiToEdit.Codigo = txtCodigo.Text;
                 artiToEdit.Descripcion = txtDescripcion.Text;
                 artiToEdit.Precio = Convert.ToDecimal(txtPrecio.Text);
                 artiToEdit.StockMin = Convert.ToInt32(txtStockMin.Text);
                 artiToEdit.Stock = Convert.ToInt32(txtStock.Text);
-                artiToEdit.Familia = (int)cbxFamilia.SelectedValue;
+                artiToEdit.Familia1.id = (int)cbxFamilia.SelectedValue;
                 artiToEdit.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
                 artiToEdit.RangoEtario = (int)cbxRangoEtario.SelectedValue;
                 artiToEdit.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
@@ -221,6 +223,12 @@ namespace UI.Desktop.Artículos
                
                 ActualizarListaPrecios(artiToEdit);
                 this.Close();        
+                }
+                catch (Exception ex)
+                {
+                    // Muestro cualquier error de la aplicacion
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
 
             
@@ -286,7 +294,7 @@ namespace UI.Desktop.Artículos
             txtStockMin.Text = artiToEdit.StockMin.ToString();
             txtCodigoArtiProveedor.Text = artiToEdit.CodigoArtiProveedor;
 
-            cbxFamilia.SelectedValue = (int)artiToEdit.Familia;
+            cbxFamilia.SelectedValue = (int)artiToEdit.Familia1.id;
             //cbxFamilia.SelectedValue = listFamilias.First(familia => familia.id == artiToEdit.Familia).id;
 
             cbxRangoEtario.SelectedValue = artiToEdit.RangoEtario != null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.Baby;

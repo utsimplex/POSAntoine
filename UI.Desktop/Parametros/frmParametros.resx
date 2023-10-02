@@ -117,6 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label19.Text" xml:space="preserve">
+    <value>Los campos personalizados son columnas que se aparecerán en la Lista de Artículos. Puedes utilizarlo para guardar cualquier información de tipo alfanumérica referida a los artículos, como 
+por ejemplo, para ingresar una descripción corta del producto. </value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>Las familias permiten añadir un atributo personalizado a tus Artículos. Podrás filtrar la Lista de Artículos según las familias. Puedes utilizarlo, por ejemplo, para crear una lista de Tipos de Artículos, Categorías, o cualquier otra clasificación que consideres de utilidad.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnGuardar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

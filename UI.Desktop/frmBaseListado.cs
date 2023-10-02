@@ -641,6 +641,11 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
+        public virtual void dgvListado_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+        }
     }
 }
 

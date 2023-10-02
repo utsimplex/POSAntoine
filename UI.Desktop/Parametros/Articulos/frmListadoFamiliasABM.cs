@@ -30,12 +30,14 @@ namespace UI.Desktop.Parametros.Articulos
             if (this.familiaSeleccionada == "Familia1")
             {
                 this.familiaListado = parametrosEmpresa.ListadoFamilia1;
+                this.txtNombreFamilia.Text = parametrosEmpresa.FamiliaNombre1;
                 this.dgvFamiliasListado.DataSource = familiaListado;
 
             }
             if(this.familiaSeleccionada == "Familia2")
             {
                 this.familiaListado = parametrosEmpresa.ListadoFamilia2;
+                this.txtNombreFamilia.Text = parametrosEmpresa.FamiliaNombre2;
                 this.dgvFamiliasListado.DataSource = familiaListado;
             }
 

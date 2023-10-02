@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmModificarPrecios));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.cbxFiltroFamilia = new System.Windows.Forms.ComboBox();
+            this.cbxFiltroFamilia1 = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cbxFiltroProveedor = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -149,20 +149,20 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.cbxFiltroFamilia);
+            this.panel3.Controls.Add(this.cbxFiltroFamilia1);
             this.panel3.Location = new System.Drawing.Point(210, 2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(202, 27);
             this.panel3.TabIndex = 35;
             // 
-            // cbxFiltroFamilia
+            // cbxFiltroFamilia1
             // 
-            this.cbxFiltroFamilia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxFiltroFamilia.FormattingEnabled = true;
-            this.cbxFiltroFamilia.Location = new System.Drawing.Point(3, 3);
-            this.cbxFiltroFamilia.Name = "cbxFiltroFamilia";
-            this.cbxFiltroFamilia.Size = new System.Drawing.Size(194, 21);
-            this.cbxFiltroFamilia.TabIndex = 31;
+            this.cbxFiltroFamilia1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFiltroFamilia1.FormattingEnabled = true;
+            this.cbxFiltroFamilia1.Location = new System.Drawing.Point(3, 3);
+            this.cbxFiltroFamilia1.Name = "cbxFiltroFamilia1";
+            this.cbxFiltroFamilia1.Size = new System.Drawing.Size(194, 21);
+            this.cbxFiltroFamilia1.TabIndex = 31;
             // 
             // panel2
             // 
@@ -403,7 +403,7 @@
         #endregion
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ComboBox cbxFiltroFamilia;
+        private System.Windows.Forms.ComboBox cbxFiltroFamilia1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox cbxFiltroProveedor;
         private System.Windows.Forms.Label label1;

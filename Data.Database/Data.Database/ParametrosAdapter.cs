@@ -49,7 +49,7 @@ namespace Data.Database
             comando.CommandText =
                 "SELECT NOMBRE, DIRECCION, TELEFONO, IMAGENPATH, IMPRESORA1, CUIT, NOMBREFISCAL, DIRECCIONFISCAL, SITUACIONFISCAL, "
                 + "CERTIFICADODIGITAL, CLAVECERTIFICADO, PUNTODEVENTA, INICIODEACTIVIDADES, INGRESOSBRUTOS, ESPRODUCCION, URLQRAFIP, "
-                + "CAMPOPERSONALIZADOARTICULO1, CAMPOPERSONALIZADOARTICULO2 "
+                + "CAMPOPERSONALIZADOARTICULO1, CAMPOPERSONALIZADOARTICULO2, FAMILIANOMBRE1, FAMILIANOMBRE2 "
                 + "FROM [PARAMETROS_EMPRESA] ";
             comando.Connection.Open();
 
@@ -76,6 +76,8 @@ namespace Data.Database
                 lcl_parametrosEmpresa.UrlQrAfip = (drMedioPago["URLQRAFIP"] != DBNull.Value) ? (string)drMedioPago["URLQRAFIP"] : null;
                 lcl_parametrosEmpresa.CampoPersonalizadoArticulo1 = (drMedioPago["CAMPOPERSONALIZADOARTICULO1"] != DBNull.Value) ? (string)drMedioPago["CAMPOPERSONALIZADOARTICULO1"] : null;
                 lcl_parametrosEmpresa.CampoPersonalizadoArticulo2 = (drMedioPago["CAMPOPERSONALIZADOARTICULO2"] != DBNull.Value) ? (string)drMedioPago["CAMPOPERSONALIZADOARTICULO2"] : null;
+                lcl_parametrosEmpresa.FamiliaNombre1 = (drMedioPago["FAMILIANOMBRE1"] != DBNull.Value) ? (string)drMedioPago["FAMILIANOMBRE1"] : null;
+                lcl_parametrosEmpresa.FamiliaNombre2 = (drMedioPago["FAMILIANOMBRE2"] != DBNull.Value) ? (string)drMedioPago["FAMILIANOMBRE2"] : null;
 
 
             }
@@ -103,7 +105,7 @@ namespace Data.Database
                 +"IMPRESORA1=@IMPRESORA1, CUIT=@CUIT, NOMBREFISCAL=@NOMBREFISCAL, DIRECCIONFISCAL=@DIRECCIONFISCAL, SITUACIONFISCAL=@SITUACIONFISCAL, "
                 +"CERTIFICADODIGITAL=@CERTIFICADODIGITAL, CLAVECERTIFICADO=@CLAVECERTIFICADO, PUNTODEVENTA=@PUNTODEVENTA, INICIODEACTIVIDADES=@INICIODEACTIVIDADES, "
                 +"INGRESOSBRUTOS=@INGRESOSBRUTOS, ESPRODUCCION=@ESPRODUCCION, URLQRAFIP=@URLQRAFIP, "
-                +"CampoPersonalizadoArticulo1=@CAMPO_PERSONALIZADO_ARTICULO1, CampoPersonalizadoArticulo2=@CAMPO_PERSONALIZADO_ARTICULO2";
+                +"CampoPersonalizadoArticulo1=@CAMPO_PERSONALIZADO_ARTICULO1, CampoPersonalizadoArticulo2=@CAMPO_PERSONALIZADO_ARTICULO2, FamiliaNombre1=@FAMILIANOMBRE1, FamiliaNombre2=@FAMILIANOMBRE2";
             Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
             Comando.Parameters["@NOMBRE"].Value = _parametrosEmpresa.Nombre ?? String.Empty;
             Comando.Parameters.Add(new SqlParameter("@DIRECCION", SqlDbType.NVarChar));
@@ -142,7 +144,11 @@ namespace Data.Database
             Comando.Parameters["@CAMPO_PERSONALIZADO_ARTICULO1"].Value = _parametrosEmpresa.CampoPersonalizadoArticulo1 ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@CAMPO_PERSONALIZADO_ARTICULO2", SqlDbType.NVarChar));
             Comando.Parameters["@CAMPO_PERSONALIZADO_ARTICULO2"].Value = _parametrosEmpresa.CampoPersonalizadoArticulo2 ?? string.Empty;
-
+            //FAMILIAS ARTICULOS
+            Comando.Parameters.Add(new SqlParameter("@FAMILIANOMBRE1", SqlDbType.NVarChar));
+            Comando.Parameters["@FAMILIANOMBRE1"].Value = _parametrosEmpresa.FamiliaNombre1 ?? string.Empty;
+            Comando.Parameters.Add(new SqlParameter("@FAMILIANOMBRE2", SqlDbType.NVarChar));
+            Comando.Parameters["@FAMILIANOMBRE2"].Value = _parametrosEmpresa.FamiliaNombre2 ?? string.Empty;
 
 
             //Ejecuta el comando INSERT

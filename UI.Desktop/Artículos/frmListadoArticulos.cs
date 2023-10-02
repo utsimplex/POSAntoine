@@ -17,7 +17,8 @@ namespace UI.Desktop.Artículos
         public frmListadoArticulos()
         {
             InitializeComponent();
-            parametrosEmpresa = ParametrosEmpresaController.GetInstance().parametrosEmpresaObj;
+            this.dgvListado.CellFormatting += dgvListado_CellFormatting;
+            parametrosEmpresa = ParametrosEmpresaController.GetInstance().ObtenerParametrosEmpresa();
             ActualizarLista();
             completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
@@ -39,7 +40,7 @@ namespace UI.Desktop.Artículos
         {
             InitializeComponent();
 
-            parametrosEmpresa  = ParametrosEmpresaController.GetInstance().parametrosEmpresaObj;
+            parametrosEmpresa  = ParametrosEmpresaController.GetInstance().ObtenerParametrosEmpresa();
             ActualizarLista();
             completaCombosBox();
             this.dgvListado.Columns["descripcion"].Width = 280;
@@ -90,7 +91,9 @@ namespace UI.Desktop.Artículos
         public AutoCompleteStringCollection listaProveedoresExistentes;
 
         //Lista de Familias
-        List<Familia> familias = new List<Familia>();
+        List<Familia> familias1 = new List<Familia>();
+
+        List<Familia> familias2 = new List<Familia>();
         //Lista de Proveedores
         List<Proveedor> proveedores = new List<Proveedor>();
         
@@ -119,22 +122,43 @@ namespace UI.Desktop.Artículos
 
         private void completaCombosBox()
         {
-            //cbxFiltroFamilia.Items.Clear();
-            familias = Datos_FamiliaAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
-            if (familias != null)
+            // CBX FAMILIA 1
+            familias1 = Datos_FamiliaAdapter.GetFamilias("Familia1", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
+            if (familias1 != null && familias1.Count != 0)
             {
                 //familias.Add(new Familia { Activo = true,Descripcion= "Seleccione Familia", id=0 });
-                cbxFiltroFamilia.DataSource = familias;
-                cbxFiltroFamilia.DisplayMember = "descripcion";
-                cbxFiltroFamilia.ValueMember = "id";
-                cbxFiltroFamilia.SelectedIndex = -1;
-                cbxFiltroFamilia.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
-                
+                cbxFiltroFamilia1.DataSource = familias1;
+                cbxFiltroFamilia1.DisplayMember = "descripcion";
+                cbxFiltroFamilia1.ValueMember = "id";
+                cbxFiltroFamilia1.SelectedIndex = -1;
+                cbxFiltroFamilia1.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
+
+            }
+            else
+            {
+                this.cbxFiltroFamilia1.Visible = false;
             }
 
-            //cbxFiltroProveedor.Items.Clear();
+            // CBX FAMILIA 2
+            familias2 = Datos_FamiliaAdapter.GetFamilias("Familia2", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
+            if (familias2 != null && familias2.Count != 0)
+            {
+                //familias.Add(new Familia { Activo = true,Descripcion= "Seleccione Familia", id=0 });
+                cbxFiltroFamilia2.DataSource = familias2;
+                cbxFiltroFamilia2.DisplayMember = "descripcion";
+                cbxFiltroFamilia2.ValueMember = "id";
+                cbxFiltroFamilia2.SelectedIndex = -1;
+                cbxFiltroFamilia2.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
+
+            }
+            else
+            {
+                this.cbxFiltroFamilia2.Visible = false;
+            }
+
+            // cbxFiltroProveedor
             proveedores = Datos_ProveedorAdapter.GetAll().OrderBy(x => x.Nombre).ToList();
-            if (familias != null)
+            if (familias1 != null)
             {
                 //proveedores.Add(new Proveedor {Nombre= "Seleccione Proveedor" });
                 cbxFiltroProveedor.DataSource = proveedores;
@@ -143,8 +167,13 @@ namespace UI.Desktop.Artículos
                 cbxFiltroProveedor.SelectedIndex = -1;
                 cbxFiltroProveedor.SelectedValueChanged += cbxFiltroProveedor_SelectedValueChanged;
             }
+
+            string placeholderFamilia1 = "Filtrar por " + parametrosEmpresa.FamiliaNombre1 + "...";
+            string placeholderFamilia2 = "Filtrar por " + parametrosEmpresa.FamiliaNombre2 + "...";
+
             SendMessage(this.cbxFiltroProveedor.Handle, CB_SETCUEBANNER, 0, "Filtrar por proveedor...");
-            SendMessage(this.cbxFiltroFamilia.Handle, CB_SETCUEBANNER, 0, "Filtrar por familia...");
+            SendMessage(this.cbxFiltroFamilia1.Handle, CB_SETCUEBANNER, 0, placeholderFamilia1);
+            SendMessage(this.cbxFiltroFamilia2.Handle, CB_SETCUEBANNER, 0, placeholderFamilia2);
 
         }
 
@@ -158,23 +187,37 @@ namespace UI.Desktop.Artículos
             dgvListado.DataSource = ListaArticulosFiltrados;
             dgvListado.Columns["habilitado"].Visible = false;
             dgvListado.Columns["RangoEtario"].Visible = false;
-            dgvListado.Columns["Familia"].Visible = false;
             dgvListado.Columns["Costo"].Visible = rol == "Admin";
 
             this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
-            this.dgvListado.Columns["FamiliaTexto"].HeaderText = "Familia";
+
+            this.dgvListado.Columns["Familia1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre1.Trim());
+            this.dgvListado.Columns["Familia1"].HeaderText = parametrosEmpresa.FamiliaNombre1;
+
+            this.dgvListado.Columns["Familia2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre2.Trim());
+            this.dgvListado.Columns["Familia2"].HeaderText = parametrosEmpresa.FamiliaNombre2;
+
             this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
             dgvListado.Size = new Size(968, 490);
             this.dgvListado.Location = new Point(7, 56);
 
             this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1.Trim());
-
             this.dgvListado.Columns["CampoPersonalizado1"].HeaderText= parametrosEmpresa.CampoPersonalizadoArticulo1.Trim();
+
             this.dgvListado.Columns["CampoPersonalizado2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2.Trim());
+            this.dgvListado.Columns["CampoPersonalizado2"].HeaderText = parametrosEmpresa.CampoPersonalizadoArticulo2.Trim();
 
 
         }
 
+        override public void dgvListado_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {   
+            if ((e.ColumnIndex == dgvListado.Columns["Familia1"].Index && e.Value != null) || (e.ColumnIndex == dgvListado.Columns["Familia2"].Index && e.Value != null))
+            {
+                Familia familia = (Familia)e.Value;
+                e.Value = familia.Descripcion;
+            }
+        }
 
         // Añadir NUEVO ARTICULO
         private void AñadirNuevoArticulo()
@@ -566,7 +609,7 @@ namespace UI.Desktop.Artículos
         private void LimpiarFiltros()
         {
             tbxFiltro.Text = "";
-            cbxFiltroFamilia.SelectedIndex = -1;
+            cbxFiltroFamilia1.SelectedIndex = -1;
             cbxFiltroProveedor.SelectedIndex = -1;
         }
 
@@ -599,7 +642,7 @@ namespace UI.Desktop.Artículos
                     if (FiltrandoPorFamilia())
                     {
                         ListaArticulosFiltrados = ListaArticulosFiltrados
-                            .Where(articulo => articulo.Familia == (int)cbxFiltroFamilia.SelectedValue)
+                            .Where(articulo => articulo.Familia1.id == (int)cbxFiltroFamilia1.SelectedValue)
                             .ToList();
                     }
 
@@ -666,7 +709,7 @@ namespace UI.Desktop.Artículos
         private bool FiltrandoPorFamilia()
         {
 
-            if (cbxFiltroFamilia.SelectedIndex != -1)
+            if (cbxFiltroFamilia1.SelectedIndex != -1)
             {
                 return true;
             }
@@ -694,10 +737,11 @@ namespace UI.Desktop.Artículos
                 frmModificarPrecios frmModificarPrecios = new frmModificarPrecios(
                     ListaArticulos, 
                     ListaArticulosFiltrados, 
-                    familias, 
+                    familias1, 
                     proveedores, 
                     cbxFiltroProveedor.SelectedIndex,
-                    cbxFiltroFamilia.SelectedIndex);
+                    cbxFiltroFamilia1.SelectedIndex,
+                    parametrosEmpresa);
                 if(frmModificarPrecios.ShowDialog() == DialogResult.Yes)
                 {
                     ActualizarLista();

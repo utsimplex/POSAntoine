@@ -37,6 +37,12 @@ namespace Data.Database
             return instance;
         }
 
+        public ParametrosEmpresa ObtenerParametrosEmpresa()
+        {
+            this.parametrosEmpresaObj = parametrosAdapter.obtenerParametrosEmpresa();
+            return this.parametrosEmpresaObj;
+        }
+
         public void ObtenerListadoFamilias()
         {
             this.parametrosEmpresaObj.ListadoFamilia1 = familiaAdapter

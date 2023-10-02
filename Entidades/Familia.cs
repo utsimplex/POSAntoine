@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class Familia
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string Descripcion { get; set; }
         public bool Activo { get; set; }
 

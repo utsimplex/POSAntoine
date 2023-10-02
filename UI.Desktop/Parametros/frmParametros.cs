@@ -27,7 +27,7 @@ namespace UI.Desktop.Parametros
         {
             InitializeComponent();
             parametrosEmpresaController = ParametrosEmpresaController.GetInstance();
-            parametrosEmpresa = parametrosEmpresaController.parametrosEmpresaObj;
+            parametrosEmpresa = parametrosEmpresaController.ObtenerParametrosEmpresa();
             ParametrosAControles();
         }
 
@@ -105,6 +105,10 @@ namespace UI.Desktop.Parametros
             //Campos Personalizados Articulo
             this.txtCampoPersonalizadoArticulo1.Text = parametrosEmpresa.CampoPersonalizadoArticulo1;
             this.txtCampoPersonalizadoArticulo2.Text = parametrosEmpresa.CampoPersonalizadoArticulo2;
+
+            //Familias artículos
+            this.txtFamilia1Titulo.Text = parametrosEmpresa.FamiliaNombre1;
+            this.txtFamilia2Titulo.Text = parametrosEmpresa.FamiliaNombre2;
         }
         private void ControlesAParametro()
         {
@@ -131,6 +135,9 @@ namespace UI.Desktop.Parametros
             parametrosEmpresa.CampoPersonalizadoArticulo1 = this.txtCampoPersonalizadoArticulo1.Text.ToString();
             parametrosEmpresa.CampoPersonalizadoArticulo2 = this.txtCampoPersonalizadoArticulo2.Text.ToString();
 
+            //Familias Artículos
+            parametrosEmpresa.FamiliaNombre1 = this.txtFamilia1Titulo.Text.ToString();
+            parametrosEmpresa.FamiliaNombre2 = this.txtFamilia2Titulo.Text.ToString();
             ////Campos Personalizados Cliente
             //parametrosEmpresa.CampoPersonalizadoCliente1 = this.txtCampoPersonalizadoCliente1.Text.ToString();
             //parametrosEmpresa.CampoPersonalizadoCliente2 = this.txtCampoPersonalizadoCliente2.Text.ToString();
@@ -198,6 +205,7 @@ namespace UI.Desktop.Parametros
                 {
                     this.txtFamilia2Titulo.Text = formFamilia.txtNombreFamilia.Text.Trim();
                 }
+                this.btnCancelar.Visible = false;
             }
         }
     }

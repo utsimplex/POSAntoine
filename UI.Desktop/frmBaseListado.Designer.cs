@@ -64,6 +64,7 @@
             this.dgvListado.Size = new System.Drawing.Size(555, 429);
             this.dgvListado.TabIndex = 0;
             this.dgvListado.TabStop = false;
+            this.dgvListado.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListado_CellFormatting);
             this.dgvListado.DoubleClick += new System.EventHandler(this.dgvListado_DoubleClick);
             // 
             // groupBox1
