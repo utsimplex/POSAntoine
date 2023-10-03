@@ -207,7 +207,7 @@ namespace UI.Desktop.Artículos
 
                 artiToEdit.Codigo = txtCodigo.Text;
                 artiToEdit.Descripcion = txtDescripcion.Text;
-                artiToEdit.Precio = Convert.ToDecimal(txtPrecio.Text);
+                    artiToEdit.Precio = Math.Round(Convert.ToDecimal(txtPrecio.Text), 2);
                 artiToEdit.StockMin = Convert.ToInt32(txtStockMin.Text);
                 artiToEdit.Stock = Convert.ToInt32(txtStock.Text);
                 artiToEdit.Familia1.id = (int)cbxFamilia1.SelectedValue;
@@ -295,7 +295,8 @@ namespace UI.Desktop.Artículos
             // Datos artículo
             txtCodigo.Text = artiToEdit.Codigo;
             txtDescripcion.Text = artiToEdit.Descripcion;
-            txtPrecio.Text = artiToEdit.Precio.ToString();
+            txtPrecio.Text = Math.Round(Convert.ToDecimal(artiToEdit.Precio),2).ToString();
+
             txtStock.Text = artiToEdit.Stock.ToString();
             txtStockMin.Text = artiToEdit.StockMin.ToString();
             txtCodigoArtiProveedor.Text = artiToEdit.CodigoArtiProveedor;
