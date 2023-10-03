@@ -18,8 +18,8 @@ namespace UI.Desktop.Artículos
         {
             InitializeComponent();
             parametrosEmpresa = pParametrosEmpresa;
-            
 
+            ConfigurarPersonalizados();
             ItemsFamilia1();
             ItemsFamilia2();
             BindUiArticuloNuevo();
@@ -31,6 +31,7 @@ namespace UI.Desktop.Artículos
         {
             InitializeComponent();
             parametrosEmpresa = pParametrosEmpresa;
+            ConfigurarPersonalizados();
             ItemsFamilia1();
             ItemsFamilia2();
             this.artiToEdit = artiToEdit;
@@ -84,7 +85,33 @@ namespace UI.Desktop.Artículos
 
         }
 
+        private void ConfigurarPersonalizados()
+        {
+            if( !String.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1))
+            {
+                txtCampoPersonalizado1.Visible = true;
+                lblCampoPersonalizado1.Text = parametrosEmpresa.CampoPersonalizadoArticulo1;
+                lblCampoPersonalizado1.Visible =true;
+            }
+            else 
+            { 
+                txtCampoPersonalizado1.Visible=false;
+                lblCampoPersonalizado1.Visible = false;
+            }
 
+            if (!String.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2.Trim()))
+            {
+                lblCampoPersonalizado2.Text = parametrosEmpresa.CampoPersonalizadoArticulo2;
+                txtCampoPersonalizado2.Visible = true;
+                lblCampoPersonalizado2.Visible = true;
+            }
+            else
+            {
+                txtCampoPersonalizado2.Visible = false;
+                lblCampoPersonalizado2.Visible = false;
+            }
+
+        }
         private void ItemsFamilia1()
         {
 
@@ -160,6 +187,8 @@ namespace UI.Desktop.Artículos
                         Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
                         Articulo.Familia2.id = (int)cbxFamilia2.SelectedValue;
                         Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
+                        Articulo.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
+                        Articulo.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();
                         /* NO UTILIZADO, REVISAR //////////////////////////////////////////////
                         // Si tiene proveedor genero nueva instancia y la agrego a datos
                         if (cbxProveedor.SelectedText != "")
@@ -214,8 +243,10 @@ namespace UI.Desktop.Artículos
                 artiToEdit.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
                 artiToEdit.Familia2.id = (int)cbxFamilia2.SelectedValue;
                 artiToEdit.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
+                    artiToEdit.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
+                    artiToEdit.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();
 
-                if (cbxProveedor.SelectedItem != null)
+                    if (cbxProveedor.SelectedItem != null)
                 {
                 artiToEdit.Proveedor = cbxProveedor.SelectedItem.ToString();
                 }
@@ -308,6 +339,9 @@ namespace UI.Desktop.Artículos
                 //!= null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.Baby;
             
             txtCosto.Text = artiToEdit.Costo.ToString();
+
+            txtCampoPersonalizado1.Text = artiToEdit.CampoPersonalizado1;
+            txtCampoPersonalizado2.Text = artiToEdit.CampoPersonalizado2;
             
                       
         }

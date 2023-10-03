@@ -21,7 +21,7 @@ namespace Data.Database
             try
             {
 
-                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado], [familia], [familia2], [codigo_arti_proveedor], [costo]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO, @FAMILIA, @FAMILIA2, @CODIGO_ARTI_PROVEEDOR, @COSTO)";
+                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado], [familia], [familia2], [codigo_arti_proveedor], [campopersonalizado1], [campopersonalizado2], [costo]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO, @FAMILIA, @FAMILIA2, @CODIGO_ARTI_PROVEEDOR, @CAMPOPERSONALIZADO1, @CAMPOPERSONALIZADO2, @COSTO)";
                 Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                 Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -42,6 +42,10 @@ namespace Data.Database
                 Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
+                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO1", SqlDbType.NVarChar));
+                Comando.Parameters["@CAMPOPERSONALIZADO1"].Value = arti.CampoPersonalizado1;
+                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO2", SqlDbType.NVarChar));
+                Comando.Parameters["@CAMPOPERSONALIZADO2"].Value = arti.CampoPersonalizado2;
                 Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
                 Comando.Parameters["@COSTO"].Value = arti.Costo;
 
@@ -93,7 +97,7 @@ namespace Data.Database
                Comando.Connection = Con;
                Comando.CommandType = CommandType.Text;
                  
-               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO, [familia]=@FAMILIA, [familia2]=@FAMILIA2, [codigo_arti_proveedor]=@CODIGO_ARTI_PROVEEDOR, [costo]=@COSTO WHERE (([codigo] = @CODIGO))";
+               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO, [familia]=@FAMILIA, [familia2]=@FAMILIA2, [codigo_arti_proveedor]=@CODIGO_ARTI_PROVEEDOR, [CampoPersonalizado1]=@CAMPOPERSONALIZADO1, [campopersonalizado2]=@CAMPOPERSONALIZADO2, [costo]=@COSTO WHERE (([codigo] = @CODIGO))";
                Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -114,6 +118,10 @@ namespace Data.Database
                 Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
+                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO1", SqlDbType.NVarChar));
+                Comando.Parameters["@CAMPOPERSONALIZADO1"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado1) ? string.Empty : arti.CampoPersonalizado1;
+                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO2", SqlDbType.NVarChar));
+                Comando.Parameters["@CAMPOPERSONALIZADO2"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado2) ? string.Empty : arti.CampoPersonalizado2;
                 Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
                 Comando.Parameters["@COSTO"].Value = arti.Costo;
 

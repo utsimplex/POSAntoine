@@ -55,6 +55,10 @@
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.lblCampoPersonalizado1 = new System.Windows.Forms.Label();
+            this.lblCampoPersonalizado2 = new System.Windows.Forms.Label();
+            this.txtCampoPersonalizado1 = new System.Windows.Forms.TextBox();
+            this.txtCampoPersonalizado2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbDatosArticulo.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +75,10 @@
             // 
             // gbDatosArticulo
             // 
+            this.gbDatosArticulo.Controls.Add(this.txtCampoPersonalizado2);
+            this.gbDatosArticulo.Controls.Add(this.txtCampoPersonalizado1);
+            this.gbDatosArticulo.Controls.Add(this.lblCampoPersonalizado1);
+            this.gbDatosArticulo.Controls.Add(this.lblCampoPersonalizado2);
             this.gbDatosArticulo.Controls.Add(this.cbxFamilia2);
             this.gbDatosArticulo.Controls.Add(this.cbxFamilia1);
             this.gbDatosArticulo.Controls.Add(this.label7);
@@ -98,7 +106,7 @@
             this.gbDatosArticulo.Controls.Add(this.pictureBox1);
             this.gbDatosArticulo.Location = new System.Drawing.Point(12, 12);
             this.gbDatosArticulo.Name = "gbDatosArticulo";
-            this.gbDatosArticulo.Size = new System.Drawing.Size(448, 352);
+            this.gbDatosArticulo.Size = new System.Drawing.Size(448, 394);
             this.gbDatosArticulo.TabIndex = 1;
             this.gbDatosArticulo.TabStop = false;
             this.gbDatosArticulo.Text = "groupBox1";
@@ -140,21 +148,21 @@
             // 
             // lblFamilia1Nombre
             // 
-            this.lblFamilia1Nombre.AutoSize = true;
-            this.lblFamilia1Nombre.Location = new System.Drawing.Point(149, 160);
+            this.lblFamilia1Nombre.Location = new System.Drawing.Point(98, 155);
             this.lblFamilia1Nombre.Name = "lblFamilia1Nombre";
-            this.lblFamilia1Nombre.Size = new System.Drawing.Size(82, 13);
+            this.lblFamilia1Nombre.Size = new System.Drawing.Size(133, 13);
             this.lblFamilia1Nombre.TabIndex = 53;
             this.lblFamilia1Nombre.Text = "Familia1Nombre";
+            this.lblFamilia1Nombre.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblFamilia2Nombre
             // 
-            this.lblFamilia2Nombre.AutoSize = true;
-            this.lblFamilia2Nombre.Location = new System.Drawing.Point(150, 183);
+            this.lblFamilia2Nombre.Location = new System.Drawing.Point(98, 183);
             this.lblFamilia2Nombre.Name = "lblFamilia2Nombre";
-            this.lblFamilia2Nombre.Size = new System.Drawing.Size(82, 13);
+            this.lblFamilia2Nombre.Size = new System.Drawing.Size(134, 13);
             this.lblFamilia2Nombre.TabIndex = 51;
             this.lblFamilia2Nombre.Text = "Familia2Nombre";
+            this.lblFamilia2Nombre.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
@@ -205,7 +213,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(94, 309);
+            this.btnGuardar.Location = new System.Drawing.Point(98, 351);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(124, 37);
             this.btnGuardar.TabIndex = 8;
@@ -229,7 +237,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
-            this.btnCancelar.Location = new System.Drawing.Point(224, 309);
+            this.btnCancelar.Location = new System.Drawing.Point(228, 351);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(124, 37);
             this.btnCancelar.TabIndex = 9;
@@ -331,11 +339,45 @@
             this.txtDescripcion.Size = new System.Drawing.Size(200, 74);
             this.txtDescripcion.TabIndex = 1;
             // 
+            // lblCampoPersonalizado1
+            // 
+            this.lblCampoPersonalizado1.Location = new System.Drawing.Point(81, 291);
+            this.lblCampoPersonalizado1.Name = "lblCampoPersonalizado1";
+            this.lblCampoPersonalizado1.Size = new System.Drawing.Size(150, 13);
+            this.lblCampoPersonalizado1.TabIndex = 59;
+            this.lblCampoPersonalizado1.Text = "Campo Personalizado 1";
+            this.lblCampoPersonalizado1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCampoPersonalizado2
+            // 
+            this.lblCampoPersonalizado2.Location = new System.Drawing.Point(81, 316);
+            this.lblCampoPersonalizado2.Name = "lblCampoPersonalizado2";
+            this.lblCampoPersonalizado2.Size = new System.Drawing.Size(150, 13);
+            this.lblCampoPersonalizado2.TabIndex = 58;
+            this.lblCampoPersonalizado2.Text = "Campo Personalizado 2";
+            this.lblCampoPersonalizado2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtCampoPersonalizado1
+            // 
+            this.txtCampoPersonalizado1.Location = new System.Drawing.Point(237, 287);
+            this.txtCampoPersonalizado1.MaxLength = 22;
+            this.txtCampoPersonalizado1.Name = "txtCampoPersonalizado1";
+            this.txtCampoPersonalizado1.Size = new System.Drawing.Size(155, 20);
+            this.txtCampoPersonalizado1.TabIndex = 60;
+            // 
+            // txtCampoPersonalizado2
+            // 
+            this.txtCampoPersonalizado2.Location = new System.Drawing.Point(237, 313);
+            this.txtCampoPersonalizado2.MaxLength = 22;
+            this.txtCampoPersonalizado2.Name = "txtCampoPersonalizado2";
+            this.txtCampoPersonalizado2.Size = new System.Drawing.Size(155, 20);
+            this.txtCampoPersonalizado2.TabIndex = 61;
+            // 
             // frmArticuloABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 376);
+            this.ClientSize = new System.Drawing.Size(475, 418);
             this.Controls.Add(this.gbDatosArticulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -379,5 +421,9 @@
         public System.Windows.Forms.TextBox txtCodigoArtiProveedor;
         private System.Windows.Forms.ComboBox cbxFamilia1;
         private System.Windows.Forms.ComboBox cbxFamilia2;
+        public System.Windows.Forms.TextBox txtCampoPersonalizado2;
+        public System.Windows.Forms.TextBox txtCampoPersonalizado1;
+        private System.Windows.Forms.Label lblCampoPersonalizado1;
+        private System.Windows.Forms.Label lblCampoPersonalizado2;
     }
 }
