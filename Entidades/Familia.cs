@@ -12,6 +12,12 @@ namespace Entidades
         public string Descripcion { get; set; }
         public bool Activo { get; set; }
 
+        public bool IsModified { get; set; }
+
+        public Familia()
+        {
+            IsModified = false;
+        }
         
     }
 }

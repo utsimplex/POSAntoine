@@ -31,7 +31,7 @@ namespace Data.Database
 
         public Familia familia { get; set; }
 
-        public void AñadirNuevo(Familia _familia)
+        public void AñadirNuevaFamilia(Familia _familia, string pFamiliaSeleccionada)
         {
             //Crear Conexion y Abrirla
             SqlConnection Con = CrearConexion();
@@ -42,11 +42,20 @@ namespace Data.Database
             Comando.CommandType = CommandType.Text;
             try
             {
+                if (pFamiliaSeleccionada == "Familia1")
+                {
+                    Comando.CommandText = "INSERT INTO [Familia](DESCRIPCION,ACTIVO ) " +
+               "VALUES (@DESCRIPCION,@ACTIVO) ";
+                }
+                else if (pFamiliaSeleccionada == "Familia2")
+                {
+                    Comando.CommandText = "INSERT INTO [Familia_DOS](DESCRIPCION,ACTIVO ) " +
+               "VALUES (@DESCRIPCION,@ACTIVO) ";
+                }
 
-                Comando.CommandText = "INSERT INTO [Familia](DESCRIPCION,ACTIVO ) " +
-                "VALUES (@DESCRIPCION,@ACTIVO) ";
+               
                 Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
-                Comando.Parameters["@CODIGO"].Value = _familia.Descripcion;
+                Comando.Parameters["@DESCRIPCION"].Value = _familia.Descripcion;
                 Comando.Parameters.Add(new SqlParameter("@ACTIVO", SqlDbType.Bit));
                 Comando.Parameters["@ACTIVO"].Value = _familia.Activo;
 
@@ -66,7 +75,7 @@ namespace Data.Database
             }
         }
 
-        public void Actualizar(Familia _familia)
+        public void ActualizarFamilia(Familia _familia, string pFamiliaSeleccionada)
         {
             
             //Crear Conexion y Abrirla
@@ -77,12 +86,21 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "UPDATE [FAMILIA] SET DESCRIPCION=@DESCRIPCION,ACTIVO=@ACTIVO" +
+            if (pFamiliaSeleccionada == "Familia1")
+            {
+                Comando.CommandText = "UPDATE [FAMILIA] SET DESCRIPCION=@DESCRIPCION,ACTIVO=@ACTIVO" +
                     " WHERE ID=@ID";
+            }
+            else if (pFamiliaSeleccionada == "Familia2")
+            {
+                Comando.CommandText = "UPDATE [FAMILIA_DOS] SET DESCRIPCION=@DESCRIPCION,ACTIVO=@ACTIVO" +
+                    " WHERE ID=@ID";
+            }
+            
             Comando.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int));
             Comando.Parameters["@ID"].Value = _familia.id;
             Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
-            Comando.Parameters["@CODIGO"].Value = _familia.Descripcion;
+            Comando.Parameters["@DESCRIPCION"].Value = _familia.Descripcion;
             Comando.Parameters.Add(new SqlParameter("@ACTIVO", SqlDbType.Bit));
             Comando.Parameters["@ACTIVO"].Value = _familia.Activo;
 

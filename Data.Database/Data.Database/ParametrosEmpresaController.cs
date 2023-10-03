@@ -37,11 +37,23 @@ namespace Data.Database
             return instance;
         }
 
+        #region ============== Parametros Empresa ============== 
         public ParametrosEmpresa ObtenerParametrosEmpresa()
         {
             this.parametrosEmpresaObj = parametrosAdapter.obtenerParametrosEmpresa();
             return this.parametrosEmpresaObj;
         }
+
+        public void Actualizar(ParametrosEmpresa _parametrosEmpresa)
+        {
+            parametrosAdapter.Actualizar(_parametrosEmpresa);
+
+        }
+
+        #endregion
+
+        #region ============== FAMILIA ============== 
+
 
         public void ObtenerListadoFamilias()
         {
@@ -54,11 +66,16 @@ namespace Data.Database
                .OrderBy(x => x.Descripcion).ToList();
         }
 
-        public void Actualizar(ParametrosEmpresa _parametrosEmpresa)
+        public void AñadirFamilia(Familia pFamilia, string pFamiliaSeleccionada)
         {
-            parametrosAdapter.Actualizar(_parametrosEmpresa);
-
+            familiaAdapter.AñadirNuevaFamilia(pFamilia, pFamiliaSeleccionada);
         }
 
+        public void ModificarFamilia(Familia pFamilia, string pFamiliaSeleccionada)
+        {
+            familiaAdapter.ActualizarFamilia(pFamilia, pFamiliaSeleccionada);
+        }
+
+        #endregion
     }
 }

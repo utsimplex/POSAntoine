@@ -243,6 +243,16 @@ namespace UI.Desktop.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap folder_add_24 {
+            get {
+                object obj = ResourceManager.GetObject("folder_add_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fondoAntoineBlack {
             get {
                 object obj = ResourceManager.GetObject("fondoAntoineBlack", resourceCulture);

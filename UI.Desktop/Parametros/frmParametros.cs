@@ -200,10 +200,41 @@ namespace UI.Desktop.Parametros
                 if(familiaSeleccionada == "Familia1")
                 {
                     this.txtFamilia1Titulo.Text = formFamilia.txtNombreFamilia.Text.Trim();
+                    formFamilia.familiaListado.ForEach(familia =>
+                    {
+                        if (familia.IsModified)
+                        {
+                            // Actualizo esta familia
+                            parametrosEmpresaController.ModificarFamilia(familia,"Familia1");
+                        }
+
+                        if(familia.id == null)
+                        {
+                            // Agrego Familia nueva
+                            parametrosEmpresaController.AñadirFamilia(familia, "Familia1");
+                        }
+
+                    });
+                    //LogicalToDeviceUnits para guardar familia1
                 }
                 if(familiaSeleccionada == "Familia2")
                 {
                     this.txtFamilia2Titulo.Text = formFamilia.txtNombreFamilia.Text.Trim();
+                    formFamilia.familiaListado.ForEach(familia =>
+                    {
+                        if (familia.IsModified)
+                        {
+                            // Actualizo esta familia
+                            parametrosEmpresaController.ModificarFamilia(familia, "Familia2");
+                        }
+
+                        if (familia.id == null)
+                        {
+                            // Agrego Familia nueva
+                            parametrosEmpresaController.AñadirFamilia(familia, "Familia2");
+                        }
+
+                    });
                 }
                 this.btnCancelar.Visible = false;
             }
