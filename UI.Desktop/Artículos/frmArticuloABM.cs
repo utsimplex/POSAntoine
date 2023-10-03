@@ -14,22 +14,25 @@ namespace UI.Desktop.Artículos
     public partial class frmArticuloABM : Form
     {
         //Constructor 1
-        public frmArticuloABM()
+        public frmArticuloABM( ParametrosEmpresa pParametrosEmpresa )
         {
             InitializeComponent();
+            parametrosEmpresa = pParametrosEmpresa;
+            
 
-            ItemsFamilia();
-            ItemsRangoEtario();
+            ItemsFamilia1();
+            ItemsFamilia2();
             BindUiArticuloNuevo();
+
         }
 
         //Constructor 2 (modo Modificacion)
-        public frmArticuloABM(Entidades.Articulo artiToEdit)
+        public frmArticuloABM(Entidades.Articulo artiToEdit, ParametrosEmpresa pParametrosEmpresa)
         {
             InitializeComponent();
-            ItemsFamilia();
-            ItemsRangoEtario();
-
+            parametrosEmpresa = pParametrosEmpresa;
+            ItemsFamilia1();
+            ItemsFamilia2();
             this.artiToEdit = artiToEdit;
 
            if(this.artiToEdit != null)
@@ -46,9 +49,11 @@ namespace UI.Desktop.Artículos
         PrecioAdapter Datos_PrecioAdapter = new PrecioAdapter();
         ProveedorAdapter Datos_ProveedorAdapter = new ProveedorAdapter();
         Entidades.Articulo artiToEdit = new Entidades.Articulo();
-        List<Familia> listFamilias = new List<Familia>();
+        List<Familia> listFamilias1 = new List<Familia>();
+        List<Familia> listFamilias2 = new List<Familia>();
         FamiliaAdapter Datos_FamiliaAdapter = new FamiliaAdapter();
-
+        //PARAMETROS DE LA EMPRESA
+        ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
 
 
         #endregion
@@ -80,45 +85,46 @@ namespace UI.Desktop.Artículos
         }
 
 
-        private void ItemsFamilia()
+        private void ItemsFamilia1()
         {
 
-            cbxFamilia.Items.Clear();
-            listFamilias = Datos_FamiliaAdapter.GetMultipleActivo("%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
-            if (listFamilias != null)
+            cbxFamilia1.Items.Clear();
+            listFamilias1 = Datos_FamiliaAdapter.GetFamilias("Familia1", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
+            this.lblFamilia1Nombre.Text = parametrosEmpresa.FamiliaNombre1;
+            if(parametrosEmpresa.FamiliaNombre1.Length > 0)
             {
-                cbxFamilia.DataSource = listFamilias;
-                cbxFamilia.DisplayMember = "descripcion";
-                cbxFamilia.ValueMember = "id";
+                cbxFamilia1.Visible = true;
+                if (parametrosEmpresa.FamiliaNombre1.Length > 0 && listFamilias1 != null && listFamilias1.Count != 0)
+                {
+                    cbxFamilia1.DataSource = listFamilias1;
+                    cbxFamilia1.DisplayMember = "descripcion";
+                    cbxFamilia1.ValueMember = "id";
+                }
             }
+            else { cbxFamilia1.Visible=false;}
+            
 
-            //cbxFamilia.DisplayMember = "Description";
-            //cbxFamilia.ValueMember = "Value";
-            //cbxFamilia.DataSource = Enum.GetValues(typeof(ArticuloConstantes.TipoFamilia))
-            //    .Cast<Enum>()
-            //    .Select(value => new
-            //    {
-            //        (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-            //        value
-            //    })
-            //    .OrderBy(item => item.Description)
-            //    .ToList();
         }
 
-        private void ItemsRangoEtario()
+        private void ItemsFamilia2()
         {
-            cbxRangoEtario.Items.Clear();
-            cbxRangoEtario.DisplayMember = "Description";
-            cbxRangoEtario.ValueMember = "Value";
-            cbxRangoEtario.DataSource = Enum.GetValues(typeof(ArticuloConstantes.RangoEtario))
-                .Cast<Enum>()
-                .Select(value => new
+            cbxFamilia2.Items.Clear();
+            listFamilias2 = Datos_FamiliaAdapter.GetFamilias("Familia2", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
+            this.lblFamilia2Nombre.Text = parametrosEmpresa.FamiliaNombre2;
+            if(parametrosEmpresa.FamiliaNombre2.Length > 0)
+            {
+                cbxFamilia2.Visible = true;
+                if (parametrosEmpresa.FamiliaNombre2.Length > 0 && listFamilias2 != null && listFamilias2.Count != 0)
                 {
-                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
-                })
-                .OrderBy(item => item.Description)
-                .ToList();
+                    cbxFamilia2.DataSource = listFamilias2;
+                    cbxFamilia2.DisplayMember = "descripcion";
+                    cbxFamilia2.ValueMember = "id";
+                }
+            }
+            else { cbxFamilia2.Visible=false;}
+
+
+
         }
 
 
@@ -150,9 +156,9 @@ namespace UI.Desktop.Artículos
                         Articulo.StockMin = Convert.ToInt32(txtStockMin.Text.Trim());
                         Articulo.Precio = String.IsNullOrEmpty(txtPrecio.Text.Trim())?0:Convert.ToDecimal(txtPrecio.Text.Trim());
                         Articulo.Proveedor = cbxProveedor.SelectedItem.ToString();
-                        Articulo.Familia1.id = (int)cbxFamilia.SelectedValue;
+                        Articulo.Familia1.id = (int)cbxFamilia1.SelectedValue;
                         Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
-                        Articulo.RangoEtario = (int)cbxRangoEtario.SelectedValue;
+                        Articulo.Familia2.id = (int)cbxFamilia2.SelectedValue;
                         Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
                         /* NO UTILIZADO, REVISAR //////////////////////////////////////////////
                         // Si tiene proveedor genero nueva instancia y la agrego a datos
@@ -204,9 +210,9 @@ namespace UI.Desktop.Artículos
                 artiToEdit.Precio = Convert.ToDecimal(txtPrecio.Text);
                 artiToEdit.StockMin = Convert.ToInt32(txtStockMin.Text);
                 artiToEdit.Stock = Convert.ToInt32(txtStock.Text);
-                artiToEdit.Familia1.id = (int)cbxFamilia.SelectedValue;
+                artiToEdit.Familia1.id = (int)cbxFamilia1.SelectedValue;
                 artiToEdit.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
-                artiToEdit.RangoEtario = (int)cbxRangoEtario.SelectedValue;
+                artiToEdit.Familia2.id = (int)cbxFamilia2.SelectedValue;
                 artiToEdit.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
 
                 if (cbxProveedor.SelectedItem != null)
@@ -294,10 +300,11 @@ namespace UI.Desktop.Artículos
             txtStockMin.Text = artiToEdit.StockMin.ToString();
             txtCodigoArtiProveedor.Text = artiToEdit.CodigoArtiProveedor;
 
-            cbxFamilia.SelectedValue = (int)artiToEdit.Familia1.id;
+            cbxFamilia1.SelectedValue = (int)artiToEdit.Familia1.id;
             //cbxFamilia.SelectedValue = listFamilias.First(familia => familia.id == artiToEdit.Familia).id;
 
-            cbxRangoEtario.SelectedValue = artiToEdit.RangoEtario != null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.Baby;
+            cbxFamilia2.SelectedValue = (int)artiToEdit.Familia2.id;
+                //!= null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.Baby;
             
             txtCosto.Text = artiToEdit.Costo.ToString();
             
@@ -581,7 +588,6 @@ namespace UI.Desktop.Artículos
             
         }
 
-
-
+       
     }
 }

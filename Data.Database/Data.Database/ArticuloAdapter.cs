@@ -21,7 +21,7 @@ namespace Data.Database
             try
             {
 
-                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado], [familia], [rango_etario], [codigo_arti_proveedor], [costo]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO, @FAMILIA, @RANGO_ETARIO, @CODIGO_ARTI_PROVEEDOR, @COSTO)";
+                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado], [familia], [familia2], [codigo_arti_proveedor], [costo]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO, @FAMILIA, @FAMILIA2, @CODIGO_ARTI_PROVEEDOR, @COSTO)";
                 Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                 Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -38,8 +38,8 @@ namespace Data.Database
                 Comando.Parameters["@HABILITADO"].Value = "Si";
                 Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
                 Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
-                Comando.Parameters.Add(new SqlParameter("@RANGO_ETARIO", SqlDbType.Int));
-                Comando.Parameters["@RANGO_ETARIO"].Value = arti.RangoEtario;
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
                 Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
@@ -93,7 +93,7 @@ namespace Data.Database
                Comando.Connection = Con;
                Comando.CommandType = CommandType.Text;
                  
-               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO, [familia]=@FAMILIA, [rango_etario]=@RANGO_ETARIO, [codigo_arti_proveedor]=@CODIGO_ARTI_PROVEEDOR, [costo]=@COSTO WHERE (([codigo] = @CODIGO))";
+               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO, [familia]=@FAMILIA, [familia2]=@FAMILIA2, [codigo_arti_proveedor]=@CODIGO_ARTI_PROVEEDOR, [costo]=@COSTO WHERE (([codigo] = @CODIGO))";
                Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -110,8 +110,8 @@ namespace Data.Database
                Comando.Parameters["@HABILITADO"].Value = arti.Habilitado;
                 Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
                 Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
-                Comando.Parameters.Add(new SqlParameter("@RANGO_ETARIO", SqlDbType.Int));
-                Comando.Parameters["@RANGO_ETARIO"].Value = arti.RangoEtario;
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
                 Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
@@ -172,7 +172,7 @@ namespace Data.Database
                  SqlConnection Con = CrearConexion();
 
                  // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCommand Comando = new SqlCommand("SELECT codigo, articulos.descripcion, stock, stockmin, precio, marca, habilitado, Rango_Etario, Familia as 'familiaID', familia.DESCRIPCION as 'familiaTexto', CODIGO_ARTI_PROVEEDOR, Costo, CampoPersonalizado1, CampoPersonalizado2 FROM Articulos LEFT JOIN FAMILIA ON familia.id = articulos.Familia ORDER BY articulos.descripcion", Con);
+                 SqlCommand Comando = new SqlCommand("SELECT codigo, articulos.descripcion, stock, stockmin, precio, marca, habilitado, Familia as 'familia1ID', familia.DESCRIPCION as 'familia1Texto', Familia2 as'familia2ID', famdos.DESCRIPCION as 'familia2Texto', CODIGO_ARTI_PROVEEDOR, Costo, CampoPersonalizado1, CampoPersonalizado2 FROM Articulos LEFT JOIN FAMILIA ON familia.id = articulos.Familia LEFT JOIN FAMILIA_DOS famdos ON famdos.ID = articulos.Familia2 ORDER BY articulos.descripcion", Con);
                  try
                  {
                      Comando.Connection.Open();
@@ -190,9 +190,11 @@ namespace Data.Database
                         arti.Proveedor = (string)drArticulos["marca"];
                         arti.Habilitado = (string)drArticulos["habilitado"];
                         //arti.FamiliaViejo = drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
-                        arti.Familia1.id = drArticulos["familiaID"] != DBNull.Value ? Convert.ToInt32(drArticulos["familiaID"]) : (int?)null;
-                        arti.Familia1.Descripcion = drArticulos["familiaTexto"] != DBNull.Value ? Convert.ToString(drArticulos["familiaTexto"]) : (string)null;
-                        arti.RangoEtario = drArticulos["rango_etario"] != DBNull.Value ? Convert.ToInt32(drArticulos["rango_etario"]) : (int?)null;
+                        arti.Familia1.id = drArticulos["familia1ID"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia1ID"]) : (int?)null;
+                        arti.Familia1.Descripcion = drArticulos["familia1Texto"] != DBNull.Value ? Convert.ToString(drArticulos["familia1Texto"]) : (string)null;
+                        arti.Familia2.id = drArticulos["familia2ID"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia2ID"]) : (int?)null;
+                        arti.Familia2.Descripcion = drArticulos["familia2Texto"] != DBNull.Value ? Convert.ToString(drArticulos["familia2Texto"]) : (string)null;
+                        //arti.RangoEtario = drArticulos["rango_etario"] != DBNull.Value ? Convert.ToInt32(drArticulos["rango_etario"]) : (int?)null;
                         arti.Costo = drArticulos["costo"] != DBNull.Value ? Convert.ToDecimal(drArticulos["costo"]) : (decimal?)null;
                         arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
                         arti.CampoPersonalizado1 = drArticulos["CampoPersonalizado1"] != DBNull.Value ? Convert.ToString(drArticulos["CampoPersonalizado1"]) : (string)null;
@@ -359,7 +361,7 @@ namespace Data.Database
                          arti.Proveedor = (string)drArticulos["marca"];
                          arti.Habilitado = (string)drArticulos["habilitado"];
                          arti.Familia1.id = drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
-                         arti.RangoEtario = drArticulos["rango_etario"] != DBNull.Value ? Convert.ToInt32(drArticulos["rango_etario"]) : (int?)null;
+                         arti.Familia2.id = drArticulos["familia2"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia2"]) : (int?)null;
                          arti.Costo = drArticulos["costo"] != DBNull.Value ? Convert.ToDecimal(drArticulos["costo"]) : (decimal?)null;
                          arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
                 }

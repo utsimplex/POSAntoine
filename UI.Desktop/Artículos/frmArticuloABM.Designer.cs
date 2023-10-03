@@ -31,6 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmArticuloABM));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gbDatosArticulo = new System.Windows.Forms.GroupBox();
+            this.cbxFamilia2 = new System.Windows.Forms.ComboBox();
+            this.cbxFamilia1 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCosto = new System.Windows.Forms.TextBox();
+            this.lblFamilia1Nombre = new System.Windows.Forms.Label();
+            this.lblFamilia2Nombre = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCodigoArtiProveedor = new System.Windows.Forms.TextBox();
             this.lblNoHayProveedores = new System.Windows.Forms.Label();
             this.cbxProveedor = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,14 +55,6 @@
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCodigoArtiProveedor = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtCosto = new System.Windows.Forms.TextBox();
-            this.cbxFamilia = new System.Windows.Forms.ComboBox();
-            this.cbxRangoEtario = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbDatosArticulo.SuspendLayout();
             this.SuspendLayout();
@@ -71,12 +71,12 @@
             // 
             // gbDatosArticulo
             // 
-            this.gbDatosArticulo.Controls.Add(this.cbxRangoEtario);
-            this.gbDatosArticulo.Controls.Add(this.cbxFamilia);
+            this.gbDatosArticulo.Controls.Add(this.cbxFamilia2);
+            this.gbDatosArticulo.Controls.Add(this.cbxFamilia1);
             this.gbDatosArticulo.Controls.Add(this.label7);
             this.gbDatosArticulo.Controls.Add(this.txtCosto);
-            this.gbDatosArticulo.Controls.Add(this.label6);
-            this.gbDatosArticulo.Controls.Add(this.label5);
+            this.gbDatosArticulo.Controls.Add(this.lblFamilia1Nombre);
+            this.gbDatosArticulo.Controls.Add(this.lblFamilia2Nombre);
             this.gbDatosArticulo.Controls.Add(this.label4);
             this.gbDatosArticulo.Controls.Add(this.txtCodigoArtiProveedor);
             this.gbDatosArticulo.Controls.Add(this.lblNoHayProveedores);
@@ -102,6 +102,76 @@
             this.gbDatosArticulo.TabIndex = 1;
             this.gbDatosArticulo.TabStop = false;
             this.gbDatosArticulo.Text = "groupBox1";
+            // 
+            // cbxFamilia2
+            // 
+            this.cbxFamilia2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFamilia2.FormattingEnabled = true;
+            this.cbxFamilia2.Location = new System.Drawing.Point(238, 179);
+            this.cbxFamilia2.Name = "cbxFamilia2";
+            this.cbxFamilia2.Size = new System.Drawing.Size(155, 21);
+            this.cbxFamilia2.TabIndex = 57;
+            // 
+            // cbxFamilia1
+            // 
+            this.cbxFamilia1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFamilia1.FormattingEnabled = true;
+            this.cbxFamilia1.Location = new System.Drawing.Point(238, 152);
+            this.cbxFamilia1.Name = "cbxFamilia1";
+            this.cbxFamilia1.Size = new System.Drawing.Size(155, 21);
+            this.cbxFamilia1.TabIndex = 56;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(197, 107);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 13);
+            this.label7.TabIndex = 55;
+            this.label7.Text = "Costo";
+            // 
+            // txtCosto
+            // 
+            this.txtCosto.Location = new System.Drawing.Point(238, 104);
+            this.txtCosto.MaxLength = 22;
+            this.txtCosto.Name = "txtCosto";
+            this.txtCosto.Size = new System.Drawing.Size(155, 20);
+            this.txtCosto.TabIndex = 54;
+            // 
+            // lblFamilia1Nombre
+            // 
+            this.lblFamilia1Nombre.AutoSize = true;
+            this.lblFamilia1Nombre.Location = new System.Drawing.Point(149, 160);
+            this.lblFamilia1Nombre.Name = "lblFamilia1Nombre";
+            this.lblFamilia1Nombre.Size = new System.Drawing.Size(82, 13);
+            this.lblFamilia1Nombre.TabIndex = 53;
+            this.lblFamilia1Nombre.Text = "Familia1Nombre";
+            // 
+            // lblFamilia2Nombre
+            // 
+            this.lblFamilia2Nombre.AutoSize = true;
+            this.lblFamilia2Nombre.Location = new System.Drawing.Point(150, 183);
+            this.lblFamilia2Nombre.Name = "lblFamilia2Nombre";
+            this.lblFamilia2Nombre.Size = new System.Drawing.Size(82, 13);
+            this.lblFamilia2Nombre.TabIndex = 51;
+            this.lblFamilia2Nombre.Text = "Familia2Nombre";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(144, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 13);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "Código proveedor";
+            // 
+            // txtCodigoArtiProveedor
+            // 
+            this.txtCodigoArtiProveedor.Location = new System.Drawing.Point(238, 78);
+            this.txtCodigoArtiProveedor.MaxLength = 22;
+            this.txtCodigoArtiProveedor.Name = "txtCodigoArtiProveedor";
+            this.txtCodigoArtiProveedor.Size = new System.Drawing.Size(155, 20);
+            this.txtCodigoArtiProveedor.TabIndex = 48;
             // 
             // lblNoHayProveedores
             // 
@@ -261,76 +331,6 @@
             this.txtDescripcion.Size = new System.Drawing.Size(200, 74);
             this.txtDescripcion.TabIndex = 1;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(144, 81);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 13);
-            this.label4.TabIndex = 49;
-            this.label4.Text = "Código proveedor";
-            // 
-            // txtCodigoArtiProveedor
-            // 
-            this.txtCodigoArtiProveedor.Location = new System.Drawing.Point(238, 78);
-            this.txtCodigoArtiProveedor.MaxLength = 22;
-            this.txtCodigoArtiProveedor.Name = "txtCodigoArtiProveedor";
-            this.txtCodigoArtiProveedor.Size = new System.Drawing.Size(155, 20);
-            this.txtCodigoArtiProveedor.TabIndex = 48;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(162, 158);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 13);
-            this.label5.TabIndex = 51;
-            this.label5.Text = "Rango Etario";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(192, 184);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 13);
-            this.label6.TabIndex = 53;
-            this.label6.Text = "Familia";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(197, 107);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 13);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "Costo";
-            // 
-            // txtCosto
-            // 
-            this.txtCosto.Location = new System.Drawing.Point(238, 104);
-            this.txtCosto.MaxLength = 22;
-            this.txtCosto.Name = "txtCosto";
-            this.txtCosto.Size = new System.Drawing.Size(155, 20);
-            this.txtCosto.TabIndex = 54;
-            // 
-            // cbxFamilia
-            // 
-            this.cbxFamilia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxFamilia.FormattingEnabled = true;
-            this.cbxFamilia.Location = new System.Drawing.Point(238, 180);
-            this.cbxFamilia.Name = "cbxFamilia";
-            this.cbxFamilia.Size = new System.Drawing.Size(155, 21);
-            this.cbxFamilia.TabIndex = 56;
-            // 
-            // cbxRangoEtario
-            // 
-            this.cbxRangoEtario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxRangoEtario.FormattingEnabled = true;
-            this.cbxRangoEtario.Location = new System.Drawing.Point(238, 153);
-            this.cbxRangoEtario.Name = "cbxRangoEtario";
-            this.cbxRangoEtario.Size = new System.Drawing.Size(155, 21);
-            this.cbxRangoEtario.TabIndex = 57;
-            // 
             // frmArticuloABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,11 +373,11 @@
         private System.Windows.Forms.Label lblNoHayProveedores;
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.TextBox txtCosto;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblFamilia1Nombre;
+        private System.Windows.Forms.Label lblFamilia2Nombre;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox txtCodigoArtiProveedor;
-        private System.Windows.Forms.ComboBox cbxFamilia;
-        private System.Windows.Forms.ComboBox cbxRangoEtario;
+        private System.Windows.Forms.ComboBox cbxFamilia1;
+        private System.Windows.Forms.ComboBox cbxFamilia2;
     }
 }

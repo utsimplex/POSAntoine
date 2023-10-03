@@ -109,6 +109,14 @@ namespace UI.Desktop.Parametros.Articulos
             dgvFamiliasListado.DataSource = null; // Establece el origen de datos del DataGridView a null
             dgvFamiliasListado.DataSource = familiaListado;
             ConfigurarGrilla();
+
+            // Setear FOCO en la fila nueva recien añadida
+            int nuevaFilaIndex = dgvFamiliasListado.Rows.Count - 1; // Obtiene el índice de la nueva fila
+            if (nuevaFilaIndex >= 0)
+            {
+                dgvFamiliasListado.CurrentCell = dgvFamiliasListado.Rows[nuevaFilaIndex].Cells[1]; // Selecciona la celda correspondiente a la primera columna de la nueva fila
+                dgvFamiliasListado.BeginEdit(true); // Comienza la edición de la nueva fila
+            }
         }
 
         private bool ValidarFamilias()

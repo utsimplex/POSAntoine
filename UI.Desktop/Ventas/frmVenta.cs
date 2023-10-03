@@ -47,7 +47,7 @@ namespace UI.Desktop.Ventas
             txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
             txtNombRazCli.Text = Datos_ClienteAdapter.GetOne((long)vtaSelec.NumeroDocumentoCliente).Nombre;
             txtNumeroVenta.Text = vtaSelec.NumeroVenta.ToString();
-            txtTotal.Text = vtaSelec.Total.ToString("c");
+            txtTotal.Text = vtaSelec.Total.ToString();
             dgvArticulosVtaActual.DataSource = Datos_VentasArticulosAdapter.GetAll(vtaSelec.NumeroVenta, vtaSelec.TipoOperacion);
             cajaAbierta = Datos_CajasAdapter.GetEstadoCajaAbierta(vtaSelec.CajaId);
             btnConfirmar.Enabled = cbxMedioDePago.Enabled=cajaAbierta;
@@ -544,7 +544,7 @@ namespace UI.Desktop.Ventas
 
                 }
 
-                this.txtTotal.Text = total.ToString("c");
+                this.txtTotal.Text = total.ToString();
 
                 //Titulo de las columnas
                 this.dgvArticulosVtaActual.Columns["Descuento"].HeaderText = "Descuento ($)";
@@ -584,7 +584,7 @@ namespace UI.Desktop.Ventas
             {
                 Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
                 ventaLocal.Descuento = descuentoTotal;
-                txtTotal.Text = (total - descuentoTotal).ToString("c");
+                txtTotal.Text = (total - descuentoTotal).ToString();
             }
             else if (txtDctoPesos.Text != "" && txtDctoPesos.Text!="0")
             {
@@ -592,7 +592,7 @@ namespace UI.Desktop.Ventas
                 //Decimal total = Convert.ToDecimal(txtTotal.Text);
                 if (descuentoTotal <= total)
                 {
-                    txtTotal.Text = (total - descuentoTotal).ToString("c");
+                    txtTotal.Text = (total - descuentoTotal).ToString();
                     ventaLocal.Descuento = descuentoTotal;
                 }
                 else

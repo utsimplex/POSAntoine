@@ -186,10 +186,9 @@ namespace UI.Desktop.Artículos
 
             dgvListado.DataSource = ListaArticulosFiltrados;
             dgvListado.Columns["habilitado"].Visible = false;
-            dgvListado.Columns["RangoEtario"].Visible = false;
             dgvListado.Columns["Costo"].Visible = rol == "Admin";
 
-            this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
+            //this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
 
             this.dgvListado.Columns["Familia1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre1.Trim());
             this.dgvListado.Columns["Familia1"].HeaderText = parametrosEmpresa.FamiliaNombre1;
@@ -214,15 +213,18 @@ namespace UI.Desktop.Artículos
         {   
             if ((e.ColumnIndex == dgvListado.Columns["Familia1"].Index && e.Value != null) || (e.ColumnIndex == dgvListado.Columns["Familia2"].Index && e.Value != null))
             {
-                Familia familia = (Familia)e.Value;
-                e.Value = familia.Descripcion;
+                if (e.Value is Familia familia)
+                {
+                    e.Value = familia.Descripcion;
+                }
+                
             }
         }
 
         // Añadir NUEVO ARTICULO
         private void AñadirNuevoArticulo()
         {
-            Artículos.frmArticuloABM frmAltaArticulo = new Artículos.frmArticuloABM();
+            Artículos.frmArticuloABM frmAltaArticulo = new Artículos.frmArticuloABM(parametrosEmpresa);
             frmAltaArticulo.ModoForm = Artículos.frmArticuloABM.TipoForm.Alta;
 
 
@@ -274,7 +276,7 @@ namespace UI.Desktop.Artículos
             //artiToEdit.CodigoArtiProveedor = dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value != null ? dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value.ToString() : "";
 
             // Instanciación del formulario ABM Articulos EDICION
-            frmArticuloABM formArticuloABM = new frmArticuloABM(artiToEdit);
+            frmArticuloABM formArticuloABM = new frmArticuloABM(artiToEdit, parametrosEmpresa);
             formArticuloABM.ModoForm = frmArticuloABM.TipoForm.Edicion;
             /*
                         //Carga el combo box con la lista de proveedores

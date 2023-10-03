@@ -50,7 +50,7 @@ namespace UI.Desktop.Artículos
             dgvListado.DataSource = ListaArticulosFiltrados;
 
             dgvListado.Columns["habilitado"].Visible = false;
-            dgvListado.Columns["RangoEtario"].Visible = false;
+            //dgvListado.Columns["RangoEtario"].Visible = false;
 
             // FAMILIAS
             this.dgvListado.Columns["Familia1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre1.Trim());
@@ -68,9 +68,9 @@ namespace UI.Desktop.Artículos
 
 
             dgvListado.Columns["Costo"].Visible = false;
-            dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
+            //dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
            
-            dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Codigo proveedor";
+            //dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Codigo proveedor";
             dgvListado.Columns["CodigoArtiProveedor"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListado.Columns["descripcion"].Width = 280;
             dgvListado.Columns["codigo"].HeaderText = "Código";
