@@ -26,7 +26,8 @@ namespace UI.Desktop.Artículos
             List<Familia> familias2,
             List<Proveedor> proveedores,
             int selectedProveedorIdx,
-            int selectedFamiliaIdx,
+            int selectedFamilia1Idx,
+            int selectedFamilia2Idx,
             ParametrosEmpresa pParametrosEmpresa)
         {
             InitializeComponent();
@@ -38,7 +39,8 @@ namespace UI.Desktop.Artículos
             this.ListaArticulosFiltrados = ListaArticulosFiltrados;
             this.parametrosEmpresa = pParametrosEmpresa;
             completaCombosBox();
-            this.cbxFiltroFamilia1.SelectedIndex = selectedFamiliaIdx;
+            this.cbxFiltroFamilia1.SelectedIndex = selectedFamilia1Idx;
+            this.cbxFiltroFamilia2.SelectedIndex = selectedFamilia2Idx;
             this.cbxFiltroProveedor.SelectedIndex = selectedProveedorIdx;
          
 
@@ -68,9 +70,6 @@ namespace UI.Desktop.Artículos
 
 
             dgvListado.Columns["Costo"].Visible = false;
-            //dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
-           
-            //dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Codigo proveedor";
             dgvListado.Columns["CodigoArtiProveedor"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvListado.Columns["descripcion"].Width = 280;
             dgvListado.Columns["codigo"].HeaderText = "Código";
@@ -393,6 +392,7 @@ namespace UI.Desktop.Artículos
         {
             tbxFiltro.Text = "";
             cbxFiltroFamilia1.SelectedIndex = -1;
+            cbxFiltroFamilia2.SelectedIndex = -1;
             cbxFiltroProveedor.SelectedIndex = -1;
         }
 

@@ -612,6 +612,7 @@ namespace UI.Desktop.Artículos
         {
             tbxFiltro.Text = "";
             cbxFiltroFamilia1.SelectedIndex = -1;
+            cbxFiltroFamilia2.SelectedIndex = -1;
             cbxFiltroProveedor.SelectedIndex = -1;
         }
 
@@ -619,7 +620,7 @@ namespace UI.Desktop.Artículos
         {
             string searchTerm = tbxFiltro.Text.ToLowerInvariant();
 
-            if (searchTerm == "" && !FiltrandoPorProveedor() && !FiltrandoPorFamilia())
+            if (searchTerm == "" && !FiltrandoPorProveedor() && !FiltrandoPorFamilia1() && !FiltrandoPorFamilia2())
             {
                 RecargarArticulos();
             }
@@ -641,10 +642,17 @@ namespace UI.Desktop.Artículos
                             .ToList();
                     }
 
-                    if (FiltrandoPorFamilia())
+                    if (FiltrandoPorFamilia1())
                     {
                         ListaArticulosFiltrados = ListaArticulosFiltrados
                             .Where(articulo => articulo.Familia1.id == (int)cbxFiltroFamilia1.SelectedValue)
+                            .ToList();
+                    }
+
+                    if (FiltrandoPorFamilia2())
+                    {
+                        ListaArticulosFiltrados = ListaArticulosFiltrados
+                            .Where(articulo => articulo.Familia2.id == (int)cbxFiltroFamilia2.SelectedValue)
                             .ToList();
                     }
 
@@ -707,8 +715,8 @@ namespace UI.Desktop.Artículos
 
         }
 
-        // Determina si actualmente se esta filtrando por familia
-        private bool FiltrandoPorFamilia()
+        // Determina si actualmente se esta filtrando por familia1
+        private bool FiltrandoPorFamilia1()
         {
 
             if (cbxFiltroFamilia1.SelectedIndex != -1)
@@ -722,10 +730,26 @@ namespace UI.Desktop.Artículos
 
         }
 
+        // Determina si actualmente se esta filtrando por familia2
+        private bool FiltrandoPorFamilia2()
+        {
+
+            if (cbxFiltroFamilia2.SelectedIndex != -1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            };
+
+        }
+
+
         // Determina si se esta filtrando por texto, pero No se esta filtrando por proveedor ni familia
         private bool FiltraSoloPorTexto(string searchTerm)
         {
-            if (searchTerm != "" && !FiltrandoPorProveedor() && !FiltrandoPorFamilia())
+            if (searchTerm != "" && !FiltrandoPorProveedor() && !FiltrandoPorFamilia1() && !FiltrandoPorFamilia2())
             {
                 return true;
             }
@@ -744,6 +768,7 @@ namespace UI.Desktop.Artículos
                     proveedores, 
                     cbxFiltroProveedor.SelectedIndex,
                     cbxFiltroFamilia1.SelectedIndex,
+                    cbxFiltroFamilia2.SelectedIndex,
                     parametrosEmpresa);
                 if(frmModificarPrecios.ShowDialog() == DialogResult.Yes)
                 {

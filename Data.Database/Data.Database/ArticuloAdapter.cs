@@ -189,12 +189,10 @@ namespace Data.Database
                         arti.StockMin = (int)drArticulos["stockmin"];
                         arti.Proveedor = (string)drArticulos["marca"];
                         arti.Habilitado = (string)drArticulos["habilitado"];
-                        //arti.FamiliaViejo = drArticulos["familia"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia"]) : (int?)null;
                         arti.Familia1.id = drArticulos["familia1ID"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia1ID"]) : (int?)null;
                         arti.Familia1.Descripcion = drArticulos["familia1Texto"] != DBNull.Value ? Convert.ToString(drArticulos["familia1Texto"]) : (string)null;
                         arti.Familia2.id = drArticulos["familia2ID"] != DBNull.Value ? Convert.ToInt32(drArticulos["familia2ID"]) : (int?)null;
                         arti.Familia2.Descripcion = drArticulos["familia2Texto"] != DBNull.Value ? Convert.ToString(drArticulos["familia2Texto"]) : (string)null;
-                        //arti.RangoEtario = drArticulos["rango_etario"] != DBNull.Value ? Convert.ToInt32(drArticulos["rango_etario"]) : (int?)null;
                         arti.Costo = drArticulos["costo"] != DBNull.Value ? Convert.ToDecimal(drArticulos["costo"]) : (decimal?)null;
                         arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
                         arti.CampoPersonalizado1 = drArticulos["CampoPersonalizado1"] != DBNull.Value ? Convert.ToString(drArticulos["CampoPersonalizado1"]) : (string)null;
