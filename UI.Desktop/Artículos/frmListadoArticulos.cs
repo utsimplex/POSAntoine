@@ -124,7 +124,7 @@ namespace UI.Desktop.Artículos
         {
             // CBX FAMILIA 1
             familias1 = Datos_FamiliaAdapter.GetFamilias("Familia1", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
-            if (familias1 != null && familias1.Count != 0)
+            if (parametrosEmpresa.FamiliaNombre1.Length>0 && familias1 != null && familias1.Count != 0)
             {
                 //familias.Add(new Familia { Activo = true,Descripcion= "Seleccione Familia", id=0 });
                 cbxFiltroFamilia1.DataSource = familias1;
@@ -141,7 +141,7 @@ namespace UI.Desktop.Artículos
 
             // CBX FAMILIA 2
             familias2 = Datos_FamiliaAdapter.GetFamilias("Familia2", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
-            if (familias2 != null && familias2.Count != 0)
+            if (parametrosEmpresa.FamiliaNombre2.Length > 0 &familias2 != null && familias2.Count != 0)
             {
                 //familias.Add(new Familia { Activo = true,Descripcion= "Seleccione Familia", id=0 });
                 cbxFiltroFamilia2.DataSource = familias2;
@@ -737,7 +737,8 @@ namespace UI.Desktop.Artículos
                 frmModificarPrecios frmModificarPrecios = new frmModificarPrecios(
                     ListaArticulos, 
                     ListaArticulosFiltrados, 
-                    familias1, 
+                    familias1,
+                    familias2,
                     proveedores, 
                     cbxFiltroProveedor.SelectedIndex,
                     cbxFiltroFamilia1.SelectedIndex,

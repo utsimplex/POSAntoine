@@ -52,6 +52,8 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnActualizarPrecios = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.cbxFiltroFamilia2 = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -65,12 +67,13 @@
             this.groupBox4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbxFiltro
             // 
             this.tbxFiltro.Location = new System.Drawing.Point(120, 15);
-            this.tbxFiltro.Size = new System.Drawing.Size(187, 20);
+            this.tbxFiltro.Size = new System.Drawing.Size(169, 20);
             this.tbxFiltro.TextChanged += new System.EventHandler(this.tbxFiltro_TextChanged_2);
             // 
             // groupBox2
@@ -80,7 +83,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Location = new System.Drawing.Point(5, 2);
-            this.groupBox2.Size = new System.Drawing.Size(885, 46);
+            this.groupBox2.Size = new System.Drawing.Size(1048, 46);
             this.groupBox2.Text = "Búsqueda";
             this.groupBox2.Controls.SetChildIndex(this.panel1, 0);
             this.groupBox2.Controls.SetChildIndex(this.tbxFiltro, 0);
@@ -91,7 +94,7 @@
             // 
             this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.btnActualizarPrecios);
-            this.groupBox1.Location = new System.Drawing.Point(978, 2);
+            this.groupBox1.Location = new System.Drawing.Point(1059, 2);
             this.groupBox1.Size = new System.Drawing.Size(264, 470);
             this.groupBox1.Text = "Modificación de precios";
             this.groupBox1.Controls.SetChildIndex(this.btnSalir, 0);
@@ -140,19 +143,20 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(312, 10);
+            this.panel1.Location = new System.Drawing.Point(295, 9);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(420, 30);
+            this.panel1.Size = new System.Drawing.Size(563, 30);
             this.panel1.TabIndex = 33;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.cbxFiltroFamilia1);
-            this.panel3.Location = new System.Drawing.Point(210, 2);
+            this.panel3.Location = new System.Drawing.Point(176, 1);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(202, 27);
+            this.panel3.Size = new System.Drawing.Size(181, 27);
             this.panel3.TabIndex = 35;
             // 
             // cbxFiltroFamilia1
@@ -161,15 +165,15 @@
             this.cbxFiltroFamilia1.FormattingEnabled = true;
             this.cbxFiltroFamilia1.Location = new System.Drawing.Point(3, 3);
             this.cbxFiltroFamilia1.Name = "cbxFiltroFamilia1";
-            this.cbxFiltroFamilia1.Size = new System.Drawing.Size(194, 21);
+            this.cbxFiltroFamilia1.Size = new System.Drawing.Size(168, 21);
             this.cbxFiltroFamilia1.TabIndex = 31;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.cbxFiltroProveedor);
-            this.panel2.Location = new System.Drawing.Point(3, 2);
+            this.panel2.Location = new System.Drawing.Point(6, 1);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(201, 27);
+            this.panel2.Size = new System.Drawing.Size(167, 27);
             this.panel2.TabIndex = 33;
             // 
             // cbxFiltroProveedor
@@ -178,7 +182,7 @@
             this.cbxFiltroProveedor.FormattingEnabled = true;
             this.cbxFiltroProveedor.Location = new System.Drawing.Point(4, 3);
             this.cbxFiltroProveedor.Name = "cbxFiltroProveedor";
-            this.cbxFiltroProveedor.Size = new System.Drawing.Size(189, 21);
+            this.cbxFiltroProveedor.Size = new System.Drawing.Size(155, 21);
             this.cbxFiltroProveedor.TabIndex = 30;
             // 
             // label1
@@ -193,7 +197,7 @@
             // btnMostrarTodos
             // 
             this.btnMostrarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMostrarTodos.Location = new System.Drawing.Point(734, 9);
+            this.btnMostrarTodos.Location = new System.Drawing.Point(897, 9);
             this.btnMostrarTodos.Name = "btnMostrarTodos";
             this.btnMostrarTodos.Size = new System.Drawing.Size(136, 30);
             this.btnMostrarTodos.TabIndex = 35;
@@ -370,11 +374,28 @@
             this.btnActualizarPrecios.UseVisualStyleBackColor = true;
             this.btnActualizarPrecios.Click += new System.EventHandler(this.btnActualizarPrecios_Click);
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.cbxFiltroFamilia2);
+            this.panel6.Location = new System.Drawing.Point(363, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(181, 27);
+            this.panel6.TabIndex = 36;
+            // 
+            // cbxFiltroFamilia2
+            // 
+            this.cbxFiltroFamilia2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFiltroFamilia2.FormattingEnabled = true;
+            this.cbxFiltroFamilia2.Location = new System.Drawing.Point(3, 3);
+            this.cbxFiltroFamilia2.Name = "cbxFiltroFamilia2";
+            this.cbxFiltroFamilia2.Size = new System.Drawing.Size(168, 21);
+            this.cbxFiltroFamilia2.TabIndex = 31;
+            // 
             // frmModificarPrecios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1254, 484);
+            this.ClientSize = new System.Drawing.Size(1335, 484);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmModificarPrecios";
             this.Text = "Actualizar precios";
@@ -396,6 +417,7 @@
             this.panel5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -424,5 +446,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox cbRedondear;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.ComboBox cbxFiltroFamilia2;
     }
 }

@@ -22,7 +22,8 @@ namespace UI.Desktop.Artículos
         public frmModificarPrecios(
             BindingList<Entidades.Articulo> ListaArticulos, 
             List<Entidades.Articulo> ListaArticulosFiltrados, 
-            List<Familia> familias,
+            List<Familia> familias1,
+            List<Familia> familias2,
             List<Proveedor> proveedores,
             int selectedProveedorIdx,
             int selectedFamiliaIdx,
@@ -30,14 +31,15 @@ namespace UI.Desktop.Artículos
         {
             InitializeComponent();
             this.dgvListado.CellFormatting += dgvListado_CellFormatting;
-            this.familias = familias;
+            this.familias1 = familias1;
+            this.familias2 = familias2;
             this.proveedores = proveedores;
             this.ListaArticulos = ListaArticulos;
             this.ListaArticulosFiltrados = ListaArticulosFiltrados;
+            this.parametrosEmpresa = pParametrosEmpresa;
             completaCombosBox();
             this.cbxFiltroFamilia1.SelectedIndex = selectedFamiliaIdx;
             this.cbxFiltroProveedor.SelectedIndex = selectedProveedorIdx;
-            this.parametrosEmpresa = pParametrosEmpresa;
          
 
 
@@ -108,7 +110,9 @@ namespace UI.Desktop.Artículos
         
       
         //Lista de Familias
-        List<Familia> familias = new List<Familia>();
+        List<Familia> familias1 = new List<Familia>();
+        List<Familia> familias2 = new List<Familia>();
+
         //Lista de Proveedores
         List<Proveedor> proveedores = new List<Proveedor>();
         
@@ -118,7 +122,7 @@ namespace UI.Desktop.Artículos
         int selectedProveedorIdx;
         int selectedFamiliaIdx;
         string mensajeConfirmacion;
-        private ParametrosEmpresa parametrosEmpresa;
+        private ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
 
         // Fisica cuantica PARA PONERLE PLACEHOLDER AL CBX
         private const int CB_SETCUEBANNER = 0x1703;
@@ -130,15 +134,35 @@ namespace UI.Desktop.Artículos
 
 
         private void completaCombosBox()
-        {            
-            if (familias != null)
+        {        
+            // CBX FAMILIA 1
+            if (parametrosEmpresa.FamiliaNombre1.Length>0 && familias1 != null && familias1.Count != 0)
             {
-                cbxFiltroFamilia1.DataSource = familias;
+                cbxFiltroFamilia1.DataSource = familias1;
                 cbxFiltroFamilia1.DisplayMember = "descripcion";
                 cbxFiltroFamilia1.ValueMember = "id";
                 cbxFiltroFamilia1.SelectedIndex = -1;
                 cbxFiltroFamilia1.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
 
+            }
+            else
+            {
+                this.cbxFiltroFamilia1.Visible = false;
+            }
+
+            // CBX FAMILIA 2
+            if (parametrosEmpresa.FamiliaNombre2.Length > 0 && familias2 != null && familias2.Count != 0)
+            {
+                cbxFiltroFamilia2.DataSource = familias2;
+                cbxFiltroFamilia2.DisplayMember = "descripcion";
+                cbxFiltroFamilia2.ValueMember = "id";
+                cbxFiltroFamilia2.SelectedIndex = -1;
+                cbxFiltroFamilia2.SelectedValueChanged += cbxFiltroFamilia_SelectedValueChanged;
+
+            }
+            else
+            {
+                this.cbxFiltroFamilia2.Visible = false;
             }
 
             if (proveedores != null)
@@ -155,7 +179,7 @@ namespace UI.Desktop.Artículos
 
             SendMessage(this.cbxFiltroProveedor.Handle, CB_SETCUEBANNER, 0, "Filtrar por proveedor...");
             SendMessage(this.cbxFiltroFamilia1.Handle, CB_SETCUEBANNER, 0, placeholderFamilia1);
-            //SendMessage(this.cbxFiltroFamilia2.Handle, CB_SETCUEBANNER, 0, placeholderFamilia2);
+            SendMessage(this.cbxFiltroFamilia2.Handle, CB_SETCUEBANNER, 0, placeholderFamilia2);
 
         }
 
