@@ -141,7 +141,7 @@ namespace UI.Desktop.Artículos
 
             // CBX FAMILIA 2
             familias2 = Datos_FamiliaAdapter.GetFamilias("Familia2", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
-            if (parametrosEmpresa.FamiliaNombre2.Length > 0 &familias2 != null && familias2.Count != 0)
+            if (parametrosEmpresa.FamiliaNombre2?.Length > 0 &familias2 != null && familias2.Count != 0)
             {
                 //familias.Add(new Familia { Activo = true,Descripcion= "Seleccione Familia", id=0 });
                 cbxFiltroFamilia2.DataSource = familias2;
@@ -190,21 +190,21 @@ namespace UI.Desktop.Artículos
 
             //this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
 
-            this.dgvListado.Columns["Familia1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre1.Trim());
+            this.dgvListado.Columns["Familia1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre1);
             this.dgvListado.Columns["Familia1"].HeaderText = parametrosEmpresa.FamiliaNombre1;
 
-            this.dgvListado.Columns["Familia2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre2.Trim());
+            this.dgvListado.Columns["Familia2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre2);
             this.dgvListado.Columns["Familia2"].HeaderText = parametrosEmpresa.FamiliaNombre2;
 
             this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
             dgvListado.Size = new Size(968, 490);
             this.dgvListado.Location = new Point(7, 56);
 
-            this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1.Trim());
-            this.dgvListado.Columns["CampoPersonalizado1"].HeaderText= parametrosEmpresa.CampoPersonalizadoArticulo1.Trim();
+            this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1);
+            this.dgvListado.Columns["CampoPersonalizado1"].HeaderText= parametrosEmpresa.CampoPersonalizadoArticulo1?.Trim();
 
-            this.dgvListado.Columns["CampoPersonalizado2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2.Trim());
-            this.dgvListado.Columns["CampoPersonalizado2"].HeaderText = parametrosEmpresa.CampoPersonalizadoArticulo2.Trim();
+            this.dgvListado.Columns["CampoPersonalizado2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2);
+            this.dgvListado.Columns["CampoPersonalizado2"].HeaderText = parametrosEmpresa.CampoPersonalizadoArticulo2?.Trim();
 
 
         }

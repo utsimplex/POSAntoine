@@ -99,9 +99,9 @@ namespace UI.Desktop.Artículos
                 lblCampoPersonalizado1.Visible = false;
             }
 
-            if (!String.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2.Trim()))
+            if (!String.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2))
             {
-                lblCampoPersonalizado2.Text = parametrosEmpresa.CampoPersonalizadoArticulo2;
+                lblCampoPersonalizado2.Text = parametrosEmpresa.CampoPersonalizadoArticulo2.Trim();
                 txtCampoPersonalizado2.Visible = true;
                 lblCampoPersonalizado2.Visible = true;
             }
@@ -138,7 +138,7 @@ namespace UI.Desktop.Artículos
             cbxFamilia2.Items.Clear();
             listFamilias2 = Datos_FamiliaAdapter.GetFamilias("Familia2", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
             this.lblFamilia2Nombre.Text = parametrosEmpresa.FamiliaNombre2;
-            if(parametrosEmpresa.FamiliaNombre2.Length > 0)
+            if(parametrosEmpresa.FamiliaNombre2?.Length > 0)
             {
                 cbxFamilia2.Visible = true;
                 if (parametrosEmpresa.FamiliaNombre2.Length > 0 && listFamilias2 != null && listFamilias2.Count != 0)
@@ -241,6 +241,7 @@ namespace UI.Desktop.Artículos
                 artiToEdit.Stock = Convert.ToInt32(txtStock.Text);
                 artiToEdit.Familia1.id = (int)cbxFamilia1.SelectedValue;
                 artiToEdit.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
+                    if(cbxFamilia2.Visible)
                 artiToEdit.Familia2.id = (int)cbxFamilia2.SelectedValue;
                 artiToEdit.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
                     artiToEdit.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
@@ -334,7 +335,7 @@ namespace UI.Desktop.Artículos
 
             cbxFamilia1.SelectedValue = (int)artiToEdit.Familia1.id;
             //cbxFamilia.SelectedValue = listFamilias.First(familia => familia.id == artiToEdit.Familia).id;
-
+            if(artiToEdit.Familia2.id !=null)
             cbxFamilia2.SelectedValue = (int)artiToEdit.Familia2.id;
                 //!= null ? (ArticuloConstantes.RangoEtario)artiToEdit.RangoEtario : ArticuloConstantes.RangoEtario.Baby;
             

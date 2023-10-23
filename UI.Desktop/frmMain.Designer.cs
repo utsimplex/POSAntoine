@@ -36,6 +36,8 @@
             this.configuracionesGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditarMiUsuario = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuracionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parametrosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiaDeSeguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.artículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,8 +91,6 @@
             this.btnCajaExtraer = new System.Windows.Forms.Button();
             this.btnCajaIngresar = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
-            this.configuracionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.parametrosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msnPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -155,6 +155,21 @@
             this.mnuEditarMiUsuario.Size = new System.Drawing.Size(163, 22);
             this.mnuEditarMiUsuario.Text = "Editar mi usuario";
             this.mnuEditarMiUsuario.Click += new System.EventHandler(this.mnuEditarMiUsuario_Click);
+            // 
+            // configuracionesDeEmpresaToolStripMenuItem
+            // 
+            this.configuracionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.parametrosDeLaEmpresaToolStripMenuItem});
+            this.configuracionesDeEmpresaToolStripMenuItem.Name = "configuracionesDeEmpresaToolStripMenuItem";
+            this.configuracionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.configuracionesDeEmpresaToolStripMenuItem.Text = "Configuraciones de Empresa";
+            // 
+            // parametrosDeLaEmpresaToolStripMenuItem
+            // 
+            this.parametrosDeLaEmpresaToolStripMenuItem.Name = "parametrosDeLaEmpresaToolStripMenuItem";
+            this.parametrosDeLaEmpresaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.parametrosDeLaEmpresaToolStripMenuItem.Text = "Parametros de la Empresa";
+            this.parametrosDeLaEmpresaToolStripMenuItem.Click += new System.EventHandler(this.parametrosDeLaEmpresaToolStripMenuItem_Click);
             // 
             // seguridadToolStripMenuItem
             // 
@@ -723,32 +738,15 @@
             this.btnCerrarCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCerrarCaja.UseVisualStyleBackColor = true;
             this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
-         
-            // 
-            // configuracionesDeEmpresaToolStripMenuItem
-            // 
-            this.configuracionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.parametrosDeLaEmpresaToolStripMenuItem});
-            this.configuracionesDeEmpresaToolStripMenuItem.Name = "configuracionesDeEmpresaToolStripMenuItem";
-            this.configuracionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.configuracionesDeEmpresaToolStripMenuItem.Text = "Configuraciones de Empresa";
-            // 
-            // parametrosDeLaEmpresaToolStripMenuItem
-            // 
-            this.parametrosDeLaEmpresaToolStripMenuItem.Name = "parametrosDeLaEmpresaToolStripMenuItem";
-            this.parametrosDeLaEmpresaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.parametrosDeLaEmpresaToolStripMenuItem.Text = "Parametros de la Empresa";
-            this.parametrosDeLaEmpresaToolStripMenuItem.Click += new System.EventHandler(this.parametrosDeLaEmpresaToolStripMenuItem_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack;
+            this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1107, 673);
-           
             this.Controls.Add(this.scntCaja);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.groupBox1);
