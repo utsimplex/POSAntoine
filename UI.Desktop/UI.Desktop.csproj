@@ -230,11 +230,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Artículos\frmActualizarCodigosDeBarra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Artículos\frmActualizarCodigosDeBarra.Designer.cs">
+      <DependentUpon>frmActualizarCodigosDeBarra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Artículos\frmArticuloABM.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Artículos\frmArticuloABM.Designer.cs">
       <DependentUpon>frmArticuloABM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBASEListaArticulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBASEListaArticulos.Designer.cs">
+      <DependentUpon>frmBASEListaArticulos.cs</DependentUpon>
     </Compile>
     <Compile Include="Artículos\frmConsultaRapidaStockPrecio.cs">
       <SubType>Form</SubType>
@@ -426,8 +438,14 @@
     <Compile Include="Ventas\PrinterDrawing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Artículos\frmActualizarCodigosDeBarra.resx">
+      <DependentUpon>frmActualizarCodigosDeBarra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Artículos\frmArticuloABM.resx">
       <DependentUpon>frmArticuloABM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBASEListaArticulos.resx">
+      <DependentUpon>frmBASEListaArticulos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Artículos\frmConsultaRapidaStockPrecio.resx">
       <DependentUpon>frmConsultaRapidaStockPrecio.cs</DependentUpon>
@@ -731,6 +749,8 @@
     <None Include="Resources\3319633_arrow_business_graph_coin_dollar.png" />
     <None Include="Resources\3319635_income_payment_finance_money_profit.png" />
     <None Include="Resources\folder_add_24.png" />
+    <None Include="Resources\barcodescanner1.png" />
+    <None Include="Resources\barcodescannersmall.png" />
     <Content Include="Resources\logoColor.jpg" />
     <Content Include="Resources\Persona.JPG" />
     <None Include="Resources\splash2blue.bmp" />

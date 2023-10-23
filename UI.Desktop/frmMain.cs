@@ -1098,5 +1098,12 @@ namespace UI.Desktop
             Parametros.frmParametros frmParametros =   new Parametros.frmParametros();
             frmParametros.ShowDialog();
         }
+
+        private void cargaDeCódigosDeBarraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // abrir formulario de carga de codigos de barra
+            Artículos.frmActualizarCodigosDeBarra frmCargaCodigosBarra = new UI.Desktop.Artículos.frmActualizarCodigosDeBarra();
+            frmCargaCodigosBarra.ShowDialog();
+        }
     }
 }

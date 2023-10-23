@@ -163,11 +163,14 @@
   <data name="Key_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Key_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="document_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="logo chico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo chico.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="forward32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\forward32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="barcodescanner1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\barcodescanner1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="User_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,6 +214,9 @@
   <data name="fondoTableVeggie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fondoTableVeggie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder_add_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_add_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="box_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\box_48.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -226,8 +232,8 @@
   <data name="Search_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Search_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="splashScreenGrande" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\splashScreenGrande.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="fondoAntoineBlack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fondoAntoineBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -247,10 +253,10 @@
   <data name="back32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\back32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="splashScreenGrande" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\splashScreenGrande.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="forward32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\forward32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_add_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_add_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="barcodescannersmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\barcodescannersmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
