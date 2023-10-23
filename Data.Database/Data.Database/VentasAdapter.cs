@@ -296,8 +296,8 @@ namespace Data.Database
                     VentaBuscada.TipoOperacion = (string)drVentas["tipooperacion"];
                     VentaBuscada.Pagado = (bool)drVentas["pagado"];
                     VentaBuscada.MontoPagado = (decimal)drVentas["monto_pagado"];
-                    VentaBuscada.Neto = Convert.ToDouble(drVentas["Neto"]);
-                    VentaBuscada.Iva = Convert.ToDouble(drVentas["Iva"]);
+                    VentaBuscada.Neto = Math.Round(Convert.ToDouble(drVentas["Neto"]),2);
+                    VentaBuscada.Iva = Math.Round(Convert.ToDouble(drVentas["Iva"]),2);
                     //FALTAN TRAER DATOS FISCALES
                     VentaBuscada.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
                     VentaBuscada.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;

@@ -115,7 +115,7 @@ namespace Data.Database
                 Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
                 Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
                 Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
-                Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
+                Comando.Parameters["@FAMILIA2"].Value = arti.Familia2?.id!=null? arti.Familia2.id:0;
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
                 Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO1", SqlDbType.NVarChar));
