@@ -60,9 +60,16 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
             this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
+            
 
         }
 
+        protected internal void OrdenarColumnas(string columna1, string columna2, string columna3)
+        {
+            dgvListado.Columns[columna1].DisplayIndex = 0;
+            dgvListado.Columns[columna2].DisplayIndex = 1;
+            dgvListado.Columns[columna3].DisplayIndex = 2;
+        }
 
         public void dgvListado_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {

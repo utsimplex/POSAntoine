@@ -30,7 +30,8 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
             this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
-           
+            this.dgvListado.Columns["codigobarras"].HeaderText = "Código de barras";
+
 
 
 
@@ -52,6 +53,9 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["stockMin"].Width = 45;
             this.dgvListado.Columns["precio"].Width = 75;
             this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
+
+            this.dgvListado.Columns["codigobarras"].HeaderText = "Código de barras";
+            this.dgvListado.Columns["codigobarras"].Width = 120;
             rol = usr.Rol;
 
 
@@ -197,7 +201,7 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["Familia2"].HeaderText = parametrosEmpresa.FamiliaNombre2;
 
             this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
-            dgvListado.Size = new Size(968, 490);
+            dgvListado.Size = new Size(1040, 490);
             this.dgvListado.Location = new Point(7, 56);
 
             this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1);

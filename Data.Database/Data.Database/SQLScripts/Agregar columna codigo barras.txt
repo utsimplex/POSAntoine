@@ -1,0 +1,1 @@
+﻿ALTER TABLE articulos ADD codigo_barras NVARCHAR(100) NULL;

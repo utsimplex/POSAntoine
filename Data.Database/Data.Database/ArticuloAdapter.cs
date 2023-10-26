@@ -21,7 +21,7 @@ namespace Data.Database
             try
             {
 
-                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado], [familia], [familia2], [codigo_arti_proveedor], [campopersonalizado1], [campopersonalizado2], [costo]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO, @FAMILIA, @FAMILIA2, @CODIGO_ARTI_PROVEEDOR, @CAMPOPERSONALIZADO1, @CAMPOPERSONALIZADO2, @COSTO)";
+                Comando.CommandText = "INSERT INTO [Articulos] ([codigo], [descripcion], [stock], [stockmin], [precio], [marca], [habilitado], [familia], [familia2], [codigo_barras], [codigo_arti_proveedor], [campopersonalizado1], [campopersonalizado2], [costo]) VALUES (@CODIGO, @DESCRIPCION, @STOCK, @STOCKMIN, @PRECIO, @MARCA, @HABILITADO, @FAMILIA, @FAMILIA2, @CODIGO_BARRAS, @CODIGO_ARTI_PROVEEDOR, @CAMPOPERSONALIZADO1, @CAMPOPERSONALIZADO2, @COSTO)";
                 Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                 Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -40,6 +40,8 @@ namespace Data.Database
                 Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
                 Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
                 Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
+                Comando.Parameters.Add(new SqlParameter("@CODIGO_BARRAS", SqlDbType.NVarChar));
+                Comando.Parameters["@CODIGO_BARRAS"].Value = String.IsNullOrEmpty(arti.CodigoBarras) ? string.Empty : arti.CodigoBarras;
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
                 Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO1", SqlDbType.NVarChar));
@@ -97,7 +99,7 @@ namespace Data.Database
                Comando.Connection = Con;
                Comando.CommandType = CommandType.Text;
                  
-               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO, [familia]=@FAMILIA, [familia2]=@FAMILIA2, [codigo_arti_proveedor]=@CODIGO_ARTI_PROVEEDOR, [CampoPersonalizado1]=@CAMPOPERSONALIZADO1, [campopersonalizado2]=@CAMPOPERSONALIZADO2, [costo]=@COSTO WHERE (([codigo] = @CODIGO))";
+               Comando.CommandText = "UPDATE [Articulos] SET [descripcion] = @DESCRIPCION, [stock] = @STOCK, [stockmin] = @STOCKMIN, [precio] = @PRECIO, [marca] = @MARCA, [habilitado]=@HABILITADO, [familia]=@FAMILIA, [familia2]=@FAMILIA2, [codigo_barras]=@CODIGO_BARRAS, [codigo_arti_proveedor]=@CODIGO_ARTI_PROVEEDOR, [CampoPersonalizado1]=@CAMPOPERSONALIZADO1, [campopersonalizado2]=@CAMPOPERSONALIZADO2, [costo]=@COSTO WHERE (([codigo] = @CODIGO))";
                Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
                Comando.Parameters["@CODIGO"].Value = arti.Codigo;
                Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
@@ -112,18 +114,20 @@ namespace Data.Database
                Comando.Parameters["@MARCA"].Value = arti.Proveedor;
                Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
                Comando.Parameters["@HABILITADO"].Value = arti.Habilitado;
-                Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
-                Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
-                Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
-                Comando.Parameters["@FAMILIA2"].Value = arti.Familia2?.id!=null? arti.Familia2.id:0;
-                Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
-                Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
-                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO1", SqlDbType.NVarChar));
-                Comando.Parameters["@CAMPOPERSONALIZADO1"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado1) ? string.Empty : arti.CampoPersonalizado1;
-                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO2", SqlDbType.NVarChar));
-                Comando.Parameters["@CAMPOPERSONALIZADO2"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado2) ? string.Empty : arti.CampoPersonalizado2;
-                Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
-                Comando.Parameters["@COSTO"].Value = arti.Costo;
+               Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+               Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
+               Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+               Comando.Parameters["@FAMILIA2"].Value = arti.Familia2?.id!=null? arti.Familia2.id:0;
+               Comando.Parameters.Add(new SqlParameter("@CODIGO_BARRAS", SqlDbType.NVarChar));
+               Comando.Parameters["@CODIGO_BARRAS"].Value = String.IsNullOrEmpty(arti.CodigoBarras) ? string.Empty : arti.CodigoBarras;
+               Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
+               Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
+               Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO1", SqlDbType.NVarChar));
+               Comando.Parameters["@CAMPOPERSONALIZADO1"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado1) ? string.Empty : arti.CampoPersonalizado1;
+               Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO2", SqlDbType.NVarChar));
+               Comando.Parameters["@CAMPOPERSONALIZADO2"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado2) ? string.Empty : arti.CampoPersonalizado2;
+               Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
+               Comando.Parameters["@COSTO"].Value = arti.Costo;
 
             //Ejecuta el comando INSERT
             Comando.Connection.Open();
@@ -180,7 +184,7 @@ namespace Data.Database
                  SqlConnection Con = CrearConexion();
 
                  // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCommand Comando = new SqlCommand("SELECT codigo, articulos.descripcion, stock, stockmin, precio, marca, habilitado, Familia as 'familia1ID', familia.DESCRIPCION as 'familia1Texto', Familia2 as'familia2ID', famdos.DESCRIPCION as 'familia2Texto', CODIGO_ARTI_PROVEEDOR, Costo, CampoPersonalizado1, CampoPersonalizado2 FROM Articulos LEFT JOIN FAMILIA ON familia.id = articulos.Familia LEFT JOIN FAMILIA_DOS famdos ON famdos.ID = articulos.Familia2 ORDER BY articulos.descripcion", Con);
+                 SqlCommand Comando = new SqlCommand("SELECT codigo, articulos.descripcion, stock, stockmin, precio, marca, habilitado, Familia as 'familia1ID', familia.DESCRIPCION as 'familia1Texto', Familia2 as'familia2ID', famdos.DESCRIPCION as 'familia2Texto', codigo_barras, CODIGO_ARTI_PROVEEDOR, Costo, CampoPersonalizado1, CampoPersonalizado2 FROM Articulos LEFT JOIN FAMILIA ON familia.id = articulos.Familia LEFT JOIN FAMILIA_DOS famdos ON famdos.ID = articulos.Familia2 ORDER BY articulos.descripcion", Con);
                  try
                  {
                      Comando.Connection.Open();
@@ -205,7 +209,7 @@ namespace Data.Database
                         arti.CodigoArtiProveedor = drArticulos["codigo_arti_proveedor"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_arti_proveedor"]) : (string)null;
                         arti.CampoPersonalizado1 = drArticulos["CampoPersonalizado1"] != DBNull.Value ? Convert.ToString(drArticulos["CampoPersonalizado1"]) : (string)null;
                         arti.CampoPersonalizado2 = drArticulos["CampoPersonalizado2"] != DBNull.Value ? Convert.ToString(drArticulos["CampoPersonalizado2"]) : (string)null;
-
+                        arti.CodigoBarras = drArticulos["codigo_barras"] != DBNull.Value ? Convert.ToString(drArticulos["codigo_barras"]) : (string)null;
 
                     //if (arti.Habilitado == "Si")
                     //{

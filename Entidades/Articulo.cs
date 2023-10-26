@@ -91,6 +91,7 @@ namespace Entidades
             set { _CampoPersonalizado2 = value; }
         }
 
+
         public Familia Familia1 { get; set; }
 
         public Familia Familia2 { get; set; }
@@ -99,10 +100,11 @@ namespace Entidades
 
         public decimal? Costo { get; set; }
 
-              
-      
 
-    
-  
+        public string CodigoBarras { get; set; }
+
+
+
+
     }
 }

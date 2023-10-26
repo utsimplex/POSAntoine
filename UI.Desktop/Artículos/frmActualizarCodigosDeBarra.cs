@@ -15,6 +15,9 @@ namespace UI.Desktop.Artículos
         public frmActualizarCodigosDeBarra()
         {
             InitializeComponent();
+            this.OrdenarColumnas("codigo", "descripcion", "codigobarras");
+
+
         }
 
         private void btnCargarCodigos_Click(object sender, EventArgs e)

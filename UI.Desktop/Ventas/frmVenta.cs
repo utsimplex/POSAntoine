@@ -697,9 +697,9 @@ namespace UI.Desktop.Ventas
 
                     ventaLocal.Total = Convert.ToDecimal(txtTotal.Text);
                     double Neto = Math.Round(Convert.ToDouble(txtTotal.Text) / 1.21,2);
-                    ventaLocal.Neto = Convert.ToDouble(Neto.ToString("c"));
+                    ventaLocal.Neto = Convert.ToDouble(Neto);
                     double Iva = Math.Round(Convert.ToDouble(ventaLocal.Total) - Neto,2);
-                    ventaLocal.Iva = Convert.ToDouble(Iva.ToString("c"));
+                    ventaLocal.Iva = Convert.ToDouble(Iva.ToString());
 
                     //TO-DO:FIX ON CUENTAS CORRIENTES
                     if (formularioConfirmacion.cuentaCorriente)

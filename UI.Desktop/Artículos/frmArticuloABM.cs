@@ -189,6 +189,7 @@ namespace UI.Desktop.Artículos
                         Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
                         Articulo.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
                         Articulo.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();
+                        Articulo.CodigoBarras = txtCodigoBarras.Text.Trim();
                         /* NO UTILIZADO, REVISAR //////////////////////////////////////////////
                         // Si tiene proveedor genero nueva instancia y la agrego a datos
                         if (cbxProveedor.SelectedText != "")
@@ -247,6 +248,8 @@ namespace UI.Desktop.Artículos
                     artiToEdit.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
                     artiToEdit.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();
 
+                    artiToEdit.CodigoBarras = txtCodigoBarras.Text.Trim();
+
                     if (cbxProveedor.SelectedItem != null)
                 {
                 artiToEdit.Proveedor = cbxProveedor.SelectedItem.ToString();
@@ -285,15 +288,11 @@ namespace UI.Desktop.Artículos
             this.cbxProveedor.DataSource = Datos_ProveedorAdapter.GetListadoNombres();
             if (cbxProveedor.Items.Count == 0)
             {
-                lblNoHayProveedores.Visible = true;
                 cbxProveedor.Visible = false;
                 MessageBox.Show("No es posible añadir artículos cuando no hay Proveedores cargados. Diríjase al módulo de Proveedores para ingresar al menos 1 proveedor.", "Imposible añadir Artículo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.Abort;
             }
-            else
-            {
-                lblNoHayProveedores.Visible = false;
-            }
+           
             this.cbxProveedor.SelectedIndex = -1;
 
         }
@@ -320,7 +319,6 @@ namespace UI.Desktop.Artículos
             {
                 MessageBox.Show("No hay Proveedores cargados. Se recomienda añadirlos al módulo de Proveedores antes de dar de alta o modificar un artículo", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cbxProveedor.Visible = false;
-                lblNoHayProveedores.Visible = true;
 
             }
 
