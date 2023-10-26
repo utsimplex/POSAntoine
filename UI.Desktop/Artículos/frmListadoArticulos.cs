@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Data.Database;
 using Entidades;
@@ -306,6 +307,13 @@ namespace UI.Desktop.Artículos
         //Seleccionar artículo e Ingresar Cantidad
         private void SeleccionarArticulo()
         {
+            if(!(this.dgvListado.SelectedRows.Count > 0))
+            {
+                return;
+            }
+
+
+
             Artículos.frmIngresarCantidad formIngreseCantidad = new frmIngresarCantidad(dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString() + " - " + dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString());
 
             //Ingreso la cantidad a agregar
@@ -540,7 +548,10 @@ namespace UI.Desktop.Artículos
 
                 case Keys.Enter:
                     if (this.ModoForm == TipoForm.SeleccionDeArticulo)
-                    { SeleccionarArticulo(); }
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        SeleccionarArticulo(); 
+                    }
 
                     break;
 
@@ -691,6 +702,7 @@ namespace UI.Desktop.Artículos
                      || a.Descripcion.ToLowerInvariant().Contains(searchTerm)
                      || a.Proveedor.ToLowerInvariant().Contains(searchTerm)
                      || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTerm)
+                                        || a.CodigoBarras != null && a.CodigoBarras.ToLowerInvariant().Contains(searchTerm)
                ).ToList();
         }
 

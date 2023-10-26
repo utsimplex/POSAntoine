@@ -143,7 +143,7 @@ namespace UI.Desktop.Artículos
         }
 
 
-        private void ActualizarLista()
+        protected internal void ActualizarLista()
         {
             ListaArticulos = DatosArticuloAdapter.GetAll();
             ListaArticulosFiltrados = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
@@ -258,6 +258,7 @@ namespace UI.Desktop.Artículos
                      || a.Descripcion.ToLowerInvariant().Contains(searchTerm)
                      || a.Proveedor.ToLowerInvariant().Contains(searchTerm)
                      || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTerm)
+                     || a.CodigoBarras.Contains(searchTerm)
                ).ToList();
         }
 

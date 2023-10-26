@@ -118,54 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnCancelar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAABD9JREFUSEu1
-        ldlPk0EUxXlyX6rRIEituxgE677vC3Hf960m+jf4YOKz+g+YuDXxyX3DtYW2tN8CWPhKi5q4JWCUaqKR
-        kOjj8dxp+9FPUPTBm0xoh+nv3Dn3zkwBgP86HHGvsND1pLTUiixZAn72Zad7jTtFRT5twwY8Kiuz+NmV
-        nXYKCPxpebn18fx5fLpyBcbmzbg7alSvIgK3jh9H2u/H61On8GDSJOt2VsQWyIe3X7iAxt270XzsGKKr
-        V/9RhCCfuWMH0pcvI3nwIOJMKr5rF6pEpLjYZQvkwxu2bIGxYgXqKiuROHoUtfwsWWZWdoXAje3bkb50
-        CckDB6DPmqVGfONGxHfuVCK2QD0nxJZn27YpuLF8OfSlS2GuWgXr8GFEli1ziDC7DPziRaT274c+c2Zm
-        zJgBc+5cNHOuevZs8rss8plbt8Ly+WCuXKng+qJF0BYuhEG4xQzDnBOwA75vHwyv1x4mRSwmqZFxi+ts
-        AQnxWl+3DtahQzAIE7g2fz40ZmQsXowERWrXroVBgILv3ZuBTp+uRh3hCSap0YFbo0er3ToEJEREI6SJ
-        mekiQLg+Z47y1uT3JMXbz51Di8DLyqBPngyDw5w6FQkmp3O3ObhENwEJ1dNr1qCJnaTPm5cpHrOLTpyI
-        6IQJ0KdMQc2gQQgNHozIkCGIDh+OONfVcs3NPLhEjwISIhJjgRvZUSG3G4EBAxDo3x/VAwciRHiY4Nqh
-        QxEbMQJNtDHGJH6FS/xWQEKKWVNeDo0+BwnNwVXWLhe0kSNh0bYYLbxZUtINLtGrQITt+u7kSYSYqQNO
-        W+q5sxS7JThtGm78q0AO/v7sWTzfs0d5Lrbk4CazbygsRNP48XjJppCd9iTSo4ADzkKLNWEWVDzXCTYJ
-        Fni8uBiJkhK0sOhv169HiFZed7v/XGQ5/nJq3585gxbCgyyuZC/WaLRJPE/yTDQSLPCUx4MX3MUr7qCN
-        DRFhJ+WLOASkc8JZeIoXlt01zF5aUbpFY0ENtuRLHqYUwQrOc/CW56CVndTOKyfKv9fHjFEitoDAJfM2
-        wpNc9KRvXyVQQ4HIsGGqz2O8W9gtfnrtr1uwAG94Vl6Vlip4G3fwgRalucMvPKTSWdcoYgsEqNp2+jSa
-        CX/Upw+e9uun7AnR9wYujsohIjizuqDghtvtj9OqVnrfWlGh4J+ZwBcm8o316+CJD3LeFnjMl+j1iRMI
-        sHiPswLVtKaOP4rwhuQhsuG5oNd+i7tO8/75xCS+0sJOin7ftAkdR47gAV/GfItcVWPHWrK16qIiBGiN
-        wazDzKwneC5EJMkT/5U16yD8Bx+cH3zdgl6vdc3j6XpwJOSZqxo3zlIXHC0L8YbkxfVbeC5YUP9z1qOT
-        L1onHyiBXyVc/ucQkOAZcN33eKyHvNh4n/cKzwUL6q/n+xGoqLDhEt0EJESEw5v9+tdBES+HDZcAUPAT
-        sp9pBQ/9MiMAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnGuardar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAABDFJREFUSEut
-        VetP02cY/QV1OjYmOOcmCEO3QGQZohQBBVqg2GqhdpQOCgKFlvvAQooVCAymggm3Oe4UVkU0wBj3AqVA
-        x2WC3DoqAbpMWJb5uX/C2Qtp9oEwZ8GT/L68Ob/neXLec56XeluwaLSwPqQ4JHq3+UjhB0orken47WCr
-        +EHFQZ13tw+CB3lg9AXg48cfbZ56etLNRNkfSHFtpEaE8qVa3JkrQ9HzUmRMyeDY5qA1UfYOIgvvbLsL
-        Kn6rhXQqF5c62Qjs4SF2NBWft5+BibY3HG56x9rmoY3x27li3F/8HgG9XFzuYoHdz4d4PB0unc77a0Au
-        tPL6cCge6OsRO54Mei8HAf0hiP8lDQKNEK5dLt0mqvl470dLN4cn9qhZUaBwoQRMFRdBg9cRNS5G8vRN
-        XOx1N17o+dLRRDcfxIq67NkcVK00IHw8Fhw1H4LxaGQ+l4M5FAj3HlepiWo+jj60kjJVQWhcVyJnoQC8
-        sXCEaaOQNS9H3LQYtJ5ze3eP9aOjjnZPbI3Vq/V4sFqNiMkYRExFI30+E7d1efDu9zB69l3YIU0NZU3V
-        UiLySak66rXh+LDFpjtpOgX1BgUSZ1Px1aQAkTPRkOtzEDJ6DV597jukqabcLBssjX5dAWD1cWDXcgpU
-        PdVNNZCmO3C85RjDo4eGqvU6yMm0nEku+M8EkOllSJiTkOndd5GmhtqUTeaibLFmO4HFCxVgq4JBGugO
-        NB74t8mJx8ett+JfoCvED4YaCGej8PVsODL0Gchfy4PfoLfRZ+DiLq6ptkDlYi0ko8Ra7UywevmIG0vD
-        VWK7I82HdcQt2z990nqiMEIbgYY/FMhalkE4L0SKPgnFL++CP8GFr8rzP1xTRxnvzZcjfEgCWnsAPn3k
-        CuenNHCHIsBVh8K29aSRFBd90XmWTF6FMkM5YhZjkKiXoHjjDrJXpKS412tcU08VevzshYyJ2zjfRsex
-        5tOwbXGGS4cHBGPRyJjNxGftp5G7lAfFRhNSl1Mh0cfju5cFKP/rPpjDdCNj8PL/BKqBUtq1OMKviwP3
-        n+hwaHWBU8d5ePYzEDMtwa2lHDRtNKNorQji5Tjc+j0LVa8qEPWrAP5DPm8WKHKhSvvWM2ANhMK3j0UW
-        FQ20fh/4j7CQNJeCO2t3kbAswTerKaj8uxT5BjkChnzMC5SV8n2lM1m9vBEh2GoevFR0BI6ywZvm48bC
-        DSS+EOPeJnHRqzJc1QQag9R083cNsaLSqcMJ4dpohE1EgqXlgD8ThtilGMgMmdvSxM4IcUXN2PuucWyz
-        l7p1n0P8s0Qkz6dBOCdEgl6M0j9LkL8uB0vtv/+XijwWoksDnkhfvInsF9nIM+SQBsUIGWMZr2mY5kuz
-        G2i9biKmmoFssgpKSKC2pOFogvYuzW7wU3nxAod9N9kj/sZgTVCl6fgNQVH/ADg1QftUF3ftAAAAAElF
-        TkSuQmCC
-</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAKysAAAEAIABkHgAAFgAAACgAAAArAAAAVgAAAAEAIAAAAAAA5BwAAMMOAADDDgAAAAAAAAAA

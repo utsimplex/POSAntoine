@@ -1,4 +1,5 @@
-﻿using Entidades;
+﻿using Data.Database;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace UI.Desktop.Artículos
     public partial class frmEscanearCodigos : Form
     {
 
-
+        ArticuloAdapter articuloAdapter = new ArticuloAdapter();
         List<Articulo> articulosConCodigo;
         private CancellationTokenSource cts;
 
@@ -31,36 +32,38 @@ namespace UI.Desktop.Artículos
         {
             foreach (Articulo articulo in articulosConCodigo)
             {
+                // Configuro UI
                 txtCodigo.Text = articulo.Codigo;
                 txtDescripcion.Text = articulo.Descripcion;
                 this.txtCodigoBarras.Select();
+
                 cts = new CancellationTokenSource();
+
+                // ESPERO LECTURA
                 await EsperarLectura(cts.Token);
+                // Si leyó exitosamente sin cancelar ni omitir
                 if (!cts.Token.IsCancellationRequested)
                 {
                     articulo.CodigoBarras = txtCodigoBarras.Text.Trim();
+                    articuloAdapter.Actualizar(articulo);
                 }
+
+                // Si omitió (o salio)
                 else
                 {
                     articulo.CodigoBarras = null;
                 }
+
                 this.txtCodigoBarras.Clear();
-                if (this.DialogResult == DialogResult.Cancel)
+
+                // Si salio
+                if ( this.DialogResult == DialogResult.OK)
                 {
+                    // Corto el bucle
                     break;
                 }
             }
-
-            if (this.DialogResult != DialogResult.Cancel)
-            {
-                MessageBox.Show("Se han leído todos los códigos de barras", "Lectura finalizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Tag = articulosConCodigo.Where(a => !string.IsNullOrEmpty(a.CodigoBarras)).ToList();
-            }
-            else
-            {
-                this.Tag = null;
-            }
+                        
             this.Close();
         }
 
@@ -90,18 +93,12 @@ namespace UI.Desktop.Artículos
 
 
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            cts?.Cancel();
-            this.DialogResult = DialogResult.Cancel;
-            
-        }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            cts?.Cancel();
             this.DialogResult = DialogResult.OK;
-            this.Tag = this.articulosConCodigo;
-            this.Close();
+            
         }
 
         private void btnOmitir_Click(object sender, EventArgs e)

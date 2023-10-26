@@ -30,14 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEscanearCodigos));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnOmitir = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtCodigoBarras = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.txtCodigoBarras = new System.Windows.Forms.TextBox();
-            this.btnOmitir = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -48,10 +47,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Controls.Add(this.btnOmitir, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnGuardar, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnSalir, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnOmitir, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -62,6 +60,20 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(507, 221);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnOmitir
+            // 
+            this.btnOmitir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOmitir.Image = global::UI.Desktop.Properties.Resources.Refresh_32x32;
+            this.btnOmitir.Location = new System.Drawing.Point(340, 172);
+            this.btnOmitir.Name = "btnOmitir";
+            this.btnOmitir.Size = new System.Drawing.Size(164, 37);
+            this.btnOmitir.TabIndex = 11;
+            this.btnOmitir.Text = "Omitir artículo";
+            this.btnOmitir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOmitir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnOmitir.UseVisualStyleBackColor = true;
+            this.btnOmitir.Click += new System.EventHandler(this.btnOmitir_Click);
             // 
             // groupBox2
             // 
@@ -77,6 +89,15 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Escanee el código de barras";
+            // 
+            // txtCodigoBarras
+            // 
+            this.txtCodigoBarras.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCodigoBarras.Location = new System.Drawing.Point(72, 105);
+            this.txtCodigoBarras.Multiline = true;
+            this.txtCodigoBarras.Name = "txtCodigoBarras";
+            this.txtCodigoBarras.Size = new System.Drawing.Size(361, 28);
+            this.txtCodigoBarras.TabIndex = 9;
             // 
             // txtCodigo
             // 
@@ -113,56 +134,19 @@
             this.txtDescripcion.Text = "DESCRIPCION";
             this.txtDescripcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnCancelar
+            // btnSalir
             // 
-            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
-            this.btnCancelar.Location = new System.Drawing.Point(3, 172);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(124, 37);
-            this.btnCancelar.TabIndex = 10;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(380, 172);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(124, 37);
-            this.btnGuardar.TabIndex = 1;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // txtCodigoBarras
-            // 
-            this.txtCodigoBarras.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodigoBarras.Location = new System.Drawing.Point(72, 105);
-            this.txtCodigoBarras.Multiline = true;
-            this.txtCodigoBarras.Name = "txtCodigoBarras";
-            this.txtCodigoBarras.Size = new System.Drawing.Size(361, 28);
-            this.txtCodigoBarras.TabIndex = 9;
-            // 
-            // btnOmitir
-            // 
-            this.btnOmitir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOmitir.Image = global::UI.Desktop.Properties.Resources.Refresh_32x32;
-            this.btnOmitir.Location = new System.Drawing.Point(171, 172);
-            this.btnOmitir.Name = "btnOmitir";
-            this.btnOmitir.Size = new System.Drawing.Size(163, 37);
-            this.btnOmitir.TabIndex = 11;
-            this.btnOmitir.Text = "Omitir artículo";
-            this.btnOmitir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOmitir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOmitir.UseVisualStyleBackColor = true;
-            this.btnOmitir.Click += new System.EventHandler(this.btnOmitir_Click);
+            this.btnSalir.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnSalir.Image = global::UI.Desktop.Properties.Resources.back32;
+            this.btnSalir.Location = new System.Drawing.Point(3, 172);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(124, 37);
+            this.btnSalir.TabIndex = 1;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // frmEscanearCodigos
             // 
@@ -188,8 +172,7 @@
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDescripcion;
-        protected System.Windows.Forms.Button btnCancelar;
-        protected System.Windows.Forms.Button btnGuardar;
+        protected System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.TextBox txtCodigoBarras;
         protected System.Windows.Forms.Button btnOmitir;
     }

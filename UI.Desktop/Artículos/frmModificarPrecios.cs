@@ -449,6 +449,7 @@ namespace UI.Desktop.Artículos
                      || a.Descripcion.ToLowerInvariant().Contains(searchTerm)
                      || a.Proveedor.ToLowerInvariant().Contains(searchTerm)
                      || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTerm)
+                     || a.CodigoBarras.Contains(searchTerm)
                ).ToList();
         }
      
