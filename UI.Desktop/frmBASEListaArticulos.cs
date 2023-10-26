@@ -187,7 +187,7 @@ namespace UI.Desktop.Artículos
             cbxFiltroProveedor.SelectedIndex = -1;
         }
 
-        private void AplicaFiltros()
+        protected internal void AplicaFiltros()
         {
             string searchTerm = tbxFiltro.Text.ToLowerInvariant();
 
