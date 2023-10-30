@@ -620,6 +620,7 @@ namespace UI.Desktop.Artículos
         {
             LimpiarFiltros();
             RecargarArticulos();
+            ActualizarLista();
         }
 
        
@@ -701,8 +702,8 @@ namespace UI.Desktop.Artículos
                    a => a.Codigo.ToLowerInvariant().Contains(searchTerm)
                      || a.Descripcion.ToLowerInvariant().Contains(searchTerm)
                      || a.Proveedor.ToLowerInvariant().Contains(searchTerm)
-                     || a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTerm)
-                                        || a.CodigoBarras != null && a.CodigoBarras.ToLowerInvariant().Contains(searchTerm)
+                     || a.CodigoArtiProveedor != null && a.CodigoArtiProveedor.ToLowerInvariant().Contains(searchTerm)
+                     || a.CodigoBarras != null && a.CodigoBarras.ToLowerInvariant().Contains(searchTerm)
                ).ToList();
         }
 

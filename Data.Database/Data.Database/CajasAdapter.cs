@@ -498,7 +498,7 @@ namespace Data.Database
             }
         }
 
-        public bool GetEstadoCajaAbierta(int caja_id)
+        public bool GetEstadoCajaAbierta(int? caja_id)
         {
             // Crear conexión
             using (SqlConnection con = CrearConexion())

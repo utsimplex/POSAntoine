@@ -34,7 +34,7 @@ namespace Entidades
         public decimal MontoPagado { get; set; }
         //IDEMPLEADO
         public string Usuario { get; set; }
-        public int CajaId { get; set; }
+        public int? CajaId { get; set; }
 
         //modulo de facturacion
         public double? Neto { get; set; }

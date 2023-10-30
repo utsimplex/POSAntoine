@@ -43,8 +43,8 @@ namespace UI.Desktop.Ventas
             if(ListaVentas == null)
             ListaVentas = Datos_VentasAdapter.GetAll();
 
-            int ultimaCaja = ListaVentas.Max(x => x.CajaId);
-            if (chbxSoloCajaAbierta.Checked)
+            int? ultimaCaja = ListaVentas.Max(x => x.CajaId);
+            if (chbxSoloCajaAbierta.Checked && ultimaCaja != null)
                 dgvListado.DataSource = ListaVentas.Where(x=>x.CajaId ==ultimaCaja).ToList();
             else
                 dgvListado.DataSource = ListaVentas;

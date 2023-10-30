@@ -45,11 +45,24 @@ namespace UI.Desktop.Ventas
             txtFechaHoraVta.Text = vtaSelec.FechaHora.ToString("dd ' de ' MMMM ', ' yyyy"); 
             txtDcto.Text = vtaSelec.Descuento.ToString();
             txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
-            txtNombRazCli.Text = Datos_ClienteAdapter.GetOne((long)vtaSelec.NumeroDocumentoCliente).Nombre;
+            if (vtaSelec.NombreCliente != null) { 
+            
+            string nombreCliente = Datos_ClienteAdapter.GetOne((long)vtaSelec.NumeroDocumentoCliente).Nombre;
+                txtNombRazCli.Text = nombreCliente;
+            }
+
+            
             txtNumeroVenta.Text = vtaSelec.NumeroVenta.ToString();
             txtTotal.Text = vtaSelec.Total.ToString();
+
             dgvArticulosVtaActual.DataSource = Datos_VentasArticulosAdapter.GetAll(vtaSelec.NumeroVenta, vtaSelec.TipoOperacion);
-            cajaAbierta = Datos_CajasAdapter.GetEstadoCajaAbierta(vtaSelec.CajaId);
+
+            if(vtaSelec.CajaId!= null)
+            {
+            var caja = Datos_CajasAdapter.GetEstadoCajaAbierta(vtaSelec.CajaId);
+                cajaAbierta = Datos_CajasAdapter.GetEstadoCajaAbierta(vtaSelec.CajaId);
+
+            }
             btnConfirmar.Enabled = cbxMedioDePago.Enabled=cajaAbierta;
             btnFacturar.Enabled = cajaAbierta && vtaSelec.NumeroTicketFiscal == null;
             txtDcto.ReadOnly = true;
@@ -139,7 +152,7 @@ namespace UI.Desktop.Ventas
             }
             else //LOAD MODO READONLY
             {
-                cbxMedioDePago.SelectedValue = listaMedioDePagos.First(medioDePago=>medioDePago.Descripcion== ventaLocal.TipoPago).id;
+                cbxMedioDePago.SelectedValue = listaMedioDePagos.First(medioDePago=>medioDePago.Descripcion== ventaLocal.TipoPago.ToUpper()).id;
                 formListaArticulos = new UI.Desktop.Artículos.frmListadoArticulos();
                 ConfigurarGrillaDetalles();
                     this.Text = "VER VENTA";

@@ -114,20 +114,44 @@ namespace Data.Database
                Comando.Parameters["@MARCA"].Value = arti.Proveedor;
                Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
                Comando.Parameters["@HABILITADO"].Value = arti.Habilitado;
-               Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
-               Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
-               Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
-               Comando.Parameters["@FAMILIA2"].Value = arti.Familia2?.id!=null? arti.Familia2.id:0;
-               Comando.Parameters.Add(new SqlParameter("@CODIGO_BARRAS", SqlDbType.NVarChar));
+               //Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+
+            if (arti.Familia1?.id != null)
+            {
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
+            }
+            else
+            {
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA"].Value = DBNull.Value;
+            }
+
+            if (arti.Familia2?.id != null)
+            {
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
+            }
+            else
+            {
+                Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+                Comando.Parameters["@FAMILIA2"].Value = DBNull.Value;
+            }
+
+
+            //Comando.Parameters["@FAMILIA"].Value = arti.Familia1?.id != null ? arti.Familia1.id: DBNull.Value;
+            //   Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+            //   Comando.Parameters["@FAMILIA2"].Value = arti.Familia2?.id != null ? arti.Familia2.id: DBNull.Value;
+            Comando.Parameters.Add(new SqlParameter("@CODIGO_BARRAS", SqlDbType.NVarChar));
                Comando.Parameters["@CODIGO_BARRAS"].Value = String.IsNullOrEmpty(arti.CodigoBarras) ? string.Empty : arti.CodigoBarras;
                Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
-               Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
+               Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = String.IsNullOrEmpty(arti.CodigoArtiProveedor) ? string.Empty : arti.CodigoArtiProveedor;
                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO1", SqlDbType.NVarChar));
                Comando.Parameters["@CAMPOPERSONALIZADO1"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado1) ? string.Empty : arti.CampoPersonalizado1;
                Comando.Parameters.Add(new SqlParameter("@CAMPOPERSONALIZADO2", SqlDbType.NVarChar));
                Comando.Parameters["@CAMPOPERSONALIZADO2"].Value = String.IsNullOrEmpty(arti.CampoPersonalizado2) ? string.Empty : arti.CampoPersonalizado2;
                Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
-               Comando.Parameters["@COSTO"].Value = arti.Costo;
+               Comando.Parameters["@COSTO"].Value = arti.Costo != null ? arti.Costo : 0;
 
             //Ejecuta el comando INSERT
             Comando.Connection.Open();

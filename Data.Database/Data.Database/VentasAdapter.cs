@@ -222,13 +222,13 @@ namespace Data.Database
                     vta.FechaHora = (DateTime)drVentas["fechahora"];
                     vta.Descuento = (decimal)drVentas["descuento"];
                     //vta.DniCliente = (string)drVentas["dnicliente"];
-                    vta.CajaId = (int)drVentas["caja_id"];
+                    vta.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     vta.Usuario = (string)drVentas["usuario"];
                     vta.TipoPago = (string)drVentas["tipopago"];
                     vta.Total = (decimal)drVentas["total"];
                     vta.TipoOperacion = (string)drVentas["tipooperacion"];
                     vta.Pagado = (bool)drVentas["pagado"];
-                    vta.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    vta.MontoPagado = drVentas["monto_pagado"] != DBNull.Value ? (decimal)drVentas["monto_pagado"] : (decimal)drVentas["total"];
                     //FALTAN TRAER DATOS FISCALES
                     vta.TipoComprobante = (drVentas["TIPOCOMPROBANTE"]!=DBNull.Value)?(int)drVentas["TIPOCOMPROBANTE"]:(int?)null;
                     vta.PuntoDeVenta = drVentas["PUNTODEVENTA"]!= DBNull.Value? (int)drVentas["PUNTODEVENTA"]:(int?)null;
@@ -288,16 +288,18 @@ namespace Data.Database
                     VentaBuscada.NumeroVenta = (int)drVentas["numventa"];
                     VentaBuscada.FechaHora = (DateTime)drVentas["fechahora"];
                     VentaBuscada.Descuento = (decimal)drVentas["descuento"];
-                    VentaBuscada.CajaId = (int)drVentas["caja_id"];
+                    VentaBuscada.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     //vta.DniCliente = (string)drVentas["dnicliente"];
                     VentaBuscada.Usuario = (string)drVentas["usuario"];
                     VentaBuscada.TipoPago = (string)drVentas["tipopago"];
                     VentaBuscada.Total = (decimal)drVentas["total"];
                     VentaBuscada.TipoOperacion = (string)drVentas["tipooperacion"];
                     VentaBuscada.Pagado = (bool)drVentas["pagado"];
-                    VentaBuscada.MontoPagado = (decimal)drVentas["monto_pagado"];
-                    VentaBuscada.Neto = Math.Round(Convert.ToDouble(drVentas["Neto"]),2);
-                    VentaBuscada.Iva = Math.Round(Convert.ToDouble(drVentas["Iva"]),2);
+                    VentaBuscada.MontoPagado = drVentas["monto_pagado"] != DBNull.Value ? (decimal)drVentas["monto_pagado"] : (decimal)drVentas["total"];
+                    VentaBuscada.Neto = drVentas["Neto"] != DBNull.Value ? Math.Round(Convert.ToDouble((decimal)drVentas["Neto"]),2) : Math.Round(Convert.ToDouble((decimal)drVentas["total"]),2);
+                    //VentaBuscada.Neto = Math.Round(Convert.ToDouble(drVentas["Neto"]),2);
+                    VentaBuscada.Iva = drVentas["Iva"] != DBNull.Value ? Math.Round(Convert.ToDouble((decimal)drVentas["Iva"]), 2) : Math.Round(Convert.ToDouble(0), 2);
+                    //VentaBuscada.Iva = Math.Round(Convert.ToDouble(drVentas["Iva"]),2);
                     //FALTAN TRAER DATOS FISCALES
                     VentaBuscada.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
                     VentaBuscada.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
@@ -433,13 +435,13 @@ namespace Data.Database
                     ventaActual.NumeroDocumentoCliente = (long)drVentas["NumeroDocumentoCliente"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
-                    ventaActual.CajaId = (int)drVentas["caja_id"];
+                    ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     ventaActual.Total = (decimal)drVentas["total"];
                     ventaActual.TipoPago = (string)drVentas["tipoPago"];
                     ventaActual.Usuario = (string)drVentas["usuario"];
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
                     ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
-                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    ventaActual.MontoPagado = drVentas["monto_pagado"] != DBNull.Value ? (decimal)drVentas["monto_pagado"] : 0;  
                     ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
                     ventaActual.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
                     ventaActual.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
@@ -498,13 +500,13 @@ namespace Data.Database
                     ventaActual.NumeroDocumentoCliente = (long)drVentas["NumeroDocumentoCliente"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
-                    ventaActual.CajaId = (int)drVentas["caja_id"];
+                    ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     ventaActual.Total = (decimal)drVentas["total"];
                     ventaActual.TipoPago = (string)drVentas["tipoPago"];
                     ventaActual.Usuario = (string)drVentas["usuario"];
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
                     ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
-                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    ventaActual.MontoPagado = drVentas["monto_pagado"] != DBNull.Value ? (decimal)drVentas["monto_pagado"] : 0;
                     ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
                     ventaActual.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
                     ventaActual.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
@@ -549,7 +551,7 @@ namespace Data.Database
             SqlConnection Con = CrearConexion();
 
             // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.tipoPago like @texto OR Ventas.usuario like @texto OR Ventas.NumeroDocumentoCliente like @texto", Con);
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas WHERE Ventas.tipoPago like @texto OR Ventas.usuario like @texto OR Ventas.NumeroDocumentoCliente like @texto OR Ventas.numVenta like @texto", Con);
             Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
             Comando.Parameters["@texto"].Value = texto + '%';
             try
@@ -562,15 +564,14 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.NumeroDocumentoCliente = (long)drVentas["NumeroDocumentoCliente"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
-                    ventaActual.CajaId = (int)drVentas["caja_id"];
+                    ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     ventaActual.Total = (decimal)drVentas["total"];
                     ventaActual.TipoPago = (string)drVentas["tipoPago"];
                     ventaActual.Usuario = (string)drVentas["usuario"]; 
                     ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
-                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    ventaActual.MontoPagado = drVentas["monto_pagado"] != DBNull.Value ? (decimal)drVentas["monto_pagado"] : 0;
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
                     ventaActual.NumeroDocumentoCliente = drVentas["numeroDocumentoCliente"] != DBNull.Value ? (long)Convert.ToDecimal(drVentas["numeroDocumentoCliente"]) : (long?)null;
 
@@ -631,14 +632,14 @@ namespace Data.Database
                     ventaActual.NumeroVenta = (int)drVentas["numventa"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechahora"];
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.CajaId = (int)drVentas["caja_id"];
+                    ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     //vta.DniCliente = (string)drVentas["dnicliente"];
                     ventaActual.Usuario = (string)drVentas["usuario"];
                     ventaActual.TipoPago = (string)drVentas["tipopago"];
                     ventaActual.Total = (decimal)drVentas["total"];
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
                     ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
-                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    ventaActual.MontoPagado = drVentas["monto_pagado"] != DBNull.Value ? (decimal)drVentas["monto_pagado"] : 0;
                     //FALTAN TRAER DATOS FISCALES
                     ventaActual.TipoComprobante = (drVentas["TIPOCOMPROBANTE"] != DBNull.Value) ? (int)drVentas["TIPOCOMPROBANTE"] : (int?)null;
                     ventaActual.PuntoDeVenta = drVentas["PUNTODEVENTA"] != DBNull.Value ? (int)drVentas["PUNTODEVENTA"] : (int?)null;
@@ -700,7 +701,7 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
-                    ventaActual.CajaId = (int)drVentas["caja_id"];
+                    ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
                     ventaActual.Total = (decimal)drVentas["total"];
@@ -709,7 +710,7 @@ namespace Data.Database
 
                     ventaActual.TipoOperacion = (string)drVentas["tipooperacion"];
                     ventaActual.Pagado = drVentas["pagado"] != DBNull.Value ? (bool)drVentas["PAGADO"] : false;
-                    ventaActual.MontoPagado = (decimal)drVentas["monto_pagado"];
+                    ventaActual.MontoPagado = drVentas["monto_pagado"] != DBNull.Value ? (decimal)drVentas["monto_pagado"] : 0;
 
                     ListaVentas.Add(ventaActual);
                 }
