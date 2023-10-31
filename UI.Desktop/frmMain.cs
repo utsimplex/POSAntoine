@@ -1113,13 +1113,10 @@ namespace UI.Desktop
                 if(this.parametrosEmpresa.FondoPantalla != null && this.parametrosEmpresa.FondoPantalla != "")
                 {
                     this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
-                    this.Invalidate();
-
                 }
             }
         }
 
-       
 
         private void cargarCódigosDeBarraToolStripMenuItem_Click(object sender, EventArgs e)
         {
