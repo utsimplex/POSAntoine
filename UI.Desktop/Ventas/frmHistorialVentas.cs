@@ -173,7 +173,7 @@ namespace UI.Desktop.Ventas
 
         private void btnMostrarTodos_Click(object sender, EventArgs e)
         {
-            this.dgvListado.DataSource = Datos_VentasAdapter.GetAll();
+            ActualizarLista();
         }
 
         private void btnModificarComprobante_Click(object sender, EventArgs e)

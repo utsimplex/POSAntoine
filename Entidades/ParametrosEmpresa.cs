@@ -30,6 +30,8 @@ namespace Entidades
         public bool EsProduccion {get; set; }
         public string UrlQrAfip { get; set; }
 
+        public string FondoPantalla { get; set; }
+
         //Campos personalizados Artículos
         public string CampoPersonalizadoArticulo1 { get; set; }
         public string CampoPersonalizadoArticulo2 { get; set; }

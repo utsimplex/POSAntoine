@@ -96,6 +96,7 @@ namespace UI.Desktop.Parametros
             this.tbxTelefono.Text = parametrosEmpresa.Telefono;
             this.tbxURLAfip.Text = parametrosEmpresa.UrlQrAfip;
             this.chkbxProduccion.Checked = parametrosEmpresa.EsProduccion;
+            this.txtFondoPantalla.Text = parametrosEmpresa.FondoPantalla;
 
             //this.cbxImpresoras.SelectedText = "";
             this.completaImpresoras();
@@ -118,6 +119,7 @@ namespace UI.Desktop.Parametros
             parametrosEmpresa.Direccion = this.tbxDireccion.Text;
             parametrosEmpresa.DireccionFiscal = this.tbxDireccionFiscal.Text;
             parametrosEmpresa.ImagenPath = this.tbxImagePath.Text;
+            parametrosEmpresa.FondoPantalla = this.txtFondoPantalla.Text;
             parametrosEmpresa.IngresosBrutos = this.tbxIngresosBrutos.Text;
             parametrosEmpresa.InicioDeActividades = this.tbxInicioActividades.Text;
             parametrosEmpresa.Nombre = this.tbxNombre.Text;
@@ -157,6 +159,7 @@ namespace UI.Desktop.Parametros
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             this.Guardar();
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
@@ -237,6 +240,17 @@ namespace UI.Desktop.Parametros
                     });
                 }
                 this.btnCancelar.Visible = false;
+            }
+        }
+
+        private void btnBuscarFondo_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ImagenDialog = new OpenFileDialog();
+            ImagenDialog.Filter = "PNG files(*.png)| *.png| JPG files(*.jpg)| *.jpg| JPEG files(*.jpeg)| *.jpeg";
+            ImagenDialog.CheckFileExists = true;
+            if (ImagenDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.txtFondoPantalla.Text = ImagenDialog.FileName;
             }
         }
     }

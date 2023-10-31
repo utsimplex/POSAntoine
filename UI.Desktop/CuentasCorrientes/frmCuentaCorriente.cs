@@ -200,25 +200,28 @@ namespace UI.Desktop.CuentasCorrientes
                 {
                     frmRecibirPago formRecibePago = new frmRecibirPago(montoAPagar);
                     recibePagoResult = formRecibePago.ShowDialog();
-                    //evaluo dentro de cada metodo si corresponde realizar la accion o no
-                    montoAPagar = formRecibePago.montoIngresado;
-                    cobroCuentaCorriente = new CobroCuentaCorriente()
+                    if (formRecibePago.DialogResult != DialogResult.Cancel)
                     {
-                        FacturasAfectadas = facturasSeleccionadas,
-                        FechaHora = DateTime.Now,
-                        MedioDePago = formRecibePago.MedioDePago,
-                        MontoRecibido = formRecibePago.montoIngresado,
-                        NumeroDocumentoCliente = clienteActual.NumeroDocumento
-                    };
-                    foreach(CuentaCorriente cuentaCorriente in cuentaCorrienteSeleccionada)
-                    {
-                        ActualizaFactura(cuentaCorriente.Venta, cuentaCorriente.Pendiente, true);
+                        //evaluo dentro de cada metodo si corresponde realizar la accion o no
+                        montoAPagar = formRecibePago.montoIngresado;
+                        cobroCuentaCorriente = new CobroCuentaCorriente()
+                        {
+                            FacturasAfectadas = facturasSeleccionadas,
+                            FechaHora = DateTime.Now,
+                            MedioDePago = formRecibePago.MedioDePago,
+                            MontoRecibido = formRecibePago.montoIngresado,
+                            NumeroDocumentoCliente = clienteActual.NumeroDocumento
+                        };
+                        foreach (CuentaCorriente cuentaCorriente in cuentaCorrienteSeleccionada)
+                        {
+                            ActualizaFactura(cuentaCorriente.Venta, cuentaCorriente.Pendiente, true);
+                        }
+                        RegistrarPagoCuentaCorriente();
+                        if (formRecibePago.MedioDePago.ToLower() == "efectivo")
+                            GuardarPago();
+                        ImprimirPago();
+                        RefrescarGrilla();
                     }
-                    RegistrarPagoCuentaCorriente();
-                    if (formRecibePago.MedioDePago.ToLower() == "efectivo")
-                        GuardarPago();
-                    ImprimirPago();
-                    RefrescarGrilla();
                 }
             }
         }

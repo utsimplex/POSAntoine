@@ -184,7 +184,7 @@ namespace UI.Desktop.Ventas
                 else
                 if (e.ColumnIndex == 6 && dgvArticulosVtaActual.Rows.Count > 0)
                 {
-                    MessageBox.Show("Ingrese el monto de descuento", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                     decimal precio = Convert.ToDecimal(dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Precio"].Value);
                     int cantidad = Convert.ToInt32(dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Cantidad"].Value);
                     frmIngresaDescuento descuento = new frmIngresaDescuento("$", precio * cantidad);
@@ -197,7 +197,6 @@ namespace UI.Desktop.Ventas
                 }
                 else if (e.ColumnIndex == 7 && dgvArticulosVtaActual.Rows.Count > 0)
                 {
-                    MessageBox.Show("Ingrese el porcentaje de descuento", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmIngresaDescuento descuento = new frmIngresaDescuento("%", 0);
                     if (descuento.ShowDialog() == DialogResult.OK)
                     {

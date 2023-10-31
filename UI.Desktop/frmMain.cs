@@ -11,6 +11,8 @@ using Microsoft.Office.Interop;
 using System.Threading;
 using UI.Desktop.Cajas;
 using UI.Desktop.Artículos;
+using Entidades;
+using Data.Database;
 
 namespace UI.Desktop
 {
@@ -43,6 +45,8 @@ namespace UI.Desktop
 
             InitializeComponent();
             //tardar.Abort();
+            parametrosEmpresaController = ParametrosEmpresaController.GetInstance();
+            parametrosEmpresa = parametrosEmpresaController.ObtenerParametrosEmpresa();
 
         }
 
@@ -62,11 +66,18 @@ namespace UI.Desktop
         Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
 
 
+        ParametrosEmpresaController parametrosEmpresaController;
+        ParametrosEmpresa parametrosEmpresa;
+
         // EVENTO LOAD
         private void frmMain_Load(object sender, EventArgs e)
         {
             bindUINoUser();
 
+            if(this.parametrosEmpresa.FondoPantalla != null && this.parametrosEmpresa.FondoPantalla != "")
+            {
+                this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
+            }
             IniciarSesion();
 
             if (usrActual != null)
@@ -1097,6 +1108,15 @@ namespace UI.Desktop
         {
             Parametros.frmParametros frmParametros =   new Parametros.frmParametros();
             frmParametros.ShowDialog();
+            if (frmParametros.DialogResult == DialogResult.OK)
+            {
+                if(this.parametrosEmpresa.FondoPantalla != null && this.parametrosEmpresa.FondoPantalla != "")
+                {
+                    this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
+                    this.Invalidate();
+
+                }
+            }
         }
 
        

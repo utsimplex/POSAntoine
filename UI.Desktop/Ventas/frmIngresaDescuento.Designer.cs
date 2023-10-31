@@ -95,6 +95,7 @@
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmIngresaDescuento";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Descuento";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

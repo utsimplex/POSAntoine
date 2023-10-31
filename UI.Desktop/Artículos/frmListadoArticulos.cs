@@ -224,6 +224,15 @@ namespace UI.Desktop.Artículos
                 }
                 
             }
+
+            if (e.RowIndex >= 0 && dgvListado.Rows[e.RowIndex].DataBoundItem != null)
+            {
+                Articulo articulo = (Articulo)dgvListado.Rows[e.RowIndex].DataBoundItem;
+                if (articulo.Habilitado == "No" )
+                {
+                    e.CellStyle.BackColor = Color.IndianRed;
+                }
+            }
         }
 
         // Añadir NUEVO ARTICULO

@@ -76,6 +76,10 @@ namespace Data.Database
             familiaAdapter.ActualizarFamilia(pFamilia, pFamiliaSeleccionada);
         }
 
+        public string ObtenerFondoPantalla()
+        {
+            return parametrosEmpresaObj.FondoPantalla;
+        }
         #endregion
     }
 }
