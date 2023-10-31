@@ -31,6 +31,8 @@ namespace UI.Desktop.Ventas
             this.ObtieneClienteGenerico();
             this.AsignaDatosClienteUI();
             medioDePago = "";
+            this.btnImprimirCambio.Visible = false;
+            this.chkbxCambio.Visible = true;
 
         }
         //MODO READONLY -- SOLO PUEDE MODIFICAR EL MEDIO DE PAGO SI ES QUE LA CAJA NO ESTA CERRADA
@@ -71,8 +73,8 @@ namespace UI.Desktop.Ventas
              btnAgregarArt.Enabled = btnBuscarCliente.Enabled = btnQuitar.Enabled = txtDcto.Enabled = txtDctoPesos.Enabled=false;
             btnReimprimir.Visible = true;
             //cbxMedioDePago.SelectedText = vtaSelec.TipoPago;
-
-
+            this.btnImprimirCambio.Visible = true;
+            this.chkbxCambio.Visible = false;
 
         }
 
@@ -321,7 +323,7 @@ namespace UI.Desktop.Ventas
                     this.setMedioPago();
                     DialogResult construyeVenta = this.ConstruirVenta();
                     if (construyeVenta != DialogResult.Cancel)
-                    { 
+                    {
                         this.GuardarVenta();
                         if (construyeVenta == DialogResult.Yes)
                         {
@@ -333,7 +335,9 @@ namespace UI.Desktop.Ventas
                                 PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
                             }
                         }
-                    this.Dispose();
+                        if (this.chkbxCambio.Checked == true)
+                        { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO"); }
+                        this.Dispose();
                     }
                 }
                 else
@@ -1000,6 +1004,10 @@ namespace UI.Desktop.Ventas
             }
         }
 
-        
+        private void btnImprimirCambio_Click(object sender, EventArgs e)
+        {
+            PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO");
+
+        }
     }
 }

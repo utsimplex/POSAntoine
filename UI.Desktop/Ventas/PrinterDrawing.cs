@@ -96,6 +96,7 @@ namespace UI.Desktop.Ventas
                 MessageBox.Show(ex.Message);
             }
         }
+        
         private void pd_PrintPage(object sender, PrintPageEventArgs ev)
         {
             Font headingFont = new System.Drawing.Font("Calibri", 14, System.Drawing.FontStyle.Bold);
@@ -143,28 +144,6 @@ namespace UI.Desktop.Ventas
                 //Print Receipt Date
                 ev.Graphics.DrawString("N° " + _venta_Actual.NumeroVenta, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
                 height += 20;
-                //if (!String.IsNullOrWhiteSpace(_venta_Actual.Usuario))
-                //{
-                //    ev.Graphics.DrawString("Atendido por: "+_venta_Actual.Usuario, normalFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 15;
-
-                //}
-                // DATOS DEL CLIENTE
-                //if (!String.IsNullOrWhiteSpace(_venta_Actual.direccion_cliente))
-                //{
-                //    ev.Graphics.DrawString(_venta_Actual.direccion_cliente, headingFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 25;
-                //}
-                //if (!String.IsNullOrWhiteSpace(_venta_Actual.telefono_cliente))
-                //{
-                //    ev.Graphics.DrawString(_venta_Actual.telefono_cliente, normalFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 20;
-                //}
-                //if (!String.IsNullOrWhiteSpace(_venta_Actual.Descripcion))
-                //{
-                //    ev.Graphics.DrawString(_venta_Actual.Descripcion, normalFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 20;
-                //}
 
                 //Print Line
                 ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
@@ -244,49 +223,44 @@ namespace UI.Desktop.Ventas
                 //}
                 ev.HasMorePages = false;
             }
-            else if (_modo=="COCINA")
+            else if (_modo=="CAMBIO")
             {
-                //MODO COCINA
+                //MODO CAMBIO
+               
                 //Print Cabecera
-                ev.Graphics.DrawString(" PEDIDO # " + _venta_Actual.NumeroVenta, headingFont, Brushes.Black, 10, height, new StringFormat());
+                //SizeF Cabecera = ev.Graphics.MeasureString(_cabeceraComanda, headingFont);
+                ev.Graphics.DrawString(_cabeceraComanda, boldFont, Brushes.Black, 10 , height, new StringFormat());
+                height += 15;
+                ev.Graphics.DrawString(_direccionFiscal, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
                 height += 20;
-                if (!String.IsNullOrWhiteSpace(_venta_Actual.DniCliente))
-                {
-                    ev.Graphics.DrawString(_venta_Actual.DniCliente, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
-                    height += 20;
-                }
-                //if (!String.IsNullOrWhiteSpace(_venta_Actual.nombre_cliente))
-                //{
-                //    ev.Graphics.DrawString(_venta_Actual.nombre_cliente, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 20;
-                //}
-                //if (!String.IsNullOrWhiteSpace(_venta_Actual.direccion_cliente))
-                //{
-                //    ev.Graphics.DrawString(_venta_Actual.direccion_cliente, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 20;
-                //}
-                //if (!String.IsNullOrWhiteSpace(_venta_Actual.telefono_cliente))
-                //{
-                //    ev.Graphics.DrawString(_venta_Actual.telefono_cliente, numPedidoFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 20;
-                //}
+                SizeF Cambio = ev.Graphics.MeasureString(_cabeceraComanda, headingFont);
+                ev.Graphics.DrawString("Ticket de Cambio", headingFont, Brushes.Black, 10 , height, new StringFormat());
+                height += 20;
+                ev.Graphics.DrawString("Fecha: " + _venta_Actual.FechaHora.ToString(), lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                height += 10;
+                //Print Receipt Date
+                ev.Graphics.DrawString("Venta N° " + _venta_Actual.NumeroVenta, lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                height += 20;
 
+                //Print Line
+                ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                height += 15;
+
+                //Printe Table Rows
                 foreach (var item in _venta_actual_articulos)
                 {
-                    //item.comanda = item.comanda ?? item.descripcion_linea;
-                    //item.comanda = item.comanda.Replace("\r\n", string.Empty) ?? item.descripcion_linea.Replace("\r\n", string.Empty);
-                    ev.Graphics.DrawString(item.DescripcionArticulo.ToString()+" ", comandaCocinaFont, Brushes.Black, 10, height, new StringFormat());
-                    height += 20;
-                }
 
-                ev.Graphics.DrawString("$" + _venta_Actual.Total.ToString(), totalCocinaFont, Brushes.Black, 180 , height, new StringFormat());
-                    height += 20;
-                ev.Graphics.DrawString("Emision " + _venta_Actual.FechaHora.ToString(), lessNormalFont, Brushes.Black, 10, height, new StringFormat());
-                //if (_venta_Actual.minutos_estimados != null)
-                //{
-                //ev.Graphics.DrawString("Entrega Estimada " + _venta_Actual.fecha.AddMinutes((int)_venta_Actual.minutos_estimados).ToString("dd/MM/yyyy HH:mm"), lessNormalFont, Brushes.Black, 10, height, new StringFormat());
-                //    height += 20;
-                //}
+                    ev.Graphics.DrawString(item.Cantidad.ToString() + "x", comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    ev.Graphics.DrawString(item.DescripcionArticulo, comandaNormalFont, Brushes.Black, 40, height, new StringFormat());
+                    height += 15;
+                }
+                ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                height += 15;
+                //Print Line
+                ev.Graphics.DrawString("Cambio válido por 10 días desde la fecha de compra", lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                height += 20;
+
+
                 ev.HasMorePages = false;
 
             }

@@ -37,6 +37,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtTipoComprobante = new System.Windows.Forms.TextBox();
             this.lblTipoComprobante = new System.Windows.Forms.Label();
+            this.btnBuscarCliente = new System.Windows.Forms.Button();
             this.txtDniCuit = new System.Windows.Forms.TextBox();
             this.txtNombRazCli = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,6 +46,8 @@
             this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
             this.gbArticulosVenta = new System.Windows.Forms.GroupBox();
             this.dgvArticulosVtaActual = new System.Windows.Forms.DataGridView();
+            this.btnAgregarArt = new System.Windows.Forms.Button();
+            this.btnQuitar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtDctoPesos = new System.Windows.Forms.TextBox();
@@ -65,9 +68,8 @@
             this.btnReimprimir = new System.Windows.Forms.Button();
             this.btnFacturar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAgregarArt = new System.Windows.Forms.Button();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.btnBuscarCliente = new System.Windows.Forms.Button();
+            this.btnImprimirCambio = new System.Windows.Forms.Button();
+            this.chkbxCambio = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
@@ -174,6 +176,18 @@
             this.lblTipoComprobante.TabIndex = 8;
             this.lblTipoComprobante.Text = "Tipo de Comprobante:";
             // 
+            // btnBuscarCliente
+            // 
+            this.btnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscarCliente.Image")));
+            this.btnBuscarCliente.Location = new System.Drawing.Point(252, 61);
+            this.btnBuscarCliente.Name = "btnBuscarCliente";
+            this.btnBuscarCliente.Size = new System.Drawing.Size(69, 29);
+            this.btnBuscarCliente.TabIndex = 1;
+            this.btnBuscarCliente.Text = "Buscar";
+            this.btnBuscarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnBuscarCliente.UseVisualStyleBackColor = true;
+            this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
+            // 
             // txtDniCuit
             // 
             this.txtDniCuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -263,6 +277,30 @@
             this.dgvArticulosVtaActual.TabIndex = 0;
             this.dgvArticulosVtaActual.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulosVtaActual_CellEndEdit);
             this.dgvArticulosVtaActual.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvArticulosVtaActual_CellMouseDoubleClick);
+            // 
+            // btnAgregarArt
+            // 
+            this.btnAgregarArt.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarArt.Image")));
+            this.btnAgregarArt.Location = new System.Drawing.Point(16, 249);
+            this.btnAgregarArt.Name = "btnAgregarArt";
+            this.btnAgregarArt.Size = new System.Drawing.Size(93, 33);
+            this.btnAgregarArt.TabIndex = 0;
+            this.btnAgregarArt.Text = "Añadir";
+            this.btnAgregarArt.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnAgregarArt.UseVisualStyleBackColor = true;
+            this.btnAgregarArt.Click += new System.EventHandler(this.btnAgregarArt_Click);
+            // 
+            // btnQuitar
+            // 
+            this.btnQuitar.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitar.Image")));
+            this.btnQuitar.Location = new System.Drawing.Point(115, 249);
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Size = new System.Drawing.Size(93, 33);
+            this.btnQuitar.TabIndex = 1;
+            this.btnQuitar.Text = "Quitar";
+            this.btnQuitar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // groupBox3
             // 
@@ -466,7 +504,7 @@
             // btnReimprimir
             // 
             this.btnReimprimir.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
-            this.btnReimprimir.Location = new System.Drawing.Point(4, 502);
+            this.btnReimprimir.Location = new System.Drawing.Point(4, 508);
             this.btnReimprimir.Name = "btnReimprimir";
             this.btnReimprimir.Size = new System.Drawing.Size(119, 34);
             this.btnReimprimir.TabIndex = 13;
@@ -501,41 +539,28 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // btnAgregarArt
+            // btnImprimirCambio
             // 
-            this.btnAgregarArt.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarArt.Image")));
-            this.btnAgregarArt.Location = new System.Drawing.Point(16, 249);
-            this.btnAgregarArt.Name = "btnAgregarArt";
-            this.btnAgregarArt.Size = new System.Drawing.Size(93, 33);
-            this.btnAgregarArt.TabIndex = 0;
-            this.btnAgregarArt.Text = "Añadir";
-            this.btnAgregarArt.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnAgregarArt.UseVisualStyleBackColor = true;
-            this.btnAgregarArt.Click += new System.EventHandler(this.btnAgregarArt_Click);
+            this.btnImprimirCambio.Image = global::UI.Desktop.Properties.Resources.Print_32x32;
+            this.btnImprimirCambio.Location = new System.Drawing.Point(139, 508);
+            this.btnImprimirCambio.Name = "btnImprimirCambio";
+            this.btnImprimirCambio.Size = new System.Drawing.Size(134, 34);
+            this.btnImprimirCambio.TabIndex = 14;
+            this.btnImprimirCambio.Text = "Reimprimir Cambio";
+            this.btnImprimirCambio.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnImprimirCambio.UseVisualStyleBackColor = true;
+            this.btnImprimirCambio.Visible = false;
+            this.btnImprimirCambio.Click += new System.EventHandler(this.btnImprimirCambio_Click);
             // 
-            // btnQuitar
+            // chkbxCambio
             // 
-            this.btnQuitar.Image = ((System.Drawing.Image)(resources.GetObject("btnQuitar.Image")));
-            this.btnQuitar.Location = new System.Drawing.Point(115, 249);
-            this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(93, 33);
-            this.btnQuitar.TabIndex = 1;
-            this.btnQuitar.Text = "Quitar";
-            this.btnQuitar.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnQuitar.UseVisualStyleBackColor = true;
-            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
-            // 
-            // btnBuscarCliente
-            // 
-            this.btnBuscarCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscarCliente.Image")));
-            this.btnBuscarCliente.Location = new System.Drawing.Point(252, 61);
-            this.btnBuscarCliente.Name = "btnBuscarCliente";
-            this.btnBuscarCliente.Size = new System.Drawing.Size(69, 29);
-            this.btnBuscarCliente.TabIndex = 1;
-            this.btnBuscarCliente.Text = "Buscar";
-            this.btnBuscarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnBuscarCliente.UseVisualStyleBackColor = true;
-            this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
+            this.chkbxCambio.AutoSize = true;
+            this.chkbxCambio.Location = new System.Drawing.Point(8, 518);
+            this.chkbxCambio.Name = "chkbxCambio";
+            this.chkbxCambio.Size = new System.Drawing.Size(146, 17);
+            this.chkbxCambio.TabIndex = 15;
+            this.chkbxCambio.Text = "Imprimir Ticket de cambio";
+            this.chkbxCambio.UseVisualStyleBackColor = true;
             // 
             // frmVenta
             // 
@@ -543,6 +568,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(861, 554);
+            this.Controls.Add(this.chkbxCambio);
+            this.Controls.Add(this.btnImprimirCambio);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReimprimir);
             this.Controls.Add(this.btnFacturar);
@@ -623,5 +650,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnReimprimir;
+        private System.Windows.Forms.Button btnImprimirCambio;
+        private System.Windows.Forms.CheckBox chkbxCambio;
     }
 }
