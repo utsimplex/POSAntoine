@@ -188,9 +188,13 @@ namespace UI.Desktop.CuentasCorrientes
             {
                 foreach(DataGridViewRow row in dgvFacturas.SelectedRows)
                 {
+                    if(Convert.ToDecimal(row.Cells["Pendiente"].Value)>0)
+                    {
                     cuentaCorrienteSeleccionada.Add(cuentaCorrienteList.First(x => x.Venta == (int)row.Cells["Venta"].Value));
                     montoAPagar += Convert.ToDecimal(row.Cells["Pendiente"].Value);
                     facturasSeleccionadas += String.IsNullOrEmpty(facturasSeleccionadas)? row.Cells["Venta"].Value.ToString(): " - "+ row.Cells["Venta"].Value.ToString();
+                    
+                    }
                 }
                 if (montoAPagar > 0)
                 {
@@ -206,6 +210,10 @@ namespace UI.Desktop.CuentasCorrientes
                         MontoRecibido = formRecibePago.montoIngresado,
                         NumeroDocumentoCliente = clienteActual.NumeroDocumento
                     };
+                    foreach(CuentaCorriente cuentaCorriente in cuentaCorrienteSeleccionada)
+                    {
+                        ActualizaFactura(cuentaCorriente.Venta, cuentaCorriente.Pendiente, true);
+                    }
                     RegistrarPagoCuentaCorriente();
                     if (formRecibePago.MedioDePago.ToLower() == "efectivo")
                         GuardarPago();
@@ -243,7 +251,7 @@ namespace UI.Desktop.CuentasCorrientes
                     NumeroDocumentoCliente = clienteActual.NumeroDocumento
                 };
                 RegistrarPagoCuentaCorriente();
-                if(formRecibePago.MedioDePago.ToLower()=="efectivo")
+                if (formRecibePago.MedioDePago.ToLower()=="efectivo")
                 GuardarPago();
 
                 ImprimirPago();
