@@ -36,6 +36,7 @@
             this.configuracionesGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditarMiUsuario = new System.Windows.Forms.ToolStripMenuItem();
+            this.cargarCódigosDeBarraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuracionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parametrosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +92,6 @@
             this.btnCajaExtraer = new System.Windows.Forms.Button();
             this.btnCajaIngresar = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
-            this.cargarCódigosDeBarraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msnPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -158,6 +158,13 @@
             this.mnuEditarMiUsuario.Text = "Editar mi usuario";
             this.mnuEditarMiUsuario.Click += new System.EventHandler(this.mnuEditarMiUsuario_Click);
             // 
+            // cargarCódigosDeBarraToolStripMenuItem
+            // 
+            this.cargarCódigosDeBarraToolStripMenuItem.Name = "cargarCódigosDeBarraToolStripMenuItem";
+            this.cargarCódigosDeBarraToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.cargarCódigosDeBarraToolStripMenuItem.Text = "Cargar códigos de barra";
+            this.cargarCódigosDeBarraToolStripMenuItem.Click += new System.EventHandler(this.cargarCódigosDeBarraToolStripMenuItem_Click);
+            // 
             // configuracionesDeEmpresaToolStripMenuItem
             // 
             this.configuracionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -180,6 +187,7 @@
             this.seguridadToolStripMenuItem.Name = "seguridadToolStripMenuItem";
             this.seguridadToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.seguridadToolStripMenuItem.Text = "Seguridad";
+            this.seguridadToolStripMenuItem.Visible = false;
             // 
             // copiaDeSeguridadToolStripMenuItem
             // 
@@ -192,39 +200,40 @@
             this.copiaDeSeguridadToolStripMenuItem.Name = "copiaDeSeguridadToolStripMenuItem";
             this.copiaDeSeguridadToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.copiaDeSeguridadToolStripMenuItem.Text = "Crear Copia de Seguridad";
+            this.copiaDeSeguridadToolStripMenuItem.Visible = false;
             // 
             // artículosToolStripMenuItem
             // 
             this.artículosToolStripMenuItem.Name = "artículosToolStripMenuItem";
-            this.artículosToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.artículosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.artículosToolStripMenuItem.Text = "Artículos";
             this.artículosToolStripMenuItem.Click += new System.EventHandler(this.artículosToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // comprobantesToolStripMenuItem
             // 
             this.comprobantesToolStripMenuItem.Name = "comprobantesToolStripMenuItem";
-            this.comprobantesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.comprobantesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.comprobantesToolStripMenuItem.Text = "Comprobantes";
             this.comprobantesToolStripMenuItem.Click += new System.EventHandler(this.comprobantesToolStripMenuItem_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
-            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.proveedoresToolStripMenuItem.Text = "Proveedores";
             this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // backUpCOMPETOToolStripMenuItem
             // 
             this.backUpCOMPETOToolStripMenuItem.Name = "backUpCOMPETOToolStripMenuItem";
-            this.backUpCOMPETOToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.backUpCOMPETOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backUpCOMPETOToolStripMenuItem.Text = "Back up COMPETO";
             this.backUpCOMPETOToolStripMenuItem.Click += new System.EventHandler(this.backUpCOMPETOToolStripMenuItem_Click);
             // 
@@ -741,13 +750,6 @@
             this.btnCerrarCaja.UseVisualStyleBackColor = true;
             this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
-            // cargarCódigosDeBarraToolStripMenuItem
-            // 
-            this.cargarCódigosDeBarraToolStripMenuItem.Name = "cargarCódigosDeBarraToolStripMenuItem";
-            this.cargarCódigosDeBarraToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.cargarCódigosDeBarraToolStripMenuItem.Text = "Cargar códigos de barra";
-            this.cargarCódigosDeBarraToolStripMenuItem.Click += new System.EventHandler(this.cargarCódigosDeBarraToolStripMenuItem_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -766,7 +768,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msnPrincipal;
             this.Name = "frmMain";
-            this.Text = "utsimplex - Antoine";
+            this.Text = "utsimplex - POS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.msnPrincipal.ResumeLayout(false);

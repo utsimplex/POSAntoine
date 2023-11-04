@@ -101,15 +101,25 @@ namespace UI.Desktop.Artículos
         private void ActualizarLista()
         {
             this.dgvArticulos.DataSource = Datos_ArticulosAdapter.GetAll();
-            this.dgvArticulos.Columns["codigo"].HeaderText = "Código";
+            // ocultar todas las columnas salvo codigo y descripcion
+            for (int i = 0; i < dgvArticulos.ColumnCount; i++)
+            {
+                if (dgvArticulos.Columns[i].HeaderText != "Codigo" && dgvArticulos.Columns[i].HeaderText != "Descripcion")
+                {
+                    dgvArticulos.Columns[i].Visible = false;
+                }
+            }
+            this.dgvArticulos.Columns["codigo"].HeaderText = "Codigo";
             this.dgvArticulos.Columns["descripcion"].HeaderText = "Descripción";
             this.dgvArticulos.Columns["codigo"].Width = 130;
             this.dgvArticulos.Columns["descripcion"].Width = 310;
-            this.dgvArticulos.Columns["stock"].Visible = false;
-            this.dgvArticulos.Columns["stockmin"].Visible = false;
-            this.dgvArticulos.Columns["precio"].Visible = false;
-            this.dgvArticulos.Columns["proveedor"].Visible = false;
-            this.dgvArticulos.Columns["habilitado"].Visible = false;
+            //this.dgvArticulos.Columns["stock"].Visible = false;
+            //this.dgvArticulos.Columns["stockmin"].Visible = false;
+            //this.dgvArticulos.Columns["precio"].Visible = false;
+            //this.dgvArticulos.Columns["proveedor"].Visible = false;
+            //this.dgvArticulos.Columns["habilitado"].Visible = false;
+            
+           
             
         }
         

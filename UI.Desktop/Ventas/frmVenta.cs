@@ -420,7 +420,7 @@ namespace UI.Desktop.Ventas
             //Titulo de las columnas
             this.dgvArticulosVtaActual.Columns["descuento"].HeaderText = "Descuento ($)";
             this.dgvArticulosVtaActual.Columns["descuento"].DefaultCellStyle.Format = "c";
-            this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].HeaderText = "Descuento ($)";
+            this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].HeaderText = "Descuento (%)";
             this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].DefaultCellStyle.Format = "#.\\%";
             this.dgvArticulosVtaActual.Columns["CodigoArticulo"].HeaderText = "Código";
             this.dgvArticulosVtaActual.Columns["DescripcionArticulo"].HeaderText = "Descripción";
@@ -439,10 +439,17 @@ namespace UI.Desktop.Ventas
         //Configura Ancho de columnas de la grilla de articulos a vender.
         private void ConfigurarAnchoColumnas()
         {
+            this.dgvArticulosVtaActual.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvArticulosVtaActual.Columns["DescripcionArticulo"].Width = 200;
             this.dgvArticulosVtaActual.Columns["Cantidad"].Width = 65;
+            this.dgvArticulosVtaActual.Columns["codigoArticulo"].Width = 70;
+            this.dgvArticulosVtaActual.Columns["descuento"].Width = 65;
+            this.dgvArticulosVtaActual.Columns["descuento_porcentaje"].Width = 65;
+            this.dgvArticulosVtaActual.Columns["Precio"].Width = 65;
+            this.dgvArticulosVtaActual.Columns["subtotal"].Width = 90;
+
             //Establecer Subtotal como ultima columna.
-//            this.dgvArticulosVtaActual.Columns["Subtotal"].DisplayIndex = 5;
+            //            this.dgvArticulosVtaActual.Columns["Subtotal"].DisplayIndex = 5;
             //Ocultar columnas innecesarias
             this.dgvArticulosVtaActual.Columns["NumeroVenta"].Visible = false;
         }
@@ -911,6 +918,7 @@ namespace UI.Desktop.Ventas
             lblDireccion.Text = parametrosEmpresa.Direccion;
             lblNombreNegocio.Text = parametrosEmpresa.Nombre;
             lblTelefono.Text = parametrosEmpresa.Telefono;
+
         }
         private void ObtieneClienteGenerico()
         {

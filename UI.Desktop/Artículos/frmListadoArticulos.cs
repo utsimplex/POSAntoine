@@ -35,6 +35,8 @@ namespace UI.Desktop.Artículos
 
 
 
+            this.btnExportar.Visible = false;
+            this.btnImportar.Visible = false;
 
         }
 
@@ -59,7 +61,8 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["codigobarras"].Width = 120;
             rol = usr.Rol;
 
-
+            this.btnExportar.Visible = false;
+            this.btnImportar.Visible = false;
 
         }
 
@@ -511,12 +514,14 @@ namespace UI.Desktop.Artículos
                 btnImportar.Visible = false;
                 btnSeleccionar.Visible = true;
                 dgvListado.TabStop = true;
+                this.Size = new Size(1300, 360);
+                this.Location = new Point(0, 0);
             }
             else
             {
                 btnEliminar.Visible = true;
-                btnExportar.Visible = true;
-                btnImportar.Visible = true;
+                btnExportar.Visible = false;
+                btnImportar.Visible = false;
                 btnSeleccionar.Visible = false;
                 listaProveedoresExistentes = DatosProveedorAdapter.GetListadoNombres();
 

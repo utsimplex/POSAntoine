@@ -354,6 +354,17 @@ namespace UI.Desktop.Artículos
 
             txtCampoPersonalizado1.Text = artiToEdit.CampoPersonalizado1;
             txtCampoPersonalizado2.Text = artiToEdit.CampoPersonalizado2;
+
+            if(artiToEdit.Habilitado == "No")
+            {
+                this.chbEliminado.Checked = true;
+                this.chbEliminado.Visible = true;
+            }
+            else
+            {
+                this.chbEliminado.Checked = false;
+                this.chbEliminado.Visible = false;
+            }
             
                       
         }

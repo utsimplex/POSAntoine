@@ -34,20 +34,20 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.cbxFiltroProveedor = new System.Windows.Forms.ComboBox();
             this.cbxFiltroFamilia1 = new System.Windows.Forms.ComboBox();
+            this.cbxFiltroFamilia2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnMostrarTodos = new System.Windows.Forms.Button();
             this.btnActualizarPrecios = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.cbxFiltroFamilia2 = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbxFiltro
@@ -63,13 +63,11 @@
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.btnMostrarTodos);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.btnSeleccionar);
             this.groupBox2.Location = new System.Drawing.Point(5, 2);
             this.groupBox2.Size = new System.Drawing.Size(1011, 46);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.Text = "Búsqueda";
             this.groupBox2.Controls.SetChildIndex(this.tbxFiltro, 0);
-            this.groupBox2.Controls.SetChildIndex(this.btnSeleccionar, 0);
             this.groupBox2.Controls.SetChildIndex(this.label1, 0);
             this.groupBox2.Controls.SetChildIndex(this.btnMostrarTodos, 0);
             this.groupBox2.Controls.SetChildIndex(this.panel1, 0);
@@ -79,12 +77,14 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnActualizarPrecios);
+            this.groupBox1.Controls.Add(this.btnSeleccionar);
             this.groupBox1.Location = new System.Drawing.Point(1088, 0);
             this.groupBox1.Size = new System.Drawing.Size(183, 547);
             this.groupBox1.Controls.SetChildIndex(this.btnSalir, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnImportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnAñadirNuevo, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnExportar, 0);
+            this.groupBox1.Controls.SetChildIndex(this.btnSeleccionar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnEliminar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnActualizarPrecios, 0);
@@ -112,6 +112,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImportar.Location = new System.Drawing.Point(16, 256);
             this.toolTip1.SetToolTip(this.btnImportar, "Añade artículos a la grilla, desde un archivo de Excel.");
+            this.btnImportar.Visible = false;
             this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
             // btnSalir
@@ -129,6 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportar.Location = new System.Drawing.Point(16, 204);
             this.toolTip1.SetToolTip(this.btnExportar, "Crea un archivo de Excel con todos los artículos de la grilla.");
+            this.btnExportar.Visible = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnAñadirNuevo
@@ -144,9 +146,9 @@
             // 
             this.btnSeleccionar.Image = ((System.Drawing.Image)(resources.GetObject("btnSeleccionar.Image")));
             this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSeleccionar.Location = new System.Drawing.Point(516, 12);
+            this.btnSeleccionar.Location = new System.Drawing.Point(16, 177);
             this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(136, 30);
+            this.btnSeleccionar.Size = new System.Drawing.Size(150, 46);
             this.btnSeleccionar.TabIndex = 28;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -174,6 +176,16 @@
             this.cbxFiltroFamilia1.Size = new System.Drawing.Size(168, 21);
             this.cbxFiltroFamilia1.TabIndex = 31;
             this.toolTip1.SetToolTip(this.cbxFiltroFamilia1, "Familia a Filtrar");
+            // 
+            // cbxFiltroFamilia2
+            // 
+            this.cbxFiltroFamilia2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFiltroFamilia2.FormattingEnabled = true;
+            this.cbxFiltroFamilia2.Location = new System.Drawing.Point(3, 3);
+            this.cbxFiltroFamilia2.Name = "cbxFiltroFamilia2";
+            this.cbxFiltroFamilia2.Size = new System.Drawing.Size(168, 21);
+            this.cbxFiltroFamilia2.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.cbxFiltroFamilia2, "Familia a Filtrar");
             // 
             // label1
             // 
@@ -218,6 +230,14 @@
             this.panel1.Size = new System.Drawing.Size(555, 30);
             this.panel1.TabIndex = 32;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.cbxFiltroFamilia2);
+            this.panel4.Location = new System.Drawing.Point(363, 2);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(181, 27);
+            this.panel4.TabIndex = 36;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.cbxFiltroFamilia1);
@@ -234,24 +254,6 @@
             this.panel2.Size = new System.Drawing.Size(167, 27);
             this.panel2.TabIndex = 33;
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.cbxFiltroFamilia2);
-            this.panel4.Location = new System.Drawing.Point(363, 2);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(181, 27);
-            this.panel4.TabIndex = 36;
-            // 
-            // cbxFiltroFamilia2
-            // 
-            this.cbxFiltroFamilia2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxFiltroFamilia2.FormattingEnabled = true;
-            this.cbxFiltroFamilia2.Location = new System.Drawing.Point(3, 3);
-            this.cbxFiltroFamilia2.Name = "cbxFiltroFamilia2";
-            this.cbxFiltroFamilia2.Size = new System.Drawing.Size(168, 21);
-            this.cbxFiltroFamilia2.TabIndex = 31;
-            this.toolTip1.SetToolTip(this.cbxFiltroFamilia2, "Familia a Filtrar");
-            // 
             // frmListadoArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,9 +267,9 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

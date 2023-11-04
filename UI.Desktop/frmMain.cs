@@ -1113,6 +1113,8 @@ namespace UI.Desktop
                 if(this.parametrosEmpresa.FondoPantalla != null && this.parametrosEmpresa.FondoPantalla != "")
                 {
                     this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
+                    MessageBox.Show("Se ha cambiado el fondo de pantalla. Reinicie la aplicación para ver los cambios", "Fondo de pantalla", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
             }
         }
