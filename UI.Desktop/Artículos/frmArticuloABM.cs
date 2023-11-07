@@ -252,8 +252,19 @@ namespace UI.Desktop.Artículos
                     artiToEdit.Precio = Math.Round(Convert.ToDecimal(txtPrecio.Text), 2);
                 artiToEdit.StockMin = Convert.ToInt32(txtStockMin.Text);
                 artiToEdit.Stock = Convert.ToInt32(txtStock.Text);
-                artiToEdit.Familia1.id = (int)cbxFamilia1.SelectedValue;
-                    if(txtCosto.Text != "")
+                
+                    
+                    
+                    
+
+                    if (lblFamilia1Nombre.Text != "")
+                    {
+                        artiToEdit.Familia1.id = (int)cbxFamilia1.SelectedValue;
+                    }
+
+
+
+                    if (txtCosto.Text != "")
                     {
                     artiToEdit.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
                     }else
@@ -261,8 +272,15 @@ namespace UI.Desktop.Artículos
                         artiToEdit.Costo = 0;
                     }
                     if(cbxFamilia2.Visible)
-                artiToEdit.Familia2.id = (int)cbxFamilia2.SelectedValue;
-                artiToEdit.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
+
+
+                        if (lblFamilia2Nombre.Text != "")
+                        {
+                            artiToEdit.Familia2.id = (int)cbxFamilia2.SelectedValue;
+                        }
+
+
+                    artiToEdit.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
                     artiToEdit.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
                     artiToEdit.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();
 

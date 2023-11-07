@@ -516,10 +516,14 @@ namespace UI.Desktop.Artículos
                 dgvListado.TabStop = true;
                 this.Size = new Size(1300, 360);
                 //this.Location = new Point(0, 0);
-                this.StartPosition = FormStartPosition.Manual;
-                this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Width) / 2, 0);
-                
 
+                // PEGADO AL BORDE SUPERIOR
+                //this.StartPosition = FormStartPosition.Manual;
+                //this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Width) / 2, 0);
+
+                // PEGADO AL BORDE INFERIOR
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Width) / 2, Screen.PrimaryScreen.Bounds.Height - this.Height -40);
             }
             else
             {
