@@ -183,14 +183,21 @@ namespace UI.Desktop.Artículos
                         Articulo.StockMin = Convert.ToInt32(txtStockMin.Text.Trim());
                         Articulo.Precio = String.IsNullOrEmpty(txtPrecio.Text.Trim())?0:Convert.ToDecimal(txtPrecio.Text.Trim());
                         Articulo.Proveedor = cbxProveedor.SelectedItem.ToString();
+                        if(lblFamilia1Nombre.Text != "")
+                        {
                         Articulo.Familia1.id = (int)cbxFamilia1.SelectedValue;
+                        }
                         if(txtCosto.Text != ""){
                             Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
                         }else
                         {
                             Articulo.Costo = 0;
                         }
+                        if(lblFamilia2Nombre.Text != "")
+                        {
                         Articulo.Familia2.id = (int)cbxFamilia2.SelectedValue;
+
+                        }
                         Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
                         Articulo.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
                         Articulo.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();

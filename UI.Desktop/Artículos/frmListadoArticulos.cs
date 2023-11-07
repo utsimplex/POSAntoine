@@ -515,7 +515,11 @@ namespace UI.Desktop.Artículos
                 btnSeleccionar.Visible = true;
                 dgvListado.TabStop = true;
                 this.Size = new Size(1300, 360);
-                this.Location = new Point(0, 0);
+                //this.Location = new Point(0, 0);
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Width) / 2, 0);
+                
+
             }
             else
             {

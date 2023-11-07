@@ -120,7 +120,7 @@ namespace UI.Desktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

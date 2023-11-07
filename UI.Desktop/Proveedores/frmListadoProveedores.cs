@@ -20,6 +20,8 @@ namespace UI.Desktop.Proveedores
 
             dgvListado.Columns["Nombre"].HeaderText = "Nombre o Razón Social";
             dgvListado.Columns["Nombre"].Width = 150;
+            this.btnImportar.Visible = false;
+            this.btnExportar.Visible = false;
             
 
         }
@@ -35,6 +37,8 @@ namespace UI.Desktop.Proveedores
             dgvListado.Columns["Nombre"].HeaderText = "Nombre o Razón Social";
             dgvListado.Columns["Nombre"].Width = 150;
             rol = usr.Rol;
+            this.btnImportar.Visible = false;
+            this.btnExportar.Visible = false;
 
         }
 

@@ -36,10 +36,34 @@ namespace Data.Database
                 Comando.Parameters["@MARCA"].Value = arti.Proveedor;
                 Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
                 Comando.Parameters["@HABILITADO"].Value = "Si";
-                Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
-                Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
-                Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
-                Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
+
+
+
+
+                if (arti.Familia1?.id != null)
+                {
+                    Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+                    Comando.Parameters["@FAMILIA"].Value = arti.Familia1.id;
+                }
+                else
+                {
+                    Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
+                    Comando.Parameters["@FAMILIA"].Value = DBNull.Value;
+                }
+
+                if (arti.Familia2?.id != null)
+                {
+                    Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+                    Comando.Parameters["@FAMILIA2"].Value = arti.Familia2.id;
+                }
+                else
+                {
+                    Comando.Parameters.Add(new SqlParameter("@FAMILIA2", SqlDbType.Int));
+                    Comando.Parameters["@FAMILIA2"].Value = DBNull.Value;
+                }
+
+
+
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_BARRAS", SqlDbType.NVarChar));
                 Comando.Parameters["@CODIGO_BARRAS"].Value = String.IsNullOrEmpty(arti.CodigoBarras) ? string.Empty : arti.CodigoBarras;
                 Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));

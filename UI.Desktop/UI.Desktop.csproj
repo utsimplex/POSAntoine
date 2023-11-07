@@ -31,7 +31,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>23</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -725,6 +725,8 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\horizontal-black-monolite-utsimplex.png" />
+    <Content Include="Resources\utsimplex-ico.ico" />
     <None Include="Resources\utsimplex-monolitoytexto-700x700.jpg" />
     <None Include="Resources\splashInhala1.png" />
     <None Include="Resources\document_24.png" />

@@ -13,6 +13,7 @@ using UI.Desktop.Cajas;
 using UI.Desktop.Artículos;
 using Entidades;
 using Data.Database;
+using System.Reflection;
 
 namespace UI.Desktop
 {
@@ -90,6 +91,13 @@ namespace UI.Desktop
                 this.Dispose();
             }
 
+
+            
+
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+         
+
+            this.Text = "utsimplex - POS - Version: "+ version;
         }
 
         // INICIAR SESION
@@ -99,6 +107,8 @@ namespace UI.Desktop
             frmLogin appLogin = new frmLogin();
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
+                bindUINoUser();
+                this.Dispose();
                 return null;
             }
             else
@@ -109,6 +119,7 @@ namespace UI.Desktop
                 return appLogin.usrActual;
                 
             }
+
 
         }
 
@@ -1108,12 +1119,14 @@ namespace UI.Desktop
         {
             Parametros.frmParametros frmParametros =   new Parametros.frmParametros();
             frmParametros.ShowDialog();
+
             if (frmParametros.DialogResult == DialogResult.OK)
             {
                 if(this.parametrosEmpresa.FondoPantalla != null && this.parametrosEmpresa.FondoPantalla != "")
                 {
+
+                    parametrosEmpresa = parametrosEmpresaController.ObtenerParametrosEmpresa();
                     this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
-                    MessageBox.Show("Se ha cambiado el fondo de pantalla. Reinicie la aplicación para ver los cambios", "Fondo de pantalla", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                 }
             }

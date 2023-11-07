@@ -205,35 +205,35 @@
             // artículosToolStripMenuItem
             // 
             this.artículosToolStripMenuItem.Name = "artículosToolStripMenuItem";
-            this.artículosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.artículosToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.artículosToolStripMenuItem.Text = "Artículos";
             this.artículosToolStripMenuItem.Click += new System.EventHandler(this.artículosToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // comprobantesToolStripMenuItem
             // 
             this.comprobantesToolStripMenuItem.Name = "comprobantesToolStripMenuItem";
-            this.comprobantesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.comprobantesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.comprobantesToolStripMenuItem.Text = "Comprobantes";
             this.comprobantesToolStripMenuItem.Click += new System.EventHandler(this.comprobantesToolStripMenuItem_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
-            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.proveedoresToolStripMenuItem.Text = "Proveedores";
             this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // backUpCOMPETOToolStripMenuItem
             // 
             this.backUpCOMPETOToolStripMenuItem.Name = "backUpCOMPETOToolStripMenuItem";
-            this.backUpCOMPETOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backUpCOMPETOToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.backUpCOMPETOToolStripMenuItem.Text = "Back up COMPETO";
             this.backUpCOMPETOToolStripMenuItem.Click += new System.EventHandler(this.backUpCOMPETOToolStripMenuItem_Click);
             // 

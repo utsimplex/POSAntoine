@@ -16,7 +16,8 @@ namespace UI.Desktop.Clientes
         {
             InitializeComponent();
             ActualizarLista();
-            
+            this.btnImportar.Visible = false;
+            this.btnExportar.Visible = false;
         }
 
         public frmListadoClientes(Usuario usr)
@@ -25,6 +26,9 @@ namespace UI.Desktop.Clientes
             ActualizarLista();
             user = usr;
             rol = usr.Rol;
+
+            this.btnImportar.Visible = false;
+            this.btnExportar.Visible = false;
         }
 
 
