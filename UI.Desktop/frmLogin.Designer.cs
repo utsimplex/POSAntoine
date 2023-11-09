@@ -49,7 +49,7 @@
             this.txtPass.Depth = 0;
             this.txtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtPass.LeadingIcon = null;
-            this.txtPass.Location = new System.Drawing.Point(246, 131);
+            this.txtPass.Location = new System.Drawing.Point(254, 131);
             this.txtPass.Margin = new System.Windows.Forms.Padding(4);
             this.txtPass.MaxLength = 50;
             this.txtPass.MouseState = MaterialSkin.MouseState.OUT;
@@ -70,7 +70,7 @@
             this.txtUsuario.Depth = 0;
             this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtUsuario.LeadingIcon = null;
-            this.txtUsuario.Location = new System.Drawing.Point(246, 86);
+            this.txtUsuario.Location = new System.Drawing.Point(254, 86);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsuario.MaxLength = 50;
             this.txtUsuario.MouseState = MaterialSkin.MouseState.OUT;
@@ -89,7 +89,7 @@
             this.label3.Depth = 0;
             this.label3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.label3.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            this.label3.Location = new System.Drawing.Point(159, 141);
+            this.label3.Location = new System.Drawing.Point(167, 141);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.MouseState = MaterialSkin.MouseState.HOVER;
             this.label3.Name = "label3";
@@ -104,7 +104,7 @@
             this.label2.Depth = 0;
             this.label2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.label2.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            this.label2.Location = new System.Drawing.Point(112, 96);
+            this.label2.Location = new System.Drawing.Point(120, 96);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.MouseState = MaterialSkin.MouseState.HOVER;
             this.label2.Name = "label2";
@@ -123,13 +123,14 @@
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.MouseState = MaterialSkin.MouseState.HOVER;
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(482, 41);
+            this.label1.Size = new System.Drawing.Size(497, 41);
             this.label1.TabIndex = 7;
             this.label1.Text = "¡Bienvenido! \r\nPor favor, digite su información de Ingreso";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.54128F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.45872F));
@@ -152,7 +153,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(490, 238);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(505, 275);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // materialDivider1
@@ -164,7 +165,7 @@
             this.materialDivider1.Location = new System.Drawing.Point(3, 57);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
-            this.materialDivider1.Size = new System.Drawing.Size(484, 6);
+            this.materialDivider1.Size = new System.Drawing.Size(499, 6);
             this.materialDivider1.TabIndex = 13;
             this.materialDivider1.Text = "materialDivider1";
             // 
@@ -178,16 +179,16 @@
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.btnCerrar.HighEmphasis = true;
             this.btnCerrar.Icon = global::UI.Desktop.Properties.Resources.back24;
-            this.btnCerrar.Location = new System.Drawing.Point(4, 198);
+            this.btnCerrar.Location = new System.Drawing.Point(4, 209);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCerrar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCerrar.Size = new System.Drawing.Size(234, 36);
+            this.btnCerrar.Size = new System.Drawing.Size(242, 36);
             this.btnCerrar.TabIndex = 12;
             this.btnCerrar.Text = "Cerrar";
-            this.btnCerrar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
-            this.btnCerrar.UseAccentColor = false;
+            this.btnCerrar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCerrar.UseAccentColor = true;
             this.btnCerrar.UseVisualStyleBackColor = true;
             // 
             // btnLogin
@@ -199,12 +200,12 @@
             this.btnLogin.Depth = 0;
             this.btnLogin.HighEmphasis = true;
             this.btnLogin.Icon = global::UI.Desktop.Properties.Resources.Key_24x24;
-            this.btnLogin.Location = new System.Drawing.Point(246, 198);
+            this.btnLogin.Location = new System.Drawing.Point(254, 209);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLogin.Size = new System.Drawing.Size(240, 36);
+            this.btnLogin.Size = new System.Drawing.Size(247, 36);
             this.btnLogin.TabIndex = 11;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -217,7 +218,8 @@
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 305);
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ClientSize = new System.Drawing.Size(511, 342);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerUseColors = true;
@@ -229,6 +231,7 @@
             this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.ShowIcon = false;
+            this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Acceso al sistema";
             this.TopMost = true;

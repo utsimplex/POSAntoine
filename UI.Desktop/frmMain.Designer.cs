@@ -62,11 +62,8 @@
             this.ayudaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.lblPerfil = new MaterialSkin.Controls.MaterialLabel();
             this.lblUserRole = new MaterialSkin.Controls.MaterialLabel();
-            this.lblNombreUsuario = new MaterialSkin.Controls.MaterialLabel();
-            this.lblUsuario = new MaterialSkin.Controls.MaterialLabel();
             this.btnCerrarSesion = new MaterialSkin.Controls.MaterialButton();
             this.NI = new System.Windows.Forms.NotifyIcon(this.components);
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
@@ -75,7 +72,7 @@
             this.txtCajaNro = new MaterialSkin.Controls.MaterialTextBox();
             this.btnCajaExtraer = new MaterialSkin.Controls.MaterialButton();
             this.btnCajaIngresar = new MaterialSkin.Controls.MaterialButton();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panelTabla = new System.Windows.Forms.TableLayoutPanel();
             this.btnCerrarSistema = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -86,15 +83,17 @@
             this.btnListaArticulos = new MaterialSkin.Controls.MaterialButton();
             this.btnCajas = new MaterialSkin.Controls.MaterialButton();
             this.btnVentaNueva = new MaterialSkin.Controls.MaterialButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.mtxtNombreUsuario = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
             this.lblNroCaja = new MaterialSkin.Controls.MaterialLabel();
             this.swAbrirCerrarCaja = new MaterialSkin.Controls.MaterialSwitch();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.msnPrincipal.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.panelTabla.SuspendLayout();
             this.materialCard1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.materialCard2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -356,83 +355,55 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Controls.Add(this.lblPerfil);
-            this.panel1.Controls.Add(this.lblUserRole);
-            this.panel1.Controls.Add(this.lblNombreUsuario);
-            this.panel1.Controls.Add(this.lblUsuario);
-            this.panel1.Controls.Add(this.btnCerrarSesion);
-            this.panel1.Location = new System.Drawing.Point(3, 333);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(172, 161);
-            this.panel1.TabIndex = 11;
-            // 
             // lblPerfil
             // 
+            this.lblPerfil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPerfil.AutoSize = true;
             this.lblPerfil.Depth = 0;
-            this.lblPerfil.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblPerfil.Location = new System.Drawing.Point(7, 59);
+            this.lblPerfil.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblPerfil.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
+            this.lblPerfil.Location = new System.Drawing.Point(4, 240);
             this.lblPerfil.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPerfil.Name = "lblPerfil";
-            this.lblPerfil.Size = new System.Drawing.Size(42, 19);
+            this.lblPerfil.Size = new System.Drawing.Size(24, 13);
             this.lblPerfil.TabIndex = 17;
             this.lblPerfil.Text = "Perfil:";
+            this.lblPerfil.UseAccent = true;
             // 
             // lblUserRole
             // 
+            this.lblUserRole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUserRole.AutoSize = true;
             this.lblUserRole.Depth = 0;
-            this.lblUserRole.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblUserRole.Location = new System.Drawing.Point(18, 78);
+            this.lblUserRole.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblUserRole.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
+            this.lblUserRole.Location = new System.Drawing.Point(34, 239);
             this.lblUserRole.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUserRole.Name = "lblUserRole";
-            this.lblUserRole.Size = new System.Drawing.Size(101, 19);
+            this.lblUserRole.Size = new System.Drawing.Size(64, 13);
             this.lblUserRole.TabIndex = 16;
             this.lblUserRole.Text = "Administrador";
-            // 
-            // lblNombreUsuario
-            // 
-            this.lblNombreUsuario.AutoSize = true;
-            this.lblNombreUsuario.Depth = 0;
-            this.lblNombreUsuario.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNombreUsuario.Location = new System.Drawing.Point(18, 31);
-            this.lblNombreUsuario.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblNombreUsuario.Name = "lblNombreUsuario";
-            this.lblNombreUsuario.Size = new System.Drawing.Size(133, 19);
-            this.lblNombreUsuario.TabIndex = 15;
-            this.lblNombreUsuario.Text = "nombre de usuario";
-            // 
-            // lblUsuario
-            // 
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Depth = 0;
-            this.lblUsuario.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblUsuario.Location = new System.Drawing.Point(7, 10);
-            this.lblUsuario.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(59, 19);
-            this.lblUsuario.TabIndex = 15;
-            this.lblUsuario.Text = "Usuario:";
+            this.lblUserRole.UseAccent = true;
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnCerrarSesion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerrarSesion.AutoSize = false;
             this.btnCerrarSesion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCerrarSesion.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnCerrarSesion.Depth = 0;
             this.btnCerrarSesion.HighEmphasis = true;
             this.btnCerrarSesion.Icon = null;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(4, 112);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(5, 151);
             this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCerrarSesion.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCerrarSesion.Size = new System.Drawing.Size(131, 36);
+            this.btnCerrarSesion.Size = new System.Drawing.Size(165, 41);
             this.btnCerrarSesion.TabIndex = 15;
             this.btnCerrarSesion.Text = "Cerrar sesión";
             this.btnCerrarSesion.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -555,67 +526,68 @@
             this.btnCajaIngresar.UseVisualStyleBackColor = true;
             this.btnCajaIngresar.Click += new System.EventHandler(this.btnCajaIngresar_Click);
             // 
-            // tableLayoutPanel1
+            // panelTabla
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.ColumnCount = 8;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
-            this.tableLayoutPanel1.Controls.Add(this.btnCerrarSistema, 7, 26);
-            this.tableLayoutPanel1.Controls.Add(this.monthCalendar1, 6, 17);
-            this.tableLayoutPanel1.Controls.Add(this.materialCard1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.materialCard2, 6, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 88);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 29;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.81395F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.18605F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1195, 665);
-            this.tableLayoutPanel1.TabIndex = 14;
+            this.panelTabla.BackColor = System.Drawing.Color.Transparent;
+            this.panelTabla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelTabla.ColumnCount = 8;
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
+            this.panelTabla.Controls.Add(this.btnCerrarSistema, 7, 26);
+            this.panelTabla.Controls.Add(this.monthCalendar1, 6, 17);
+            this.panelTabla.Controls.Add(this.materialCard1, 0, 0);
+            this.panelTabla.Controls.Add(this.materialCard2, 6, 0);
+            this.panelTabla.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTabla.Location = new System.Drawing.Point(3, 88);
+            this.panelTabla.Name = "panelTabla";
+            this.panelTabla.RowCount = 29;
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.81395F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.18605F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.panelTabla.Size = new System.Drawing.Size(1195, 665);
+            this.panelTabla.TabIndex = 14;
             // 
             // btnCerrarSistema
             // 
@@ -633,7 +605,7 @@
             this.btnCerrarSistema.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCerrarSistema.Name = "btnCerrarSistema";
             this.btnCerrarSistema.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.tableLayoutPanel1.SetRowSpan(this.btnCerrarSistema, 2);
+            this.panelTabla.SetRowSpan(this.btnCerrarSistema, 2);
             this.btnCerrarSistema.Size = new System.Drawing.Size(146, 36);
             this.btnCerrarSistema.TabIndex = 16;
             this.btnCerrarSistema.Text = "Cerrar el sistema";
@@ -644,8 +616,10 @@
             // 
             // materialCard1
             // 
+            this.materialCard1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.materialCard1, 2);
+            this.panelTabla.SetColumnSpan(this.materialCard1, 2);
             this.materialCard1.Controls.Add(this.tableLayoutPanel2);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -654,36 +628,37 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.tableLayoutPanel1.SetRowSpan(this.materialCard1, 28);
-            this.materialCard1.Size = new System.Drawing.Size(207, 527);
+            this.panelTabla.SetRowSpan(this.materialCard1, 28);
+            this.materialCard1.Size = new System.Drawing.Size(207, 626);
             this.materialCard1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.materialLabel1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.btnListaClientes, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.btnListaProveedores, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.btnHistorialVentas, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.btnListaArticulos, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.btnCajas, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.btnVentaNueva, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 7);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(14, 14);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 9;
+            this.tableLayoutPanel2.RowCount = 8;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 183F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(179, 499);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(179, 595);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // materialLabel1
@@ -804,7 +779,7 @@
             this.btnCajas.Depth = 0;
             this.btnCajas.HighEmphasis = true;
             this.btnCajas.Icon = null;
-            this.btnCajas.Location = new System.Drawing.Point(4, 88);
+            this.btnCajas.Location = new System.Drawing.Point(4, 87);
             this.btnCajas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCajas.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCajas.Name = "btnCajas";
@@ -841,11 +816,57 @@
             this.btnVentaNueva.UseVisualStyleBackColor = true;
             this.btnVentaNueva.Click += new System.EventHandler(this.btnVentaNueva_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnCerrarSesion);
+            this.panel1.Controls.Add(this.lblUserRole);
+            this.panel1.Controls.Add(this.mtxtNombreUsuario);
+            this.panel1.Controls.Add(this.lblPerfil);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 334);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(173, 258);
+            this.panel1.TabIndex = 16;
+            // 
+            // mtxtNombreUsuario
+            // 
+            this.mtxtNombreUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mtxtNombreUsuario.AnimateReadOnly = false;
+            this.mtxtNombreUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtxtNombreUsuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtxtNombreUsuario.Cursor = System.Windows.Forms.Cursors.Help;
+            this.mtxtNombreUsuario.Depth = 0;
+            this.mtxtNombreUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtxtNombreUsuario.HelperText = "Usuario";
+            this.mtxtNombreUsuario.HideSelection = true;
+            this.mtxtNombreUsuario.LeadingIcon = global::UI.Desktop.Properties.Resources.User_32x32;
+            this.mtxtNombreUsuario.Location = new System.Drawing.Point(5, 201);
+            this.mtxtNombreUsuario.MaxLength = 32767;
+            this.mtxtNombreUsuario.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtxtNombreUsuario.Name = "mtxtNombreUsuario";
+            this.mtxtNombreUsuario.PasswordChar = '\0';
+            this.mtxtNombreUsuario.PrefixSuffixText = null;
+            this.mtxtNombreUsuario.ReadOnly = true;
+            this.mtxtNombreUsuario.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtxtNombreUsuario.SelectedText = "";
+            this.mtxtNombreUsuario.SelectionLength = 0;
+            this.mtxtNombreUsuario.SelectionStart = 0;
+            this.mtxtNombreUsuario.ShortcutsEnabled = true;
+            this.mtxtNombreUsuario.Size = new System.Drawing.Size(165, 36);
+            this.mtxtNombreUsuario.TabIndex = 18;
+            this.mtxtNombreUsuario.TabStop = false;
+            this.mtxtNombreUsuario.Text = "username";
+            this.mtxtNombreUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mtxtNombreUsuario.TrailingIcon = null;
+            this.mtxtNombreUsuario.UseSystemPasswordChar = false;
+            this.mtxtNombreUsuario.UseTallSize = false;
+            // 
             // materialCard2
             // 
             this.materialCard2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.materialCard2, 2);
+            this.panelTabla.SetColumnSpan(this.materialCard2, 2);
             this.materialCard2.Controls.Add(this.lblNroCaja);
             this.materialCard2.Controls.Add(this.swAbrirCerrarCaja);
             this.materialCard2.Controls.Add(this.txtCajaFecha);
@@ -858,7 +879,7 @@
             this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard2.Name = "materialCard2";
             this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
-            this.tableLayoutPanel1.SetRowSpan(this.materialCard2, 15);
+            this.panelTabla.SetRowSpan(this.materialCard2, 15);
             this.materialCard2.Size = new System.Drawing.Size(228, 249);
             this.materialCard2.TabIndex = 15;
             // 
@@ -924,7 +945,7 @@
             this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1201, 756);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.panelTabla);
             this.Controls.Add(this.msnPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msnPrincipal;
@@ -934,13 +955,13 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.msnPrincipal.ResumeLayout(false);
             this.msnPrincipal.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.panelTabla.ResumeLayout(false);
+            this.panelTabla.PerformLayout();
             this.materialCard1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.materialCard2.ResumeLayout(false);
             this.materialCard2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -975,7 +996,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem configuracionesGeneralesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem mnuEditarMiUsuario;
         private System.Windows.Forms.ToolStripMenuItem valorizaciónDeInventarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aReponerPorMarcaToolStripMenuItem;
@@ -990,7 +1010,7 @@
         private System.Windows.Forms.ToolStripMenuItem configuracionesDeEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parametrosDeLaEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cargarCódigosDeBarraToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel panelTabla;
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private MaterialSkin.Controls.MaterialButton btnVentaNueva;
@@ -1000,9 +1020,7 @@
         private MaterialSkin.Controls.MaterialButton btnListaProveedores;
         private MaterialSkin.Controls.MaterialButton btnListaClientes;
         private MaterialSkin.Controls.MaterialButton btnCerrarSesion;
-        private MaterialSkin.Controls.MaterialLabel lblUsuario;
         private MaterialSkin.Controls.MaterialLabel lblUserRole;
-        private MaterialSkin.Controls.MaterialLabel lblNombreUsuario;
         private MaterialSkin.Controls.MaterialLabel lblPerfil;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialButton btnCerrarSistema;
@@ -1012,6 +1030,8 @@
         private MaterialSkin.Controls.MaterialLabel lblNroCaja;
         private MaterialSkin.Controls.MaterialButton btnCajaExtraer;
         private MaterialSkin.Controls.MaterialButton btnCajaIngresar;
+        private MaterialSkin.Controls.MaterialTextBox2 mtxtNombreUsuario;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

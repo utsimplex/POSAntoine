@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Data.Database;
 using Entidades;
+using MaterialSkin.Controls;
 using UI.Desktop.Parametros.Articulos;
 
 namespace UI.Desktop.Parametros
 {
-    public partial class frmParametros : Form
+    public partial class frmParametros : MaterialForm
     {
         #region ///***///***///***/// V A R I A B L E S \\\***\\\***\\\***\\\
 

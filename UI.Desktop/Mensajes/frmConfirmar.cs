@@ -15,7 +15,7 @@ namespace UI.Desktop.Mensajes
         public frmConfirmar(string mensaje,string boton)
         {
             InitializeComponent();
-            lblAtencion.Text = mensaje;
+            lblBodyContent.Text = mensaje;
             btnSi.Text = "Si " + boton;
             btnNo.Text = "No " + boton;
         }

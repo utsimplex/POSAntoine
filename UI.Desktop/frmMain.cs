@@ -59,7 +59,7 @@ namespace UI.Desktop
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.DeepOrange400, TextShade.WHITE);
            
         }
@@ -91,7 +91,8 @@ namespace UI.Desktop
             this.Visible = false;
             if(this.parametrosEmpresa.FondoPantalla != null && this.parametrosEmpresa.FondoPantalla != "")
             {
-                this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
+                this.panelTabla.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
+                //this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
             }
             IniciarSesion();
 
@@ -148,7 +149,7 @@ namespace UI.Desktop
             NI.ContextMenu = this.ContextMenu;
 
             NI.ShowBalloonTip(100);
-            lblNombreUsuario.Text = "";
+            mtxtNombreUsuario.Text = "";
             lblUserRole.Text = "";
         }
         
@@ -156,7 +157,7 @@ namespace UI.Desktop
         private void bindUIUsuario()
         {
 
-            lblNombreUsuario.Text = usrActual.usuario;
+            mtxtNombreUsuario.Text = usrActual.usuario;
             lblUserRole.Text = usrActual.Rol;
             if (usrActual.Rol == "Empleado")
             { mnuUsuarios.Visible = false; }
@@ -1138,7 +1139,7 @@ namespace UI.Desktop
                 {
 
                     parametrosEmpresa = parametrosEmpresaController.ObtenerParametrosEmpresa();
-                    this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
+                    this.panelTabla.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
                     
                 }
             }
