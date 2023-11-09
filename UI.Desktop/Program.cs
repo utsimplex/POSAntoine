@@ -7,6 +7,8 @@ namespace UI.Desktop
 {
     static class Program
     {
+        private static frmMain mainForm;
+
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -15,7 +17,31 @@ namespace UI.Desktop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            try
+            {
+                mainForm = new frmMain();
+                Application.Run(mainForm);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            finally
+            {
+                ExitApplication();
+            }
+        }
+
+        public static void ExitApplication()
+        {
+            if (mainForm != null && !mainForm.IsDisposed)
+            {
+                mainForm.Close();
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
     }
 }

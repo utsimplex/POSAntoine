@@ -14,10 +14,12 @@ using UI.Desktop.Artículos;
 using Entidades;
 using Data.Database;
 using System.Reflection;
+using MaterialSkin.Controls;
+using MaterialSkin;
 
 namespace UI.Desktop
 {
-    public partial class frmMain : Form
+    public partial class frmMain : MaterialForm
     {
         #region PROPIEDADES Y ENUMERADORES
 
@@ -48,6 +50,17 @@ namespace UI.Desktop
             //tardar.Abort();
             parametrosEmpresaController = ParametrosEmpresaController.GetInstance();
             parametrosEmpresa = parametrosEmpresaController.ObtenerParametrosEmpresa();
+            AplicarMaterialTheme();
+        }
+
+
+        private void AplicarMaterialTheme()
+        {
+
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Pink200, TextShade.WHITE);
 
         }
 
@@ -75,6 +88,7 @@ namespace UI.Desktop
         {
             bindUINoUser();
 
+            this.Visible = false;
             if(this.parametrosEmpresa.FondoPantalla != null && this.parametrosEmpresa.FondoPantalla != "")
             {
                 this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
@@ -83,12 +97,12 @@ namespace UI.Desktop
 
             if (usrActual != null)
             {
-                //bindUIUsuario();
+                 //bindUIUsuario();
                 
             }
             else
             {
-                this.Dispose();
+                this.Close();
             }
 
 
@@ -116,6 +130,7 @@ namespace UI.Desktop
                 usrActual = appLogin.usrActual;
                 InicializarCaja();
                 bindUIUsuario();
+                this.Visible = true;
                 return appLogin.usrActual;
                 
             }
@@ -1035,6 +1050,7 @@ namespace UI.Desktop
             if (formConfirmar.ShowDialog() == DialogResult.Yes)
             {
                bindUINoUser();
+                this.Visible = false;
                usrActual= IniciarSesion();
             }
         }

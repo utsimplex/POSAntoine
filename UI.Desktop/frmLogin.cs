@@ -10,10 +10,11 @@ using System.Text;
 using System.Windows.Forms;
 using Data.Database;
 using Entidades;
+using MaterialSkin.Controls;
 
 namespace UI.Desktop
 {
-    public partial class frmLogin : Form
+    public partial class frmLogin : MaterialForm
     {
         public frmLogin()
         {
@@ -120,7 +121,34 @@ namespace UI.Desktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            
+            Application.Exit();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            txtUsuario.Text = txtUsuario.Text.ToLower();
+            if (txtUsuario.Text != "" && txtPass.Text != "")
+            {
+                //VALIDATE USERNAME AND PASSWORD
+                if (Datos_UsuarioAdapter.ValidarUsuario(txtUsuario.Text, txtPass.Text))
+                {
+                    //GET USER
+                    Usuario usr = Datos_UsuarioAdapter.GetUsuario(txtUsuario.Text);
+
+
+                    usrActual = Datos_UsuarioAdapter.GetUsuario(txtUsuario.Text);
+                    DialogResult = DialogResult.OK;
+
+                }
+                else // WRONG USER AND PASS
+                {
+                    MessageBox.Show("Usuario y/o Contraseña incorrectos", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El Usuario y la Contraseña no pueden estar vacios", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

@@ -70,8 +70,6 @@
             this.btnCerrarSistema = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblRol = new System.Windows.Forms.Label();
             this.lblRolDeUsuario = new System.Windows.Forms.Label();
             this.lblNombreUsuario = new System.Windows.Forms.Label();
@@ -92,15 +90,20 @@
             this.btnCajaExtraer = new System.Windows.Forms.Button();
             this.btnCajaIngresar = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.msnPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scntCaja)).BeginInit();
             this.scntCaja.Panel1.SuspendLayout();
             this.scntCaja.Panel2.SuspendLayout();
             this.scntCaja.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.materialCard1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // msnPrincipal
@@ -111,9 +114,9 @@
             this.ayudaToolStripMenuItem,
             this.ayudaToolStripMenuItem1,
             this.toolStripMenuItem1});
-            this.msnPrincipal.Location = new System.Drawing.Point(0, 0);
+            this.msnPrincipal.Location = new System.Drawing.Point(3, 64);
             this.msnPrincipal.Name = "msnPrincipal";
-            this.msnPrincipal.Size = new System.Drawing.Size(1107, 24);
+            this.msnPrincipal.Size = new System.Drawing.Size(1101, 24);
             this.msnPrincipal.TabIndex = 0;
             this.msnPrincipal.Text = "menuStrip1";
             // 
@@ -405,7 +408,7 @@
             // 
             this.btnNuevaVenta.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnNuevaVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevaVenta.Image")));
-            this.btnNuevaVenta.Location = new System.Drawing.Point(15, 19);
+            this.btnNuevaVenta.Location = new System.Drawing.Point(17, 19);
             this.btnNuevaVenta.Name = "btnNuevaVenta";
             this.btnNuevaVenta.Size = new System.Drawing.Size(124, 59);
             this.btnNuevaVenta.TabIndex = 7;
@@ -448,12 +451,10 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.Controls.Add(this.btnCerrarSesion);
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.lblUsuario);
+            this.panel1.Controls.Add(this.lblNombreUsuario);
             this.panel1.Controls.Add(this.lblRol);
             this.panel1.Controls.Add(this.lblRolDeUsuario);
-            this.panel1.Controls.Add(this.lblNombreUsuario);
-            this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Location = new System.Drawing.Point(12, 543);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 118);
@@ -461,7 +462,7 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(118, 79);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(7, 82);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(102, 36);
             this.btnCerrarSesion.TabIndex = 14;
@@ -470,28 +471,10 @@
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(112, 118);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(112, 118);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
             // lblRol
             // 
             this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(135, 63);
+            this.lblRol.Location = new System.Drawing.Point(24, 66);
             this.lblRol.Name = "lblRol";
             this.lblRol.Size = new System.Drawing.Size(70, 13);
             this.lblRol.TabIndex = 3;
@@ -501,7 +484,7 @@
             // 
             this.lblRolDeUsuario.AutoSize = true;
             this.lblRolDeUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRolDeUsuario.Location = new System.Drawing.Point(118, 44);
+            this.lblRolDeUsuario.Location = new System.Drawing.Point(7, 47);
             this.lblRolDeUsuario.Name = "lblRolDeUsuario";
             this.lblRolDeUsuario.Size = new System.Drawing.Size(66, 17);
             this.lblRolDeUsuario.TabIndex = 2;
@@ -510,7 +493,7 @@
             // lblNombreUsuario
             // 
             this.lblNombreUsuario.AutoSize = true;
-            this.lblNombreUsuario.Location = new System.Drawing.Point(135, 28);
+            this.lblNombreUsuario.Location = new System.Drawing.Point(24, 31);
             this.lblNombreUsuario.Name = "lblNombreUsuario";
             this.lblNombreUsuario.Size = new System.Drawing.Size(94, 13);
             this.lblNombreUsuario.TabIndex = 1;
@@ -520,7 +503,7 @@
             // 
             this.lblUsuario.AutoSize = true;
             this.lblUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.Location = new System.Drawing.Point(118, 8);
+            this.lblUsuario.Location = new System.Drawing.Point(7, 11);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(57, 17);
             this.lblUsuario.TabIndex = 0;
@@ -535,14 +518,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.btnNuevaVenta);
             this.groupBox1.Controls.Add(this.btnListaClientes);
             this.groupBox1.Controls.Add(this.btnListaArticulos);
             this.groupBox1.Controls.Add(this.btnCajas);
             this.groupBox1.Controls.Add(this.btnHistorialVentas);
             this.groupBox1.Controls.Add(this.btnListaProveedores);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox1.Location = new System.Drawing.Point(12, 39);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox1.Location = new System.Drawing.Point(22, 109);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(152, 414);
             this.groupBox1.TabIndex = 12;
@@ -578,7 +562,7 @@
             this.scntCaja.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.scntCaja.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.scntCaja.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.scntCaja.Location = new System.Drawing.Point(873, 39);
+            this.scntCaja.Location = new System.Drawing.Point(882, 91);
             this.scntCaja.Name = "scntCaja";
             this.scntCaja.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -750,6 +734,103 @@
             this.btnCerrarCaja.UseVisualStyleBackColor = true;
             this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.materialCard1, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(303, 91);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 28;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 570);
+            this.tableLayoutPanel1.TabIndex = 14;
+            // 
+            // materialCard1
+            // 
+            this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tableLayoutPanel1.SetColumnSpan(this.materialCard1, 2);
+            this.materialCard1.Controls.Add(this.tableLayoutPanel2);
+            this.materialCard1.Depth = 0;
+            this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard1.Location = new System.Drawing.Point(14, 14);
+            this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard1.Name = "materialCard1";
+            this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
+            this.tableLayoutPanel1.SetRowSpan(this.materialCard1, 28);
+            this.materialCard1.Size = new System.Drawing.Size(172, 542);
+            this.materialCard1.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.materialButton1, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(14, 14);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(144, 514);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // materialButton1
+            // 
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = null;
+            this.materialButton1.Location = new System.Drawing.Point(4, 6);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton1.Size = new System.Drawing.Size(120, 36);
+            this.materialButton1.TabIndex = 0;
+            this.materialButton1.Text = "Nueva Venta";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -758,13 +839,13 @@
             this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1107, 673);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.scntCaja);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCerrarSistema);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.msnPrincipal);
-            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msnPrincipal;
             this.Name = "frmMain";
@@ -775,14 +856,16 @@
             this.msnPrincipal.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.scntCaja.Panel1.ResumeLayout(false);
             this.scntCaja.Panel1.PerformLayout();
             this.scntCaja.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scntCaja)).EndInit();
             this.scntCaja.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.materialCard1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -820,8 +903,6 @@
         private System.Windows.Forms.ToolStripMenuItem configuracionesGeneralesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.Label lblRolDeUsuario;
         private System.Windows.Forms.Label lblNombreUsuario;
@@ -852,6 +933,10 @@
         private System.Windows.Forms.ToolStripMenuItem configuracionesDeEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parametrosDeLaEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cargarCódigosDeBarraToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }
 
