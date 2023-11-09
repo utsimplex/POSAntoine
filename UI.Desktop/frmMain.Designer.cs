@@ -62,48 +62,41 @@
             this.ayudaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnListaClientes = new System.Windows.Forms.Button();
-            this.btnListaArticulos = new System.Windows.Forms.Button();
-            this.btnListaProveedores = new System.Windows.Forms.Button();
-            this.btnNuevaVenta = new System.Windows.Forms.Button();
-            this.btnHistorialVentas = new System.Windows.Forms.Button();
-            this.btnCerrarSistema = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnCerrarSesion = new System.Windows.Forms.Button();
-            this.lblRol = new System.Windows.Forms.Label();
-            this.lblRolDeUsuario = new System.Windows.Forms.Label();
-            this.lblNombreUsuario = new System.Windows.Forms.Label();
-            this.lblUsuario = new System.Windows.Forms.Label();
+            this.lblPerfil = new MaterialSkin.Controls.MaterialLabel();
+            this.lblUserRole = new MaterialSkin.Controls.MaterialLabel();
+            this.lblNombreUsuario = new MaterialSkin.Controls.MaterialLabel();
+            this.lblUsuario = new MaterialSkin.Controls.MaterialLabel();
+            this.btnCerrarSesion = new MaterialSkin.Controls.MaterialButton();
             this.NI = new System.Windows.Forms.NotifyIcon(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnCajas = new System.Windows.Forms.Button();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.scntCaja = new System.Windows.Forms.SplitContainer();
-            this.txtCajaFecha = new System.Windows.Forms.TextBox();
-            this.lblCajaFecha = new System.Windows.Forms.Label();
-            this.txtCajaNro = new System.Windows.Forms.TextBox();
-            this.lblNroCaja = new System.Windows.Forms.Label();
-            this.lblCajaAbierta = new System.Windows.Forms.Label();
-            this.lblCajaCerrada = new System.Windows.Forms.Label();
-            this.btnAbrirCaja = new System.Windows.Forms.Button();
-            this.btnCajaExtraer = new System.Windows.Forms.Button();
-            this.btnCajaIngresar = new System.Windows.Forms.Button();
-            this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.txtCajaFecha = new MaterialSkin.Controls.MaterialTextBox();
+            this.txtCajaNro = new MaterialSkin.Controls.MaterialTextBox();
+            this.btnCajaExtraer = new MaterialSkin.Controls.MaterialButton();
+            this.btnCajaIngresar = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCerrarSistema = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnListaClientes = new MaterialSkin.Controls.MaterialButton();
+            this.btnListaProveedores = new MaterialSkin.Controls.MaterialButton();
+            this.btnHistorialVentas = new MaterialSkin.Controls.MaterialButton();
+            this.btnListaArticulos = new MaterialSkin.Controls.MaterialButton();
+            this.btnCajas = new MaterialSkin.Controls.MaterialButton();
+            this.btnVentaNueva = new MaterialSkin.Controls.MaterialButton();
+            this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            this.lblNroCaja = new MaterialSkin.Controls.MaterialLabel();
+            this.swAbrirCerrarCaja = new MaterialSkin.Controls.MaterialSwitch();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.msnPrincipal.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scntCaja)).BeginInit();
-            this.scntCaja.Panel1.SuspendLayout();
-            this.scntCaja.Panel2.SuspendLayout();
-            this.scntCaja.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.materialCard1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.materialCard2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // msnPrincipal
@@ -116,7 +109,7 @@
             this.toolStripMenuItem1});
             this.msnPrincipal.Location = new System.Drawing.Point(3, 64);
             this.msnPrincipal.Name = "msnPrincipal";
-            this.msnPrincipal.Size = new System.Drawing.Size(1101, 24);
+            this.msnPrincipal.Size = new System.Drawing.Size(1195, 24);
             this.msnPrincipal.TabIndex = 0;
             this.msnPrincipal.Text = "menuStrip1";
             // 
@@ -363,151 +356,89 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
             // 
-            // btnListaClientes
-            // 
-            this.btnListaClientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnListaClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnListaClientes.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnListaClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnListaClientes.Image")));
-            this.btnListaClientes.Location = new System.Drawing.Point(15, 344);
-            this.btnListaClientes.Name = "btnListaClientes";
-            this.btnListaClientes.Size = new System.Drawing.Size(124, 59);
-            this.btnListaClientes.TabIndex = 2;
-            this.btnListaClientes.Text = "Clientes";
-            this.btnListaClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnListaClientes.UseVisualStyleBackColor = true;
-            this.btnListaClientes.Click += new System.EventHandler(this.btnListaClientes_Click);
-            // 
-            // btnListaArticulos
-            // 
-            this.btnListaArticulos.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnListaArticulos.Image = ((System.Drawing.Image)(resources.GetObject("btnListaArticulos.Image")));
-            this.btnListaArticulos.Location = new System.Drawing.Point(15, 149);
-            this.btnListaArticulos.Name = "btnListaArticulos";
-            this.btnListaArticulos.Size = new System.Drawing.Size(124, 59);
-            this.btnListaArticulos.TabIndex = 4;
-            this.btnListaArticulos.Text = "Artículos";
-            this.btnListaArticulos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnListaArticulos.UseVisualStyleBackColor = true;
-            this.btnListaArticulos.Click += new System.EventHandler(this.btnListaArticulos_Click);
-            // 
-            // btnListaProveedores
-            // 
-            this.btnListaProveedores.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnListaProveedores.Image = ((System.Drawing.Image)(resources.GetObject("btnListaProveedores.Image")));
-            this.btnListaProveedores.Location = new System.Drawing.Point(15, 279);
-            this.btnListaProveedores.Name = "btnListaProveedores";
-            this.btnListaProveedores.Size = new System.Drawing.Size(124, 59);
-            this.btnListaProveedores.TabIndex = 6;
-            this.btnListaProveedores.Text = "Proveedores";
-            this.btnListaProveedores.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnListaProveedores.UseVisualStyleBackColor = true;
-            this.btnListaProveedores.Click += new System.EventHandler(this.btnListaProveedores_Click);
-            // 
-            // btnNuevaVenta
-            // 
-            this.btnNuevaVenta.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnNuevaVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevaVenta.Image")));
-            this.btnNuevaVenta.Location = new System.Drawing.Point(17, 19);
-            this.btnNuevaVenta.Name = "btnNuevaVenta";
-            this.btnNuevaVenta.Size = new System.Drawing.Size(124, 59);
-            this.btnNuevaVenta.TabIndex = 7;
-            this.btnNuevaVenta.Text = "Nueva Venta";
-            this.btnNuevaVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNuevaVenta.UseVisualStyleBackColor = true;
-            this.btnNuevaVenta.Click += new System.EventHandler(this.btnNuevaVenta_Click);
-            // 
-            // btnHistorialVentas
-            // 
-            this.btnHistorialVentas.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHistorialVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnHistorialVentas.Image")));
-            this.btnHistorialVentas.Location = new System.Drawing.Point(15, 214);
-            this.btnHistorialVentas.Name = "btnHistorialVentas";
-            this.btnHistorialVentas.Size = new System.Drawing.Size(124, 59);
-            this.btnHistorialVentas.TabIndex = 8;
-            this.btnHistorialVentas.Text = "Historial de Ventas";
-            this.btnHistorialVentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnHistorialVentas.UseVisualStyleBackColor = true;
-            this.btnHistorialVentas.Click += new System.EventHandler(this.btnHistorialVentas_Click);
-            // 
-            // btnCerrarSistema
-            // 
-            this.btnCerrarSistema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerrarSistema.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCerrarSistema.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnCerrarSistema.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCerrarSistema.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarSistema.Image")));
-            this.btnCerrarSistema.Location = new System.Drawing.Point(944, 602);
-            this.btnCerrarSistema.Name = "btnCerrarSistema";
-            this.btnCerrarSistema.Size = new System.Drawing.Size(151, 59);
-            this.btnCerrarSistema.TabIndex = 9;
-            this.btnCerrarSistema.Text = "Cerrar el sistema";
-            this.btnCerrarSistema.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCerrarSistema.UseVisualStyleBackColor = true;
-            this.btnCerrarSistema.Click += new System.EventHandler(this.btnCerrarSistema_Click);
-            // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Controls.Add(this.btnCerrarSesion);
-            this.panel1.Controls.Add(this.lblUsuario);
+            this.panel1.Controls.Add(this.lblPerfil);
+            this.panel1.Controls.Add(this.lblUserRole);
             this.panel1.Controls.Add(this.lblNombreUsuario);
-            this.panel1.Controls.Add(this.lblRol);
-            this.panel1.Controls.Add(this.lblRolDeUsuario);
-            this.panel1.Location = new System.Drawing.Point(12, 543);
+            this.panel1.Controls.Add(this.lblUsuario);
+            this.panel1.Controls.Add(this.btnCerrarSesion);
+            this.panel1.Location = new System.Drawing.Point(3, 333);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 118);
+            this.panel1.Size = new System.Drawing.Size(172, 161);
             this.panel1.TabIndex = 11;
             // 
-            // btnCerrarSesion
+            // lblPerfil
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(7, 82);
-            this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(102, 36);
-            this.btnCerrarSesion.TabIndex = 14;
-            this.btnCerrarSesion.Text = "Cerrar Sesión";
-            this.btnCerrarSesion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCerrarSesion.UseVisualStyleBackColor = true;
-            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
+            this.lblPerfil.AutoSize = true;
+            this.lblPerfil.Depth = 0;
+            this.lblPerfil.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblPerfil.Location = new System.Drawing.Point(7, 59);
+            this.lblPerfil.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblPerfil.Name = "lblPerfil";
+            this.lblPerfil.Size = new System.Drawing.Size(42, 19);
+            this.lblPerfil.TabIndex = 17;
+            this.lblPerfil.Text = "Perfil:";
             // 
-            // lblRol
+            // lblUserRole
             // 
-            this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(24, 66);
-            this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(70, 13);
-            this.lblRol.TabIndex = 3;
-            this.lblRol.Text = "Administrador";
-            // 
-            // lblRolDeUsuario
-            // 
-            this.lblRolDeUsuario.AutoSize = true;
-            this.lblRolDeUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRolDeUsuario.Location = new System.Drawing.Point(7, 47);
-            this.lblRolDeUsuario.Name = "lblRolDeUsuario";
-            this.lblRolDeUsuario.Size = new System.Drawing.Size(66, 17);
-            this.lblRolDeUsuario.TabIndex = 2;
-            this.lblRolDeUsuario.Text = "Permisos";
+            this.lblUserRole.AutoSize = true;
+            this.lblUserRole.Depth = 0;
+            this.lblUserRole.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblUserRole.Location = new System.Drawing.Point(18, 78);
+            this.lblUserRole.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblUserRole.Name = "lblUserRole";
+            this.lblUserRole.Size = new System.Drawing.Size(101, 19);
+            this.lblUserRole.TabIndex = 16;
+            this.lblUserRole.Text = "Administrador";
             // 
             // lblNombreUsuario
             // 
             this.lblNombreUsuario.AutoSize = true;
-            this.lblNombreUsuario.Location = new System.Drawing.Point(24, 31);
+            this.lblNombreUsuario.Depth = 0;
+            this.lblNombreUsuario.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblNombreUsuario.Location = new System.Drawing.Point(18, 31);
+            this.lblNombreUsuario.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNombreUsuario.Name = "lblNombreUsuario";
-            this.lblNombreUsuario.Size = new System.Drawing.Size(94, 13);
-            this.lblNombreUsuario.TabIndex = 1;
-            this.lblNombreUsuario.Text = "NombreDeUsuario";
+            this.lblNombreUsuario.Size = new System.Drawing.Size(133, 19);
+            this.lblNombreUsuario.TabIndex = 15;
+            this.lblNombreUsuario.Text = "nombre de usuario";
             // 
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.Location = new System.Drawing.Point(7, 11);
+            this.lblUsuario.Depth = 0;
+            this.lblUsuario.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblUsuario.Location = new System.Drawing.Point(7, 10);
+            this.lblUsuario.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(57, 17);
-            this.lblUsuario.TabIndex = 0;
-            this.lblUsuario.Text = "Usuario";
+            this.lblUsuario.Size = new System.Drawing.Size(59, 19);
+            this.lblUsuario.TabIndex = 15;
+            this.lblUsuario.Text = "Usuario:";
+            // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerrarSesion.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCerrarSesion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCerrarSesion.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCerrarSesion.Depth = 0;
+            this.btnCerrarSesion.HighEmphasis = true;
+            this.btnCerrarSesion.Icon = null;
+            this.btnCerrarSesion.Location = new System.Drawing.Point(4, 112);
+            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCerrarSesion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCerrarSesion.Size = new System.Drawing.Size(131, 36);
+            this.btnCerrarSesion.TabIndex = 15;
+            this.btnCerrarSesion.Text = "Cerrar sesión";
+            this.btnCerrarSesion.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCerrarSesion.UseAccentColor = true;
+            this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.materialButton1_Click);
             // 
             // NI
             // 
@@ -516,185 +447,83 @@
             this.NI.Text = "POS - Ut Simplex ";
             this.NI.Visible = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.btnNuevaVenta);
-            this.groupBox1.Controls.Add(this.btnListaClientes);
-            this.groupBox1.Controls.Add(this.btnListaArticulos);
-            this.groupBox1.Controls.Add(this.btnCajas);
-            this.groupBox1.Controls.Add(this.btnHistorialVentas);
-            this.groupBox1.Controls.Add(this.btnListaProveedores);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox1.Location = new System.Drawing.Point(22, 109);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(152, 414);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Menú de Opciones";
-            // 
-            // btnCajas
-            // 
-            this.btnCajas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCajas.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCajas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnCajas.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCajas.Image = global::UI.Desktop.Properties.Resources._3319627_coin_money_banking_transfer_dollar;
-            this.btnCajas.Location = new System.Drawing.Point(15, 84);
-            this.btnCajas.Name = "btnCajas";
-            this.btnCajas.Size = new System.Drawing.Size(124, 59);
-            this.btnCajas.TabIndex = 9;
-            this.btnCajas.Text = "Cajas";
-            this.btnCajas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCajas.UseVisualStyleBackColor = true;
-            this.btnCajas.Click += new System.EventHandler(this.btnCajas_Click);
-            // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.monthCalendar1.Location = new System.Drawing.Point(859, 383);
+            this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.monthCalendar1.Location = new System.Drawing.Point(925, 433);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 13;
-            // 
-            // scntCaja
-            // 
-            this.scntCaja.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.scntCaja.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.scntCaja.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.scntCaja.Location = new System.Drawing.Point(882, 91);
-            this.scntCaja.Name = "scntCaja";
-            this.scntCaja.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // scntCaja.Panel1
-            // 
-            this.scntCaja.Panel1.Controls.Add(this.txtCajaFecha);
-            this.scntCaja.Panel1.Controls.Add(this.lblCajaFecha);
-            this.scntCaja.Panel1.Controls.Add(this.txtCajaNro);
-            this.scntCaja.Panel1.Controls.Add(this.lblNroCaja);
-            this.scntCaja.Panel1.Controls.Add(this.lblCajaAbierta);
-            this.scntCaja.Panel1.Controls.Add(this.lblCajaCerrada);
-            // 
-            // scntCaja.Panel2
-            // 
-            this.scntCaja.Panel2.Controls.Add(this.btnAbrirCaja);
-            this.scntCaja.Panel2.Controls.Add(this.btnCajaExtraer);
-            this.scntCaja.Panel2.Controls.Add(this.btnCajaIngresar);
-            this.scntCaja.Panel2.Controls.Add(this.btnCerrarCaja);
-            this.scntCaja.Size = new System.Drawing.Size(222, 273);
-            this.scntCaja.SplitterDistance = 93;
-            this.scntCaja.TabIndex = 4;
             // 
             // txtCajaFecha
             // 
             this.txtCajaFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCajaFecha.AnimateReadOnly = false;
+            this.txtCajaFecha.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCajaFecha.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtCajaFecha.Depth = 0;
             this.txtCajaFecha.Enabled = false;
-            this.txtCajaFecha.Location = new System.Drawing.Point(89, 69);
+            this.txtCajaFecha.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCajaFecha.Hint = "Fecha";
+            this.txtCajaFecha.LeadingIcon = null;
+            this.txtCajaFecha.Location = new System.Drawing.Point(8, 91);
+            this.txtCajaFecha.MaxLength = 50;
+            this.txtCajaFecha.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCajaFecha.Multiline = false;
             this.txtCajaFecha.Name = "txtCajaFecha";
-            this.txtCajaFecha.Size = new System.Drawing.Size(130, 20);
+            this.txtCajaFecha.Size = new System.Drawing.Size(212, 36);
             this.txtCajaFecha.TabIndex = 16;
-            this.txtCajaFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lblCajaFecha
-            // 
-            this.lblCajaFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCajaFecha.AutoSize = true;
-            this.lblCajaFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCajaFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblCajaFecha.Location = new System.Drawing.Point(26, 70);
-            this.lblCajaFecha.Name = "lblCajaFecha";
-            this.lblCajaFecha.Size = new System.Drawing.Size(57, 17);
-            this.lblCajaFecha.TabIndex = 15;
-            this.lblCajaFecha.Text = "Fecha:";
-            this.lblCajaFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtCajaFecha.Text = "";
+            this.txtCajaFecha.TrailingIcon = null;
+            this.txtCajaFecha.UseTallSize = false;
             // 
             // txtCajaNro
             // 
             this.txtCajaNro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCajaNro.AnimateReadOnly = false;
+            this.txtCajaNro.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCajaNro.Depth = 0;
             this.txtCajaNro.Enabled = false;
-            this.txtCajaNro.Location = new System.Drawing.Point(89, 43);
+            this.txtCajaNro.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCajaNro.Hint = "01234";
+            this.txtCajaNro.LeadingIcon = null;
+            this.txtCajaNro.Location = new System.Drawing.Point(80, 49);
+            this.txtCajaNro.MaxLength = 50;
+            this.txtCajaNro.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCajaNro.Multiline = false;
             this.txtCajaNro.Name = "txtCajaNro";
-            this.txtCajaNro.Size = new System.Drawing.Size(130, 20);
+            this.txtCajaNro.Size = new System.Drawing.Size(140, 36);
             this.txtCajaNro.TabIndex = 14;
-            this.txtCajaNro.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lblNroCaja
-            // 
-            this.lblNroCaja.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNroCaja.AutoSize = true;
-            this.lblNroCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNroCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblNroCaja.Location = new System.Drawing.Point(3, 44);
-            this.lblNroCaja.Name = "lblNroCaja";
-            this.lblNroCaja.Size = new System.Drawing.Size(86, 17);
-            this.lblNroCaja.TabIndex = 11;
-            this.lblNroCaja.Text = "Nro. Caja: ";
-            this.lblNroCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblCajaAbierta
-            // 
-            this.lblCajaAbierta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCajaAbierta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCajaAbierta.ForeColor = System.Drawing.Color.SeaGreen;
-            this.lblCajaAbierta.Location = new System.Drawing.Point(3, 2);
-            this.lblCajaAbierta.Name = "lblCajaAbierta";
-            this.lblCajaAbierta.Size = new System.Drawing.Size(216, 36);
-            this.lblCajaAbierta.TabIndex = 1;
-            this.lblCajaAbierta.Text = "Caja abierta";
-            this.lblCajaAbierta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCajaAbierta.Visible = false;
-            // 
-            // lblCajaCerrada
-            // 
-            this.lblCajaCerrada.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCajaCerrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCajaCerrada.ForeColor = System.Drawing.Color.Tomato;
-            this.lblCajaCerrada.Location = new System.Drawing.Point(3, 2);
-            this.lblCajaCerrada.Name = "lblCajaCerrada";
-            this.lblCajaCerrada.Size = new System.Drawing.Size(216, 36);
-            this.lblCajaCerrada.TabIndex = 0;
-            this.lblCajaCerrada.Text = "Caja cerrada";
-            this.lblCajaCerrada.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnAbrirCaja
-            // 
-            this.btnAbrirCaja.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAbrirCaja.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnAbrirCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnAbrirCaja.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAbrirCaja.Image = global::UI.Desktop.Properties.Resources._3387295_shopping_finance_payment_machine_credit;
-            this.btnAbrirCaja.Location = new System.Drawing.Point(3, 3);
-            this.btnAbrirCaja.Name = "btnAbrirCaja";
-            this.btnAbrirCaja.Size = new System.Drawing.Size(216, 47);
-            this.btnAbrirCaja.TabIndex = 13;
-            this.btnAbrirCaja.Text = "Abrir caja";
-            this.btnAbrirCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAbrirCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAbrirCaja.UseVisualStyleBackColor = true;
-            this.btnAbrirCaja.Click += new System.EventHandler(this.btnAbrirCaja_Click);
+            this.txtCajaNro.Text = "";
+            this.txtCajaNro.TrailingIcon = null;
+            this.txtCajaNro.UseTallSize = false;
             // 
             // btnCajaExtraer
             // 
             this.btnCajaExtraer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCajaExtraer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCajaExtraer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCajaExtraer.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCajaExtraer.Depth = 0;
             this.btnCajaExtraer.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCajaExtraer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnCajaExtraer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCajaExtraer.Image = global::UI.Desktop.Properties.Resources.back32;
-            this.btnCajaExtraer.Location = new System.Drawing.Point(3, 64);
+            this.btnCajaExtraer.HighEmphasis = true;
+            this.btnCajaExtraer.Icon = global::UI.Desktop.Properties.Resources.back32;
+            this.btnCajaExtraer.Location = new System.Drawing.Point(4, 51);
+            this.btnCajaExtraer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCajaExtraer.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCajaExtraer.Name = "btnCajaExtraer";
-            this.btnCajaExtraer.Size = new System.Drawing.Size(216, 47);
+            this.btnCajaExtraer.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCajaExtraer.Size = new System.Drawing.Size(204, 36);
             this.btnCajaExtraer.TabIndex = 15;
             this.btnCajaExtraer.Text = "Extraer $";
             this.btnCajaExtraer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCajaExtraer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCajaExtraer.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCajaExtraer.UseAccentColor = false;
             this.btnCajaExtraer.UseVisualStyleBackColor = true;
             this.btnCajaExtraer.Click += new System.EventHandler(this.btnCajaExtraer_Click);
             // 
@@ -702,50 +531,54 @@
             // 
             this.btnCajaIngresar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCajaIngresar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCajaIngresar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCajaIngresar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCajaIngresar.Depth = 0;
             this.btnCajaIngresar.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCajaIngresar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnCajaIngresar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCajaIngresar.Image = global::UI.Desktop.Properties.Resources.forward32;
-            this.btnCajaIngresar.Location = new System.Drawing.Point(3, 11);
+            this.btnCajaIngresar.HighEmphasis = true;
+            this.btnCajaIngresar.Icon = global::UI.Desktop.Properties.Resources.forward32;
+            this.btnCajaIngresar.Location = new System.Drawing.Point(4, 6);
+            this.btnCajaIngresar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCajaIngresar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCajaIngresar.Name = "btnCajaIngresar";
-            this.btnCajaIngresar.Size = new System.Drawing.Size(216, 47);
+            this.btnCajaIngresar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCajaIngresar.Size = new System.Drawing.Size(204, 33);
             this.btnCajaIngresar.TabIndex = 14;
             this.btnCajaIngresar.Text = "Ingresar $";
             this.btnCajaIngresar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCajaIngresar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCajaIngresar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCajaIngresar.UseAccentColor = false;
             this.btnCajaIngresar.UseVisualStyleBackColor = true;
             this.btnCajaIngresar.Click += new System.EventHandler(this.btnCajaIngresar_Click);
-            // 
-            // btnCerrarCaja
-            // 
-            this.btnCerrarCaja.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerrarCaja.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCerrarCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnCerrarCaja.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCerrarCaja.Image = global::UI.Desktop.Properties.Resources.close_24;
-            this.btnCerrarCaja.Location = new System.Drawing.Point(3, 117);
-            this.btnCerrarCaja.Name = "btnCerrarCaja";
-            this.btnCerrarCaja.Size = new System.Drawing.Size(216, 47);
-            this.btnCerrarCaja.TabIndex = 10;
-            this.btnCerrarCaja.Text = "Cerrar caja";
-            this.btnCerrarCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCerrarCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnCerrarCaja.UseVisualStyleBackColor = true;
-            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnCount = 8;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
+            this.tableLayoutPanel1.Controls.Add(this.btnCerrarSistema, 7, 26);
+            this.tableLayoutPanel1.Controls.Add(this.monthCalendar1, 6, 17);
             this.tableLayoutPanel1.Controls.Add(this.materialCard1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(303, 91);
+            this.tableLayoutPanel1.Controls.Add(this.materialCard2, 6, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 88);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 28;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowCount = 29;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.81395F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.18605F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -767,6 +600,10 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -774,8 +611,36 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 570);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1195, 665);
             this.tableLayoutPanel1.TabIndex = 14;
+            // 
+            // btnCerrarSistema
+            // 
+            this.btnCerrarSistema.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerrarSistema.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCerrarSistema.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCerrarSistema.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCerrarSistema.Depth = 0;
+            this.btnCerrarSistema.ForeColor = System.Drawing.Color.Transparent;
+            this.btnCerrarSistema.HighEmphasis = true;
+            this.btnCerrarSistema.Icon = null;
+            this.btnCerrarSistema.Location = new System.Drawing.Point(1045, 611);
+            this.btnCerrarSistema.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCerrarSistema.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCerrarSistema.Name = "btnCerrarSistema";
+            this.btnCerrarSistema.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.tableLayoutPanel1.SetRowSpan(this.btnCerrarSistema, 2);
+            this.btnCerrarSistema.Size = new System.Drawing.Size(146, 36);
+            this.btnCerrarSistema.TabIndex = 16;
+            this.btnCerrarSistema.Text = "Cerrar el sistema";
+            this.btnCerrarSistema.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCerrarSistema.UseAccentColor = true;
+            this.btnCerrarSistema.UseVisualStyleBackColor = true;
+            this.btnCerrarSistema.Click += new System.EventHandler(this.btnCerrarSistema_Click);
             // 
             // materialCard1
             // 
@@ -790,46 +655,266 @@
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
             this.tableLayoutPanel1.SetRowSpan(this.materialCard1, 28);
-            this.materialCard1.Size = new System.Drawing.Size(172, 542);
+            this.materialCard1.Size = new System.Drawing.Size(207, 527);
             this.materialCard1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.materialButton1, 0, 0);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.materialLabel1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.btnListaClientes, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.btnListaProveedores, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.btnHistorialVentas, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.btnListaArticulos, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnCajas, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnVentaNueva, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(14, 14);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(144, 514);
+            this.tableLayoutPanel2.RowCount = 9;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 183F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(179, 499);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // materialButton1
+            // materialLabel1
             // 
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(4, 6);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(120, 36);
-            this.materialButton1.TabIndex = 0;
-            this.materialButton1.Text = "Nueva Venta";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = false;
-            this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
+            this.materialLabel1.HighEmphasis = true;
+            this.materialLabel1.Location = new System.Drawing.Point(3, 7);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(119, 17);
+            this.materialLabel1.TabIndex = 15;
+            this.materialLabel1.Text = "Menú de Opciones";
+            // 
+            // btnListaClientes
+            // 
+            this.btnListaClientes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnListaClientes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnListaClientes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnListaClientes.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnListaClientes.Depth = 0;
+            this.btnListaClientes.HighEmphasis = true;
+            this.btnListaClientes.Icon = null;
+            this.btnListaClientes.Location = new System.Drawing.Point(4, 287);
+            this.btnListaClientes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnListaClientes.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnListaClientes.Name = "btnListaClientes";
+            this.btnListaClientes.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnListaClientes.Size = new System.Drawing.Size(171, 36);
+            this.btnListaClientes.TabIndex = 5;
+            this.btnListaClientes.Text = "Clientes";
+            this.btnListaClientes.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnListaClientes.UseAccentColor = false;
+            this.btnListaClientes.UseVisualStyleBackColor = true;
+            this.btnListaClientes.Click += new System.EventHandler(this.btnListaClientes_Click);
+            // 
+            // btnListaProveedores
+            // 
+            this.btnListaProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnListaProveedores.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnListaProveedores.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnListaProveedores.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnListaProveedores.Depth = 0;
+            this.btnListaProveedores.HighEmphasis = true;
+            this.btnListaProveedores.Icon = null;
+            this.btnListaProveedores.Location = new System.Drawing.Point(4, 237);
+            this.btnListaProveedores.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnListaProveedores.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnListaProveedores.Name = "btnListaProveedores";
+            this.btnListaProveedores.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnListaProveedores.Size = new System.Drawing.Size(171, 36);
+            this.btnListaProveedores.TabIndex = 4;
+            this.btnListaProveedores.Text = "Proveedores";
+            this.btnListaProveedores.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnListaProveedores.UseAccentColor = false;
+            this.btnListaProveedores.UseVisualStyleBackColor = true;
+            this.btnListaProveedores.Click += new System.EventHandler(this.btnListaProveedores_Click);
+            // 
+            // btnHistorialVentas
+            // 
+            this.btnHistorialVentas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHistorialVentas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnHistorialVentas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHistorialVentas.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnHistorialVentas.Depth = 0;
+            this.btnHistorialVentas.HighEmphasis = true;
+            this.btnHistorialVentas.Icon = null;
+            this.btnHistorialVentas.Location = new System.Drawing.Point(4, 187);
+            this.btnHistorialVentas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnHistorialVentas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnHistorialVentas.Name = "btnHistorialVentas";
+            this.btnHistorialVentas.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnHistorialVentas.Size = new System.Drawing.Size(171, 36);
+            this.btnHistorialVentas.TabIndex = 3;
+            this.btnHistorialVentas.Text = "Historial de Ventas";
+            this.btnHistorialVentas.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnHistorialVentas.UseAccentColor = false;
+            this.btnHistorialVentas.UseVisualStyleBackColor = true;
+            this.btnHistorialVentas.Click += new System.EventHandler(this.btnHistorialVentas_Click);
+            // 
+            // btnListaArticulos
+            // 
+            this.btnListaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnListaArticulos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnListaArticulos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnListaArticulos.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnListaArticulos.Depth = 0;
+            this.btnListaArticulos.HighEmphasis = true;
+            this.btnListaArticulos.Icon = null;
+            this.btnListaArticulos.Location = new System.Drawing.Point(4, 137);
+            this.btnListaArticulos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnListaArticulos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnListaArticulos.Name = "btnListaArticulos";
+            this.btnListaArticulos.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnListaArticulos.Size = new System.Drawing.Size(171, 36);
+            this.btnListaArticulos.TabIndex = 2;
+            this.btnListaArticulos.Text = "Articulos";
+            this.btnListaArticulos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnListaArticulos.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnListaArticulos.UseAccentColor = false;
+            this.btnListaArticulos.UseVisualStyleBackColor = true;
+            this.btnListaArticulos.Click += new System.EventHandler(this.btnListaArticulos_Click);
+            // 
+            // btnCajas
+            // 
+            this.btnCajas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCajas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCajas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCajas.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCajas.Depth = 0;
+            this.btnCajas.HighEmphasis = true;
+            this.btnCajas.Icon = null;
+            this.btnCajas.Location = new System.Drawing.Point(4, 88);
+            this.btnCajas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCajas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCajas.Name = "btnCajas";
+            this.btnCajas.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCajas.Size = new System.Drawing.Size(171, 36);
+            this.btnCajas.TabIndex = 1;
+            this.btnCajas.Text = "Cajas";
+            this.btnCajas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCajas.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCajas.UseAccentColor = false;
+            this.btnCajas.UseVisualStyleBackColor = true;
+            this.btnCajas.Click += new System.EventHandler(this.btnCajas_Click);
+            // 
+            // btnVentaNueva
+            // 
+            this.btnVentaNueva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVentaNueva.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnVentaNueva.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVentaNueva.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnVentaNueva.Depth = 0;
+            this.btnVentaNueva.HighEmphasis = true;
+            this.btnVentaNueva.Icon = global::UI.Desktop.Properties.Resources.Add_32x32;
+            this.btnVentaNueva.Location = new System.Drawing.Point(4, 37);
+            this.btnVentaNueva.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnVentaNueva.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnVentaNueva.Name = "btnVentaNueva";
+            this.btnVentaNueva.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnVentaNueva.Size = new System.Drawing.Size(171, 36);
+            this.btnVentaNueva.TabIndex = 0;
+            this.btnVentaNueva.Text = "Nueva Venta";
+            this.btnVentaNueva.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnVentaNueva.UseAccentColor = false;
+            this.btnVentaNueva.UseVisualStyleBackColor = true;
+            this.btnVentaNueva.Click += new System.EventHandler(this.btnVentaNueva_Click);
+            // 
+            // materialCard2
+            // 
+            this.materialCard2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tableLayoutPanel1.SetColumnSpan(this.materialCard2, 2);
+            this.materialCard2.Controls.Add(this.lblNroCaja);
+            this.materialCard2.Controls.Add(this.swAbrirCerrarCaja);
+            this.materialCard2.Controls.Add(this.txtCajaFecha);
+            this.materialCard2.Controls.Add(this.tableLayoutPanel3);
+            this.materialCard2.Controls.Add(this.txtCajaNro);
+            this.materialCard2.Depth = 0;
+            this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard2.Location = new System.Drawing.Point(953, 14);
+            this.materialCard2.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard2.Name = "materialCard2";
+            this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
+            this.tableLayoutPanel1.SetRowSpan(this.materialCard2, 15);
+            this.materialCard2.Size = new System.Drawing.Size(228, 249);
+            this.materialCard2.TabIndex = 15;
+            // 
+            // lblNroCaja
+            // 
+            this.lblNroCaja.AutoSize = true;
+            this.lblNroCaja.Depth = 0;
+            this.lblNroCaja.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblNroCaja.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            this.lblNroCaja.Location = new System.Drawing.Point(10, 61);
+            this.lblNroCaja.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblNroCaja.Name = "lblNroCaja";
+            this.lblNroCaja.Size = new System.Drawing.Size(64, 17);
+            this.lblNroCaja.TabIndex = 18;
+            this.lblNroCaja.Text = "Nro. Caja:";
+            // 
+            // swAbrirCerrarCaja
+            // 
+            this.swAbrirCerrarCaja.Appearance = System.Windows.Forms.Appearance.Button;
+            this.swAbrirCerrarCaja.AutoSize = true;
+            this.swAbrirCerrarCaja.BackColor = System.Drawing.Color.Transparent;
+            this.swAbrirCerrarCaja.CheckAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.swAbrirCerrarCaja.Checked = true;
+            this.swAbrirCerrarCaja.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.swAbrirCerrarCaja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.swAbrirCerrarCaja.Depth = 0;
+            this.swAbrirCerrarCaja.Location = new System.Drawing.Point(8, 12);
+            this.swAbrirCerrarCaja.Margin = new System.Windows.Forms.Padding(0);
+            this.swAbrirCerrarCaja.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.swAbrirCerrarCaja.MouseState = MaterialSkin.MouseState.HOVER;
+            this.swAbrirCerrarCaja.Name = "swAbrirCerrarCaja";
+            this.swAbrirCerrarCaja.Ripple = true;
+            this.swAbrirCerrarCaja.Size = new System.Drawing.Size(127, 37);
+            this.swAbrirCerrarCaja.TabIndex = 17;
+            this.swAbrirCerrarCaja.Text = "Abrir Caja";
+            this.swAbrirCerrarCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.swAbrirCerrarCaja.UseVisualStyleBackColor = false;
+            this.swAbrirCerrarCaja.Click += new System.EventHandler(this.swAbrirCerrarCaja_Click);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.btnCajaIngresar, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnCajaExtraer, 0, 1);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(8, 135);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(212, 97);
+            this.tableLayoutPanel3.TabIndex = 0;
             // 
             // frmMain
             // 
@@ -838,13 +923,8 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BackgroundImage = global::UI.Desktop.Properties.Resources.fondoAntoineBlack2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1107, 673);
+            this.ClientSize = new System.Drawing.Size(1201, 756);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.scntCaja);
-            this.Controls.Add(this.monthCalendar1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnCerrarSistema);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.msnPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msnPrincipal;
@@ -856,16 +936,15 @@
             this.msnPrincipal.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.scntCaja.Panel1.ResumeLayout(false);
-            this.scntCaja.Panel1.PerformLayout();
-            this.scntCaja.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.scntCaja)).EndInit();
-            this.scntCaja.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.materialCard1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.materialCard2.ResumeLayout(false);
+            this.materialCard2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -894,19 +973,9 @@
         private System.Windows.Forms.ToolStripMenuItem porArtículoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem porFechaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.Button btnListaClientes;
-        private System.Windows.Forms.Button btnListaArticulos;
-        private System.Windows.Forms.Button btnListaProveedores;
-        private System.Windows.Forms.Button btnNuevaVenta;
-        private System.Windows.Forms.Button btnHistorialVentas;
-        private System.Windows.Forms.Button btnCerrarSistema;
         private System.Windows.Forms.ToolStripMenuItem configuracionesGeneralesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblRol;
-        private System.Windows.Forms.Label lblRolDeUsuario;
-        private System.Windows.Forms.Label lblNombreUsuario;
-        private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.ToolStripMenuItem mnuEditarMiUsuario;
         private System.Windows.Forms.ToolStripMenuItem valorizaciónDeInventarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aReponerPorMarcaToolStripMenuItem;
@@ -914,29 +983,35 @@
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaRápidaToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button btnCajas;
-        private System.Windows.Forms.Label lblCajaCerrada;
-        private System.Windows.Forms.SplitContainer scntCaja;
-        private System.Windows.Forms.Label lblCajaAbierta;
-        private System.Windows.Forms.Label lblNroCaja;
-        private System.Windows.Forms.Button btnCerrarCaja;
-        private System.Windows.Forms.Button btnAbrirCaja;
-        private System.Windows.Forms.Label lblCajaFecha;
-        private System.Windows.Forms.TextBox txtCajaNro;
-        private System.Windows.Forms.Button btnCajaExtraer;
-        private System.Windows.Forms.Button btnCajaIngresar;
-        private System.Windows.Forms.TextBox txtCajaFecha;
+        private MaterialSkin.Controls.MaterialTextBox txtCajaNro;
+        private MaterialSkin.Controls.MaterialTextBox txtCajaFecha;
         private System.Windows.Forms.ToolStripMenuItem configuracionesDeEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parametrosDeLaEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cargarCódigosDeBarraToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialButton btnVentaNueva;
+        private MaterialSkin.Controls.MaterialButton btnCajas;
+        private MaterialSkin.Controls.MaterialButton btnListaArticulos;
+        private MaterialSkin.Controls.MaterialButton btnHistorialVentas;
+        private MaterialSkin.Controls.MaterialButton btnListaProveedores;
+        private MaterialSkin.Controls.MaterialButton btnListaClientes;
+        private MaterialSkin.Controls.MaterialButton btnCerrarSesion;
+        private MaterialSkin.Controls.MaterialLabel lblUsuario;
+        private MaterialSkin.Controls.MaterialLabel lblUserRole;
+        private MaterialSkin.Controls.MaterialLabel lblNombreUsuario;
+        private MaterialSkin.Controls.MaterialLabel lblPerfil;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialButton btnCerrarSistema;
+        private MaterialSkin.Controls.MaterialCard materialCard2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private MaterialSkin.Controls.MaterialSwitch swAbrirCerrarCaja;
+        private MaterialSkin.Controls.MaterialLabel lblNroCaja;
+        private MaterialSkin.Controls.MaterialButton btnCajaExtraer;
+        private MaterialSkin.Controls.MaterialButton btnCajaIngresar;
     }
 }
 

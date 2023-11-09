@@ -48,9 +48,9 @@ namespace UI.Desktop
 
             InitializeComponent();
             //tardar.Abort();
+            AplicarMaterialTheme();
             parametrosEmpresaController = ParametrosEmpresaController.GetInstance();
             parametrosEmpresa = parametrosEmpresaController.ObtenerParametrosEmpresa();
-            AplicarMaterialTheme();
         }
 
 
@@ -60,8 +60,8 @@ namespace UI.Desktop
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Pink200, TextShade.WHITE);
-
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.DeepOrange400, TextShade.WHITE);
+           
         }
 
         public void pantalla()
@@ -149,16 +149,15 @@ namespace UI.Desktop
 
             NI.ShowBalloonTip(100);
             lblNombreUsuario.Text = "";
-            lblRol.Text = "";
-            scntCaja.Visible = false;
+            lblUserRole.Text = "";
         }
         
         // Bind UI Usuario
         private void bindUIUsuario()
         {
-            
+
             lblNombreUsuario.Text = usrActual.usuario;
-            lblRol.Text = usrActual.Rol;
+            lblUserRole.Text = usrActual.Rol;
             if (usrActual.Rol == "Empleado")
             { mnuUsuarios.Visible = false; }
 
@@ -175,13 +174,10 @@ namespace UI.Desktop
         {
             Boolean isAbierta = cajaActual != null? true : false;
 
-            lblCajaAbierta.Visible = isAbierta;
-            lblCajaCerrada.Visible = !isAbierta;
-            btnCerrarCaja.Enabled = isAbierta;
-            btnAbrirCaja.Enabled = !isAbierta;
-            btnAbrirCaja.Visible = !isAbierta;
+            swAbrirCerrarCaja.Text = isAbierta ? "Cerrar Caja" : "Abrir Caja";
+            swAbrirCerrarCaja.Checked = isAbierta;
+          
             lblNroCaja.Visible = isAbierta;
-            lblCajaFecha.Visible = isAbierta;
 
             txtCajaFecha.Visible = isAbierta;
             txtCajaNro.Visible = isAbierta;
@@ -190,9 +186,7 @@ namespace UI.Desktop
 
             btnCajaExtraer.Visible = isAbierta;
             btnCajaIngresar.Visible = isAbierta;
-            btnCerrarCaja.Visible = isAbierta;
-            scntCaja.Visible = true;
-            scntCaja.Height = isAbierta ? 273 : 135;
+            
 
         }
 
@@ -210,11 +204,13 @@ namespace UI.Desktop
         }
 
         // CLICK BTN Cajas
+
         private void btnCajas_Click(object sender, EventArgs e)
         {
             Cajas.frmCajas frmCajas = new Cajas.frmCajas(usrActual);
             frmCajas.ShowDialog();
         }
+
 
         // CLICK BTN Lista Articulos
         private void btnListaArticulos_Click(object sender, EventArgs e)
@@ -224,17 +220,12 @@ namespace UI.Desktop
         }
 
         // CLICK BTN Lista Proveedores
-        private void btnListaProveedores_Click(object sender, EventArgs e)
-        {
-
-            Proveedores.frmListadoProveedores frmProveedores = new Proveedores.frmListadoProveedores(usrActual);
-            frmProveedores.ShowDialog();
-        }
+       
 
         // CLICK BTN Nueva Venta
-        private void btnNuevaVenta_Click(object sender, EventArgs e)
+        private void btnVentaNueva_Click(object sender, EventArgs e)
         {
-            if(cajaActual != null)
+            if (cajaActual != null)
             {
                 Ventas.frmVenta formNuevaVenta = new Ventas.frmVenta(usrActual);
                 formNuevaVenta.ShowDialog();
@@ -248,20 +239,23 @@ namespace UI.Desktop
         // CLICK BTN Cerrar SISTEMA
         private void btnCerrarSistema_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Mensajes.frmConfirmar formConfirmar = new Mensajes.frmConfirmar("¿Está seguro que desea cerrar el sistema?", "");
+
+            if (formConfirmar.ShowDialog() == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         // CLICK BTN Historial de ventas
         private void btnHistorialVentas_Click(object sender, EventArgs e)
         {
-
             Ventas.frmHistorialVentas formListaVentas = new UI.Desktop.Ventas.frmHistorialVentas(usrActual);
             formListaVentas.ShowDialog();
 
-
         }
 
-      
+
 
         //TECLAS ACCESO RAPIDO
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -944,7 +938,6 @@ namespace UI.Desktop
                 if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
                 {
                     cajaActual = null;
-                    bindUICaja();
 
                 }
             }
@@ -952,6 +945,7 @@ namespace UI.Desktop
             {
                 MessageBox.Show("No existe una caja abierta. Debe abrirla antes de intentar cerrarla.", "Cerrar caja no permitido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+                    bindUICaja();
         }
        
         //ABRIR CAJA NUEVA
@@ -964,14 +958,15 @@ namespace UI.Desktop
                 if (frmAperturaCaja.ShowDialog() == DialogResult.OK)
                 {
                     cajaActual = frmAperturaCaja.caja;
-                    bindUICaja();
 
                 }
+               
             }
             else
             {
                 MessageBox.Show("Ya existe una caja abierta. Debe cerrarla antes de abrir una nueva.", "Abrir caja no permitido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+                    bindUICaja();
         }
 
         #endregion
@@ -986,6 +981,7 @@ namespace UI.Desktop
         private void artículosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.exportarArtículos();
+
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1154,6 +1150,39 @@ namespace UI.Desktop
             // abrir formulario de carga de codigos de barra
             Artículos.frmActualizarCodigosDeBarra frmCargaCodigosBarra = new UI.Desktop.Artículos.frmActualizarCodigosDeBarra();
             frmCargaCodigosBarra.ShowDialog();
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            Mensajes.frmConfirmar formConfirmar = new Mensajes.frmConfirmar("¿Está seguro que desea cerrar la sesión iniciada?", "");
+
+            if (formConfirmar.ShowDialog() == DialogResult.Yes)
+            {
+                bindUINoUser();
+                this.Visible = false;
+                usrActual = IniciarSesion();
+            }
+        }
+
+        private void btnListaProveedores_Click(object sender, EventArgs e)
+        {
+
+            Proveedores.frmListadoProveedores frmProveedores = new Proveedores.frmListadoProveedores(usrActual);
+            frmProveedores.ShowDialog();
+        }
+
+       
+        private void swAbrirCerrarCaja_Click(object sender, EventArgs e)
+        {
+            if(swAbrirCerrarCaja.Checked == true)
+            {
+                AbrirCajaNueva();
+                swAbrirCerrarCaja.ForeColor = Color.Green;
+            }
+            else
+            {
+                CerrarCaja();
+            }
         }
     }
 }
