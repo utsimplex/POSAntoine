@@ -603,13 +603,13 @@ namespace UI.Desktop.Ventas
             
             Decimal total = Convert.ToDecimal(txtTotal.Text);
 
-            if (txtDcto.Text != "" && txtDcto.Text != "0")
+            if (!String.IsNullOrWhiteSpace(txtDcto.Text) && txtDcto.Text != "0")
             {
                 Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
                 ventaLocal.Descuento = descuentoTotal;
                 txtTotal.Text = (total - descuentoTotal).ToString();
             }
-            else if (txtDctoPesos.Text != "" && txtDctoPesos.Text!="0")
+            else if (!String.IsNullOrWhiteSpace(txtDctoPesos.Text) && txtDctoPesos.Text!="0")
             {
                 Decimal descuentoTotal = Convert.ToDecimal(txtDctoPesos.Text);
                 //Decimal total = Convert.ToDecimal(txtTotal.Text);
@@ -622,11 +622,12 @@ namespace UI.Desktop.Ventas
                 {
                     MessageBox.Show("El monto de descuento es mayor al total. No puede aplicarse", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtDctoPesos.Text = "";
+                    ventaLocal.Descuento = 0;
                 }
             }
             else
             {
-                //ActualizarTotal();
+                ventaLocal.Descuento = 0;
             }
         }
 
