@@ -520,10 +520,10 @@ namespace UI.Desktop.Artículos
                 btnEliminar.Visible = false;
                 btnExportar.Visible = false;
                 btnImportar.Visible = false;
+                btnActualizarPrecios.Visible = false;
                 btnSeleccionar.Visible = true;
                 dgvListado.TabStop = true;
                 this.Size = new Size(1300, 360);
-                //this.Location = new Point(0, 0);
 
                 // PEGADO AL BORDE SUPERIOR
                 //this.StartPosition = FormStartPosition.Manual;
