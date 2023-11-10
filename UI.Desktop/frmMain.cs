@@ -60,8 +60,29 @@ namespace UI.Desktop
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+
+            //Lila y Naranja (BASIC DARK)
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.DeepOrange400, TextShade.WHITE);
-           
+
+            // Lila y Rojenta
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Red400, TextShade.WHITE);
+
+            //Verde y Salmón (INHALA)
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Teal300, Primary.Teal600, Primary.Teal100, Accent.Green700, TextShade.WHITE);
+
+            // Lila y Verde
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.DeepPurple500, Primary.DeepPurple700, Primary.DeepPurple100, Accent.Green400, TextShade.WHITE);
+
+            //Lila y Amarillo Oscuro/Naranja
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.DeepPurple500, Primary.DeepPurple700, Primary.DeepPurple100, Accent.Amber700, TextShade.WHITE);
+
+            // Rosa y Turquesa
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Purple500, Primary.Purple700, Primary.Purple100, Accent.Teal700, TextShade.WHITE);
+
+            // UtSimplex Theme 1
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue500, Primary.Blue700, Primary.Blue100, Accent.LightBlue200, TextShade.WHITE);
+
+
         }
 
         public void pantalla()
