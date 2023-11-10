@@ -131,6 +131,16 @@ namespace UI.Desktop.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _3387295_shopping_finance_payment_machine_credit1 {
+            get {
+                object obj = ResourceManager.GetObject("3387295_shopping_finance_payment_machine_credit1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
         internal static System.Drawing.Icon _case {
@@ -323,6 +333,16 @@ namespace UI.Desktop.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
+        internal static System.Drawing.Icon barcodescannersmall1 {
+            get {
+                object obj = ResourceManager.GetObject("barcodescannersmall1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
         internal static System.Drawing.Icon boss {
             get {
                 object obj = ResourceManager.GetObject("boss", resourceCulture);
@@ -367,6 +387,16 @@ namespace UI.Desktop.Properties {
             get {
                 object obj = ResourceManager.GetObject("box_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon box_321 {
+            get {
+                object obj = ResourceManager.GetObject("box_321", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -567,6 +597,16 @@ namespace UI.Desktop.Properties {
             get {
                 object obj = ResourceManager.GetObject("cart32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon cart321 {
+            get {
+                object obj = ResourceManager.GetObject("cart321", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -827,6 +867,16 @@ namespace UI.Desktop.Properties {
             get {
                 object obj = ResourceManager.GetObject("configure32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon configure321 {
+            get {
+                object obj = ResourceManager.GetObject("configure321", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -1413,6 +1463,36 @@ namespace UI.Desktop.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ico_barcode1 {
+            get {
+                object obj = ResourceManager.GetObject("ico-barcode1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ico_mano_hoja {
+            get {
+                object obj = ResourceManager.GetObject("ico-mano-hoja", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ico_oferta {
+            get {
+                object obj = ResourceManager.GetObject("ico-oferta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap info_16 {
             get {
                 object obj = ResourceManager.GetObject("info_16", resourceCulture);
@@ -1436,16 +1516,6 @@ namespace UI.Desktop.Properties {
         internal static System.Drawing.Bitmap info_32 {
             get {
                 object obj = ResourceManager.GetObject("info_32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap info_48 {
-            get {
-                object obj = ResourceManager.GetObject("info_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1487,6 +1557,16 @@ namespace UI.Desktop.Properties {
             get {
                 object obj = ResourceManager.GetObject("Key_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon Key_24x241 {
+            get {
+                object obj = ResourceManager.GetObject("Key_24x241", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -1731,12 +1811,12 @@ namespace UI.Desktop.Properties {
         }
         
         /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon money {
+        internal static System.Drawing.Bitmap money {
             get {
                 object obj = ResourceManager.GetObject("money", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -2511,6 +2591,16 @@ namespace UI.Desktop.Properties {
             get {
                 object obj = ResourceManager.GetObject("User_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon User_32x321 {
+            get {
+                object obj = ResourceManager.GetObject("User_32x321", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

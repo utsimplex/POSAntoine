@@ -239,6 +239,8 @@ namespace UI.Desktop
         {
             Artículos.frmListadoArticulos frmArticulos = new Artículos.frmListadoArticulos(usrActual);
             frmArticulos.ShowDialog();
+
+
         }
 
         // CLICK BTN Lista Proveedores
@@ -1205,6 +1207,11 @@ namespace UI.Desktop
             {
                 CerrarCaja();
             }
+        }
+
+        private void f12ConsultaRápidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ConsultaRapida();
         }
     }
 }

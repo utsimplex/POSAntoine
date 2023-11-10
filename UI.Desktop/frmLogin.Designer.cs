@@ -49,14 +49,14 @@
             this.txtPass.Depth = 0;
             this.txtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtPass.LeadingIcon = null;
-            this.txtPass.Location = new System.Drawing.Point(263, 131);
+            this.txtPass.Location = new System.Drawing.Point(257, 131);
             this.txtPass.Margin = new System.Windows.Forms.Padding(4);
             this.txtPass.MaxLength = 50;
             this.txtPass.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPass.Multiline = false;
             this.txtPass.Name = "txtPass";
             this.txtPass.Password = true;
-            this.txtPass.Size = new System.Drawing.Size(179, 36);
+            this.txtPass.Size = new System.Drawing.Size(134, 36);
             this.txtPass.TabIndex = 1;
             this.txtPass.Text = "admin";
             this.txtPass.TrailingIcon = null;
@@ -70,13 +70,13 @@
             this.txtUsuario.Depth = 0;
             this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtUsuario.LeadingIcon = null;
-            this.txtUsuario.Location = new System.Drawing.Point(263, 86);
+            this.txtUsuario.Location = new System.Drawing.Point(257, 86);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsuario.MaxLength = 50;
             this.txtUsuario.MouseState = MaterialSkin.MouseState.OUT;
             this.txtUsuario.Multiline = false;
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(179, 36);
+            this.txtUsuario.Size = new System.Drawing.Size(134, 36);
             this.txtUsuario.TabIndex = 0;
             this.txtUsuario.Text = "admin";
             this.txtUsuario.TrailingIcon = null;
@@ -89,7 +89,7 @@
             this.label3.Depth = 0;
             this.label3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.label3.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            this.label3.Location = new System.Drawing.Point(176, 141);
+            this.label3.Location = new System.Drawing.Point(170, 141);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.MouseState = MaterialSkin.MouseState.HOVER;
             this.label3.Name = "label3";
@@ -101,10 +101,11 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
             this.label2.Depth = 0;
             this.label2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.label2.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            this.label2.Location = new System.Drawing.Point(129, 96);
+            this.label2.Location = new System.Drawing.Point(123, 96);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.MouseState = MaterialSkin.MouseState.HOVER;
             this.label2.Name = "label2";
@@ -115,7 +116,7 @@
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 4);
             this.label1.Depth = 0;
             this.label1.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.label1.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
@@ -131,17 +132,19 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.54128F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.45872F));
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtUsuario, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtPass, 1, 4);
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.Controls.Add(this.materialDivider1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtUsuario, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtPass, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnCerrar, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnLogin, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnLogin, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 80);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -153,14 +156,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(524, 298);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(524, 241);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // materialDivider1
             // 
             this.materialDivider1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.materialDivider1, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.materialDivider1, 4);
             this.materialDivider1.Depth = 0;
             this.materialDivider1.Location = new System.Drawing.Point(3, 57);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -179,12 +182,12 @@
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.btnCerrar.HighEmphasis = true;
             this.btnCerrar.Icon = global::UI.Desktop.Properties.Resources.back24;
-            this.btnCerrar.Location = new System.Drawing.Point(4, 221);
+            this.btnCerrar.Location = new System.Drawing.Point(4, 198);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCerrar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCerrar.Size = new System.Drawing.Size(251, 36);
+            this.btnCerrar.Size = new System.Drawing.Size(121, 36);
             this.btnCerrar.TabIndex = 12;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -200,12 +203,12 @@
             this.btnLogin.Depth = 0;
             this.btnLogin.HighEmphasis = true;
             this.btnLogin.Icon = global::UI.Desktop.Properties.Resources.Key_24x24;
-            this.btnLogin.Location = new System.Drawing.Point(263, 221);
+            this.btnLogin.Location = new System.Drawing.Point(399, 198);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLogin.Size = new System.Drawing.Size(257, 36);
+            this.btnLogin.Size = new System.Drawing.Size(121, 36);
             this.btnLogin.TabIndex = 11;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -219,7 +222,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(527, 381);
+            this.ClientSize = new System.Drawing.Size(527, 324);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerUseColors = true;

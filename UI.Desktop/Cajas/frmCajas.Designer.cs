@@ -47,7 +47,12 @@
             // 
             // btnModificar
             // 
+            this.btnModificar.Location = new System.Drawing.Point(16, 19);
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnAñadirNuevo
+            // 
+            this.btnAñadirNuevo.Visible = false;
             // 
             // frmCajas
             // 

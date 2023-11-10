@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListadoUsuarios));
             this.label1 = new System.Windows.Forms.Label();
             this.btnMostrarTodos = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
@@ -93,6 +94,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 495);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmListadoUsuarios";
             this.Text = "Listado de Usuarios";
             this.Load += new System.EventHandler(this.frmListadoUsuarios_Load);

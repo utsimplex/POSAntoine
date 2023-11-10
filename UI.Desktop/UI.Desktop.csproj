@@ -840,6 +840,10 @@
     <None Include="Resources\af.png" />
     <None Include="Resources\afip-32x32.png" />
     <None Include="Resources\afip-transparente.png" />
+    <None Include="Resources\barcodescannersmall.ico" />
+    <None Include="Resources\box_32.ico" />
+    <None Include="Resources\cart32.ico" />
+    <None Include="Resources\configure32.ico" />
     <Content Include="Resources\horizontal-black-monolite-utsimplex.png" />
     <None Include="Resources\separador_verde_horizontal.png" />
     <None Include="Resources\separador_purple_horizontal.png" />
@@ -943,6 +947,14 @@
     <None Include="Resources\open_48.png" />
     <None Include="Resources\utsimplex-ico-16.png" />
     <None Include="Resources\utsimplex-ico-transparent.png" />
+    <None Include="Resources\ico-barcode.ico" />
+    <None Include="Resources\ico-precio.ico" />
+    <None Include="Resources\Key_24x24.ico" />
+    <None Include="Resources\User_32x32.ico" />
+    <None Include="Resources\ico-barcode.png" />
+    <None Include="Resources\ico-mano-hoja.png" />
+    <None Include="Resources\ico-oferta.png" />
+    <None Include="Resources\ico-precio.png" />
     <Content Include="Resources\utsimplex-ico.ico" />
     <None Include="Resources\visa_32.png" />
     <None Include="Resources\wallet.ico" />

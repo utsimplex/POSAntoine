@@ -74,7 +74,7 @@
             // btnEliminar
             // 
             this.btnEliminar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnEliminar.Location = new System.Drawing.Point(11, 312);
+            this.btnEliminar.Location = new System.Drawing.Point(11, 365);
             this.btnEliminar.Size = new System.Drawing.Size(162, 46);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);

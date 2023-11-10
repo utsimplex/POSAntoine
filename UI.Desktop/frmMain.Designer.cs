@@ -32,13 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.msnPrincipal = new System.Windows.Forms.MenuStrip();
             this.mnuArchivo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.configuracionesGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditarMiUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.cargarCódigosDeBarraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuracionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parametrosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiaDeSeguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.artículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,9 +58,9 @@
             this.porArtículoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.porFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.valorizaciónDeInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultaRápidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.f12ConsultaRápidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblPerfil = new MaterialSkin.Controls.MaterialLabel();
             this.lblUserRole = new MaterialSkin.Controls.MaterialLabel();
@@ -115,19 +115,13 @@
             // mnuArchivo
             // 
             this.mnuArchivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSalir,
             this.configuracionesGeneralesToolStripMenuItem,
-            this.configuracionesDeEmpresaToolStripMenuItem});
+            this.configuracionesDeEmpresaToolStripMenuItem,
+            this.mnuSalir});
+            this.mnuArchivo.Image = global::UI.Desktop.Properties.Resources.maintenance32;
             this.mnuArchivo.Name = "mnuArchivo";
-            this.mnuArchivo.Size = new System.Drawing.Size(50, 20);
+            this.mnuArchivo.Size = new System.Drawing.Size(66, 20);
             this.mnuArchivo.Text = "Menu";
-            // 
-            // mnuSalir
-            // 
-            this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(225, 22);
-            this.mnuSalir.Text = "Salir";
-            this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
             // configuracionesGeneralesToolStripMenuItem
             // 
@@ -135,12 +129,14 @@
             this.mnuUsuarios,
             this.mnuEditarMiUsuario,
             this.cargarCódigosDeBarraToolStripMenuItem});
+            this.configuracionesGeneralesToolStripMenuItem.Image = global::UI.Desktop.Properties.Resources.configure64;
             this.configuracionesGeneralesToolStripMenuItem.Name = "configuracionesGeneralesToolStripMenuItem";
             this.configuracionesGeneralesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.configuracionesGeneralesToolStripMenuItem.Text = "Configuraciones generales";
             // 
             // mnuUsuarios
             // 
+            this.mnuUsuarios.Image = global::UI.Desktop.Properties.Resources.User_32x32;
             this.mnuUsuarios.Name = "mnuUsuarios";
             this.mnuUsuarios.Size = new System.Drawing.Size(200, 22);
             this.mnuUsuarios.Text = "Usuarios";
@@ -155,6 +151,7 @@
             // 
             // cargarCódigosDeBarraToolStripMenuItem
             // 
+            this.cargarCódigosDeBarraToolStripMenuItem.Image = global::UI.Desktop.Properties.Resources.ico_barcode1;
             this.cargarCódigosDeBarraToolStripMenuItem.Name = "cargarCódigosDeBarraToolStripMenuItem";
             this.cargarCódigosDeBarraToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.cargarCódigosDeBarraToolStripMenuItem.Text = "Cargar códigos de barra";
@@ -164,6 +161,7 @@
             // 
             this.configuracionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.parametrosDeLaEmpresaToolStripMenuItem});
+            this.configuracionesDeEmpresaToolStripMenuItem.Image = global::UI.Desktop.Properties.Resources._3387295_shopping_finance_payment_machine_credit1;
             this.configuracionesDeEmpresaToolStripMenuItem.Name = "configuracionesDeEmpresaToolStripMenuItem";
             this.configuracionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.configuracionesDeEmpresaToolStripMenuItem.Text = "Configuraciones de Empresa";
@@ -174,6 +172,14 @@
             this.parametrosDeLaEmpresaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.parametrosDeLaEmpresaToolStripMenuItem.Text = "Parametros de la Empresa";
             this.parametrosDeLaEmpresaToolStripMenuItem.Click += new System.EventHandler(this.parametrosDeLaEmpresaToolStripMenuItem_Click);
+            // 
+            // mnuSalir
+            // 
+            this.mnuSalir.Image = global::UI.Desktop.Properties.Resources.close32;
+            this.mnuSalir.Name = "mnuSalir";
+            this.mnuSalir.Size = new System.Drawing.Size(225, 22);
+            this.mnuSalir.Text = "Salir";
+            this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
             // seguridadToolStripMenuItem
             // 
@@ -236,8 +242,7 @@
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.emitirListasToolStripMenuItem,
-            this.valorizaciónDeInventarioToolStripMenuItem,
-            this.consultaRápidaToolStripMenuItem});
+            this.valorizaciónDeInventarioToolStripMenuItem});
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.ayudaToolStripMenuItem.Text = "Informes";
@@ -247,6 +252,7 @@
             this.emitirListasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.artículosToolStripMenuItem1,
             this.comprobantesToolStripMenuItem2});
+            this.emitirListasToolStripMenuItem.Image = global::UI.Desktop.Properties.Resources.document_32;
             this.emitirListasToolStripMenuItem.Name = "emitirListasToolStripMenuItem";
             this.emitirListasToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.emitirListasToolStripMenuItem.Text = "Emitir listas";
@@ -323,24 +329,20 @@
             // 
             // valorizaciónDeInventarioToolStripMenuItem
             // 
+            this.valorizaciónDeInventarioToolStripMenuItem.Image = global::UI.Desktop.Properties.Resources.money;
             this.valorizaciónDeInventarioToolStripMenuItem.Name = "valorizaciónDeInventarioToolStripMenuItem";
             this.valorizaciónDeInventarioToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.valorizaciónDeInventarioToolStripMenuItem.Text = "Valorización de Inventario";
             this.valorizaciónDeInventarioToolStripMenuItem.Click += new System.EventHandler(this.valorizaciónDeInventarioToolStripMenuItem_Click);
             // 
-            // consultaRápidaToolStripMenuItem
-            // 
-            this.consultaRápidaToolStripMenuItem.Name = "consultaRápidaToolStripMenuItem";
-            this.consultaRápidaToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.consultaRápidaToolStripMenuItem.Text = "Consulta rápida";
-            this.consultaRápidaToolStripMenuItem.Click += new System.EventHandler(this.consultaRápidaToolStripMenuItem_Click);
-            // 
             // ayudaToolStripMenuItem1
             // 
             this.ayudaToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.acercaDeToolStripMenuItem});
+            this.acercaDeToolStripMenuItem,
+            this.f12ConsultaRápidaToolStripMenuItem});
+            this.ayudaToolStripMenuItem1.Image = global::UI.Desktop.Properties.Resources.info_32;
             this.ayudaToolStripMenuItem1.Name = "ayudaToolStripMenuItem1";
-            this.ayudaToolStripMenuItem1.Size = new System.Drawing.Size(53, 20);
+            this.ayudaToolStripMenuItem1.Size = new System.Drawing.Size(69, 20);
             this.ayudaToolStripMenuItem1.Text = "Ayuda";
             // 
             // acercaDeToolStripMenuItem
@@ -349,6 +351,13 @@
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.acercaDeToolStripMenuItem.Text = "Información del Software";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            // 
+            // f12ConsultaRápidaToolStripMenuItem
+            // 
+            this.f12ConsultaRápidaToolStripMenuItem.Name = "f12ConsultaRápidaToolStripMenuItem";
+            this.f12ConsultaRápidaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.f12ConsultaRápidaToolStripMenuItem.Text = "F12 - Consulta rápida";
+            this.f12ConsultaRápidaToolStripMenuItem.Click += new System.EventHandler(this.f12ConsultaRápidaToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -421,7 +430,7 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.monthCalendar1.Location = new System.Drawing.Point(940, 433);
+            this.monthCalendar1.Location = new System.Drawing.Point(944, 433);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 13;
             // 
@@ -532,13 +541,13 @@
             this.panelTabla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelTabla.ColumnCount = 8;
             this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
-            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.panelTabla.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.panelTabla.Controls.Add(this.btnCerrarSistema, 7, 26);
             this.panelTabla.Controls.Add(this.monthCalendar1, 6, 17);
             this.panelTabla.Controls.Add(this.materialCard1, 0, 0);
@@ -580,12 +589,6 @@
             this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelTabla.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.panelTabla.Size = new System.Drawing.Size(1195, 665);
             this.panelTabla.TabIndex = 14;
             // 
@@ -600,13 +603,13 @@
             this.btnCerrarSistema.ForeColor = System.Drawing.Color.Transparent;
             this.btnCerrarSistema.HighEmphasis = true;
             this.btnCerrarSistema.Icon = null;
-            this.btnCerrarSistema.Location = new System.Drawing.Point(1045, 611);
+            this.btnCerrarSistema.Location = new System.Drawing.Point(1039, 611);
             this.btnCerrarSistema.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCerrarSistema.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCerrarSistema.Name = "btnCerrarSistema";
             this.btnCerrarSistema.NoAccentTextColor = System.Drawing.Color.Empty;
             this.panelTabla.SetRowSpan(this.btnCerrarSistema, 2);
-            this.btnCerrarSistema.Size = new System.Drawing.Size(146, 36);
+            this.btnCerrarSistema.Size = new System.Drawing.Size(152, 36);
             this.btnCerrarSistema.TabIndex = 16;
             this.btnCerrarSistema.Text = "Cerrar el sistema";
             this.btnCerrarSistema.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -619,7 +622,6 @@
             this.materialCard1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panelTabla.SetColumnSpan(this.materialCard1, 2);
             this.materialCard1.Controls.Add(this.tableLayoutPanel2);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -1002,7 +1004,6 @@
         private System.Windows.Forms.NotifyIcon NI;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consultaRápidaToolStripMenuItem;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private MaterialSkin.Controls.MaterialTextBox txtCajaNro;
@@ -1032,6 +1033,7 @@
         private MaterialSkin.Controls.MaterialButton btnCajaIngresar;
         private MaterialSkin.Controls.MaterialTextBox2 mtxtNombreUsuario;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem f12ConsultaRápidaToolStripMenuItem;
     }
 }
 

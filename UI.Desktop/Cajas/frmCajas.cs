@@ -142,5 +142,21 @@ namespace UI.Desktop.Cajas
                     this.ActualizarListaCajas();
                 }
         }
+
+        //TECLAS ACCESO RAPIDO
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    this.Close();
+                    break;
+
+                default:
+
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }
