@@ -22,18 +22,7 @@ namespace UI.Desktop.Artículos
             parametrosEmpresa = ParametrosEmpresaController.GetInstance().ObtenerParametrosEmpresa();
             ActualizarLista();
             completaCombosBox();
-            this.dgvListado.Columns["descripcion"].Width = 280;
-            this.dgvListado.Columns["codigo"].HeaderText = "Código";
-            this.dgvListado.Columns["descripcion"].HeaderText = "Descripción";
-            this.dgvListado.Columns["stockMin"].HeaderText = "Stock Min.";
-            this.dgvListado.Columns["precio"].HeaderText = "Precio ($)";
-            this.dgvListado.Columns["stock"].Width = 45;
-            this.dgvListado.Columns["stockMin"].Width = 45;
-            this.dgvListado.Columns["precio"].Width = 75;
-            this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
-            this.dgvListado.Columns["codigobarras"].HeaderText = "Código de barras";
-
-
+          FormatearUITabla ();
 
             this.btnExportar.Visible = false;
             this.btnImportar.Visible = false;
@@ -44,21 +33,10 @@ namespace UI.Desktop.Artículos
         {
             InitializeComponent();
 
-            parametrosEmpresa  = ParametrosEmpresaController.GetInstance().ObtenerParametrosEmpresa();
+            parametrosEmpresa = ParametrosEmpresaController.GetInstance().ObtenerParametrosEmpresa();
             ActualizarLista();
             completaCombosBox();
-            this.dgvListado.Columns["descripcion"].Width = 280;
-            this.dgvListado.Columns["codigo"].HeaderText = "Código";
-            this.dgvListado.Columns["descripcion"].HeaderText = "Descripción";
-            this.dgvListado.Columns["stockMin"].HeaderText = "Stock Min.";
-            this.dgvListado.Columns["precio"].HeaderText = "Precio ($)";
-            this.dgvListado.Columns["stock"].Width = 45;
-            this.dgvListado.Columns["stockMin"].Width = 45;
-            this.dgvListado.Columns["precio"].Width = 75;
-            this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
-
-            this.dgvListado.Columns["codigobarras"].HeaderText = "Código de barras";
-            this.dgvListado.Columns["codigobarras"].Width = 120;
+            FormatearUITabla();
             rol = usr.Rol;
 
             this.btnExportar.Visible = false;
@@ -66,7 +44,29 @@ namespace UI.Desktop.Artículos
 
         }
 
-        
+        private void FormatearUITabla()
+        {
+            this.dgvListado.Columns["descripcion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.dgvListado.Columns["descripcion"].Width = 300;
+            this.dgvListado.Columns["codigo"].HeaderText = "Código";
+            this.dgvListado.Columns["descripcion"].HeaderText = "Descripción";
+            this.dgvListado.Columns["stockMin"].HeaderText = "Stock Min.";
+            this.dgvListado.Columns["precio"].HeaderText = "Precio ($)";
+
+            this.dgvListado.Columns["stock"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.dgvListado.Columns["stock"].Width = 45;
+            this.dgvListado.Columns["stockMin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.dgvListado.Columns["stockMin"].Width = 45;
+            this.dgvListado.Columns["precio"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.dgvListado.Columns["precio"].Width = 75;
+            this.dgvListado.Columns["precio"].DefaultCellStyle.Format = "c";
+
+            this.dgvListado.Columns["codigobarras"].HeaderText = "Código de barras";
+            this.dgvListado.Columns["codigobarras"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.dgvListado.Columns["codigobarras"].Width = 120;
+        }
+
+
         #region ///***///***///***/// V A R I A B L E S   L O C A L E S \\\***\\\***\\\***\\\
 
         //PROPIEDAD MODOFORM
@@ -193,10 +193,19 @@ namespace UI.Desktop.Artículos
             ListaArticulosFiltrados = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
 
             dgvListado.DataSource = ListaArticulosFiltrados;
+            
+            dgvListado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvListado.Size = new Size(1077, 490);
+            this.dgvListado.Location = new Point(7, 56);
+
+
             dgvListado.Columns["habilitado"].Visible = false;
             dgvListado.Columns["Costo"].Visible = rol == "Admin";
 
             //this.dgvListado.Columns["RangoEtarioTexto"].HeaderText = "Rango etario";
+            
+            
 
             this.dgvListado.Columns["Familia1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.FamiliaNombre1);
             this.dgvListado.Columns["Familia1"].HeaderText = parametrosEmpresa.FamiliaNombre1;
@@ -205,8 +214,7 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["Familia2"].HeaderText = parametrosEmpresa.FamiliaNombre2;
 
             this.dgvListado.Columns["CodigoArtiProveedor"].HeaderText = "Codigo proveedor";
-            dgvListado.Size = new Size(1040, 490);
-            this.dgvListado.Location = new Point(7, 56);
+          
 
             this.dgvListado.Columns["CampoPersonalizado1"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo1);
             this.dgvListado.Columns["CampoPersonalizado1"].HeaderText= parametrosEmpresa.CampoPersonalizadoArticulo1?.Trim();

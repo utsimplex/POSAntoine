@@ -64,7 +64,7 @@
             this.groupBox2.Controls.Add(this.btnMostrarTodos);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(5, 2);
-            this.groupBox2.Size = new System.Drawing.Size(1011, 46);
+            this.groupBox2.Size = new System.Drawing.Size(1077, 46);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.Text = "Búsqueda";
             this.groupBox2.Controls.SetChildIndex(this.tbxFiltro, 0);
@@ -199,7 +199,7 @@
             // btnMostrarTodos
             // 
             this.btnMostrarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMostrarTodos.Location = new System.Drawing.Point(866, 10);
+            this.btnMostrarTodos.Location = new System.Drawing.Point(932, 10);
             this.btnMostrarTodos.Name = "btnMostrarTodos";
             this.btnMostrarTodos.Size = new System.Drawing.Size(136, 30);
             this.btnMostrarTodos.TabIndex = 2;

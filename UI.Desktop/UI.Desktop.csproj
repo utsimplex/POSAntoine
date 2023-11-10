@@ -837,6 +837,9 @@
     <None Include="Resources\folder_delete_32.png" />
     <None Include="Resources\folder_delete_48.png" />
     <None Include="Resources\codigo.ico.png" />
+    <None Include="Resources\af.png" />
+    <None Include="Resources\afip-32x32.png" />
+    <None Include="Resources\afip-transparente.png" />
     <Content Include="Resources\horizontal-black-monolite-utsimplex.png" />
     <None Include="Resources\separador_verde_horizontal.png" />
     <None Include="Resources\separador_purple_horizontal.png" />
