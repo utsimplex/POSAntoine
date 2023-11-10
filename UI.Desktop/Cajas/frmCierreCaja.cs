@@ -38,7 +38,6 @@ namespace UI.Desktop.Cajas
             dtpFechaCaja.Value = caja.FechaCaja;
             dtpFechaApertura.Value = caja.FechaApertura;
             txtVentas.Text = Math.Round(Datos_CajasAdapter.GetVentas(caja.ID), 2).ToString();
-            txtSaldoFinal.Text = Math.Round(Datos_CajasAdapter.GetSaldoFinal(caja.ID), 2).ToString();
             txtEfectivoRendir.Text = Math.Round(Datos_CajasAdapter.GetRendirEfectivo(caja.ID), 2).ToString();
         }
 
@@ -53,15 +52,9 @@ namespace UI.Desktop.Cajas
             //Try to close the cash register
             try
             {
-                //Check if the 'Saldo Final' field is empty
-                if (string.IsNullOrWhiteSpace(txtSaldoFinal.Text))
-                {
-                    //Throw an exception if the field is empty
-                    throw new Exception("El campo 'Saldo Final' no puede estar vacío.");
-                }
+               
 
-                //Set the final balance of the cash register
-                caja.SaldoFinal = new SqlMoney(Convert.ToDecimal(txtSaldoFinal.Text));
+                
                 //Set the user who closed the cash register
                 caja.CierraUsuario = usrActual.usuario;
 

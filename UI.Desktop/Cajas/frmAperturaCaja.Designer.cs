@@ -53,7 +53,7 @@
             this.btnAbrirCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnAbrirCaja.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAbrirCaja.Image = global::UI.Desktop.Properties.Resources._3387295_shopping_finance_payment_machine_credit;
-            this.btnAbrirCaja.Location = new System.Drawing.Point(169, 256);
+            this.btnAbrirCaja.Location = new System.Drawing.Point(169, 243);
             this.btnAbrirCaja.Name = "btnAbrirCaja";
             this.btnAbrirCaja.Size = new System.Drawing.Size(138, 46);
             this.btnAbrirCaja.TabIndex = 14;
@@ -68,7 +68,7 @@
             this.btnNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnNo.Image = ((System.Drawing.Image)(resources.GetObject("btnNo.Image")));
-            this.btnNo.Location = new System.Drawing.Point(39, 256);
+            this.btnNo.Location = new System.Drawing.Point(39, 243);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(124, 46);
             this.btnNo.TabIndex = 20;
@@ -228,7 +228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 314);
+            this.ClientSize = new System.Drawing.Size(346, 301);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtSaldoInicial);
