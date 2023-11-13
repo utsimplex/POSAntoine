@@ -294,7 +294,7 @@ namespace Data.Database
                  SqlConnection Con = CrearConexion();
 
                  // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCommand Comando = new SqlCommand("SELECT * FROM Articulos WHERE Articulos.codigo like @texto or Articulos.descripcion like @texto OR Articulos.marca like @texto", Con);
+                 SqlCommand Comando = new SqlCommand("SELECT * FROM Articulos WHERE Articulos.codigo like @texto or Articulos.descripcion like @texto OR Articulos.marca like @texto OR Articulos.codigo_barras like @texto", Con);
                  Comando.Parameters.Add(new SqlParameter("@texto", SqlDbType.NVarChar));
                  Comando.Parameters["@texto"].Value = '%' + texto + '%';
                  try
