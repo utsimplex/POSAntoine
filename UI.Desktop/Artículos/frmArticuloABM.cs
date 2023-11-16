@@ -390,6 +390,8 @@ namespace UI.Desktop.Artículos
                 this.chbEliminado.Checked = false;
                 this.chbEliminado.Visible = false;
             }
+
+            txtCodigoBarras.Text = artiToEdit.CodigoBarras;
             
                       
         }
