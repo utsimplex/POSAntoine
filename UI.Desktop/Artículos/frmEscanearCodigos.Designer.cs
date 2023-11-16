@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEscanearCodigos));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtCodigoBarras = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -38,7 +39,6 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnOmitir = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -77,9 +77,19 @@
             this.groupBox2.Name = "groupBox2";
             this.tableLayoutPanel1.SetRowSpan(this.groupBox2, 2);
             this.groupBox2.Size = new System.Drawing.Size(612, 256);
-            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Escanee el código de barras";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(237, 235);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(374, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Presionar la tecla \"O\" para omitir el artículo actual y continuar con el siguient" +
+    "e";
             // 
             // pictureBox1
             // 
@@ -98,7 +108,7 @@
             this.txtCodigoBarras.Multiline = true;
             this.txtCodigoBarras.Name = "txtCodigoBarras";
             this.txtCodigoBarras.Size = new System.Drawing.Size(361, 41);
-            this.txtCodigoBarras.TabIndex = 9;
+            this.txtCodigoBarras.TabIndex = 1;
             // 
             // txtCodigo
             // 
@@ -158,22 +168,12 @@
             this.btnOmitir.Location = new System.Drawing.Point(417, 274);
             this.btnOmitir.Name = "btnOmitir";
             this.btnOmitir.Size = new System.Drawing.Size(202, 37);
-            this.btnOmitir.TabIndex = 11;
+            this.btnOmitir.TabIndex = 0;
             this.btnOmitir.Text = "Omitir artículo";
             this.btnOmitir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOmitir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnOmitir.UseVisualStyleBackColor = true;
             this.btnOmitir.Click += new System.EventHandler(this.btnOmitir_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(237, 235);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(374, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Presionar la tecla \"O\" para omitir el artículo actual y continuar con el siguient" +
-    "e";
             // 
             // frmEscanearCodigos
             // 

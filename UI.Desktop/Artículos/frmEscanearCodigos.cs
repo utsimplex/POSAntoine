@@ -35,7 +35,16 @@ namespace UI.Desktop.Artículos
                 // Configuro UI
                 txtCodigo.Text = articulo.Codigo;
                 txtDescripcion.Text = articulo.Descripcion;
-                this.txtCodigoBarras.Select();
+                if(articulo.CodigoBarras != null && articulo.CodigoBarras != "")
+                {
+                    txtCodigoBarras.Text = articulo.CodigoBarras;
+                    //txtCodigoBarras.Focus();
+                    txtCodigoBarras.SelectionStart = txtCodigoBarras.Text.Length;
+                }
+                else
+                {
+                    this.txtCodigoBarras.Select();
+                }
 
                 cts = new CancellationTokenSource();
 
@@ -75,16 +84,23 @@ namespace UI.Desktop.Artículos
             {
                 while (true)
                 {
-                    if (token.IsCancellationRequested) 
+                    try
                     {
-                        break;
+                        if (token.IsCancellationRequested) 
+                        {
+                            break;
+                        }
+                        if (txtCodigoBarras.Text.EndsWith(Environment.NewLine))
+                        {
+                            this.Invoke(new Action(() => txtCodigoBarras.Text = txtCodigoBarras.Text.TrimEnd(Environment.NewLine.ToCharArray())));
+                            break;
+                        }
                     }
-                    if (txtCodigoBarras.Text.EndsWith(Environment.NewLine))
+                    catch (Exception ex)
                     {
-                        this.Invoke(new Action(() => txtCodigoBarras.Text = txtCodigoBarras.Text.TrimEnd(Environment.NewLine.ToCharArray())));
-                        break;
+                        MessageBox.Show("Utilice el botón Salir para salir de la pantalla de escaneo", "Recomendacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    
+
                 }
             });
         }

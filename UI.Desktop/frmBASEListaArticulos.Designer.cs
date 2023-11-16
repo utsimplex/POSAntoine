@@ -51,7 +51,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 174F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 112F));
             this.tableLayoutPanel1.Controls.Add(this.tbxFiltro, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbxFiltroProveedor, 2, 0);
@@ -91,7 +91,7 @@
             this.cbxFiltroProveedor.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxFiltroProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFiltroProveedor.FormattingEnabled = true;
-            this.cbxFiltroProveedor.Location = new System.Drawing.Point(287, 15);
+            this.cbxFiltroProveedor.Location = new System.Drawing.Point(286, 15);
             this.cbxFiltroProveedor.Name = "cbxFiltroProveedor";
             this.cbxFiltroProveedor.Size = new System.Drawing.Size(155, 21);
             this.cbxFiltroProveedor.TabIndex = 32;
@@ -101,7 +101,7 @@
             this.cbxFiltroFamilia1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxFiltroFamilia1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFiltroFamilia1.FormattingEnabled = true;
-            this.cbxFiltroFamilia1.Location = new System.Drawing.Point(451, 15);
+            this.cbxFiltroFamilia1.Location = new System.Drawing.Point(450, 15);
             this.cbxFiltroFamilia1.Name = "cbxFiltroFamilia1";
             this.cbxFiltroFamilia1.Size = new System.Drawing.Size(168, 21);
             this.cbxFiltroFamilia1.TabIndex = 33;
@@ -111,7 +111,7 @@
             this.cbxFiltroFamilia2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxFiltroFamilia2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFiltroFamilia2.FormattingEnabled = true;
-            this.cbxFiltroFamilia2.Location = new System.Drawing.Point(626, 15);
+            this.cbxFiltroFamilia2.Location = new System.Drawing.Point(625, 15);
             this.cbxFiltroFamilia2.Name = "cbxFiltroFamilia2";
             this.cbxFiltroFamilia2.Size = new System.Drawing.Size(168, 21);
             this.cbxFiltroFamilia2.TabIndex = 34;
@@ -119,7 +119,7 @@
             // btnMostrarTodos
             // 
             this.btnMostrarTodos.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnMostrarTodos.Location = new System.Drawing.Point(800, 10);
+            this.btnMostrarTodos.Location = new System.Drawing.Point(799, 10);
             this.btnMostrarTodos.Name = "btnMostrarTodos";
             this.btnMostrarTodos.Size = new System.Drawing.Size(105, 30);
             this.btnMostrarTodos.TabIndex = 35;
@@ -135,6 +135,7 @@
             this.dgvListado.Location = new System.Drawing.Point(3, 54);
             this.dgvListado.Name = "dgvListado";
             this.tableLayoutPanel1.SetRowSpan(this.dgvListado, 2);
+            this.dgvListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListado.Size = new System.Drawing.Size(903, 389);
             this.dgvListado.TabIndex = 36;
             // 
@@ -190,8 +191,8 @@
         private System.Windows.Forms.ComboBox cbxFiltroProveedor;
         private System.Windows.Forms.ComboBox cbxFiltroFamilia1;
         private System.Windows.Forms.ComboBox cbxFiltroFamilia2;
-        private System.Windows.Forms.Button btnMostrarTodos;
-        private System.Windows.Forms.DataGridView dgvListado;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        public System.Windows.Forms.DataGridView dgvListado;
+        public System.Windows.Forms.Button btnMostrarTodos;
     }
 }

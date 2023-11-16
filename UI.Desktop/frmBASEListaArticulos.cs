@@ -169,6 +169,7 @@ namespace UI.Desktop.Artículos
             this.dgvListado.Columns["CampoPersonalizado2"].Visible = !string.IsNullOrEmpty(parametrosEmpresa.CampoPersonalizadoArticulo2.Trim());
             this.dgvListado.Columns["CampoPersonalizado2"].HeaderText = parametrosEmpresa.CampoPersonalizadoArticulo2.Trim();
 
+            this.dgvListado.ReadOnly = true;
         }
 
 
@@ -179,7 +180,7 @@ namespace UI.Desktop.Artículos
         }
 
 
-        private void LimpiarFiltros()
+        protected void LimpiarFiltros()
         {
             tbxFiltro.Text = "";
             cbxFiltroFamilia1.SelectedIndex = -1;
@@ -189,6 +190,7 @@ namespace UI.Desktop.Artículos
 
         protected internal void AplicaFiltros()
         {
+            ActualizarLista();
             string searchTerm = tbxFiltro.Text.ToLowerInvariant();
 
             if (searchTerm == "" && !FiltrandoPorProveedor() && !FiltrandoPorFamilia1() && !FiltrandoPorFamilia2())
@@ -245,7 +247,7 @@ namespace UI.Desktop.Artículos
         }
 
         // Carga TODOS los articulos en la grilla
-        private void RecargarArticulos()
+        protected void RecargarArticulos()
         {
             dgvListado.DataSource = ListaArticulos;
         }
@@ -336,7 +338,7 @@ namespace UI.Desktop.Artículos
             AplicaFiltros();
         }
 
-        private void btnMostrarTodos_Click_1(object sender, EventArgs e)
+        protected virtual void btnMostrarTodos_Click_1(object sender, EventArgs e)
         {
             LimpiarFiltros();
             RecargarArticulos();
