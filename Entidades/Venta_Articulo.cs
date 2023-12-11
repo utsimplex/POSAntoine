@@ -68,5 +68,8 @@ namespace Entidades
             get { return _Subtotal; }
             set { _Subtotal = value; }
         }
+
+        public bool imprimeCambio
+        { get; set; }
     }
 }

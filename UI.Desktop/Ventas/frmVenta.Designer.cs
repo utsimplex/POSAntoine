@@ -273,6 +273,7 @@
             this.dgvArticulosVtaActual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvArticulosVtaActual.Size = new System.Drawing.Size(1033, 339);
             this.dgvArticulosVtaActual.TabIndex = 0;
+            this.dgvArticulosVtaActual.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulosVtaActual_CellClick);
             this.dgvArticulosVtaActual.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulosVtaActual_CellEndEdit);
             this.dgvArticulosVtaActual.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvArticulosVtaActual_CellMouseDoubleClick);
             // 

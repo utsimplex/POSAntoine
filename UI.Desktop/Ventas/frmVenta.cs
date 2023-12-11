@@ -335,8 +335,18 @@ namespace UI.Desktop.Ventas
                             }
                         }
                         if (this.chkbxCambio.Checked == true)
-                        { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO"); }
-                        this.Dispose();
+                        {
+                            List<Venta_Articulo> articulosAImprimir = formListaArticulos.ListaArticulosVtaActual.Where(x => x.imprimeCambio).ToList();
+                            if (articulosAImprimir.Count != 0)
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, articulosAImprimir, "CAMBIO");
+                            }
+                            else
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO");
+                            }
+                        }
+                            this.Dispose();
                     }
                 }
                 else
@@ -428,6 +438,8 @@ namespace UI.Desktop.Ventas
             this.dgvArticulosVtaActual.Columns["Precio"].DefaultCellStyle.Format = "c";
             this.dgvArticulosVtaActual.Columns["subtotal"].HeaderText = "SubTotal ($)";
             this.dgvArticulosVtaActual.Columns["subtotal"].DefaultCellStyle.Format = "c";
+            this.dgvArticulosVtaActual.Columns["imprimeCambio"].HeaderText = "Imprimir Cambio";
+            this.dgvArticulosVtaActual.Columns["imprimeCambio"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
             //Ancho de las columnas
             ConfigurarAnchoColumnas();
@@ -1014,8 +1026,25 @@ namespace UI.Desktop.Ventas
 
         private void btnImprimirCambio_Click(object sender, EventArgs e)
         {
-            PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO");
+            List<string> idImprimir = new List<string>();
+            foreach (DataGridViewRow row in this.dgvArticulosVtaActual.Rows)
+            {
+                if((bool)row.Cells[9].Value==true)
+                {
+                    idImprimir.Add(row.Cells["CodigoArticulo"].Value.ToString());
+                }
+            }
+            if (idImprimir.Count > 0)
+            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.Where(x => idImprimir.Contains(x.CodigoArticulo)).ToList(), "CAMBIO"); }
+            else
+            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO"); }
+        }
 
+        private void dgvArticulosVtaActual_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 9 && dgvArticulosVtaActual.Rows.Count > 0 && e.RowIndex !=-1)
+            { dgvArticulosVtaActual.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = !(bool)dgvArticulosVtaActual.Rows[e.RowIndex].Cells[e.ColumnIndex].Value; }
+            //MessageBox.Show("Click");
         }
     }
 }

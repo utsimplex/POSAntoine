@@ -250,8 +250,8 @@ namespace UI.Desktop.Ventas
                 foreach (var item in _venta_actual_articulos)
                 {
 
-                    ev.Graphics.DrawString(item.Cantidad.ToString() + "x", comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
-                    ev.Graphics.DrawString(item.DescripcionArticulo, comandaNormalFont, Brushes.Black, 40, height, new StringFormat());
+                    ev.Graphics.DrawString(item.Cantidad.ToString() + " x", comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    ev.Graphics.DrawString(item.DescripcionArticulo + "  (" + item.CodigoArticulo+")", comandaNormalFont, Brushes.Black, 40, height, new StringFormat());
                     height += 15;
                 }
                 ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
