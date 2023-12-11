@@ -334,9 +334,9 @@ namespace UI.Desktop.Ventas
                                 PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
                             }
                         }
-                        if (this.chkbxCambio.Checked == true)
-                        {
                             List<Venta_Articulo> articulosAImprimir = formListaArticulos.ListaArticulosVtaActual.Where(x => x.imprimeCambio).ToList();
+                        if (this.chkbxCambio.Checked == true || articulosAImprimir.Count != 0)
+                        {
                             if (articulosAImprimir.Count != 0)
                             {
                                 PrinterDrawing prt = new PrinterDrawing(ventaLocal, articulosAImprimir, "CAMBIO");
@@ -385,7 +385,19 @@ namespace UI.Desktop.Ventas
                                 PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE");
                             }
                         }
-                    this.Dispose();
+                            List<Venta_Articulo> articulosAImprimir = formListaArticulos.ListaArticulosVtaActual.Where(x => x.imprimeCambio).ToList();
+                        if (this.chkbxCambio.Checked == true || articulosAImprimir.Count !=0)
+                        {
+                            if (articulosAImprimir.Count != 0)
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, articulosAImprimir, "CAMBIO");
+                            }
+                            else
+                            {
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO");
+                            }
+                        }
+                        this.Dispose();
                     }
                 }
                 else
