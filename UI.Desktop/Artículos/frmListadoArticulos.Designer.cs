@@ -42,6 +42,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMasiva = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -76,6 +77,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnMasiva);
             this.groupBox1.Controls.Add(this.btnActualizarPrecios);
             this.groupBox1.Controls.Add(this.btnSeleccionar);
             this.groupBox1.Location = new System.Drawing.Point(1088, 0);
@@ -88,6 +90,7 @@
             this.groupBox1.Controls.SetChildIndex(this.btnEliminar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnActualizarPrecios, 0);
+            this.groupBox1.Controls.SetChildIndex(this.btnMasiva, 0);
             // 
             // btnEliminar
             // 
@@ -254,6 +257,20 @@
             this.panel2.Size = new System.Drawing.Size(167, 27);
             this.panel2.TabIndex = 33;
             // 
+            // btnMasiva
+            // 
+            this.btnMasiva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasiva.Image = ((System.Drawing.Image)(resources.GetObject("btnMasiva.Image")));
+            this.btnMasiva.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasiva.Location = new System.Drawing.Point(16, 399);
+            this.btnMasiva.Name = "btnMasiva";
+            this.btnMasiva.Size = new System.Drawing.Size(150, 46);
+            this.btnMasiva.TabIndex = 29;
+            this.btnMasiva.Text = "Carga Masiva";
+            this.btnMasiva.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMasiva.UseVisualStyleBackColor = true;
+            this.btnMasiva.Click += new System.EventHandler(this.btnMasiva_Click);
+            // 
             // frmListadoArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,5 +305,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox cbxFiltroFamilia2;
+        public System.Windows.Forms.Button btnMasiva;
     }
 }

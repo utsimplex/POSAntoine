@@ -116,7 +116,7 @@ namespace Data.Database
 
                 // Crear SqlCommand
                 // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Cajas", con);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Cajas ORDER BY fecha_caja desc", con);
                 cmd.CommandType = CommandType.Text;
 
                 // Ejecutar el stored procedure y obtener el resultado en un SqlDataReader

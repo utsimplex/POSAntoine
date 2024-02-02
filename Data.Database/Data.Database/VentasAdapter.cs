@@ -208,7 +208,7 @@ namespace Data.Database
             SqlConnection Con = CrearConexion();
 
             // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas ORDER BY Ventas.numVenta, Ventas.TipoOperacion DESC", Con);
+            SqlCommand Comando = new SqlCommand("SELECT * FROM Ventas ORDER BY Ventas.numVenta DESC, Ventas.TipoOperacion DESC", Con);
             try
             {
                 Comando.Connection.Open();

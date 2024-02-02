@@ -4,6 +4,7 @@ using System.Text;
 using System.Data.SqlServerCe;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Data.Database
 {
@@ -184,46 +185,6 @@ namespace Data.Database
              
              }
 
-        public void ActualizarPrecio(List<Entidades.Articulo> listadoArticulos)
-        {
-            //Crear Conexion y Abrirla
-            SqlConnection Con = CrearConexion();
-
-            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-            SqlCommand Comando = new SqlCommand();
-            Comando.Connection = Con;
-            Comando.CommandType = CommandType.Text;
-
-            Comando.CommandText = "UPDATE Articulos SET precio = @PRECIO WHERE codigo = @CODIGO";
-            Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
-            //Comando.Parameters["@CODIGO"].Value = arti.Codigo;
-            //Comando.Parameters.Add(new SqlParameter("@DESCRIPCION", SqlDbType.NVarChar));
-            //Comando.Parameters["@DESCRIPCION"].Value = arti.Descripcion;
-            //Comando.Parameters.Add(new SqlParameter("@STOCK", SqlDbType.Int));
-            //Comando.Parameters["@STOCK"].Value = arti.Stock;
-            //Comando.Parameters.Add(new SqlParameter("@STOCKMIN", SqlDbType.Int));
-            //Comando.Parameters["@STOCKMIN"].Value = arti.StockMin;
-            //Comando.Parameters.Add(new SqlParameter("@PRECIO", SqlDbType.Money));
-            //Comando.Parameters["@PRECIO"].Value = arti.Precio;
-            //Comando.Parameters.Add(new SqlParameter("@MARCA", SqlDbType.NVarChar));
-            //Comando.Parameters["@MARCA"].Value = arti.Proveedor;
-            //Comando.Parameters.Add(new SqlParameter("@HABILITADO", SqlDbType.NVarChar));
-            //Comando.Parameters["@HABILITADO"].Value = arti.Habilitado;
-            //Comando.Parameters.Add(new SqlParameter("@FAMILIA", SqlDbType.Int));
-            //Comando.Parameters["@FAMILIA"].Value = arti.Familia;
-            //Comando.Parameters.Add(new SqlParameter("@RANGO_ETARIO", SqlDbType.Int));
-            //Comando.Parameters["@RANGO_ETARIO"].Value = arti.RangoEtario;
-            //Comando.Parameters.Add(new SqlParameter("@CODIGO_ARTI_PROVEEDOR", SqlDbType.NVarChar));
-            //Comando.Parameters["@CODIGO_ARTI_PROVEEDOR"].Value = arti.CodigoArtiProveedor;
-            //Comando.Parameters.Add(new SqlParameter("@COSTO", SqlDbType.Decimal));
-            //Comando.Parameters["@COSTO"].Value = arti.Costo;
-
-            //Ejecuta el comando INSERT
-            Comando.Connection.Open();
-            Comando.ExecuteNonQuery();
-            Comando.Connection.Close();
-
-        }
        
         public System.ComponentModel.BindingList<Entidades.Articulo> GetAll()
              {
@@ -232,7 +193,7 @@ namespace Data.Database
                  SqlConnection Con = CrearConexion();
 
                  // Crear SQLCeCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
-                 SqlCommand Comando = new SqlCommand("SELECT codigo, articulos.descripcion, stock, stockmin, precio, marca, habilitado, Familia as 'familia1ID', familia.DESCRIPCION as 'familia1Texto', Familia2 as'familia2ID', famdos.DESCRIPCION as 'familia2Texto', codigo_barras, CODIGO_ARTI_PROVEEDOR, Costo, CampoPersonalizado1, CampoPersonalizado2 FROM Articulos LEFT JOIN FAMILIA ON familia.id = articulos.Familia LEFT JOIN FAMILIA_DOS famdos ON famdos.ID = articulos.Familia2 ORDER BY articulos.descripcion", Con);
+                 SqlCommand Comando = new SqlCommand("SELECT codigo, articulos.descripcion, stock, stockmin, precio, marca, habilitado, Familia as 'familia1ID', familia.DESCRIPCION as 'familia1Texto', Familia2 as'familia2ID', famdos.DESCRIPCION as 'familia2Texto', codigo_barras, CODIGO_ARTI_PROVEEDOR, Costo, CampoPersonalizado1, CampoPersonalizado2 FROM Articulos LEFT JOIN FAMILIA ON familia.id = articulos.Familia LEFT JOIN FAMILIA_DOS famdos ON famdos.ID = articulos.Familia2 ORDER BY articulos.codigo,stock", Con);
                  try
                  {
                      Comando.Connection.Open();
@@ -558,6 +519,91 @@ namespace Data.Database
 
  
              }
+
+        public string getProximoNumeradorProveedor(string proveedor)
+        {
+            // Crear conexión
+            SqlConnection con = CrearConexion();
+            string codigo = "AA00001";
+
+            try
+            {
+                // Abrir la conexión
+                con.Open();
+
+                // Crear SqlCommand
+                SqlCommand cmd = new SqlCommand("getProximoNumeradorProveedor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Agregar los parámetros al comando
+                cmd.Parameters.AddWithValue("@pProveedor", proveedor);
+
+
+                // Ejecutar el stored procedure
+                SqlDataReader drMarcas = cmd.ExecuteReader();
+
+                while (drMarcas.Read())
+                {
+
+
+                    codigo = (string)drMarcas["codigo"];
+
+
+
+                }
+                drMarcas.Close();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción o mostrar un mensaje de error
+                MessageBox.Show("Error al registrar Articulos: " + ex.Message);
+            }
+            finally
+            {
+                // Cerrar la conexión después de usarla
+                con.Close();
+            }
+                return codigo;
+        }
+
+        public void altaMasivaArticulos(int caja_id)
+        {
+            //Este metodo devuelve true si la caja tiene al menos una venta Y/O un movimiento
+            // Crear conexión
+            using (SqlConnection con = CrearConexion())
+            {
+                try
+                {
+                    // Abrir la conexión
+                    con.Open();
+
+                    // Crear SqlCommand
+                    using (SqlCommand cmd = new SqlCommand("AltaMasivaArticulos", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros al comando
+                        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+                        // Agregar parámetro de salida para el efectivo a rendir
+                        SqlParameter cajaAbierta = new SqlParameter("@cajaConMovimientos", SqlDbType.Bit);
+                        cajaAbierta.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(cajaAbierta);
+
+                        // Ejecutar el stored procedure
+                        cmd.ExecuteNonQuery();
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción o mostrar un mensaje de error
+                    MessageBox.Show("Error al obtener los movimientos de la caja: " + ex.Message);
+                }
+            }
+        }
+
     }
 
 }

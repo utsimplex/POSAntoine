@@ -827,6 +827,12 @@ namespace UI.Desktop.Artículos
                 MessageBox.Show("El usuario no posee permisos para realizar esta tarea", "Se requiere un Administrador", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
+
+        private void btnMasiva_Click(object sender, EventArgs e)
+        {
+            frmArticuloTallesABM frmArticulos = new Artículos.frmArticuloTallesABM(parametrosEmpresa);
+            frmArticulos.ShowDialog();
+        }
     }
 
 }
