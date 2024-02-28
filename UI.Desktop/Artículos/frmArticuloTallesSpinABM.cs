@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Data.Database;
+using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Data.Database;
-using Entidades;
 
 namespace UI.Desktop.Artículos
 {
-    public partial class frmArticuloTallesABM : Form
+    public partial class frmArticuloTallesSpinABM : Form
     {
-        public frmArticuloTallesABM(ParametrosEmpresa pParametrosEmpresa)
+        public frmArticuloTallesSpinABM(ParametrosEmpresa pParametrosEmpresa)
         {
             InitializeComponent();
             parametrosEmpresa = pParametrosEmpresa;
@@ -25,7 +26,6 @@ namespace UI.Desktop.Artículos
             listFamilias2 = Datos_FamiliaAdapter.GetFamilias("Familia2", "%").Where(x => x.Activo == true).OrderBy(x => x.Descripcion).ToList();
             lstArticulosenBD = Datos_ArticuloAdapter.GetAll().ToList();
         }
-
 
         #region ///***///***///***/// V A R I A B L E S \\\***\\\***\\\***\\\
 
@@ -131,83 +131,94 @@ namespace UI.Desktop.Artículos
             List<Articulo> Articulos = new List<Articulo>();
             Entidades.Articulo Articulo;
             string error = "";
-                // Valido Datos
-                if (ValidarPrecio() && ValidarStocks() && ValidarMarca() && ValidarTalles())
+            // Valido Datos
+            if (ValidarPrecio() && ValidarStocks() && ValidarMarca())
+            {
+                try
                 {
-                    try
+                    foreach (Control con in tblTalles.Controls)
                     {
-                    foreach(CheckBox chk in tblTalles.Controls)
-                    {
-                        if (chk.Checked)
+                        if (con.GetType() == typeof(NumericUpDown))
                         {
-                            Articulo = new Articulo();
-                            // TXT to nuevoArticulo
-                            Articulo.Codigo = txtCodigo.Text.Trim() + "." + chk.Text;
-                            if (this.ValidarCodigo(Articulo.Codigo))
+                            if ((con as NumericUpDown).Value > 0)
                             {
+                                Articulo = new Articulo();
+                                // TXT to nuevoArticulo
+                                Articulo.Codigo = txtCodigo.Text.Trim() + "." + (con as NumericUpDown).Name.Substring(1);
+                                if (this.ValidarCodigo(Articulo.Codigo))
+                                {
 
-                                Articulo.Descripcion = txtDescripcion.Text.Trim();
-                                Articulo.Stock = Convert.ToInt32(txtStock.Text.Trim());
-                                Articulo.StockMin = 0;
-                                Articulo.Precio = String.IsNullOrEmpty(txtPrecio.Text.Trim()) ? 0 : Convert.ToDecimal(txtPrecio.Text.Trim());
-                                Articulo.Proveedor = cbxProveedor.SelectedItem.ToString();
-                                if (lblFamilia1Nombre.Text != "")
-                                {
-                                    Articulo.Familia1.id = (int)cbxFamilia1.SelectedValue;
-                                }
-                                Articulo.Familia2.id = this.getFamiliaFromTalle(chk.Text);
-                                if (txtCosto.Text != "")
-                                {
-                                    Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
+                                    Articulo.Descripcion = txtDescripcion.Text.Trim();
+                                    Articulo.Stock = Convert.ToInt32((con as NumericUpDown).Value);
+                                    Articulo.StockMin = 0;
+                                    Articulo.Precio = String.IsNullOrEmpty(txtPrecio.Text.Trim()) ? 0 : Convert.ToDecimal(txtPrecio.Text.Trim());
+                                    Articulo.Proveedor = cbxProveedor.SelectedItem.ToString();
+                                    if (lblFamilia1Nombre.Text != "")
+                                    {
+                                        Articulo.Familia1.id = (int)cbxFamilia1.SelectedValue;
+                                    }
+                                    Articulo.Familia2.id = this.getFamiliaFromTalle((con as NumericUpDown).Name.Substring(1));
+                                    if (txtCosto.Text != "")
+                                    {
+                                        Articulo.Costo = Convert.ToDecimal(txtCosto.Text.Trim());
+                                    }
+                                    else
+                                    {
+                                        Articulo.Costo = 0;
+                                    }
+                                    Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
+                                    Articulo.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
+                                    Articulo.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();
+
+                                    if (Articulo.Descripcion == "")
+                                    {
+                                        Articulo.Descripcion = "NO REGISTRADO";
+                                    }
+                                    // nuevoArticulo to Base de Datos (capa de datos)
+                                    Datos_ArticuloAdapter.AñadirNuevo(Articulo);
+
+                                    // Nuevo precio a tabla de precios del articulo.
+                                    ActualizarListaPrecios(Articulo);
+
                                 }
                                 else
                                 {
-                                    Articulo.Costo = 0;
+                                    if(MessageBox.Show("Desea Actualizar el stock del articulo" + Articulo.Codigo, "Advertencia", MessageBoxButtons.YesNo) ==DialogResult.Yes)
+                                    Datos_ArticuloAdapter.ActualizarStock(Articulo.Codigo, Convert.ToInt32((con as NumericUpDown).Value));
                                 }
-                                Articulo.CodigoArtiProveedor = txtCodigoArtiProveedor.Text.Trim();
-                                Articulo.CampoPersonalizado1 = txtCampoPersonalizado1.Text.Trim();
-                                Articulo.CampoPersonalizado2 = txtCampoPersonalizado2.Text.Trim();
-
-                                if (Articulo.Descripcion == "")
-                                {
-                                    Articulo.Descripcion = "NO REGISTRADO";
-                                }
-                                // nuevoArticulo to Base de Datos (capa de datos)
-                                Datos_ArticuloAdapter.AñadirNuevo(Articulo);
-
-                                // Nuevo precio a tabla de precios del articulo.
-                                ActualizarListaPrecios(Articulo);
-
                             }
                         }
                     }
-                    }
-                    catch (Exception ex)
-                    {
-                        // Muestro cualquier error de la aplicacion
-                        MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    finally
-                    {
-                        // Libero objetos
-                        Articulo = null;
+                }
+                catch (Exception ex)
+                {
+                    // Muestro cualquier error de la aplicacion
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                finally
+                {
+                    // Libero objetos
+                    Articulo = null;
                     if (seguir)
                         cleanForm();
                     else
                         this.Close();
-                    }
-                }//Fin try
+                }
+            }//Fin try
         }
         private void cleanForm()
         {
-            foreach(Control control in tableLayoutPanel1.Controls)
+            foreach (Control control in tableLayoutPanel1.Controls)
             {
-                if(control.GetType() == typeof(TextBox))
-                control.Text = "";
+                if (control.GetType() == typeof(TextBox))
+                    control.Text = "";
 
             }
-            foreach (CheckBox chk in tblTalles.Controls)
-                chk.Checked= false;
+            foreach (Control con in tblTalles.Controls)
+            {
+                if (con.GetType() == typeof(NumericUpDown))
+                    (con as NumericUpDown).Value= 0 ; 
+            }
         }
         private void BindUiArticuloNuevo()
         {
@@ -229,7 +240,7 @@ namespace UI.Desktop.Artículos
         private int getFamiliaFromTalle(string talle)
         {
             int id = 0;
-            switch(talle)
+            switch (talle)
             {
                 case "RN":
                 case "3m":
@@ -237,7 +248,7 @@ namespace UI.Desktop.Artículos
                 case "9m":
                 case "12m":
                 case "18m":
-                    id = (int)this.listFamilias2.Find(familia=>familia.Descripcion=="Baby").id ; 
+                    id = (int)this.listFamilias2.Find(familia => familia.Descripcion == "Baby").id;
                     break;
                 case "TU":
                     id = (int)this.listFamilias2.Find(familia => familia.Descripcion == "Sin Rango").id;
@@ -264,13 +275,13 @@ namespace UI.Desktop.Artículos
                 mensaje += "- El código no puede estar en blanco." + "\n";
 
             //Consulta BD para no añadir codigo repetido
-            
-            if(this.lstArticulosenBD.Find(articulo=>articulo.Codigo == codigoAValidar) != null)
+
+            if (this.lstArticulosenBD.Find(articulo => articulo.Codigo == codigoAValidar) != null)
             {
-                mensaje += "Ya existe un artículo registrado con el código"+ codigoAValidar +" ingresado. \nPor favor, utilize uno distinto." + "\n";
+                mensaje += "Ya existe un artículo registrado con el código" + codigoAValidar + " ingresado. \n Se actualizará el stock." + "\n";
 
             }
-            
+
             // Mostrar Errors
             if (!String.IsNullOrEmpty(mensaje))
             {
@@ -334,18 +345,21 @@ namespace UI.Desktop.Artículos
         }
         bool ValidarStocks()
         {
-            string mensaje = "";
+            string mensaje = "Debe indicar al menos un stock por talle.";
 
-
-            //Formato del precio con decimales
-            if (txtStock.Text == "")
+            foreach (Control num in tblTalles.Controls)
             {
-                mensaje = "Debe ingresar la cantidad de unidades que posee en Stock actualmente.";
+                if (num.GetType()== typeof(NumericUpDown))
+                {
+                    if ((num as NumericUpDown).Value > 0)
+                    {
+                        mensaje = "";
+                    }
+                }
             }
-
-            // Mostrar Errors
+                    // Mostrar Errors
             if (!String.IsNullOrEmpty(mensaje))
-            {
+            { 
                 MessageBox.Show(mensaje, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
@@ -359,8 +373,8 @@ namespace UI.Desktop.Artículos
             bool oneOrMore = false;
 
             foreach (CheckBox chk in tblTalles.Controls)
-            { 
-                if(chk.Checked)
+            {
+                if (chk.Checked)
                     oneOrMore = true;
             }
 
@@ -459,19 +473,6 @@ namespace UI.Desktop.Artículos
 
 
 
-        //CLICK Modificar Stock
-        private void btnModificarStock_Click(object sender, EventArgs e)
-        {
-            if (txtStock.ReadOnly == false)
-            {
-                this.txtStock.ReadOnly = true;
-            }
-            else
-            {
-                this.txtStock.ReadOnly = false;
-            }
-        }
-
         //LEAVE txtPRECIO
         private void txtPrecio_Leave(object sender, EventArgs e)
         {
@@ -523,7 +524,7 @@ namespace UI.Desktop.Artículos
         {
             SoloNumeros(e);
         }
-        
+
         //LOAD
         private void frmArticuloTallesABM_Load(object sender, EventArgs e)
         {
@@ -544,5 +545,14 @@ namespace UI.Desktop.Artículos
         {
             this.Guardar(true);
         }
+
+        private void btnBuscarCodProv_Click(object sender, EventArgs e)
+        {
+            if (cbxProveedor.Text == "" || txtCodigoArtiProveedor.Text=="")
+                MessageBox.Show("Debes seleccionar un proveedor y poner el codigo de Proveedor");
+            else
+                this.txtCodigo.Text = this.Datos_ArticuloAdapter.getNumeradorCodigoProveedor(this.cbxProveedor.Text, txtCodigoArtiProveedor.Text);
+        }
     }
 }
+

@@ -23,11 +23,11 @@ namespace Data.Database
             Comando.Connection = Con;
             Comando.CommandType = CommandType.Text;
 
-            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [descuento],[usuario], [tipooperacion], [caja_id],[Neto]"+
+            Comando.CommandText = "INSERT INTO [Ventas] ([numVenta], [fechaHora], [tipoPago], [total], [descuento],[recargo],[usuario], [tipooperacion], [caja_id],[Neto]"+
            ",[Iva]," +
            "[TipoDocumentoCliente],[NumeroDocumentoCliente],[NombreCliente],[DireccionCliente],[SituacionFiscalCliente],[Pagado],[Monto_pagado],TipoComprobante" +
            ") " +
-                "VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DESCUENTO, @USUARIO, @TIPOOPERACION, @CAJA_ID,@NETO,@IVA," +
+                "VALUES (@NUMVENTA, @FECHAHORA, @TIPOPAGO, @TOTAL, @DESCUENTO,@RECARGO, @USUARIO, @TIPOOPERACION, @CAJA_ID,@NETO,@IVA," +
                 "@TIPODOCUMENTOCLIENTE,@NUMERODOCUMENTOCLIENTE,@NOMBRECLIENTE,@DIRECCIONCLIENTE,@SITUACIONFISCALCLIENTE,@pagado,@monto_pagado,@tipoComprobante"+
                 ")";
             Comando.Parameters.Add(new SqlParameter("@NUMVENTA", SqlDbType.Int));
@@ -42,6 +42,8 @@ namespace Data.Database
             //Comando.Parameters["@DNICLIENTE"].Value = ventaNueva.DniCliente;
             Comando.Parameters.Add(new SqlParameter("@DESCUENTO", SqlDbType.Decimal));
             Comando.Parameters["@DESCUENTO"].Value = ventaNueva.Descuento;
+            Comando.Parameters.Add(new SqlParameter("@RECARGO", SqlDbType.Decimal));
+            Comando.Parameters["@RECARGO"].Value = ventaNueva.Recargo;
             Comando.Parameters.Add(new SqlParameter("@USUARIO", SqlDbType.NVarChar));
             Comando.Parameters["@USUARIO"].Value = ventaNueva.Usuario;
             Comando.Parameters.Add(new SqlParameter("@TIPOOPERACION", SqlDbType.NVarChar));
@@ -221,6 +223,7 @@ namespace Data.Database
                     vta.NumeroVenta = (int)drVentas["numventa"];
                     vta.FechaHora = (DateTime)drVentas["fechahora"];
                     vta.Descuento = (decimal)drVentas["descuento"];
+                    vta.Recargo = (decimal)drVentas["recargo"];
                     //vta.DniCliente = (string)drVentas["dnicliente"];
                     vta.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     vta.Usuario = (string)drVentas["usuario"];
@@ -288,6 +291,7 @@ namespace Data.Database
                     VentaBuscada.NumeroVenta = (int)drVentas["numventa"];
                     VentaBuscada.FechaHora = (DateTime)drVentas["fechahora"];
                     VentaBuscada.Descuento = (decimal)drVentas["descuento"];
+                    VentaBuscada.Recargo = (decimal)drVentas["recargo"];
                     VentaBuscada.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     //vta.DniCliente = (string)drVentas["dnicliente"];
                     VentaBuscada.Usuario = (string)drVentas["usuario"];
@@ -432,6 +436,7 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
+                    ventaActual.Recargo = (decimal)drVentas["recargo"];
                     ventaActual.NumeroDocumentoCliente = (long)drVentas["NumeroDocumentoCliente"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
@@ -497,6 +502,7 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
+                    ventaActual.Recargo = (decimal)drVentas["recargo"];
                     ventaActual.NumeroDocumentoCliente = (long)drVentas["NumeroDocumentoCliente"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
@@ -564,6 +570,7 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
+                    ventaActual.Recargo = (decimal)drVentas["recargo"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];
                     ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
@@ -632,6 +639,7 @@ namespace Data.Database
                     ventaActual.NumeroVenta = (int)drVentas["numventa"];
                     ventaActual.FechaHora = (DateTime)drVentas["fechahora"];
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
+                    ventaActual.Recargo = (decimal)drVentas["recargo"];
                     ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     //vta.DniCliente = (string)drVentas["dnicliente"];
                     ventaActual.Usuario = (string)drVentas["usuario"];
@@ -701,6 +709,7 @@ namespace Data.Database
                     Entidades.Venta ventaActual = new Entidades.Venta();
 
                     ventaActual.Descuento = (decimal)drVentas["descuento"];
+                    ventaActual.Recargo = (decimal)drVentas["recargo"];
                     ventaActual.CajaId = (drVentas["caja_id"] != DBNull.Value) ? (int)drVentas["caja_id"] : (int?)null;
                     ventaActual.FechaHora = (DateTime)drVentas["fechaHora"];
                     ventaActual.NumeroVenta = (int)drVentas["numVenta"];

@@ -7,28 +7,30 @@ using System.Web.Script.Serialization;
 
 namespace Entidades
 {
-   public class Venta
+    public class Venta
     {
         //NUMERO DE VENTA
-        public int NumeroVenta{get; set;}
-        
+        public int NumeroVenta { get; set; }
+
         //FECHA-HORA DE VENTA
-        public DateTime FechaHora {get; set;}
-    
+        public DateTime FechaHora { get; set; }
+
         //TIPO DE PAGO
-        public string TipoPago {get; set;}
+        public string TipoPago { get; set; }
 
         //TIPO DE Operacion (Venta - Devolucion)
         public string TipoOperacion { get; set; }
-        
+
         // TOTAL DEL COMPROBANTE (Decimal)
         public decimal Total { get; set; }
 
         // DESCUENTO
-       public decimal Descuento { get; set; }
+        public decimal Descuento { get; set; }
+        // RECARGO
+        public decimal Recargo { get; set; }
 
-       //DNICLIENTE
-       public string DniCliente { get; set; }
+        //DNICLIENTE
+        public string DniCliente { get; set; }
 
         public bool Pagado { get; set; }
         public decimal MontoPagado { get; set; }
@@ -48,7 +50,7 @@ namespace Entidades
         public long? NumeroDocumentoCliente { get; set; }
         public string NombreCliente { get; set; }
         public long? CuitEmisor { get; set; }
-        public string DireccionCliente{ get; set; }
+        public string DireccionCliente { get; set; }
         public int? SituacionFiscalCliente { get; set; }
 
         //propiedades read-only
@@ -200,10 +202,11 @@ namespace Entidades
             }
         }
 
-
-
-
-
+    }
+    public class VentasXMP
+        {
+        public string MedioPago { get; set; }
+        public decimal Total { get; set; }
 
     }
 }

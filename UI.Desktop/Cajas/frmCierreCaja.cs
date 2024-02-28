@@ -20,6 +20,7 @@ namespace UI.Desktop.Cajas
         Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
         Entidades.Usuario usrActual;
         public Entidades.Caja caja = null;
+        public List<Entidades.VentasXMP> ventasXMP=null;
 
         #endregion
 
@@ -34,11 +35,18 @@ namespace UI.Desktop.Cajas
             txtCajaNro.Text = caja.ID.ToString();
             txtDescripcion.Text = caja.Descripcion;
             txtSaldoInicial.Text = caja.SaldoInicial.ToString();
+            txtSaldoInicial.ReadOnly = true;
             txtCerradaPorUsr.Text = usr.usuario;
             dtpFechaCaja.Value = caja.FechaCaja;
             dtpFechaApertura.Value = caja.FechaApertura;
             txtVentas.Text = Math.Round(Datos_CajasAdapter.GetVentas(caja.ID), 2).ToString();
             txtEfectivoRendir.Text = Math.Round(Datos_CajasAdapter.GetRendirEfectivo(caja.ID), 2).ToString();
+            ventasXMP = Datos_CajasAdapter.GetVentasMP(caja.ID);
+            dgvVentasxMP.DataSource = ventasXMP;
+            dgvVentasxMP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVentasxMP.Columns["Total"].DefaultCellStyle.Format = "c";
+
+
         }
 
         private void btnNo_Click(object sender, EventArgs e)

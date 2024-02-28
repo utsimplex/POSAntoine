@@ -45,7 +45,8 @@ namespace UI.Desktop.Ventas
             usuarioLogueado = usr;
             modo = "READONLY";
             txtFechaHoraVta.Text = vtaSelec.FechaHora.ToString("dd ' de ' MMMM ', ' yyyy"); 
-            txtDcto.Text = vtaSelec.Descuento.ToString();
+            txtDctoPesos.Text = vtaSelec.Descuento.ToString();
+            txtRecPesos.Text = vtaSelec.Recargo.ToString();
             txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
             if (vtaSelec.NombreCliente != null) { 
             
@@ -70,7 +71,7 @@ namespace UI.Desktop.Ventas
             txtDcto.ReadOnly = true;
             btnBuscarCliente.Visible = false;
             ventaLocal = vtaSelec;
-             btnAgregarArt.Enabled = btnBuscarCliente.Enabled = btnQuitar.Enabled = txtDcto.Enabled = txtDctoPesos.Enabled=false;
+             btnAgregarArt.Enabled = btnBuscarCliente.Enabled = btnQuitar.Enabled = txtDcto.Enabled = txtDctoPesos.Enabled= txtRec.Enabled = txtRecPesos.Enabled = false;
             btnReimprimir.Visible = true;
             //cbxMedioDePago.SelectedText = vtaSelec.TipoPago;
             this.btnImprimirCambio.Visible = true;
@@ -193,7 +194,7 @@ namespace UI.Desktop.Ventas
                         dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento_porcentaje"].Value = Convert.ToDecimal(0);
                         dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento"].Value = descuento.descuento;
                     }
-                    AplicarDescuento();
+                    AplicarDescuentoyRecargo();
                 }
                 else if (e.ColumnIndex == 7 && dgvArticulosVtaActual.Rows.Count > 0)
                 {
@@ -203,7 +204,7 @@ namespace UI.Desktop.Ventas
                         dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento_porcentaje"].Value = descuento.descuento;
                         dgvArticulosVtaActual.Rows[dgvArticulosVtaActual.CurrentCell.RowIndex].Cells["Descuento"].Value = Convert.ToDecimal(0);
                     }
-                    AplicarDescuento();
+                    AplicarDescuentoyRecargo();
                 }
             }
 
@@ -263,18 +264,18 @@ namespace UI.Desktop.Ventas
             if (!String.IsNullOrEmpty(this.txtDcto.Text))
             {
                 if (!String.IsNullOrEmpty(this.txtDctoPesos.Text))
-                    this.txtDctoPesos.Text = "";
+                    this.txtDctoPesos.Text = this.txtRec.Text = this.txtRecPesos.Text = "";
             }
-                AplicarDescuento();
+                AplicarDescuentoyRecargo();
         }
         private void txtDctoPesos_Leave(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(this.txtDctoPesos.Text))
             {
                 if (!String.IsNullOrEmpty(this.txtDcto.Text))
-                    this.txtDcto.Text = "";
+                    this.txtDcto.Text = this.txtRec.Text = this.txtRecPesos.Text = "";
             }
-                AplicarDescuento();
+            AplicarDescuentoyRecargo();
         }
 
         //BTN QUITAR CLICK
@@ -306,7 +307,7 @@ namespace UI.Desktop.Ventas
                     {
                         formListaArticulos.ListaArticulosVtaActual.Remove(artiDevuelto);
                         ActualizarVtaActual();
-                        AplicarDescuento();
+                        AplicarDescuentoyRecargo();
                     }
             }
         }
@@ -513,7 +514,7 @@ namespace UI.Desktop.Ventas
             formListaArticulos.ShowDialog();
                      
             ActualizarVtaActual();
-            AplicarDescuento();
+            AplicarDescuentoyRecargo();
 
             }
 
@@ -620,8 +621,8 @@ namespace UI.Desktop.Ventas
             this.dgvArticulosVtaActual.Refresh();
         }
 
-        //APLICAR DESCUENTO
-        private void AplicarDescuento()
+        //APLICAR DESCUENTO y recargo
+        private void AplicarDescuentoyRecargo()
         {
             ActualizarTotal();
             
@@ -632,6 +633,7 @@ namespace UI.Desktop.Ventas
                 Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
                 ventaLocal.Descuento = descuentoTotal;
                 txtTotal.Text = (total - descuentoTotal).ToString();
+                ventaLocal.Recargo = 0;
             }
             else if (!String.IsNullOrWhiteSpace(txtDctoPesos.Text) && txtDctoPesos.Text!="0")
             {
@@ -641,20 +643,41 @@ namespace UI.Desktop.Ventas
                 {
                     txtTotal.Text = (total - descuentoTotal).ToString();
                     ventaLocal.Descuento = descuentoTotal;
+                ventaLocal.Recargo = 0;
                 }
                 else
                 {
                     MessageBox.Show("El monto de descuento es mayor al total. No puede aplicarse", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtDctoPesos.Text = "";
                     ventaLocal.Descuento = 0;
+                ventaLocal.Recargo = 0;
                 }
             }
             else
             {
                 ventaLocal.Descuento = 0;
             }
-        }
+            if (!String.IsNullOrWhiteSpace(txtRec.Text) && txtRec.Text != "0")
+            {
+                Decimal recargoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtRec.Text)) / 100;
+                ventaLocal.Recargo = recargoTotal;
+                txtTotal.Text = (total + recargoTotal).ToString();
+                ventaLocal.Descuento = 0;
+            }
+            else if (!String.IsNullOrWhiteSpace(txtRecPesos.Text) && txtRecPesos.Text != "0")
+            {
+                Decimal recargoTotal = Convert.ToDecimal(txtRecPesos.Text);
+                txtTotal.Text = (total + recargoTotal).ToString();
+                ventaLocal.Recargo = recargoTotal;
+                ventaLocal.Descuento = 0;
 
+            }
+            else
+            {
+                ventaLocal.Recargo = 0;
+            }
+        }
+        
         //Descontar Stock SOTCK
         private void ActualizarStock()
         {
@@ -1057,6 +1080,26 @@ namespace UI.Desktop.Ventas
             if (e.ColumnIndex == 9 && dgvArticulosVtaActual.Rows.Count > 0 && e.RowIndex !=-1)
             { dgvArticulosVtaActual.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = !(bool)dgvArticulosVtaActual.Rows[e.RowIndex].Cells[e.ColumnIndex].Value; }
             //MessageBox.Show("Click");
+        }
+
+        private void txtRec_Leave(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txtRec.Text))
+            {
+                //if (!String.IsNullOrEmpty(this.txtRecPesos.Text))
+                    this.txtRecPesos.Text = this.txtDcto.Text = this.txtDctoPesos.Text = "";
+            }
+            AplicarDescuentoyRecargo();
+        }
+
+        private void txtRecPesos_Leave(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.txtRecPesos.Text))
+            {
+                //if (!String.IsNullOrEmpty(this.txtRec.Text))
+                    this.txtRec.Text = this.txtDcto.Text = this.txtDctoPesos.Text= "";
+            }
+            AplicarDescuentoyRecargo();
         }
     }
 }

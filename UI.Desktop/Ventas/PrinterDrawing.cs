@@ -196,9 +196,16 @@ namespace UI.Desktop.Ventas
 
                 //Print Net Total
                 //ev.Graphics.DrawString("Total", normalFont, Brushes.Black, 160, height, new StringFormat());
-                if(_venta_Actual.Descuento!=0)
+                if (_venta_Actual.Recargo != 0)
                 {
-                SizeF netWidth = ev.Graphics.MeasureString((_venta_Actual.Total*-1).ToString("c"), descuentoFont);
+                    SizeF recargoWidth = ev.Graphics.MeasureString((_venta_Actual.Recargo * -1).ToString("c"), descuentoFont);
+                    ev.Graphics.DrawString("Interes Financiacion ", descuentoFont, Brushes.Black, 10, height, new StringFormat());
+                    ev.Graphics.DrawString((_venta_Actual.Recargo * -1).ToString("c"), descuentoFont, Brushes.Black, 230 + (50 - recargoWidth.Width), height, new StringFormat());
+                    height += 20;
+                }
+                if (_venta_Actual.Descuento!=0)
+                {
+                SizeF netWidth = ev.Graphics.MeasureString((_venta_Actual.Descuento * -1).ToString("c"), descuentoFont);
                 ev.Graphics.DrawString("Descuento", descuentoFont, Brushes.Black, 10, height, new StringFormat());
                 ev.Graphics.DrawString((_venta_Actual.Descuento *-1).ToString("c"), descuentoFont, Brushes.Black, 230 + (50 - netWidth.Width), height, new StringFormat());
                 height += 20;
@@ -391,12 +398,20 @@ namespace UI.Desktop.Ventas
                     }
 
                     }
-                    //Print Line
+                //Print Line
                 if (_venta_Actual.Descuento != Convert.ToDecimal(0))
                 {
-                    SizeF descuentoWidth = ev.Graphics.MeasureString((_venta_Actual.Descuento *-1).ToString("c"), comandaNormalFont);
+                    SizeF descuentoWidth = ev.Graphics.MeasureString((_venta_Actual.Descuento * -1).ToString("c"), comandaNormalFont);
                     ev.Graphics.DrawString("DESCUENTO", comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
-                    ev.Graphics.DrawString((_venta_Actual.Descuento *-1).ToString("c"), comandaNormalFont, Brushes.Black, 275- descuentoWidth.Width, height, new StringFormat());
+                    ev.Graphics.DrawString((_venta_Actual.Descuento * -1).ToString("c"), comandaNormalFont, Brushes.Black, 275 - descuentoWidth.Width, height, new StringFormat());
+
+                    height += 15;
+                }
+                if (_venta_Actual.Recargo != Convert.ToDecimal(0))
+                {
+                    SizeF recargoWidth = ev.Graphics.MeasureString((_venta_Actual.Recargo *-1).ToString("c"), comandaNormalFont);
+                    ev.Graphics.DrawString("Interes Financiacion ", comandaNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    ev.Graphics.DrawString((_venta_Actual.Recargo *-1).ToString("c"), comandaNormalFont, Brushes.Black, 275- recargoWidth.Width, height, new StringFormat());
 
                     height += 15;
                 }

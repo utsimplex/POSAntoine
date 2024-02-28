@@ -45,6 +45,12 @@
             this.gbTipoPago = new System.Windows.Forms.GroupBox();
             this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
             this.gbArticulosVenta = new System.Windows.Forms.GroupBox();
+            this.gpbxRecargo = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtRecPesos = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtRec = new System.Windows.Forms.TextBox();
             this.dgvArticulosVtaActual = new System.Windows.Forms.DataGridView();
             this.btnAgregarArt = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
@@ -73,6 +79,8 @@
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
             this.gbArticulosVenta.SuspendLayout();
+            this.gpbxRecargo.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulosVtaActual)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -248,6 +256,7 @@
             // 
             // gbArticulosVenta
             // 
+            this.gbArticulosVenta.Controls.Add(this.gpbxRecargo);
             this.gbArticulosVenta.Controls.Add(this.dgvArticulosVtaActual);
             this.gbArticulosVenta.Controls.Add(this.btnAgregarArt);
             this.gbArticulosVenta.Controls.Add(this.btnQuitar);
@@ -259,6 +268,80 @@
             this.gbArticulosVenta.TabIndex = 2;
             this.gbArticulosVenta.TabStop = false;
             this.gbArticulosVenta.Text = "Detalle";
+            // 
+            // gpbxRecargo
+            // 
+            this.gpbxRecargo.Controls.Add(this.tableLayoutPanel4);
+            this.gpbxRecargo.Location = new System.Drawing.Point(326, 365);
+            this.gpbxRecargo.Name = "gpbxRecargo";
+            this.gpbxRecargo.Size = new System.Drawing.Size(214, 58);
+            this.gpbxRecargo.TabIndex = 4;
+            this.gpbxRecargo.TabStop = false;
+            this.gpbxRecargo.Text = "Aplicar Recargo";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.txtRecPesos, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label4, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtRec, 0, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(208, 39);
+            this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // txtRecPesos
+            // 
+            this.txtRecPesos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtRecPesos.Location = new System.Drawing.Point(123, 18);
+            this.txtRecPesos.Name = "txtRecPesos";
+            this.txtRecPesos.Size = new System.Drawing.Size(66, 20);
+            this.txtRecPesos.TabIndex = 3;
+            this.txtRecPesos.Text = "0";
+            this.txtRecPesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtRecPesos.Leave += new System.EventHandler(this.txtRecPesos_Leave);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(107, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "$";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 15);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "%";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtRec
+            // 
+            this.txtRec.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtRec.Location = new System.Drawing.Point(19, 18);
+            this.txtRec.Name = "txtRec";
+            this.txtRec.Size = new System.Drawing.Size(66, 20);
+            this.txtRec.TabIndex = 0;
+            this.txtRec.Text = "0";
+            this.txtRec.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtRec.Leave += new System.EventHandler(this.txtRec_Leave);
             // 
             // dgvArticulosVtaActual
             // 
@@ -580,6 +663,9 @@
             this.groupBox2.PerformLayout();
             this.gbTipoPago.ResumeLayout(false);
             this.gbArticulosVenta.ResumeLayout(false);
+            this.gpbxRecargo.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulosVtaActual)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -637,5 +723,11 @@
         private System.Windows.Forms.Button btnReimprimir;
         private System.Windows.Forms.Button btnImprimirCambio;
         private System.Windows.Forms.CheckBox chkbxCambio;
+        private System.Windows.Forms.GroupBox gpbxRecargo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TextBox txtRecPesos;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtRec;
     }
 }

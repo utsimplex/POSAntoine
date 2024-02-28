@@ -185,7 +185,31 @@ namespace Data.Database
              
              }
 
-       
+
+        public void ActualizarStock(string codigoArtilo, int cantidad)
+        {
+            //Crear Conexion y Abrirla
+            SqlConnection Con = CrearConexion();
+
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand();
+            Comando.Connection = Con;
+            Comando.CommandType = CommandType.Text;
+
+            Comando.CommandText = "UPDATE [Articulos] SET [stock] = stock + @STOCK WHERE (([codigo] = @CODIGO))";
+            Comando.Parameters.Add(new SqlParameter("@CODIGO", SqlDbType.NVarChar));
+            Comando.Parameters["@CODIGO"].Value = codigoArtilo;
+            Comando.Parameters.Add(new SqlParameter("@STOCK", SqlDbType.Int));
+            Comando.Parameters["@STOCK"].Value = cantidad;
+
+            //Ejecuta el comando INSERT
+            Comando.Connection.Open();
+            Comando.ExecuteNonQuery();
+            Comando.Connection.Close();
+
+        }
+
+
         public System.ComponentModel.BindingList<Entidades.Articulo> GetAll()
              {
                  System.ComponentModel.BindingList<Entidades.Articulo> ListaArticulos = new System.ComponentModel.BindingList<Entidades.Articulo>();
@@ -564,6 +588,53 @@ namespace Data.Database
                 con.Close();
             }
                 return codigo;
+        }
+
+        public string getNumeradorCodigoProveedor(string proveedor, string codigoProveedor)
+        {
+            // Crear conexión
+            SqlConnection con = CrearConexion();
+            string codigo = "AA00001";
+
+            try
+            {
+                // Abrir la conexión
+                con.Open();
+
+                // Crear SqlCommand
+                SqlCommand cmd = new SqlCommand("getNumeradorCodigoProveedor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Agregar los parámetros al comando
+                cmd.Parameters.AddWithValue("@pProveedor", proveedor);
+                cmd.Parameters.AddWithValue("@pCodigoProveedor", codigoProveedor);
+
+
+                // Ejecutar el stored procedure
+                SqlDataReader drMarcas = cmd.ExecuteReader();
+
+                while (drMarcas.Read())
+                {
+
+
+                    codigo = (string)drMarcas["codigo"];
+
+
+
+                }
+                drMarcas.Close();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción o mostrar un mensaje de error
+                MessageBox.Show("Error al registrar Articulos: " + ex.Message);
+            }
+            finally
+            {
+                // Cerrar la conexión después de usarla
+                con.Close();
+            }
+            return codigo;
         }
 
         public void altaMasivaArticulos(int caja_id)

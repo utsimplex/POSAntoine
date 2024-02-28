@@ -40,14 +40,11 @@
             this.lblDescripcionCaja = new System.Windows.Forms.Label();
             this.txtAbiertaPorUsr = new System.Windows.Forms.TextBox();
             this.lblUsuario = new System.Windows.Forms.Label();
-            this.lblCajaFecha = new System.Windows.Forms.Label();
             this.txtCajaNro = new System.Windows.Forms.TextBox();
             this.lblNroCaja = new System.Windows.Forms.Label();
             this.btnNo = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblMovimientos = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtVentas = new System.Windows.Forms.TextBox();
@@ -56,8 +53,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtCerradaPorUsr = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.dgvVentasxMP = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentasxMP)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSaldoInicial
@@ -65,7 +64,7 @@
             this.lblSaldoInicial.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSaldoInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaldoInicial.Location = new System.Drawing.Point(23, 172);
+            this.lblSaldoInicial.Location = new System.Drawing.Point(11, 124);
             this.lblSaldoInicial.Name = "lblSaldoInicial";
             this.lblSaldoInicial.Size = new System.Drawing.Size(186, 23);
             this.lblSaldoInicial.TabIndex = 21;
@@ -76,7 +75,7 @@
             // 
             this.txtSaldoInicial.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtSaldoInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSaldoInicial.Location = new System.Drawing.Point(215, 172);
+            this.txtSaldoInicial.Location = new System.Drawing.Point(252, 121);
             this.txtSaldoInicial.Name = "txtSaldoInicial";
             this.txtSaldoInicial.Size = new System.Drawing.Size(187, 32);
             this.txtSaldoInicial.TabIndex = 22;
@@ -96,22 +95,23 @@
             this.groupBox1.Controls.Add(this.lblSaldoInicial);
             this.groupBox1.Controls.Add(this.txtAbiertaPorUsr);
             this.groupBox1.Controls.Add(this.lblUsuario);
-            this.groupBox1.Controls.Add(this.lblCajaFecha);
             this.groupBox1.Controls.Add(this.txtCajaNro);
             this.groupBox1.Controls.Add(this.lblNroCaja);
             this.groupBox1.Location = new System.Drawing.Point(21, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(522, 216);
+            this.groupBox1.Size = new System.Drawing.Size(522, 162);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información de la caja";
             // 
             // dtpFechaApertura
             // 
+            this.dtpFechaApertura.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.dtpFechaApertura.Enabled = false;
-            this.dtpFechaApertura.Location = new System.Drawing.Point(146, 129);
+            this.dtpFechaApertura.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaApertura.Location = new System.Drawing.Point(374, 26);
             this.dtpFechaApertura.Name = "dtpFechaApertura";
-            this.dtpFechaApertura.Size = new System.Drawing.Size(256, 20);
+            this.dtpFechaApertura.Size = new System.Drawing.Size(126, 20);
             this.dtpFechaApertura.TabIndex = 27;
             // 
             // label4
@@ -121,7 +121,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Location = new System.Drawing.Point(12, 132);
+            this.label4.Location = new System.Drawing.Point(249, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 17);
             this.label4.TabIndex = 26;
@@ -134,7 +134,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(182, 172);
+            this.label1.Location = new System.Drawing.Point(219, 124);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 29);
             this.label1.TabIndex = 25;
@@ -144,9 +144,10 @@
             // dtpFechaCaja
             // 
             this.dtpFechaCaja.Enabled = false;
-            this.dtpFechaCaja.Location = new System.Drawing.Point(146, 77);
+            this.dtpFechaCaja.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaCaja.Location = new System.Drawing.Point(287, 52);
             this.dtpFechaCaja.Name = "dtpFechaCaja";
-            this.dtpFechaCaja.Size = new System.Drawing.Size(256, 20);
+            this.dtpFechaCaja.Size = new System.Drawing.Size(82, 20);
             this.dtpFechaCaja.TabIndex = 24;
             // 
             // txtDescripcion
@@ -154,10 +155,10 @@
             this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescripcion.Enabled = false;
-            this.txtDescripcion.Location = new System.Drawing.Point(146, 103);
+            this.txtDescripcion.Location = new System.Drawing.Point(146, 80);
             this.txtDescripcion.MaxLength = 999;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(370, 20);
+            this.txtDescripcion.Size = new System.Drawing.Size(269, 20);
             this.txtDescripcion.TabIndex = 24;
             // 
             // lblDescripcionCaja
@@ -167,7 +168,7 @@
             this.lblDescripcionCaja.AutoSize = true;
             this.lblDescripcionCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescripcionCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblDescripcionCaja.Location = new System.Drawing.Point(36, 104);
+            this.lblDescripcionCaja.Location = new System.Drawing.Point(38, 81);
             this.lblDescripcionCaja.Name = "lblDescripcionCaja";
             this.lblDescripcionCaja.Size = new System.Drawing.Size(98, 17);
             this.lblDescripcionCaja.TabIndex = 23;
@@ -181,7 +182,7 @@
             this.txtAbiertaPorUsr.Enabled = false;
             this.txtAbiertaPorUsr.Location = new System.Drawing.Point(146, 25);
             this.txtAbiertaPorUsr.Name = "txtAbiertaPorUsr";
-            this.txtAbiertaPorUsr.Size = new System.Drawing.Size(370, 20);
+            this.txtAbiertaPorUsr.Size = new System.Drawing.Size(100, 20);
             this.txtAbiertaPorUsr.TabIndex = 22;
             this.txtAbiertaPorUsr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -199,28 +200,14 @@
             this.lblUsuario.Text = "Abierta por:";
             this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lblCajaFecha
-            // 
-            this.lblCajaFecha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCajaFecha.AutoSize = true;
-            this.lblCajaFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCajaFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblCajaFecha.Location = new System.Drawing.Point(77, 78);
-            this.lblCajaFecha.Name = "lblCajaFecha";
-            this.lblCajaFecha.Size = new System.Drawing.Size(57, 17);
-            this.lblCajaFecha.TabIndex = 19;
-            this.lblCajaFecha.Text = "Fecha:";
-            this.lblCajaFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // txtCajaNro
             // 
             this.txtCajaNro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCajaNro.Enabled = false;
-            this.txtCajaNro.Location = new System.Drawing.Point(146, 51);
+            this.txtCajaNro.Location = new System.Drawing.Point(146, 52);
             this.txtCajaNro.Name = "txtCajaNro";
-            this.txtCajaNro.Size = new System.Drawing.Size(256, 20);
+            this.txtCajaNro.Size = new System.Drawing.Size(135, 20);
             this.txtCajaNro.TabIndex = 18;
             this.txtCajaNro.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -231,7 +218,7 @@
             this.lblNroCaja.AutoSize = true;
             this.lblNroCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNroCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblNroCaja.Location = new System.Drawing.Point(54, 52);
+            this.lblNroCaja.Location = new System.Drawing.Point(50, 52);
             this.lblNroCaja.Name = "lblNroCaja";
             this.lblNroCaja.Size = new System.Drawing.Size(86, 17);
             this.lblNroCaja.TabIndex = 17;
@@ -243,7 +230,7 @@
             this.btnNo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnNo.Image = ((System.Drawing.Image)(resources.GetObject("btnNo.Image")));
-            this.btnNo.Location = new System.Drawing.Point(143, 418);
+            this.btnNo.Location = new System.Drawing.Point(143, 440);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(124, 46);
             this.btnNo.TabIndex = 20;
@@ -260,7 +247,7 @@
             this.btnCerrarCaja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnCerrarCaja.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnCerrarCaja.Image = global::UI.Desktop.Properties.Resources._3319640_money_coin_dollar_save_lock;
-            this.btnCerrarCaja.Location = new System.Drawing.Point(273, 418);
+            this.btnCerrarCaja.Location = new System.Drawing.Point(273, 440);
             this.btnCerrarCaja.Name = "btnCerrarCaja";
             this.btnCerrarCaja.Size = new System.Drawing.Size(138, 46);
             this.btnCerrarCaja.TabIndex = 14;
@@ -272,8 +259,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.lblMovimientos);
-            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.dgvVentasxMP);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtVentas);
@@ -282,40 +268,12 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtCerradaPorUsr);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(21, 234);
+            this.groupBox2.Location = new System.Drawing.Point(21, 180);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(522, 174);
+            this.groupBox2.Size = new System.Drawing.Size(522, 253);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cierre de caja";
-            // 
-            // lblMovimientos
-            // 
-            this.lblMovimientos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMovimientos.AutoSize = true;
-            this.lblMovimientos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMovimientos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblMovimientos.Location = new System.Drawing.Point(143, 48);
-            this.lblMovimientos.Name = "lblMovimientos";
-            this.lblMovimientos.Size = new System.Drawing.Size(17, 17);
-            this.lblMovimientos.TabIndex = 36;
-            this.lblMovimientos.Text = "0";
-            this.lblMovimientos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label9.Location = new System.Drawing.Point(32, 48);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 17);
-            this.label9.TabIndex = 35;
-            this.label9.Text = "Movimientos:";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label8
             // 
@@ -323,7 +281,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label8.Location = new System.Drawing.Point(182, 132);
+            this.label8.Location = new System.Drawing.Point(219, 214);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(27, 29);
             this.label8.TabIndex = 34;
@@ -336,7 +294,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label7.Location = new System.Drawing.Point(182, 82);
+            this.label7.Location = new System.Drawing.Point(219, 162);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(27, 29);
             this.label7.TabIndex = 33;
@@ -348,7 +306,7 @@
             this.txtVentas.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtVentas.Enabled = false;
             this.txtVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVentas.Location = new System.Drawing.Point(215, 82);
+            this.txtVentas.Location = new System.Drawing.Point(252, 162);
             this.txtVentas.Name = "txtVentas";
             this.txtVentas.Size = new System.Drawing.Size(187, 32);
             this.txtVentas.TabIndex = 32;
@@ -359,7 +317,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 85);
+            this.label6.Location = new System.Drawing.Point(-5, 165);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(216, 23);
             this.label6.TabIndex = 31;
@@ -371,7 +329,7 @@
             this.txtEfectivoRendir.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtEfectivoRendir.Enabled = false;
             this.txtEfectivoRendir.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEfectivoRendir.Location = new System.Drawing.Point(215, 129);
+            this.txtEfectivoRendir.Location = new System.Drawing.Point(252, 211);
             this.txtEfectivoRendir.Name = "txtEfectivoRendir";
             this.txtEfectivoRendir.Size = new System.Drawing.Size(187, 32);
             this.txtEfectivoRendir.TabIndex = 30;
@@ -382,7 +340,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(-19, 132);
+            this.label5.Location = new System.Drawing.Point(11, 214);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(216, 23);
             this.label5.TabIndex = 29;
@@ -394,9 +352,9 @@
             this.txtCerradaPorUsr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCerradaPorUsr.Enabled = false;
-            this.txtCerradaPorUsr.Location = new System.Drawing.Point(146, 25);
+            this.txtCerradaPorUsr.Location = new System.Drawing.Point(146, 49);
             this.txtCerradaPorUsr.Name = "txtCerradaPorUsr";
-            this.txtCerradaPorUsr.Size = new System.Drawing.Size(370, 20);
+            this.txtCerradaPorUsr.Size = new System.Drawing.Size(100, 20);
             this.txtCerradaPorUsr.TabIndex = 27;
             this.txtCerradaPorUsr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -407,18 +365,30 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label2.Location = new System.Drawing.Point(34, 26);
+            this.label2.Location = new System.Drawing.Point(32, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 17);
             this.label2.TabIndex = 26;
             this.label2.Text = "Cerrada por:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // dgvVentasxMP
+            // 
+            this.dgvVentasxMP.AllowUserToAddRows = false;
+            this.dgvVentasxMP.AllowUserToDeleteRows = false;
+            this.dgvVentasxMP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVentasxMP.Location = new System.Drawing.Point(252, 18);
+            this.dgvVentasxMP.Name = "dgvVentasxMP";
+            this.dgvVentasxMP.ReadOnly = true;
+            this.dgvVentasxMP.RowHeadersVisible = false;
+            this.dgvVentasxMP.Size = new System.Drawing.Size(239, 133);
+            this.dgvVentasxMP.TabIndex = 37;
+            // 
             // frmCierreCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 476);
+            this.ClientSize = new System.Drawing.Size(555, 498);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnNo);
@@ -433,6 +403,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVentasxMP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -446,7 +417,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtAbiertaPorUsr;
         private System.Windows.Forms.Label lblUsuario;
-        private System.Windows.Forms.Label lblCajaFecha;
         private System.Windows.Forms.TextBox txtCajaNro;
         private System.Windows.Forms.Label lblNroCaja;
         private System.Windows.Forms.TextBox txtDescripcion;
@@ -464,7 +434,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtVentas;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lblMovimientos;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridView dgvVentasxMP;
     }
 }

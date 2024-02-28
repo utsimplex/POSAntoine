@@ -645,5 +645,48 @@ namespace Data.Database
 
             return caja;
         }
+
+
+        public List<VentasXMP> GetVentasMP(int caja_id)
+        {
+            List<Entidades.VentasXMP> ListaVentas = new List<Entidades.VentasXMP>();
+            //Crear Conexion y Abrirla
+            SqlConnection Con = CrearConexion();
+
+            // Crear SqlCommand - Asignarle la conexion - Asignarle la instruccion SQL (consulta)
+            SqlCommand Comando = new SqlCommand("SELECT SUM(TOTAL) as TOTAL, tipoPago as MedioPago FROM Ventas WHERE Ventas.caja_id = @caja_id GROUP BY tipoPago", Con);
+            Comando.Parameters.Add(new SqlParameter("@caja_id", SqlDbType.BigInt));
+            Comando.Parameters["@caja_id"].Value = caja_id;
+            try
+            {
+                Comando.Connection.Open();
+                SqlDataReader drVentas = Comando.ExecuteReader();
+
+                while (drVentas.Read())
+                {
+                    Entidades.VentasXMP ventaActual = new Entidades.VentasXMP();
+
+                    ventaActual.MedioPago = (string)drVentas["MedioPago"];
+                    ventaActual.Total = (decimal)drVentas["Total"];
+
+                    ListaVentas.Add(ventaActual);
+                }
+                drVentas.Close();
+
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar lista de Ventas", Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                Comando.Connection.Close();
+            }
+
+
+
+            return ListaVentas;
+        }
     }
 }

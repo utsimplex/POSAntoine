@@ -830,8 +830,11 @@ namespace UI.Desktop.Artículos
 
         private void btnMasiva_Click(object sender, EventArgs e)
         {
-            frmArticuloTallesABM frmArticulos = new Artículos.frmArticuloTallesABM(parametrosEmpresa);
+            //frmArticuloTallesABM frmArticulos = new Artículos.frmArticuloTallesABM(parametrosEmpresa);
+            //frmArticulos.ShowDialog();
+            frmArticuloTallesSpinABM frmArticulos = new Artículos.frmArticuloTallesSpinABM(parametrosEmpresa);
             frmArticulos.ShowDialog();
+
         }
     }
 

@@ -68,6 +68,7 @@ namespace UI.Desktop.Ventas
             Entidades.Venta vtaSeleccionada = new Entidades.Venta();
 
             vtaSeleccionada.Descuento = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["Descuento"].Value.ToString());
+            vtaSeleccionada.Recargo = Convert.ToDecimal(dgvListado.SelectedRows[0].Cells["Recargo"].Value.ToString());
             vtaSeleccionada.DniCliente = dgvListado.SelectedRows[0].Cells["DniCliente"].Value.ToString();
             vtaSeleccionada.FechaHora = Convert.ToDateTime(dgvListado.SelectedRows[0].Cells["FechaHora"].Value);
             vtaSeleccionada.NumeroVenta = Convert.ToInt32(dgvListado.SelectedRows[0].Cells["NumeroVenta"].Value.ToString());
