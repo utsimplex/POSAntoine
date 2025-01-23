@@ -48,17 +48,7 @@ namespace UI.Desktop.Ventas
                 dgvListado.DataSource = ListaVentas.Where(x=>x.CajaId ==ultimaCaja).ToList();
             else
                 dgvListado.DataSource = ListaVentas;
-            //dgvListado.Refresh();
-            dgvListado.Columns["DniCliente"].Visible = dgvListado.Columns["TipoDocumentoClienteRO"].Visible = dgvListado.Columns["CuitEmisor"].Visible = dgvListado.Columns["SituacionFiscalClienteRO"].Visible
-                = dgvListado.Columns["QRBase64RO"].Visible = dgvListado.Columns["puntoDeVentaRO"].Visible = dgvListado.Columns["numeroDeComprobanteFiscalRO"].Visible = dgvListado.Columns["TipoOperacion"].Visible  =false;
-            dgvListado.Columns["Neto"].Visible = dgvListado.Columns["Iva"].Visible = dgvListado.Columns["TipoComprobante"].Visible = dgvListado.Columns["NumeroTicketFiscal"].Visible = dgvListado.Columns["CAE"].Visible =
-                dgvListado.Columns["VencimientoCAE"].Visible = dgvListado.Columns["DireccionCliente"].Visible = dgvListado.Columns["LetraComprobateRO"].Visible = dgvListado.Columns["TipoDocumentoCliente"].Visible =
-                dgvListado.Columns["SituacionFiscalCliente"].Visible = dgvListado.Columns["PuntoDeVenta"].Visible = false;
-            dgvListado.Columns["CajaID"].HeaderText = "N° Caja";
-            dgvListado.Columns["NumeroDocumentoCliente"].HeaderText = "Documento Cliente";
-            dgvListado.Columns["NombreCliente"].HeaderText = "Cliente";
-            dgvListado.Columns["ComprobanteFiscalRO"].HeaderText = "Factura";
-            dgvListado.Size = new Size(820, 429);
+               this.formatearGrilla();
 
         }
 
@@ -114,6 +104,8 @@ namespace UI.Desktop.Ventas
             {
                 dgvListado.DataSource = adapter.Busqueda(tbxFiltro.Text);
             }
+
+            this.formatearGrilla();
         }
 
         private void btnVerComprobante_Click(object sender, EventArgs e)
@@ -159,15 +151,34 @@ namespace UI.Desktop.Ventas
 
                 if (formSeleccionFecha.TipoBusqueda == "Fecha Desde")
                 {
-                    dgvListado.DataSource = ListaVentas.Where(x=>x.FechaHora.Date >= formSeleccionFecha.dtpFechaDesde.Value);
+                    dgvListado.DataSource = ListaVentas.Where(x=>x.FechaHora.Date >= formSeleccionFecha.dtpFechaDesde.Value).ToList();
                     //dgvListado.DataSource = Datos_VentasAdapter.BusquedaFechaDesde(formSeleccionFecha.dtpFechaDesde.Value);
                 }
                 if (formSeleccionFecha.TipoBusqueda == "Desde-Hasta")
                 {
-                    dgvListado.DataSource = ListaVentas.Where(x=>x.FechaHora.Date >= formSeleccionFecha.dtpDHDesde.Value && x.FechaHora.Date <= formSeleccionFecha.dtpDHHasta.Value);
+                    dgvListado.DataSource = ListaVentas.Where(x=>x.FechaHora.Date >= formSeleccionFecha.dtpDHDesde.Value && x.FechaHora.Date <= formSeleccionFecha.dtpDHHasta.Value).ToList();
                     //dgvListado.DataSource = Datos_VentasAdapter.BusquedaFechaDesde(formSeleccionFecha.dtpDHDesde.Value, formSeleccionFecha.dtpDHHasta.Value);
                 }
             }
+
+            this.formatearGrilla();
+
+        
+        }
+
+        private void formatearGrilla()
+        {
+            dgvListado.Columns["DniCliente"].Visible = dgvListado.Columns["TipoDocumentoClienteRO"].Visible = dgvListado.Columns["CuitEmisor"].Visible = dgvListado.Columns["SituacionFiscalClienteRO"].Visible
+           = dgvListado.Columns["QRBase64RO"].Visible = dgvListado.Columns["puntoDeVentaRO"].Visible = dgvListado.Columns["numeroDeComprobanteFiscalRO"].Visible = dgvListado.Columns["TipoOperacion"].Visible = false;
+            dgvListado.Columns["Neto"].Visible = dgvListado.Columns["Iva"].Visible = dgvListado.Columns["TipoComprobante"].Visible = dgvListado.Columns["NumeroTicketFiscal"].Visible = dgvListado.Columns["CAE"].Visible =
+                dgvListado.Columns["VencimientoCAE"].Visible = dgvListado.Columns["DireccionCliente"].Visible = dgvListado.Columns["LetraComprobateRO"].Visible = dgvListado.Columns["TipoDocumentoCliente"].Visible =
+                dgvListado.Columns["SituacionFiscalCliente"].Visible = dgvListado.Columns["PuntoDeVenta"].Visible = false;
+            dgvListado.Columns["CajaID"].HeaderText = "N° Caja";
+            dgvListado.Columns["NumeroDocumentoCliente"].HeaderText = "Documento Cliente";
+            dgvListado.Columns["NombreCliente"].HeaderText = "Cliente";
+            dgvListado.Columns["ComprobanteFiscalRO"].HeaderText = "Factura";
+            dgvListado.Size = new Size(820, 429);
+
 
         }
 
@@ -198,6 +209,7 @@ namespace UI.Desktop.Ventas
                 //Obtengo el DNI Del Cliente Seleccionado;
                 string dniClienteSeleccionado = formSeleccionFecha.dniClienteSeleccionado;
                 dgvListado.DataSource = Datos_VentasAdapter.Busqueda(dniClienteSeleccionado);
+                this.formatearGrilla();
             }
         }
 

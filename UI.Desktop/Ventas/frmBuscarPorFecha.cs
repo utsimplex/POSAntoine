@@ -88,6 +88,7 @@ namespace UI.Desktop.Ventas
         {
             this.Close();
         }
+        
         //CLICK SELECCIONAR CLIENTE
         private void btnSeleccionarCliente_Click(object sender, EventArgs e)
         {
