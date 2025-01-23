@@ -152,6 +152,7 @@ namespace UI.Desktop
                 usrActual = appLogin.usrActual;
                 InicializarCaja();
                 bindUIUsuario();
+                setPermissions();
                 this.Visible = true;
                 return appLogin.usrActual;
                 
@@ -159,6 +160,15 @@ namespace UI.Desktop
 
 
         }
+        // permissions
+        private void setPermissions()
+        {
+                if (usrActual.Rol == "Empleado")
+                { mnuUsuarios.Visible = btnCajas.Visible = btnListaProveedores.Visible = btnDescuentos.Visible = tsmiGastos.Visible = 
+                    false; }
+        }
+
+
 
         // Bind UI No User
         private void bindUINoUser()
@@ -180,9 +190,7 @@ namespace UI.Desktop
 
             mtxtNombreUsuario.Text = usrActual.usuario;
             lblUserRole.Text = usrActual.Rol;
-            if (usrActual.Rol == "Empleado")
-            { mnuUsuarios.Visible = false; }
-
+            
             NI.BalloonTipIcon = ToolTipIcon.Info;
             NI.BalloonTipText = "Bienvenido " + this.usrActual.Nombre;
             NI.BalloonTipTitle = "Ut Simplex";
@@ -1212,6 +1220,70 @@ namespace UI.Desktop
         private void f12ConsultaRápidaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ConsultaRapida();
+        }
+
+        private void btnGasto_Click(object sender, EventArgs e)
+        {
+            Gastos.frmIngresoGasto formNuevoGasto = new Gastos.frmIngresoGasto();
+            formNuevoGasto.ShowDialog();
+        }
+
+        private void nuevoGastoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Gastos.frmIngresoGasto formNuevoGasto = new Gastos.frmIngresoGasto();
+            formNuevoGasto.ShowDialog();
+        }
+
+        private void listadoDeGastosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Gastos.frmListadoGastos formListadoDeGastos = new Gastos.frmListadoGastos();
+            formListadoDeGastos.ShowDialog();
+
+        }
+
+        private void btnDescuentos_Click(object sender, EventArgs e)
+        {
+            Descuentos.frmListadoDescuentos formListDescuentos = new Descuentos.frmListadoDescuentos();
+            formListDescuentos.ShowDialog();
+        }
+
+        private void nuevoDescuentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Descuentos.frmDescuentoABM formDescuentos = new Descuentos.frmDescuentoABM();
+            formDescuentos.ShowDialog();
+        }
+
+        private void listadoDeDescuentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Descuentos.frmListadoDescuentos formListDescuentos = new Descuentos.frmListadoDescuentos();
+            formListDescuentos.ShowDialog();
+        }
+
+       private void cashFlowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Informes.frmReporte formReporteCash = new Informes.frmReporte(this.parametrosEmpresa.ImpresoraReportes,Reportes.CashFlow);
+            formReporteCash.ShowDialog();
+        }
+
+        private void ventasComisionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Informes.frmReporte formReporteVentasComisiones = new Informes.frmReporte(this.parametrosEmpresa.ImpresoraReportes, Reportes.VentasComisiones);
+            formReporteVentasComisiones.ShowDialog();
+        }
+
+        private void btnNuevaSeña_Click(object sender, EventArgs e)
+        {
+
+            if (cajaActual != null)
+            {
+                Ventas.frmSeña formNuevaSeña = new Ventas.frmSeña(usrActual);
+                formNuevaSeña.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Debe abrir una caja antes de realizar ventas.", "Caja CERRADA - Ventas no permitidas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

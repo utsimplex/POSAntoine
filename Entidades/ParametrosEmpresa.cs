@@ -16,6 +16,7 @@ namespace Entidades
         public string Telefono { get; set; }//Propiedad que se va a mostrar en la UI(ej.Ventas) y en la cabecera de la comanda
         public string ImagenPath { get; set; }//Imagen que se va a imprimir en comandas, facturas y en UI
         public string Impresora1 { get; set; }//Path Impresora 1
+        public string ImpresoraReportes { get; set; }//Path Impresora 1
 
         //Datos Fiscales
         public string CUIT { get; set; }

@@ -47,7 +47,7 @@ namespace Data.Database
             comando.Connection = ConexionSQL;
             comando.CommandType = CommandType.Text;
             comando.CommandText =
-                "SELECT NOMBRE, DIRECCION, TELEFONO, IMAGENPATH, IMPRESORA1, CUIT, NOMBREFISCAL, DIRECCIONFISCAL, SITUACIONFISCAL, "
+                "SELECT NOMBRE, DIRECCION, TELEFONO, IMAGENPATH, IMPRESORA1,IMPRESORAREPORTES, CUIT, NOMBREFISCAL, DIRECCIONFISCAL, SITUACIONFISCAL, "
                 + "CERTIFICADODIGITAL, CLAVECERTIFICADO, PUNTODEVENTA, INICIODEACTIVIDADES, INGRESOSBRUTOS, ESPRODUCCION, URLQRAFIP, "
                 + "CAMPOPERSONALIZADOARTICULO1, CAMPOPERSONALIZADOARTICULO2, FAMILIANOMBRE1, FAMILIANOMBRE2, FONDOPANTALLA "
                 + "FROM [PARAMETROS_EMPRESA] ";
@@ -63,6 +63,7 @@ namespace Data.Database
                 lcl_parametrosEmpresa.Telefono = (drMedioPago["TELEFONO"] != DBNull.Value) ? (string)drMedioPago["TELEFONO"] : null;
                 lcl_parametrosEmpresa.ImagenPath = (drMedioPago["IMAGENPATH"] != DBNull.Value) ? (string)drMedioPago["IMAGENPATH"] : null;
                 lcl_parametrosEmpresa.Impresora1 = (drMedioPago["IMPRESORA1"] != DBNull.Value) ? (string)drMedioPago["IMPRESORA1"] : null;
+                lcl_parametrosEmpresa.ImpresoraReportes = (drMedioPago["IMPRESORAREPORTES"] != DBNull.Value) ? (string)drMedioPago["IMPRESORAREPORTES"] : null;
                 lcl_parametrosEmpresa.CUIT = (drMedioPago["CUIT"] != DBNull.Value) ? (string)drMedioPago["CUIT"] : null;
                 lcl_parametrosEmpresa.NombreFiscal = (drMedioPago["NOMBREFISCAL"] != DBNull.Value) ? (string)drMedioPago["NOMBREFISCAL"] : null;
                 lcl_parametrosEmpresa.DireccionFiscal = (drMedioPago["DIRECCIONFISCAL"] != DBNull.Value) ? (string)drMedioPago["DIRECCIONFISCAL"] : null;
@@ -102,8 +103,8 @@ namespace Data.Database
 
 
             Comando.CommandText = "UPDATE [PARAMETROS_EMPRESA] SET NOMBRE=@NOMBRE, DIRECCION=@DIRECCION, TELEFONO=@TELEFONO, IMAGENPATH=@IMAGENPATH, "
-                +"IMPRESORA1=@IMPRESORA1, CUIT=@CUIT, NOMBREFISCAL=@NOMBREFISCAL, DIRECCIONFISCAL=@DIRECCIONFISCAL, SITUACIONFISCAL=@SITUACIONFISCAL, "
-                +"CERTIFICADODIGITAL=@CERTIFICADODIGITAL, CLAVECERTIFICADO=@CLAVECERTIFICADO, PUNTODEVENTA=@PUNTODEVENTA, INICIODEACTIVIDADES=@INICIODEACTIVIDADES, "
+                + "IMPRESORA1=@IMPRESORA1, IMPRESORAREPORTES=@IMPRESORAREPORTES, CUIT=@CUIT, NOMBREFISCAL=@NOMBREFISCAL, DIRECCIONFISCAL=@DIRECCIONFISCAL, SITUACIONFISCAL=@SITUACIONFISCAL, "
+                + "CERTIFICADODIGITAL=@CERTIFICADODIGITAL, CLAVECERTIFICADO=@CLAVECERTIFICADO, PUNTODEVENTA=@PUNTODEVENTA, INICIODEACTIVIDADES=@INICIODEACTIVIDADES, "
                 +"INGRESOSBRUTOS=@INGRESOSBRUTOS, ESPRODUCCION=@ESPRODUCCION, URLQRAFIP=@URLQRAFIP, "
                 +"CampoPersonalizadoArticulo1=@CAMPO_PERSONALIZADO_ARTICULO1, CampoPersonalizadoArticulo2=@CAMPO_PERSONALIZADO_ARTICULO2, FamiliaNombre1=@FAMILIANOMBRE1, FamiliaNombre2=@FAMILIANOMBRE2, FONDOPANTALLA=@FONDOPANTALLA";
             Comando.Parameters.Add(new SqlParameter("@NOMBRE", SqlDbType.NVarChar));
@@ -118,6 +119,8 @@ namespace Data.Database
             Comando.Parameters["@FONDOPANTALLA"].Value = _parametrosEmpresa.FondoPantalla ?? string.Empty;
             Comando.Parameters.Add(new SqlParameter("@IMPRESORA1", SqlDbType.NVarChar));
             Comando.Parameters["@IMPRESORA1"].Value = _parametrosEmpresa.Impresora1 ?? string.Empty;
+            Comando.Parameters.Add(new SqlParameter("@IMPRESORAREPORTES", SqlDbType.NVarChar));
+            Comando.Parameters["@IMPRESORAREPORTES"].Value = _parametrosEmpresa.ImpresoraReportes ?? string.Empty;
             //FISCAL
             Comando.Parameters.Add(new SqlParameter("@CUIT", SqlDbType.NVarChar));
             Comando.Parameters["@CUIT"].Value = _parametrosEmpresa.CUIT ?? string.Empty;

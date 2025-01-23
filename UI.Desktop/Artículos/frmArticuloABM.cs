@@ -27,8 +27,9 @@ namespace UI.Desktop.Artículos
         }
 
         //Constructor 2 (modo Modificacion)
-        public frmArticuloABM(Entidades.Articulo artiToEdit, ParametrosEmpresa pParametrosEmpresa)
+        public frmArticuloABM(Entidades.Articulo artiToEdit, ParametrosEmpresa pParametrosEmpresa, string rol)
         {
+            this.rol = rol;
             InitializeComponent();
             parametrosEmpresa = pParametrosEmpresa;
             ConfigurarPersonalizados();
@@ -56,7 +57,7 @@ namespace UI.Desktop.Artículos
         //PARAMETROS DE LA EMPRESA
         ParametrosEmpresa parametrosEmpresa = new ParametrosEmpresa();
 
-
+        string rol;
         #endregion
 
 
@@ -600,7 +601,7 @@ namespace UI.Desktop.Artículos
         //CLICK Modificar Stock
         private void btnModificarStock_Click(object sender, EventArgs e)
         {
-            if (txtStock.ReadOnly == false)
+            if (txtStock.ReadOnly == false|| this.rol=="EMPLEADO")
             {
                 this.txtStock.ReadOnly = true;
             }

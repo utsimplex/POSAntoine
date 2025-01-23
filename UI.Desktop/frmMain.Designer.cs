@@ -39,6 +39,12 @@
             this.configuracionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parametrosDeLaEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiGastos = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoGastoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.nuevoDescuentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeDescuentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiaDeSeguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.artículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,10 +64,11 @@
             this.porArtículoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.porFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.valorizaciónDeInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cashFlowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ventasComisionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.f12ConsultaRápidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblPerfil = new MaterialSkin.Controls.MaterialLabel();
             this.lblUserRole = new MaterialSkin.Controls.MaterialLabel();
             this.btnCerrarSesion = new MaterialSkin.Controls.MaterialButton();
@@ -76,6 +83,8 @@
             this.btnCerrarSistema = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDescuentos = new MaterialSkin.Controls.MaterialButton();
+            this.btnGasto = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.btnListaClientes = new MaterialSkin.Controls.MaterialButton();
             this.btnListaProveedores = new MaterialSkin.Controls.MaterialButton();
@@ -89,6 +98,7 @@
             this.lblNroCaja = new MaterialSkin.Controls.MaterialLabel();
             this.swAbrirCerrarCaja = new MaterialSkin.Controls.MaterialSwitch();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnNuevaSeña = new MaterialSkin.Controls.MaterialButton();
             this.msnPrincipal.SuspendLayout();
             this.panelTabla.SuspendLayout();
             this.materialCard1.SuspendLayout();
@@ -102,10 +112,10 @@
             // 
             this.msnPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuArchivo,
+            this.tsmiGastos,
             this.seguridadToolStripMenuItem,
             this.ayudaToolStripMenuItem,
-            this.ayudaToolStripMenuItem1,
-            this.toolStripMenuItem1});
+            this.ayudaToolStripMenuItem1});
             this.msnPrincipal.Location = new System.Drawing.Point(3, 64);
             this.msnPrincipal.Name = "msnPrincipal";
             this.msnPrincipal.Size = new System.Drawing.Size(1195, 24);
@@ -181,6 +191,51 @@
             this.mnuSalir.Text = "Salir";
             this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
+            // tsmiGastos
+            // 
+            this.tsmiGastos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevoGastoToolStripMenuItem,
+            this.listadoDeGastosToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.nuevoDescuentoToolStripMenuItem,
+            this.listadoDeDescuentosToolStripMenuItem});
+            this.tsmiGastos.Name = "tsmiGastos";
+            this.tsmiGastos.Size = new System.Drawing.Size(74, 20);
+            this.tsmiGastos.Text = "Financiero";
+            // 
+            // nuevoGastoToolStripMenuItem
+            // 
+            this.nuevoGastoToolStripMenuItem.Name = "nuevoGastoToolStripMenuItem";
+            this.nuevoGastoToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.nuevoGastoToolStripMenuItem.Text = "Nuevo Gasto";
+            this.nuevoGastoToolStripMenuItem.Click += new System.EventHandler(this.nuevoGastoToolStripMenuItem_Click);
+            // 
+            // listadoDeGastosToolStripMenuItem
+            // 
+            this.listadoDeGastosToolStripMenuItem.Name = "listadoDeGastosToolStripMenuItem";
+            this.listadoDeGastosToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.listadoDeGastosToolStripMenuItem.Text = "Listado de Gastos";
+            this.listadoDeGastosToolStripMenuItem.Click += new System.EventHandler(this.listadoDeGastosToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(189, 6);
+            // 
+            // nuevoDescuentoToolStripMenuItem
+            // 
+            this.nuevoDescuentoToolStripMenuItem.Name = "nuevoDescuentoToolStripMenuItem";
+            this.nuevoDescuentoToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.nuevoDescuentoToolStripMenuItem.Text = "Nuevo Descuento";
+            this.nuevoDescuentoToolStripMenuItem.Click += new System.EventHandler(this.nuevoDescuentoToolStripMenuItem_Click);
+            // 
+            // listadoDeDescuentosToolStripMenuItem
+            // 
+            this.listadoDeDescuentosToolStripMenuItem.Name = "listadoDeDescuentosToolStripMenuItem";
+            this.listadoDeDescuentosToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.listadoDeDescuentosToolStripMenuItem.Text = "Listado de Descuentos";
+            this.listadoDeDescuentosToolStripMenuItem.Click += new System.EventHandler(this.listadoDeDescuentosToolStripMenuItem_Click);
+            // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -242,7 +297,9 @@
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.emitirListasToolStripMenuItem,
-            this.valorizaciónDeInventarioToolStripMenuItem});
+            this.valorizaciónDeInventarioToolStripMenuItem,
+            this.cashFlowToolStripMenuItem,
+            this.ventasComisionesToolStripMenuItem});
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.ayudaToolStripMenuItem.Text = "Informes";
@@ -335,6 +392,20 @@
             this.valorizaciónDeInventarioToolStripMenuItem.Text = "Valorización de Inventario";
             this.valorizaciónDeInventarioToolStripMenuItem.Click += new System.EventHandler(this.valorizaciónDeInventarioToolStripMenuItem_Click);
             // 
+            // cashFlowToolStripMenuItem
+            // 
+            this.cashFlowToolStripMenuItem.Name = "cashFlowToolStripMenuItem";
+            this.cashFlowToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.cashFlowToolStripMenuItem.Text = "CashFlow";
+            this.cashFlowToolStripMenuItem.Click += new System.EventHandler(this.cashFlowToolStripMenuItem_Click);
+            // 
+            // ventasComisionesToolStripMenuItem
+            // 
+            this.ventasComisionesToolStripMenuItem.Name = "ventasComisionesToolStripMenuItem";
+            this.ventasComisionesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.ventasComisionesToolStripMenuItem.Text = "Ventas Comisiones";
+            this.ventasComisionesToolStripMenuItem.Click += new System.EventHandler(this.ventasComisionesToolStripMenuItem_Click);
+            // 
             // ayudaToolStripMenuItem1
             // 
             this.ayudaToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -359,11 +430,6 @@
             this.f12ConsultaRápidaToolStripMenuItem.Text = "F12 - Consulta rápida";
             this.f12ConsultaRápidaToolStripMenuItem.Click += new System.EventHandler(this.f12ConsultaRápidaToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
-            // 
             // lblPerfil
             // 
             this.lblPerfil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -372,7 +438,7 @@
             this.lblPerfil.Depth = 0;
             this.lblPerfil.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblPerfil.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
-            this.lblPerfil.Location = new System.Drawing.Point(4, 240);
+            this.lblPerfil.Location = new System.Drawing.Point(4, 135);
             this.lblPerfil.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPerfil.Name = "lblPerfil";
             this.lblPerfil.Size = new System.Drawing.Size(24, 13);
@@ -388,7 +454,7 @@
             this.lblUserRole.Depth = 0;
             this.lblUserRole.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblUserRole.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
-            this.lblUserRole.Location = new System.Drawing.Point(34, 239);
+            this.lblUserRole.Location = new System.Drawing.Point(34, 134);
             this.lblUserRole.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUserRole.Name = "lblUserRole";
             this.lblUserRole.Size = new System.Drawing.Size(64, 13);
@@ -407,7 +473,7 @@
             this.btnCerrarSesion.Depth = 0;
             this.btnCerrarSesion.HighEmphasis = true;
             this.btnCerrarSesion.Icon = null;
-            this.btnCerrarSesion.Location = new System.Drawing.Point(5, 151);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(5, 46);
             this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCerrarSesion.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCerrarSesion.Name = "btnCerrarSesion";
@@ -640,28 +706,79 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.btnNuevaSeña, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnDescuentos, 0, 9);
+            this.tableLayoutPanel2.Controls.Add(this.btnGasto, 0, 8);
             this.tableLayoutPanel2.Controls.Add(this.materialLabel1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnListaClientes, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.btnListaProveedores, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.btnHistorialVentas, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.btnListaArticulos, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.btnCajas, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnListaClientes, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.btnListaProveedores, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.btnHistorialVentas, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.btnListaArticulos, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.btnCajas, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.btnVentaNueva, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 10);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(14, 14);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 8;
+            this.tableLayoutPanel2.RowCount = 11;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(179, 595);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // btnDescuentos
+            // 
+            this.btnDescuentos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDescuentos.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDescuentos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDescuentos.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDescuentos.Depth = 0;
+            this.btnDescuentos.HighEmphasis = true;
+            this.btnDescuentos.Icon = null;
+            this.btnDescuentos.Location = new System.Drawing.Point(4, 397);
+            this.btnDescuentos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDescuentos.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDescuentos.Name = "btnDescuentos";
+            this.btnDescuentos.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDescuentos.Size = new System.Drawing.Size(171, 33);
+            this.btnDescuentos.TabIndex = 18;
+            this.btnDescuentos.Text = "Descuentos";
+            this.btnDescuentos.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDescuentos.UseAccentColor = false;
+            this.btnDescuentos.UseVisualStyleBackColor = true;
+            this.btnDescuentos.Click += new System.EventHandler(this.btnDescuentos_Click);
+            // 
+            // btnGasto
+            // 
+            this.btnGasto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGasto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGasto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGasto.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGasto.Depth = 0;
+            this.btnGasto.HighEmphasis = true;
+            this.btnGasto.Icon = null;
+            this.btnGasto.Location = new System.Drawing.Point(4, 352);
+            this.btnGasto.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGasto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGasto.Name = "btnGasto";
+            this.btnGasto.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGasto.Size = new System.Drawing.Size(171, 33);
+            this.btnGasto.TabIndex = 17;
+            this.btnGasto.Text = "Nuevo Gasto";
+            this.btnGasto.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGasto.UseAccentColor = false;
+            this.btnGasto.UseVisualStyleBackColor = true;
+            this.btnGasto.Click += new System.EventHandler(this.btnGasto_Click);
             // 
             // materialLabel1
             // 
@@ -688,12 +805,12 @@
             this.btnListaClientes.Depth = 0;
             this.btnListaClientes.HighEmphasis = true;
             this.btnListaClientes.Icon = null;
-            this.btnListaClientes.Location = new System.Drawing.Point(4, 287);
+            this.btnListaClientes.Location = new System.Drawing.Point(4, 307);
             this.btnListaClientes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnListaClientes.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnListaClientes.Name = "btnListaClientes";
             this.btnListaClientes.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnListaClientes.Size = new System.Drawing.Size(171, 36);
+            this.btnListaClientes.Size = new System.Drawing.Size(171, 33);
             this.btnListaClientes.TabIndex = 5;
             this.btnListaClientes.Text = "Clientes";
             this.btnListaClientes.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -711,12 +828,12 @@
             this.btnListaProveedores.Depth = 0;
             this.btnListaProveedores.HighEmphasis = true;
             this.btnListaProveedores.Icon = null;
-            this.btnListaProveedores.Location = new System.Drawing.Point(4, 237);
+            this.btnListaProveedores.Location = new System.Drawing.Point(4, 262);
             this.btnListaProveedores.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnListaProveedores.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnListaProveedores.Name = "btnListaProveedores";
             this.btnListaProveedores.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnListaProveedores.Size = new System.Drawing.Size(171, 36);
+            this.btnListaProveedores.Size = new System.Drawing.Size(171, 33);
             this.btnListaProveedores.TabIndex = 4;
             this.btnListaProveedores.Text = "Proveedores";
             this.btnListaProveedores.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -734,12 +851,12 @@
             this.btnHistorialVentas.Depth = 0;
             this.btnHistorialVentas.HighEmphasis = true;
             this.btnHistorialVentas.Icon = null;
-            this.btnHistorialVentas.Location = new System.Drawing.Point(4, 187);
+            this.btnHistorialVentas.Location = new System.Drawing.Point(4, 217);
             this.btnHistorialVentas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnHistorialVentas.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnHistorialVentas.Name = "btnHistorialVentas";
             this.btnHistorialVentas.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHistorialVentas.Size = new System.Drawing.Size(171, 36);
+            this.btnHistorialVentas.Size = new System.Drawing.Size(171, 33);
             this.btnHistorialVentas.TabIndex = 3;
             this.btnHistorialVentas.Text = "Historial de Ventas";
             this.btnHistorialVentas.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -757,12 +874,12 @@
             this.btnListaArticulos.Depth = 0;
             this.btnListaArticulos.HighEmphasis = true;
             this.btnListaArticulos.Icon = null;
-            this.btnListaArticulos.Location = new System.Drawing.Point(4, 137);
+            this.btnListaArticulos.Location = new System.Drawing.Point(4, 172);
             this.btnListaArticulos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnListaArticulos.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnListaArticulos.Name = "btnListaArticulos";
             this.btnListaArticulos.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnListaArticulos.Size = new System.Drawing.Size(171, 36);
+            this.btnListaArticulos.Size = new System.Drawing.Size(171, 33);
             this.btnListaArticulos.TabIndex = 2;
             this.btnListaArticulos.Text = "Articulos";
             this.btnListaArticulos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -781,12 +898,12 @@
             this.btnCajas.Depth = 0;
             this.btnCajas.HighEmphasis = true;
             this.btnCajas.Icon = null;
-            this.btnCajas.Location = new System.Drawing.Point(4, 87);
+            this.btnCajas.Location = new System.Drawing.Point(4, 127);
             this.btnCajas.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCajas.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCajas.Name = "btnCajas";
             this.btnCajas.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCajas.Size = new System.Drawing.Size(171, 36);
+            this.btnCajas.Size = new System.Drawing.Size(171, 33);
             this.btnCajas.TabIndex = 1;
             this.btnCajas.Text = "Cajas";
             this.btnCajas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -810,7 +927,7 @@
             this.btnVentaNueva.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnVentaNueva.Name = "btnVentaNueva";
             this.btnVentaNueva.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVentaNueva.Size = new System.Drawing.Size(171, 36);
+            this.btnVentaNueva.Size = new System.Drawing.Size(171, 33);
             this.btnVentaNueva.TabIndex = 0;
             this.btnVentaNueva.Text = "Nueva Venta";
             this.btnVentaNueva.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -825,9 +942,9 @@
             this.panel1.Controls.Add(this.mtxtNombreUsuario);
             this.panel1.Controls.Add(this.lblPerfil);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 334);
+            this.panel1.Location = new System.Drawing.Point(3, 439);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(173, 258);
+            this.panel1.Size = new System.Drawing.Size(173, 153);
             this.panel1.TabIndex = 16;
             // 
             // mtxtNombreUsuario
@@ -843,7 +960,7 @@
             this.mtxtNombreUsuario.HelperText = "Usuario";
             this.mtxtNombreUsuario.HideSelection = true;
             this.mtxtNombreUsuario.LeadingIcon = global::UI.Desktop.Properties.Resources.User_32x32;
-            this.mtxtNombreUsuario.Location = new System.Drawing.Point(5, 201);
+            this.mtxtNombreUsuario.Location = new System.Drawing.Point(5, 96);
             this.mtxtNombreUsuario.MaxLength = 32767;
             this.mtxtNombreUsuario.MouseState = MaterialSkin.MouseState.OUT;
             this.mtxtNombreUsuario.Name = "mtxtNombreUsuario";
@@ -939,6 +1056,30 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(212, 97);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
+            // btnNuevaSeña
+            // 
+            this.btnNuevaSeña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuevaSeña.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevaSeña.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevaSeña.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnNuevaSeña.Depth = 0;
+            this.btnNuevaSeña.HighEmphasis = true;
+            this.btnNuevaSeña.Icon = null;
+            this.btnNuevaSeña.Location = new System.Drawing.Point(4, 82);
+            this.btnNuevaSeña.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnNuevaSeña.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnNuevaSeña.Name = "btnNuevaSeña";
+            this.btnNuevaSeña.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnNuevaSeña.Size = new System.Drawing.Size(171, 33);
+            this.btnNuevaSeña.TabIndex = 19;
+            this.btnNuevaSeña.Text = "Nueva Seña";
+            this.btnNuevaSeña.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevaSeña.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnNuevaSeña.UseAccentColor = false;
+            this.btnNuevaSeña.UseVisualStyleBackColor = true;
+            this.btnNuevaSeña.Click += new System.EventHandler(this.btnNuevaSeña_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -995,7 +1136,7 @@
         private System.Windows.Forms.ToolStripMenuItem porClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem porArtículoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem porFechaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiGastos;
         private System.Windows.Forms.ToolStripMenuItem configuracionesGeneralesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
         private System.Windows.Forms.ToolStripMenuItem mnuEditarMiUsuario;
@@ -1034,6 +1175,16 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtxtNombreUsuario;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem f12ConsultaRápidaToolStripMenuItem;
+        private MaterialSkin.Controls.MaterialButton btnGasto;
+        private System.Windows.Forms.ToolStripMenuItem nuevoGastoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeGastosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem nuevoDescuentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeDescuentosToolStripMenuItem;
+        private MaterialSkin.Controls.MaterialButton btnDescuentos;
+        private System.Windows.Forms.ToolStripMenuItem cashFlowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ventasComisionesToolStripMenuItem;
+        private MaterialSkin.Controls.MaterialButton btnNuevaSeña;
     }
 }
 

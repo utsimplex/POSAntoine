@@ -54,17 +54,9 @@
             // 
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // btnImportar
-            // 
-            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
-            // 
             // btnSalir
             // 
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnAñadirNuevo
             // 

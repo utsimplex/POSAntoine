@@ -38,11 +38,7 @@ namespace UI.Desktop.Cajas
         // Ocultar controles innecesarios
         private void limpiarUI()
         {
-            btnExportar.Visible = false;
-            btnImportar.Visible = false;
             btnEliminar.Visible = false;
-            btnExportar.Enabled = false;
-            btnImportar.Enabled = false;
             btnEliminar.Enabled = false;
         }
 

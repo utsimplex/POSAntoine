@@ -84,6 +84,9 @@
   <ItemGroup>
     <Compile Include="AfipJsonQR.cs" />
     <Compile Include="Articulo.cs" />
+    <Compile Include="Reporte.cs" />
+    <Compile Include="Descuento.cs" />
+    <Compile Include="Gasto.cs" />
     <Compile Include="CuentaCorriente.cs" />
     <Compile Include="CobroCuentaCorriente.cs" />
     <Compile Include="Familia.cs" />
@@ -105,7 +108,9 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Caja.cs" />
+    <Compile Include="Seña.cs" />
     <Compile Include="Venta.cs" />
+    <Compile Include="Seña_Articulo.cs" />
     <Compile Include="Venta_Articulo.cs" />
   </ItemGroup>
   <ItemGroup>

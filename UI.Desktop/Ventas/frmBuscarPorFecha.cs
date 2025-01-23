@@ -19,8 +19,11 @@ namespace UI.Desktop.Ventas
 
         public string TipoBusqueda = "";
         VentasAdapter Datos_VentasAdapter = new VentasAdapter();
+        ArticuloAdapter Datos_ArticuloAdapter = new ArticuloAdapter();
         ClienteAdapter DatosClienteAdapter = new ClienteAdapter();
         public string dniClienteSeleccionado;
+        public string codigoArticuloSeleccionado;
+        //List<> armar un
 
 
         private void btnConfirmarFechaDesde_Click(object sender, EventArgs e)
@@ -52,6 +55,22 @@ namespace UI.Desktop.Ventas
             }
         }
 
+        private void txtFiltroArticulo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtFiltroArticulo.Text == "")
+            {
+
+                dgvListaArticulos.DataSource = Datos_ArticuloAdapter.GetAll();
+                OcultarColumnasArticulos();
+            }
+            else if(txtFiltroArticulo.Text.Length>2)
+            {
+                dgvListaArticulos.DataSource = Datos_ArticuloAdapter.Busqueda(txtFiltroArticulo.Text);
+
+                OcultarColumnasArticulos();
+            }
+        }
+
         //METODO OCULTAR COLUMNAS
         private void OcultarColumnas()
         {
@@ -69,6 +88,18 @@ namespace UI.Desktop.Ventas
             }
         }
 
+        private void OcultarColumnasArticulos()
+        {
+            foreach (DataGridViewColumn col in dgvListaArticulos.Columns)
+            {
+                if (col.Name == "Codigo" || col.Name == "Descripcion" || col.Name == "Precio")
+                {
+                    col.Visible = true;
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                }
+                else { col.Visible = false; }
+            }
+        }
         //SELECCIONAR PESTAÑA POR CLIENTE
         private void pBuscarPorCliente_Enter(object sender, EventArgs e)
         {
@@ -82,6 +113,12 @@ namespace UI.Desktop.Ventas
             dgvListaClientes.DataSource = DatosClienteAdapter.GetAll();
             OcultarColumnas();
         }
+        private void ActualizarListaArticulos()
+        {
+
+            dgvListaArticulos.DataSource = Datos_ArticuloAdapter.GetAll();
+            OcultarColumnasArticulos();
+        }
 
         //CLICK CANCELAR
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -94,10 +131,15 @@ namespace UI.Desktop.Ventas
             dniClienteSeleccionado = dgvListaClientes.SelectedRows[0].Cells["NumeroDocumento"].Value.ToString();
         }
 
-     
+        private void btnSeleccionarArticulo_Click(object sender, EventArgs e)
+        {
+            codigoArticuloSeleccionado = dgvListaArticulos.SelectedRows[0].Cells["Codigo"].Value.ToString();
+        }
 
-     
+        private void tabArticulos_Enter(object sender, EventArgs e)
+        {
+            ActualizarListaArticulos();
 
-        
+        }
     }
 }

@@ -83,9 +83,7 @@
             this.groupBox1.Location = new System.Drawing.Point(1088, 0);
             this.groupBox1.Size = new System.Drawing.Size(183, 547);
             this.groupBox1.Controls.SetChildIndex(this.btnSalir, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnImportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnAñadirNuevo, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnExportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnSeleccionar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnEliminar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificar, 0);
@@ -109,15 +107,6 @@
             this.toolTip1.SetToolTip(this.btnModificar, "Modifica datos del artículo.");
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // btnImportar
-            // 
-            this.btnImportar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImportar.Location = new System.Drawing.Point(16, 256);
-            this.toolTip1.SetToolTip(this.btnImportar, "Añade artículos a la grilla, desde un archivo de Excel.");
-            this.btnImportar.Visible = false;
-            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
-            // 
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -126,15 +115,6 @@
             this.btnSalir.TabIndex = 3;
             this.toolTip1.SetToolTip(this.btnSalir, "Cerrar esta ventana.");
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportar.Location = new System.Drawing.Point(16, 204);
-            this.toolTip1.SetToolTip(this.btnExportar, "Crea un archivo de Excel con todos los artículos de la grilla.");
-            this.btnExportar.Visible = false;
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnAñadirNuevo
             // 

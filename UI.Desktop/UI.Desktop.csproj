@@ -31,7 +31,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>31</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -267,6 +267,18 @@
     <Compile Include="Artículos\frmEscanearCodigos.Designer.cs">
       <DependentUpon>frmEscanearCodigos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Descuentos\frmDescuentoABM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Descuentos\frmDescuentoABM.Designer.cs">
+      <DependentUpon>frmDescuentoABM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Descuentos\frmListadoDescuentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Descuentos\frmListadoDescuentos.Designer.cs">
+      <DependentUpon>frmListadoDescuentos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBASEListaArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -423,6 +435,24 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gastos\frmIngresoGasto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gastos\frmIngresoGasto.Designer.cs">
+      <DependentUpon>frmIngresoGasto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gastos\frmListadoGastos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gastos\frmListadoGastos.Designer.cs">
+      <DependentUpon>frmListadoGastos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Informes\frmReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Informes\frmReporte.Designer.cs">
+      <DependentUpon>frmReporte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mensajes\frmConfirmar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -453,12 +483,24 @@
     <Compile Include="Parametros\frmParametros.Designer.cs">
       <DependentUpon>frmParametros.cs</DependentUpon>
     </Compile>
+    <Compile Include="Señas\frmListadoSeña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Señas\frmListadoSeña.Designer.cs">
+      <DependentUpon>frmListadoSeña.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\Facturador.cs" />
     <Compile Include="Ventas\frmIngresaDescuento.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Ventas\frmIngresaDescuento.Designer.cs">
       <DependentUpon>frmIngresaDescuento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\frmSeña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\frmSeña.Designer.cs">
+      <DependentUpon>frmSeña.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\PrinterDrawing.cs" />
     <Compile Include="Program.cs" />
@@ -477,6 +519,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Artículos\frmEscanearCodigos.resx">
       <DependentUpon>frmEscanearCodigos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Descuentos\frmDescuentoABM.resx">
+      <DependentUpon>frmDescuentoABM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Descuentos\frmListadoDescuentos.resx">
+      <DependentUpon>frmListadoDescuentos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBASEListaArticulos.resx">
       <DependentUpon>frmBASEListaArticulos.cs</DependentUpon>
@@ -561,6 +609,15 @@
       <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gastos\frmIngresoGasto.resx">
+      <DependentUpon>frmIngresoGasto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gastos\frmListadoGastos.resx">
+      <DependentUpon>frmListadoGastos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informes\frmReporte.resx">
+      <DependentUpon>frmReporte.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mensajes\frmConfirmar.resx">
       <DependentUpon>frmConfirmar.cs</DependentUpon>
     </EmbeddedResource>
@@ -596,6 +653,9 @@
     <EmbeddedResource Include="Proveedores\frmProveedorABM.resx">
       <DependentUpon>frmProveedorABM.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Señas\frmListadoSeña.resx">
+      <DependentUpon>frmListadoSeña.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Usuarios\frmListadoUsuarios.resx">
       <DependentUpon>frmListadoUsuarios.cs</DependentUpon>
     </EmbeddedResource>
@@ -619,6 +679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\frmIngresaDescuento.resx">
       <DependentUpon>frmIngresaDescuento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\frmSeña.resx">
+      <DependentUpon>frmSeña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\frmVenta.resx">
       <DependentUpon>frmVenta.cs</DependentUpon>

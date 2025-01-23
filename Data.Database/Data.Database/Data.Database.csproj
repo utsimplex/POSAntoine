@@ -64,6 +64,7 @@
       <HintPath>C:\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\office.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Umbraco.SqlServerCE.4.0.0.1\lib\net472\System.Data.SqlServerCe.dll</HintPath>
@@ -76,10 +77,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter.cs" />
+    <Compile Include="InformeAdapter.cs" />
+    <Compile Include="DescuentoAdapter.cs" />
     <Compile Include="CuentaCorrienteAdapter.cs" />
     <Compile Include="ArticuloAdapter.cs" />
     <Compile Include="CobroCuentaCorrienteAdapter.cs" />
     <Compile Include="FamiliaAdapter.cs" />
+    <Compile Include="GastosAdapter.cs" />
+    <Compile Include="IniFile.cs" />
     <Compile Include="ParametrosAdapter.cs" />
     <Compile Include="MedioDePagoAdapter.cs" />
     <Compile Include="MovimientoCajaAdapter.cs" />
@@ -100,10 +105,12 @@
     </Compile>
     <Compile Include="ProveedorAdapter.cs" />
     <Compile Include="Proveedores_Articulos_Adapter.cs" />
+    <Compile Include="SeñasArticuloAdapter.cs" />
     <Compile Include="UsuarioAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CajasAdapter.cs" />
     <Compile Include="FacturaElectronicaAdapter.cs" />
+    <Compile Include="SeñasAdapter.cs" />
     <Compile Include="VentasAdapter.cs" />
     <Compile Include="Ventas_ArticulosAdapter.cs" />
   </ItemGroup>
@@ -114,7 +121,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <Compile Include="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,7 +141,39 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SQLScripts\add descuentos por linea.sql" />
+    <Content Include="SQLScripts\Add Pagado a Ventas.sql" />
+    <Content Include="SQLScripts\Agrega columnaCaja.sql" />
+    <Content Include="SQLScripts\Agregar TableDescuentos.txt" />
     <Content Include="SQLScripts\Agregar columna codigo barras.txt" />
+    <Content Include="SQLScripts\Alter Table Cliente-Facturacion.sql" />
+    <Content Include="SQLScripts\Alter Table Venta-Facturacion.sql" />
+    <Content Include="SQLScripts\Alter Total Ventas.sql" />
+    <Content Include="SQLScripts\ARTICULOS HISTORICO.sql" />
+    <Content Include="SQLScripts\campo recargo.sql" />
+    <Content Include="SQLScripts\Cliente No Registrado.sql" />
+    <Content Include="SQLScripts\Creacion Cobro Cta cte.sql" />
+    <Content Include="SQLScripts\Crear Parametros Empresa.sql" />
+    <Content Include="SQLScripts\CREATE INSERT MEDIO DE PAGO.sql" />
+    <Content Include="SQLScripts\CreateTable FacturaElectronica.sql" />
+    <Content Include="SQLScripts\funcion getNumeradorCodigoProveedor.sql" />
+    <Content Include="SQLScripts\funcion getProximoNumeradorProveedor.sql" />
+    <Content Include="SQLScripts\Modify AddMovimiento.sql" />
+    <Content Include="SQLScripts\Modify_SPGetRendirEfectivo.sql" />
+    <Content Include="SQLScripts\NumVenta en movimientos Caja.sql" />
+    <Content Include="SQLScripts\Parametros afip.sql" />
+    <Content Include="SQLScripts\PARAMETROS EMPRESA.sql" />
+    <Content Include="SQLScripts\Propiedades Articulos.sql" />
+    <Content Include="SQLScripts\SP AddGasto.sql" />
+    <Content Include="SQLScripts\SP_CajaTieneMovimientosVentas.sql" />
+    <Content Include="SQLScripts\SP_getCajaAbierta.sql" />
+    <Content Include="SQLScripts\SP_ModificarCaja.sql" />
+    <Content Include="SQLScripts\SP_VENTA_GANANCIA_BRUTA.sql" />
+    <Content Include="SQLScripts\TablaSeñasDetalle.txt" />
+    <Content Include="SQLScripts\TablaSeñas.txt" />
+    <Content Include="SQLScripts\Table gastos.sql" />
+    <Content Include="SQLScripts\VW_COSTO_VENTAS.sql" />
+    <Content Include="SQLScripts\VW_CuentaCorriene.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -18,8 +18,8 @@ namespace UI.Desktop.Ventas
             InitializeComponent();
             base.btnAñadirNuevo.Visible = false;
             base.btnEliminar.Visible = false;
-            base.btnExportar.Visible = false;
-            base.btnImportar.Visible = false;
+            //base.btnExportar.Visible = false;
+            //base.btnImportar.Visible = false;
             base.btnModificar.Visible = false;
             usrActual = usr;
         }
@@ -88,7 +88,14 @@ namespace UI.Desktop.Ventas
 
         }
 
-
+        private void setPermissions()
+        {
+            if (usrActual.Rol == "Empleado")
+            { 
+                chbxSoloCajaAbierta.Visible = 
+                btnBuscarPorCliente.Enabled = btnFiltroFecha.Enabled = false;
+            }
+        }
 
 
         #endregion
@@ -96,6 +103,7 @@ namespace UI.Desktop.Ventas
         private void frmHistorialVentas_Load(object sender, EventArgs e)
         {
             ActualizarLista();
+            setPermissions();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -221,6 +229,25 @@ namespace UI.Desktop.Ventas
                     break;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void btnBuscarArticulo_Click(object sender, EventArgs e)
+        {
+            this.GetVentasArticulos();
+        }
+        private void GetVentasArticulos()
+        {
+            //Abro formulario para seleccionar fech
+            Ventas.frmBuscarPorFecha formSeleccionFecha = new frmBuscarPorFecha();
+            //Activo la pestaña buscar por Cliente
+            formSeleccionFecha.tcPestañas.SelectedTab = formSeleccionFecha.tabArticulos;
+
+            if (formSeleccionFecha.ShowDialog() == DialogResult.OK)
+            {
+                //Obtengo el codigoArticuloSeleccionado;
+                string codigoArticuloSeleccionado = formSeleccionFecha.codigoArticuloSeleccionado;
+                dgvListado.DataSource = Datos_VentasAdapter.BusquedaArticulo(codigoArticuloSeleccionado);
+            }
         }
     }
 }

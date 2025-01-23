@@ -18,8 +18,17 @@ namespace Data.Database
 
         public static SqlConnection CrearConexion()
         {
-            //connectionString = ConfigurationManager.AppSettings["connectionString"];
-        string connectionString = "Data Source=.\\SQLEXPRESS;Database=POSUTSimplex; Integrated Security=True";
+            var MyIni = new IniFile(@"C:\BASES\Settings.ini");
+            string connectionString = "";
+            if (!MyIni.KeyExists("ConnectionString", "Database"))
+            {
+                MyIni.Write("ConnectionString", "Data Source=.\\SQLEXPRESS;Database=POSUTSimplex; Integrated Security=True", "Database");
+            }
+            connectionString = MyIni.Read("ConnectionString","Database");
+            //string connectionString = Properties.Settings.Default.ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            //string connectionString = "Data Source=.\\SQLEXPRESS01;Database=POSUTSimplex; Integrated Security=True";
+            //string connectionString = "Data Source=.\\SQLEXPRESS;Database=POSUTSimplex; Integrated Security=True";
 
             SqlConnection ConexionSQL;
             try

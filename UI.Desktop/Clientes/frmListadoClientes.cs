@@ -16,8 +16,6 @@ namespace UI.Desktop.Clientes
         {
             InitializeComponent();
             ActualizarLista();
-            this.btnImportar.Visible = false;
-            this.btnExportar.Visible = false;
         }
 
         public frmListadoClientes(Usuario usr)
@@ -27,8 +25,6 @@ namespace UI.Desktop.Clientes
             user = usr;
             rol = usr.Rol;
 
-            this.btnImportar.Visible = false;
-            this.btnExportar.Visible = false;
         }
 
 
@@ -217,8 +213,6 @@ namespace UI.Desktop.Clientes
         {
             if (ModoForm == TipoForm.SeleccionDeCliente)
             {
-                this.btnImportar.Visible = false;
-                this.btnExportar.Visible = false;
                 this.btnEliminar.Visible = false;
                 this.btnSeleccionarCli.Visible = true;
                

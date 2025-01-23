@@ -98,9 +98,7 @@
             this.groupBox1.Size = new System.Drawing.Size(264, 470);
             this.groupBox1.Text = "Modificación de precios";
             this.groupBox1.Controls.SetChildIndex(this.btnSalir, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnImportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnAñadirNuevo, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnExportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnEliminar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnActualizarPrecios, 0);
@@ -118,23 +116,12 @@
             this.btnModificar.Size = new System.Drawing.Size(23, 25);
             this.btnModificar.Visible = false;
             // 
-            // btnImportar
-            // 
-            this.btnImportar.Location = new System.Drawing.Point(16, 312);
-            this.btnImportar.Size = new System.Drawing.Size(23, 28);
-            this.btnImportar.Visible = false;
-            // 
             // btnSalir
             // 
             this.btnSalir.Location = new System.Drawing.Point(6, 418);
             this.btnSalir.Size = new System.Drawing.Size(120, 46);
             // 
-            // btnExportar
-            // 
-            this.btnExportar.Location = new System.Drawing.Point(16, 311);
-            this.btnExportar.Size = new System.Drawing.Size(23, 29);
-            this.btnExportar.Visible = false;
-            // 
+            
             // btnAñadirNuevo
             // 
             this.btnAñadirNuevo.Location = new System.Drawing.Point(16, 311);

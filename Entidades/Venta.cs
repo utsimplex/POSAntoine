@@ -14,6 +14,7 @@ namespace Entidades
 
         //FECHA-HORA DE VENTA
         public DateTime FechaHora { get; set; }
+        public DateTime? FechaFactura { get; set; }
 
         //TIPO DE PAGO
         public string TipoPago { get; set; }
@@ -36,6 +37,7 @@ namespace Entidades
         public decimal MontoPagado { get; set; }
         //IDEMPLEADO
         public string Usuario { get; set; }
+        public string señasAplicadas { get; set; }
         public int? CajaId { get; set; }
 
         //modulo de facturacion
@@ -89,12 +91,12 @@ namespace Entidades
             get
             {
                 //TO-DO:Parameter
-                string url = "https://serviciosweb.afip.gob.ar/genericos/comprobantes/cae.aspx?p=";
+                string url = "https://www.afip.gob.ar/fe/qr/?p=";
                 string link;
                 AfipJsonQR Data = new AfipJsonQR()
                 {
                     Version = 1,
-                    Fecha = this.FechaHora.ToString("yyyy-MM-dd"),
+                    Fecha = this.FechaFactura!=null? ((DateTime)this.FechaFactura).ToString("yyyy-MM-dd") : this.FechaHora.ToString("yyyy-MM-dd"),
                     CUIT = (long)this.CuitEmisor,
                     PuntoDeVenta = (int)this.PuntoDeVenta,
                     TipoComprobante = (int)TipoComprobante,
@@ -144,23 +146,23 @@ namespace Entidades
                 switch (TipoComprobante)
                 {
                     case (int)FeConstantes.TipoComprobante.FacturaA:
-                        return "A";
+                        return "FACTURA  A";
                     case (int)FeConstantes.TipoComprobante.FacturaB:
-                        return "B";
+                        return "FACTURA  B";
                     case (int)FeConstantes.TipoComprobante.FacturaC:
-                        return "C";
+                        return "FACTURA  C";
                     case (int)FeConstantes.TipoComprobante.NDA:
-                        return "ND A";
+                        return "NOTA DE DEBITO  A";
                     case (int)FeConstantes.TipoComprobante.NCA:
-                        return "NC A";
+                        return "NOTA DE CREDITO  A";
                     case (int)FeConstantes.TipoComprobante.NDB:
-                        return "ND B";
+                        return "NOTA DE DEBITO  B";
                     case (int)FeConstantes.TipoComprobante.NCB:
-                        return "NC B";
+                        return "NOTA DE CREDITO  B";
                     case (int)FeConstantes.TipoComprobante.NDC:
-                        return "ND C";
+                        return "NOTA DE DEBITO  C";
                     case (int)FeConstantes.TipoComprobante.NCC:
-                        return "NC C";
+                        return "NOTA DE CREDITO  C";
                     default: return "";
                 }
             }

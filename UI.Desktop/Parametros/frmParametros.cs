@@ -45,9 +45,14 @@ namespace UI.Desktop.Parametros
             {
                 pkInstalledPrinters = PrinterSettings.InstalledPrinters[i];
                 this.cbxImpresoras.Items.Add(pkInstalledPrinters);
+                this.cbxImpresoraReportes.Items.Add(pkInstalledPrinters);
                 if (parametrosEmpresa.Impresora1 == pkInstalledPrinters)
                 {
                     this.cbxImpresoras.SelectedIndex = i;
+                }
+                if (parametrosEmpresa.ImpresoraReportes == pkInstalledPrinters)
+                {
+                    this.cbxImpresoraReportes.SelectedIndex = i;
                 }
             }
         }
@@ -131,6 +136,7 @@ namespace UI.Desktop.Parametros
             parametrosEmpresa.UrlQrAfip = this.tbxURLAfip.Text;
             parametrosEmpresa.EsProduccion = this.chkbxProduccion.Checked;
             parametrosEmpresa.Impresora1 = this.cbxImpresoras.SelectedItem.ToString();
+            parametrosEmpresa.ImpresoraReportes = this.cbxImpresoraReportes.SelectedItem.ToString();
             parametrosEmpresa.SituacionFiscal = Convert.ToInt32(cbxSituacionFiscal.SelectedValue).ToString();
             //parametrosEmpresa.SituacionFiscal = this.cbxSituacionFiscal.SelectedValue.ToString();
 

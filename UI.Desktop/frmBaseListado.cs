@@ -63,6 +63,7 @@ namespace UI.Desktop
         protected ArticuloAdapter DatosArticuloAdapter = new ArticuloAdapter();
         protected ClienteAdapter DatosClienteAdapter = new ClienteAdapter();
         protected ProveedorAdapter DatosProveedorAdapter = new ProveedorAdapter();
+        protected GastosAdapter DatosGastosAdapter = new GastosAdapter();
         protected Proveedores_Articulos_Adapter DatosProv_Art_Adapter = new Proveedores_Articulos_Adapter();
         //
         //*****************************************************************

@@ -24,9 +24,6 @@ namespace UI.Desktop.Artículos
             completaCombosBox();
           FormatearUITabla ();
 
-            this.btnExportar.Visible = false;
-            this.btnImportar.Visible = false;
-
         }
 
         public frmListadoArticulos(Usuario usr)
@@ -38,10 +35,6 @@ namespace UI.Desktop.Artículos
             completaCombosBox();
             FormatearUITabla();
             rol = usr.Rol;
-
-            this.btnExportar.Visible = false;
-            this.btnImportar.Visible = false;
-
         }
 
         private void FormatearUITabla()
@@ -82,7 +75,8 @@ namespace UI.Desktop.Artículos
         public enum TipoForm
         {
             Lista,
-            SeleccionDeArticulo
+            SeleccionDeArticulo,
+            SeleccionDeArticuloParaSeña
 
         }
 
@@ -94,6 +88,7 @@ namespace UI.Desktop.Artículos
 
         //LISTA DE ARTICULOS Añadidos Venta Actual
         public BindingList<Entidades.Venta_Articulo> ListaArticulosVtaActual = new BindingList<Venta_Articulo>();
+        public BindingList<Entidades.Seña_Articulo> ListaArticulosSeñaActual = new BindingList<Seña_Articulo>();
 
         // Lista de PROVEEDORES
         public AutoCompleteStringCollection listaProveedoresExistentes;
@@ -301,7 +296,7 @@ namespace UI.Desktop.Artículos
             //artiToEdit.CodigoArtiProveedor = dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value != null ? dgvListado.SelectedRows[0].Cells["CodigoArtiProveedor"].Value.ToString() : "";
 
             // Instanciación del formulario ABM Articulos EDICION
-            frmArticuloABM formArticuloABM = new frmArticuloABM(artiToEdit, parametrosEmpresa);
+            frmArticuloABM formArticuloABM = new frmArticuloABM(artiToEdit, parametrosEmpresa,rol);
             formArticuloABM.ModoForm = frmArticuloABM.TipoForm.Edicion;
             /*
                         //Carga el combo box con la lista de proveedores
@@ -348,13 +343,43 @@ namespace UI.Desktop.Artículos
 
                 if (ValidarListaVtaActual(vta_arti))
                 {
-                    if (ValidarStock2(vta_arti.CodigoArticulo, vta_arti.Cantidad) == true)
+                    if (this._modoForm == TipoForm.SeleccionDeArticuloParaSeña || ValidarStock2(vta_arti.CodigoArticulo, vta_arti.Cantidad) == true)
                     {
 
                         ListaArticulosVtaActual.Add(vta_arti);
                     }
 
 
+                }
+                tbxFiltro.ResetText();
+            }
+
+
+        }
+        private void SeleccionarArticuloSeña()
+        {
+            if (!(this.dgvListado.SelectedRows.Count > 0))
+            {
+                return;
+            }
+
+
+
+            Artículos.frmIngresarCantidad formIngreseCantidad = new frmIngresarCantidad(dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString() + " - " + dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString());
+
+            //Ingreso la cantidad a agregar
+            if (formIngreseCantidad.ShowDialog() == DialogResult.OK)
+            {
+               Seña_Articulo seña_Arti = new Seña_Articulo();
+
+                seña_Arti.cantidad = Convert.ToInt32(formIngreseCantidad.cantidad.Value);
+                seña_Arti.codigoArticulo = dgvListado.SelectedRows[0].Cells["codigo"].Value.ToString();
+                seña_Arti.descripcionArticulo = dgvListado.SelectedRows[0].Cells["descripcion"].Value.ToString();
+
+                if (ValidarListaSeñaActual(seña_Arti))
+                {
+                    
+                        ListaArticulosSeñaActual.Add(seña_Arti);
                 }
                 tbxFiltro.ResetText();
             }
@@ -368,20 +393,31 @@ namespace UI.Desktop.Artículos
             bool añadir = true;
 
             //Se saltea la validacion de stock, hasta que se normalice el uso del sistema
-            //foreach (Venta_Articulo vta_art in ListaArticulosVtaActual)
-            //{
-            //    if (vta_art.CodigoArticulo == vta_art_seleccionado.CodigoArticulo)
-            //    {
-            //        MessageBox.Show("El artículo " + vta_art.CodigoArticulo + " ya se encuentra en la lista de la venta actual.", "Listado de Artículos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        añadir = false;
-            //        break;
-            //    }
+            foreach (Venta_Articulo vta_art in ListaArticulosVtaActual)
+            {
+                if (vta_art.CodigoArticulo == vta_art_seleccionado.CodigoArticulo)
+                {
+                    MessageBox.Show("El artículo " + vta_art.CodigoArticulo + " ya se encuentra en la lista de la venta actual.", "Listado de Artículos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    añadir = false;
+                    break;
+                }
+            }
+                return añadir;
+        }
+        private bool ValidarListaSeñaActual(Seña_Articulo seña_art_seleccionado)
+        {
+            bool añadir = true;
 
-
-
-            //}
-
-
+            //Se saltea la validacion de stock, hasta que se normalice el uso del sistema
+            foreach (Seña_Articulo seña_art in ListaArticulosSeñaActual)
+            {
+                if (seña_art.codigoArticulo == seña_art_seleccionado.codigoArticulo)
+                {
+                    MessageBox.Show("El artículo " + seña_art.codigoArticulo + " ya se encuentra en la lista de la seña actual.", "Listado de Artículos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    añadir = false;
+                    break;
+                }
+            }
             return añadir;
         }
 
@@ -475,14 +511,14 @@ namespace UI.Desktop.Artículos
         // CLICK Modificar
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (rol == "Empleado")
-            {
-                MessageBox.Show("El usuario no posee permisos para realizar esta tarea.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
+            //if (rol == "Empleado")
+            //{
+            //    MessageBox.Show("El usuario no posee permisos para realizar esta tarea.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //else
+            //{
                 ModificarArticulo();
-            }
+            //}
         }
 
 
@@ -491,7 +527,7 @@ namespace UI.Desktop.Artículos
         {
             if (this.ModoForm == TipoForm.Lista)
             { ModificarArticulo(); }
-            else if (this.ModoForm == TipoForm.SeleccionDeArticulo)
+            else if (this.ModoForm == TipoForm.SeleccionDeArticulo || this.ModoForm == TipoForm.SeleccionDeArticuloParaSeña)
             { SeleccionarArticulo(); }
         }
 
@@ -515,11 +551,9 @@ namespace UI.Desktop.Artículos
         // LOAD  -  CARGA MODO LISTA O SELECCION
         private void frmListadoArticulos_Load(object sender, EventArgs e)
         {
-            if (this.ModoForm == TipoForm.SeleccionDeArticulo)
+            if (this.ModoForm == TipoForm.SeleccionDeArticulo || this.ModoForm == TipoForm.SeleccionDeArticuloParaSeña)
             {
                 btnEliminar.Visible = false;
-                btnExportar.Visible = false;
-                btnImportar.Visible = false;
                 btnActualizarPrecios.Visible = false;
                 btnSeleccionar.Visible = true;
                 dgvListado.TabStop = true;
@@ -536,8 +570,6 @@ namespace UI.Desktop.Artículos
             else
             {
                 btnEliminar.Visible = true;
-                btnExportar.Visible = false;
-                btnImportar.Visible = false;
                 btnSeleccionar.Visible = false;
                 listaProveedoresExistentes = DatosProveedorAdapter.GetListadoNombres();
 
@@ -554,7 +586,7 @@ namespace UI.Desktop.Artículos
         // CLICK Salir
         public void btnSalir_Click(object sender, EventArgs e)
         {
-            if (this.ModoForm == TipoForm.SeleccionDeArticulo)
+            if (this.ModoForm == TipoForm.SeleccionDeArticulo || this.ModoForm == TipoForm.SeleccionDeArticuloParaSeña)
             {
                 this.Close();
             }
@@ -577,7 +609,7 @@ namespace UI.Desktop.Artículos
             {
 
                 case Keys.Enter:
-                    if (this.ModoForm == TipoForm.SeleccionDeArticulo)
+                    if (this.ModoForm == TipoForm.SeleccionDeArticulo || this.ModoForm == TipoForm.SeleccionDeArticuloParaSeña)
                     {
                         System.Threading.Thread.Sleep(1000);
                         SeleccionarArticulo(); 

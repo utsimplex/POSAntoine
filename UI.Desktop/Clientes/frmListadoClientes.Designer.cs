@@ -63,9 +63,7 @@
             this.groupBox1.Location = new System.Drawing.Point(822, 12);
             this.groupBox1.Size = new System.Drawing.Size(184, 469);
             this.groupBox1.Controls.SetChildIndex(this.btnSalir, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnExportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnSeleccionarCli, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnImportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnAñadirNuevo, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnEliminar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificar, 0);
@@ -87,14 +85,6 @@
             this.btnModificar.TabIndex = 1;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // btnImportar
-            // 
-            this.btnImportar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnImportar.Location = new System.Drawing.Point(11, 260);
-            this.btnImportar.Size = new System.Drawing.Size(162, 46);
-            this.btnImportar.TabIndex = 3;
-            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
-            // 
             // btnSalir
             // 
             this.btnSalir.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -102,13 +92,6 @@
             this.btnSalir.Size = new System.Drawing.Size(162, 46);
             this.btnSalir.TabIndex = 5;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnExportar.Location = new System.Drawing.Point(11, 208);
-            this.btnExportar.Size = new System.Drawing.Size(162, 46);
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnAñadirNuevo
             // 

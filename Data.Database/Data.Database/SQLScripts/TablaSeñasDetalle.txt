@@ -1,0 +1,6 @@
+CREATE TABLE Senas_detalle (
+    NumeroSeña INT 
+    Cantidad INT
+    Articulo NVARCHAR(100)
+    
+);

@@ -36,6 +36,7 @@
             this.btnModificarComprobante = new System.Windows.Forms.Button();
             this.btnBuscarPorCliente = new System.Windows.Forms.Button();
             this.chbxSoloCajaAbierta = new System.Windows.Forms.CheckBox();
+            this.btnBuscarArticulo = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBuscarArticulo);
             this.groupBox1.Controls.Add(this.btnBuscarPorCliente);
             this.groupBox1.Controls.Add(this.btnModificarComprobante);
             this.groupBox1.Controls.Add(this.btnFiltroFecha);
@@ -69,15 +71,15 @@
             this.groupBox1.Controls.SetChildIndex(this.btnVerComprobante, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnSalir, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnImportar, 0);
-            this.groupBox1.Controls.SetChildIndex(this.btnExportar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnEliminar, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnFiltroFecha, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnModificarComprobante, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnBuscarPorCliente, 0);
+            this.groupBox1.Controls.SetChildIndex(this.btnBuscarArticulo, 0);
             // 
             // btnSalir
             // 
+            this.btnSalir.Location = new System.Drawing.Point(16, 411);
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnVerComprobante
@@ -164,6 +166,19 @@
             this.chbxSoloCajaAbierta.UseVisualStyleBackColor = true;
             this.chbxSoloCajaAbierta.CheckedChanged += new System.EventHandler(this.chbxSoloCajaAbierta_CheckedChanged);
             // 
+            // btnBuscarArticulo
+            // 
+            this.btnBuscarArticulo.Image = global::UI.Desktop.Properties.Resources.box_32;
+            this.btnBuscarArticulo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscarArticulo.Location = new System.Drawing.Point(16, 236);
+            this.btnBuscarArticulo.Name = "btnBuscarArticulo";
+            this.btnBuscarArticulo.Size = new System.Drawing.Size(150, 46);
+            this.btnBuscarArticulo.TabIndex = 32;
+            this.btnBuscarArticulo.Text = "Buscar por Articulo";
+            this.btnBuscarArticulo.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnBuscarArticulo.UseVisualStyleBackColor = true;
+            this.btnBuscarArticulo.Click += new System.EventHandler(this.btnBuscarArticulo_Click);
+            // 
             // frmHistorialVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,5 +204,6 @@
         private System.Windows.Forms.Button btnModificarComprobante;
         private System.Windows.Forms.Button btnBuscarPorCliente;
         private System.Windows.Forms.CheckBox chbxSoloCajaAbierta;
+        private System.Windows.Forms.Button btnBuscarArticulo;
     }
 }

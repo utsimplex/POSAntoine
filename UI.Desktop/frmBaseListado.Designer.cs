@@ -34,9 +34,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnExportar = new System.Windows.Forms.Button();
             this.btnAñadirNuevo = new System.Windows.Forms.Button();
-            this.btnImportar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbxFiltro = new System.Windows.Forms.TextBox();
@@ -76,9 +74,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnModificar);
             this.groupBox1.Controls.Add(this.btnEliminar);
-            this.groupBox1.Controls.Add(this.btnExportar);
             this.groupBox1.Controls.Add(this.btnAñadirNuevo);
-            this.groupBox1.Controls.Add(this.btnImportar);
             this.groupBox1.Controls.Add(this.btnSalir);
             this.groupBox1.Location = new System.Drawing.Point(573, 16);
             this.groupBox1.Name = "groupBox1";
@@ -113,19 +109,6 @@
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
-            // btnExportar
-            // 
-            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
-            this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportar.Location = new System.Drawing.Point(16, 202);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(150, 46);
-            this.btnExportar.TabIndex = 26;
-            this.btnExportar.Text = "Exportar a Excel";
-            this.btnExportar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExportar.UseVisualStyleBackColor = true;
-            // 
             // btnAñadirNuevo
             // 
             this.btnAñadirNuevo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -138,19 +121,6 @@
             this.btnAñadirNuevo.Text = "Añadir Nuevo";
             this.btnAñadirNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAñadirNuevo.UseVisualStyleBackColor = true;
-            // 
-            // btnImportar
-            // 
-            this.btnImportar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImportar.Image = ((System.Drawing.Image)(resources.GetObject("btnImportar.Image")));
-            this.btnImportar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnImportar.Location = new System.Drawing.Point(16, 254);
-            this.btnImportar.Name = "btnImportar";
-            this.btnImportar.Size = new System.Drawing.Size(150, 46);
-            this.btnImportar.TabIndex = 25;
-            this.btnImportar.Text = "Importar desde Excel";
-            this.btnImportar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImportar.UseVisualStyleBackColor = true;
             // 
             // btnSalir
             // 
@@ -215,9 +185,7 @@
         protected System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Button btnEliminar;
         public System.Windows.Forms.Button btnModificar;
-        public System.Windows.Forms.Button btnImportar;
         public System.Windows.Forms.Button btnSalir;
-        public System.Windows.Forms.Button btnExportar;
         public System.Windows.Forms.Button btnAñadirNuevo;
         public System.Windows.Forms.DataGridView dgvListado;
     }

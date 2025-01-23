@@ -1,0 +1,13 @@
+CREATE TABLE Senas (
+    NumeroSeña INT PRIMARY KEY IDENTITY(1,1), -- Identificador único y autoincremental
+    FechaHora DATETIME NOT NULL,              -- Fecha y hora de la seña
+    TipoPago NVARCHAR(50) NOT NULL,           -- Tipo de pago (e.g., "Efectivo", "Tarjeta")
+    Total DECIMAL(18, 2) NOT NULL,            -- Total de la seña
+    DniCliente NVARCHAR(50) NULL,             -- DNI del cliente (opcional)
+    Pagado BIT NOT NULL,                      -- Indicador de si está pagado (1 o 0)
+    MontoPagado DECIMAL(18, 2) NOT NULL,      -- Monto pagado
+    Usuario NVARCHAR(50) NOT NULL,            -- Usuario que registró la seña
+    CajaId INT NULL,                          -- ID de la caja asociada (opcional)
+    NumVentaAplicada INT NULL,                -- Número de venta aplicada (opcional)
+    
+);

@@ -160,8 +160,6 @@ namespace UI.Desktop.Usuarios
         {
             if (ModoForm == TipoForm.SeleccionDeUsuario)
             {
-                this.btnImportar.Visible = false;
-                this.btnExportar.Visible = false;
                 this.btnEliminar.Visible = false;
             }
 

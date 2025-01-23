@@ -20,8 +20,6 @@ namespace UI.Desktop.Proveedores
 
             dgvListado.Columns["Nombre"].HeaderText = "Nombre o Razón Social";
             dgvListado.Columns["Nombre"].Width = 150;
-            this.btnImportar.Visible = false;
-            this.btnExportar.Visible = false;
             
 
         }
@@ -37,9 +35,6 @@ namespace UI.Desktop.Proveedores
             dgvListado.Columns["Nombre"].HeaderText = "Nombre o Razón Social";
             dgvListado.Columns["Nombre"].Width = 150;
             rol = usr.Rol;
-            this.btnImportar.Visible = false;
-            this.btnExportar.Visible = false;
-
         }
 
         
@@ -203,8 +198,6 @@ namespace UI.Desktop.Proveedores
             if (this.ModoForm == TipoForm.SeleccionDeProveedor)
             {
                 this.btnEliminar.Visible = false;
-                this.btnExportar.Visible = false;
-                this.btnImportar.Visible = false;
                 this.btnModificar.Visible = false;
                 this.btnSalir.Text = "Seleccionar";
                 this.btnSalir.DialogResult = DialogResult.Yes;

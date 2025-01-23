@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Reflection;
 using Data.Database;
+using UI.Desktop.Seña;
 
 namespace UI.Desktop.Ventas
 {
@@ -33,6 +34,7 @@ namespace UI.Desktop.Ventas
             medioDePago = "";
             this.btnImprimirCambio.Visible = false;
             this.chkbxCambio.Visible = true;
+            this.btnNotaCredito.Visible = false;
 
         }
         //MODO READONLY -- SOLO PUEDE MODIFICAR EL MEDIO DE PAGO SI ES QUE LA CAJA NO ESTA CERRADA
@@ -48,6 +50,8 @@ namespace UI.Desktop.Ventas
             txtDctoPesos.Text = vtaSelec.Descuento.ToString();
             txtRecPesos.Text = vtaSelec.Recargo.ToString();
             txtDniCuit.Text = vtaSelec.NumeroDocumentoCliente.ToString();
+            //TODO: buscar seña. La venta deberia saber si se le aplico una seña o no, para saber cual.. Referencia cruzada
+            //TODO: actualizar seña en base a que venta se aplico
             if (vtaSelec.NombreCliente != null) { 
             
             string nombreCliente = Datos_ClienteAdapter.GetOne((long)vtaSelec.NumeroDocumentoCliente).Nombre;
@@ -56,7 +60,8 @@ namespace UI.Desktop.Ventas
 
             
             txtNumeroVenta.Text = vtaSelec.NumeroVenta.ToString();
-            txtTotal.Text = vtaSelec.Total.ToString();
+            txtTotal.Text = vtaSelec.Total.ToString("c");
+            this.txtTotalAPagar.Text = señaActual ==null? this.txtTotal.Text : (vtaSelec.Total - señaActual.Total).ToString("c");
 
             dgvArticulosVtaActual.DataSource = Datos_VentasArticulosAdapter.GetAll(vtaSelec.NumeroVenta, vtaSelec.TipoOperacion);
 
@@ -67,12 +72,13 @@ namespace UI.Desktop.Ventas
 
             }
             btnConfirmar.Enabled = cbxMedioDePago.Enabled=cajaAbierta;
-            btnFacturar.Enabled = cajaAbierta && vtaSelec.NumeroTicketFiscal == null;
+            btnFacturar.Enabled = vtaSelec.NumeroTicketFiscal == null;
+            btnNotaCredito.Enabled = vtaSelec.NumeroTicketFiscal != null;
             txtDcto.ReadOnly = true;
             btnBuscarCliente.Visible = false;
             ventaLocal = vtaSelec;
              btnAgregarArt.Enabled = btnBuscarCliente.Enabled = btnQuitar.Enabled = txtDcto.Enabled = txtDctoPesos.Enabled= txtRec.Enabled = txtRecPesos.Enabled = false;
-            btnReimprimir.Visible = true;
+            btnReimprimir.Visible = btnPDF.Visible = true;
             //cbxMedioDePago.SelectedText = vtaSelec.TipoPago;
             this.btnImprimirCambio.Visible = true;
             this.chkbxCambio.Visible = false;
@@ -90,15 +96,19 @@ namespace UI.Desktop.Ventas
         Data.Database.InformeVentaAdapter Datos_InformesAdapter = new Data.Database.InformeVentaAdapter();
         Data.Database.ArticuloAdapter Datos_ArticulosAdapter = new Data.Database.ArticuloAdapter();
         Data.Database.MedioDePagoAdapter Datos_MedioDePagoAdapter = new Data.Database.MedioDePagoAdapter();
+        Data.Database.DescuentoAdapter Datos_DescuentoAdapter = new Data.Database.DescuentoAdapter();
         Data.Database.ParametrosAdapter Datos_ParametrosAdapter = ParametrosAdapter.GetInstance();
         Data.Database.CajasAdapter Datos_CajasAdapter = new Data.Database.CajasAdapter();
+        Data.Database.SeñasAdapter Datos_SeñasAdapter = new Data.Database.SeñasAdapter();
         Artículos.frmListadoArticulos formListaArticulos;
         List<MedioDePago> listaMedioDePagos = new List<MedioDePago>();
+        List<Descuento> listaDescuentos = new List<Descuento>();
         string modo;
         Entidades.Usuario usuarioLogueado;
         Entidades.Venta ventaLocal;
         Entidades.ParametrosEmpresa parametrosEmpresa;
         Venta vtaModificar;
+        Entidades.Seña señaActual;
         bool cajaAbierta = false;
         public string medioDePago;
 
@@ -141,6 +151,17 @@ namespace UI.Desktop.Ventas
                 cbxMedioDePago.ValueMember = "id";
                 cbxMedioDePago.SelectedIndex = listaMedioDePagos.FindIndex(x => x.Default == true);
             }
+            cbxDescuentos.Items.Clear();    
+            listaDescuentos = Datos_DescuentoAdapter.GetAll(true);
+            if (listaDescuentos != null && listaMedioDePagos!=null)
+            {
+                List<Descuento> descuentosPorMedioDePago = listaDescuentos.Where(descuento => descuento.MedioDePago.ToUpper() == ((MedioDePago)cbxMedioDePago.SelectedItem).Descripcion).ToList();
+                cbxDescuentos.Items.AddRange(filtrarDescuentos(descuentosPorMedioDePago).Cast<object>().ToArray());
+                //cbxDescuentos.Items.AddRange(listaDescuentos.Where(descuento=> descuento.MedioDePago== listaMedioDePagos.First(mp=>mp.Default== true).Descripcion).Cast<object>().ToArray());
+                cbxDescuentos.DisplayMember = "descripcion";
+                cbxDescuentos.ValueMember = "id";
+            }
+
             txtTotal.ReadOnly = true;
             //EVALUO UN CAMPO PARA VER SI ES EDICION O ALTA DE VENTA NUEVA
             if (modo == "Alta")
@@ -344,7 +365,7 @@ namespace UI.Desktop.Ventas
                             }
                             else
                             {
-                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CAMBIO");
+                                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.Where(x =>x.Cantidad > 0).ToList(), "CAMBIO");
                             }
                         }
                             this.Dispose();
@@ -368,7 +389,7 @@ namespace UI.Desktop.Ventas
         {
             if (modo == "Alta")
             {
-                if (this.dgvArticulosVtaActual.RowCount != 0 && Convert.ToDouble(this.txtTotal.Text) > 0)
+                if (this.dgvArticulosVtaActual.RowCount != 0 && Convert.ToDouble(this.txtTotal.Text.Replace('$',' ')) > 0)
                 {
                     this.setMedioPago();
                     DialogResult construyeVenta = this.ConstruirVenta();
@@ -592,7 +613,8 @@ namespace UI.Desktop.Ventas
 
                 }
 
-                this.txtTotal.Text = total.ToString();
+                this.txtTotal.Text = total.ToString("c");
+                this.txtTotalAPagar.Text = señaActual ==null? this.txtTotal.Text : (total - señaActual.Total).ToString("c");
 
                 //Titulo de las columnas
                 this.dgvArticulosVtaActual.Columns["Descuento"].HeaderText = "Descuento ($)";
@@ -625,14 +647,16 @@ namespace UI.Desktop.Ventas
         private void AplicarDescuentoyRecargo()
         {
             ActualizarTotal();
-            
-            Decimal total = Convert.ToDecimal(txtTotal.Text);
+
+            //Decimal total = Convert.ToDecimal(txtTotal.Text);
+            Decimal total = 0;
+            decimal.TryParse(txtTotal.Text, NumberStyles.Currency,CultureInfo.CurrentCulture.NumberFormat, out total);
 
             if (!String.IsNullOrWhiteSpace(txtDcto.Text) && txtDcto.Text != "0")
             {
-                Decimal descuentoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtDcto.Text)) / 100;
+                Decimal descuentoTotal = (total * Convert.ToDecimal(txtDcto.Text)) / 100;
                 ventaLocal.Descuento = descuentoTotal;
-                txtTotal.Text = (total - descuentoTotal).ToString();
+                txtTotal.Text = (total - descuentoTotal).ToString("c");
                 ventaLocal.Recargo = 0;
             }
             else if (!String.IsNullOrWhiteSpace(txtDctoPesos.Text) && txtDctoPesos.Text!="0")
@@ -641,7 +665,7 @@ namespace UI.Desktop.Ventas
                 //Decimal total = Convert.ToDecimal(txtTotal.Text);
                 if (descuentoTotal <= total)
                 {
-                    txtTotal.Text = (total - descuentoTotal).ToString();
+                    txtTotal.Text = (total - descuentoTotal).ToString("c");
                     ventaLocal.Descuento = descuentoTotal;
                 ventaLocal.Recargo = 0;
                 }
@@ -659,15 +683,18 @@ namespace UI.Desktop.Ventas
             }
             if (!String.IsNullOrWhiteSpace(txtRec.Text) && txtRec.Text != "0")
             {
-                Decimal recargoTotal = (Convert.ToDecimal(txtTotal.Text) * Convert.ToDecimal(txtRec.Text)) / 100;
+                Decimal totalP = 0;
+                decimal.TryParse(txtTotal.Text, NumberStyles.Currency, CultureInfo.CurrentCulture.NumberFormat, out totalP);
+
+                Decimal recargoTotal = (totalP * Convert.ToDecimal(txtRec.Text)) / 100;
                 ventaLocal.Recargo = recargoTotal;
-                txtTotal.Text = (total + recargoTotal).ToString();
+                txtTotal.Text = (total + recargoTotal).ToString("c");
                 ventaLocal.Descuento = 0;
             }
             else if (!String.IsNullOrWhiteSpace(txtRecPesos.Text) && txtRecPesos.Text != "0")
             {
                 Decimal recargoTotal = Convert.ToDecimal(txtRecPesos.Text);
-                txtTotal.Text = (total + recargoTotal).ToString();
+                txtTotal.Text = (total + recargoTotal).ToString("c");
                 ventaLocal.Recargo = recargoTotal;
                 ventaLocal.Descuento = 0;
 
@@ -676,8 +703,10 @@ namespace UI.Desktop.Ventas
             {
                 ventaLocal.Recargo = 0;
             }
+            this.txtTotalAPagar.Text = señaActual == null ? this.txtTotal.Text : (total - señaActual.Total).ToString("c");
+
         }
-        
+
         //Descontar Stock SOTCK
         private void ActualizarStock()
         {
@@ -762,12 +791,18 @@ namespace UI.Desktop.Ventas
                         lineaVta.TipoOperacion = ventaLocal.TipoOperacion;
                     }
                     ventaLocal.FechaHora = Convert.ToDateTime(DateTime.Now);
+                    ventaLocal.FechaFactura = Convert.ToDateTime(DateTime.Now);
 
                     //#Data Fiscal
                     this.SetDatosClienteEnVenta();
 
-                    ventaLocal.Total = Convert.ToDecimal(txtTotal.Text);
-                    double Neto = Math.Round(Convert.ToDouble(txtTotal.Text) / 1.21,2);
+                    Decimal total = 0;
+                    decimal.TryParse(txtTotal.Text, NumberStyles.Currency, CultureInfo.CurrentCulture.NumberFormat, out total);
+                    
+                    ventaLocal.Total = total; 
+                    
+
+                    double Neto = Math.Round(Convert.ToDouble(total) / 1.21,2);
                     ventaLocal.Neto = Convert.ToDouble(Neto);
                     double Iva = Math.Round(Convert.ToDouble(ventaLocal.Total) - Neto,2);
                     ventaLocal.Iva = Convert.ToDouble(Iva.ToString());
@@ -919,6 +954,13 @@ namespace UI.Desktop.Ventas
             bool esMonotributo = Convert.ToInt32(parametrosEmpresa.SituacionFiscal) == (int)FeConstantes.SituacionFiscal.MONOTRIBUTO;
             await Facturador.facturarAsync(ventaLocal, esMonotributo);
         }
+
+        private async Task NotaDeCreditoAsync(Venta NotadeCredito)
+        {
+            //TO-DO: FIX TOMAR PARAMETRO GENERAL - segundo parametro si es monotributista
+            bool esMonotributo = Convert.ToInt32(parametrosEmpresa.SituacionFiscal) == (int)FeConstantes.SituacionFiscal.MONOTRIBUTO;
+            await Facturador.facturarAsync(NotadeCredito, esMonotributo,ventaLocal);
+        }
         private void setMedioPago()
         {
 
@@ -945,7 +987,7 @@ namespace UI.Desktop.Ventas
         private frmConfirmarVta ConfirmarVenta()
         {
             frmConfirmarVta formConfirmarVenta = new frmConfirmarVta();
-            formConfirmarVenta.txtTotal.Text = this.txtTotal.Text;
+            formConfirmarVenta.txtTotal.Text = this.txtTotal.Text.Replace('$',' ');
 
            
             formConfirmarVenta.txtTipoPago.Text = ventaLocal.TipoPago;
@@ -1100,6 +1142,170 @@ namespace UI.Desktop.Ventas
                     this.txtRec.Text = this.txtDcto.Text = this.txtDctoPesos.Text= "";
             }
             AplicarDescuentoyRecargo();
+        }
+
+        private async void btnNotaCredito_Click(object sender, EventArgs e)
+        {
+            int ultNroVta = Datos_VentasAdapter.getUltNroVenta();
+
+            Venta notaDeCredito = new Venta()
+            {
+                CajaId = ventaLocal.CajaId,
+                DireccionCliente = ventaLocal.DireccionCliente,
+                DniCliente = ventaLocal.DniCliente,
+                FechaHora = DateTime.Now,
+                FechaFactura = DateTime.Now,
+                Iva = ventaLocal.Iva * -1,
+                CuitEmisor = ventaLocal.CuitEmisor,
+                MontoPagado = ventaLocal.MontoPagado * -1,
+                Neto = ventaLocal.Neto * -1,
+                NombreCliente = ventaLocal.NombreCliente,
+                NumeroDocumentoCliente = ventaLocal.NumeroDocumentoCliente,
+                NumeroVenta = ultNroVta + 1,
+                Pagado = ventaLocal.Pagado,
+                PuntoDeVenta = ventaLocal.PuntoDeVenta,
+                SituacionFiscalCliente = ventaLocal.SituacionFiscalCliente,
+                TipoComprobante = ventaLocal.TipoComprobante == (int)FeConstantes.TipoComprobante.FacturaC ? (int)FeConstantes.TipoComprobante.NCC : (int)FeConstantes.TipoComprobante.NCB,
+                TipoDocumentoCliente = ventaLocal.TipoDocumentoCliente,
+                TipoOperacion = ventaLocal.TipoOperacion,
+                TipoPago = ventaLocal.TipoPago,
+                Total = ventaLocal.Total * -1,
+                Usuario = ventaLocal.Usuario
+
+            };
+
+            List<Venta_Articulo> ArticulosNC = new List<Venta_Articulo>();
+            Datos_VentasAdapter.RegistrarVenta(notaDeCredito);
+
+            foreach (Venta_Articulo lineaVta in formListaArticulos.ListaArticulosVtaActual)
+            {
+                //lineaVta.NumeroVenta = ventaLocal.NumeroVenta;
+                //lineaVta.TipoOperacion = ventaLocal.TipoOperacion;
+                lineaVta.Cantidad = lineaVta.Cantidad * -1;
+                lineaVta.Precio = lineaVta.Precio * -1;
+                lineaVta.Subtotal = lineaVta.Subtotal * -1;
+                lineaVta.NumeroVenta = notaDeCredito.NumeroVenta;
+                ArticulosNC.Add(lineaVta);
+                Datos_VentasArticulosAdapter.RegistrarLineaVta(lineaVta);
+            }
+            //ActualizarStock();
+
+            await this.NotaDeCreditoAsync(notaDeCredito);
+
+            notaDeCredito = Datos_VentasAdapter.GetOne(notaDeCredito.NumeroVenta);
+            if (notaDeCredito.NumeroTicketFiscal != null)
+            { PrinterDrawing prt = new PrinterDrawing(notaDeCredito, ArticulosNC.ToList(), "FISCAL"); }
+            else
+            {
+                PrinterDrawing prt = new PrinterDrawing(notaDeCredito, ArticulosNC.ToList(), "CLIENTE");
+            }
+        }
+
+        private void cbxMedioDePago_SelectedValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cbxDescuentos_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            lblDispositivo.Text = listaDescuentos.Find(descuento=>descuento.Id ==((Descuento)cbxDescuentos.SelectedItem).Id).Dispositivo;
+            txtDcto.Text = listaDescuentos.Find(descuento => descuento.Id == ((Descuento)cbxDescuentos.SelectedItem).Id).PorcentajeDescuento.ToString();
+            txtDctoPesos.Text = "";
+            this.AplicarDescuentoyRecargo();
+        }
+
+        private void cbxMedioDePago_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            lblDispositivo.Text = "";
+            cbxDescuentos.Items.Clear();
+            if (listaDescuentos != null && listaMedioDePagos != null)
+            {
+                List<Descuento> descuentosPorMedioDePago = listaDescuentos.Where(descuento => descuento.MedioDePago.ToUpper() == ((MedioDePago)cbxMedioDePago.SelectedItem).Descripcion).ToList();
+                cbxDescuentos.Items.AddRange(filtrarDescuentos(descuentosPorMedioDePago).Cast<object>().ToArray());
+                cbxDescuentos.DisplayMember = "descripcion";
+                cbxDescuentos.ValueMember = "id";
+                //cbxDescuentos.SelectedIndex = listaMedioDePagos.FindIndex(x => x.Default == true);
+            }
+        }
+
+        private void btnPDF_Click(object sender, EventArgs e)
+        {
+            if (ventaLocal.NumeroTicketFiscal != null)
+            { PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "FISCAL",true); }
+            else
+            {
+                PrinterDrawing prt = new PrinterDrawing(ventaLocal, formListaArticulos.ListaArticulosVtaActual.ToList(), "CLIENTE",true);
+            }
+        }
+        private List<Descuento> filtrarDescuentos(List<Descuento> descuentos)
+        {
+            List<Descuento> lcl_descuentos = new List<Descuento>();
+            foreach (Descuento d in descuentos)
+            {
+                if (d.AplicaFechas.Count>0)
+                {
+                    if(d.AplicaFechas.Any(x=>x.Date == DateTime.Now.Date))
+                    {
+                        lcl_descuentos.Add(d);
+                    }
+                }
+                else
+                {
+                    switch (DateTime.Now.DayOfWeek)
+                    {
+                        case DayOfWeek.Monday:
+                            if (d.AplicaLunes)
+                            {
+                                lcl_descuentos.Add(d);
+                            }
+                            break;
+                        case DayOfWeek.Tuesday:
+                            if (d.AplicaMartes)
+                            {
+                                lcl_descuentos.Add(d);
+                            }
+                            break;
+                        case DayOfWeek.Wednesday:
+                            if (d.AplicaMiercoles)
+                            {
+                                lcl_descuentos.Add(d);
+                            }
+                            break;
+                        case DayOfWeek.Thursday:
+                            if (d.AplicaJueves)
+                            {
+                                lcl_descuentos.Add(d);
+                            }
+                            break;
+                        case DayOfWeek.Friday:
+                            if (d.AplicaViernes)
+                            {
+                                lcl_descuentos.Add(d);
+                            }
+                            break;
+                        case DayOfWeek.Saturday:
+                            if (d.AplicaSabado)
+                            {
+                                lcl_descuentos.Add(d);
+                            }
+                            break;
+
+                        default: break;
+                    }
+                }
+            }
+            return lcl_descuentos;
+        }
+
+        private void btnBuscaSeña_Click(object sender, EventArgs e)
+        {
+            frmListadoSeña frmListado = new frmListadoSeña(this.clienteActual.NumeroDocumento);
+            if(frmListado.ShowDialog() == DialogResult.OK)
+            {
+                this.señaActual = frmListado.señaActual;
+                this.tbxSeñaAplicada.Text = this.señaActual.Total.ToString("c");
+                lblFechaSeña.Text = this.señaActual.FechaHora.ToString("dd/MM/yyyy");
+            }
+            //Datos_SeñasAdapter.GetAllSeñas(clienteActual.NumeroDocumento);
         }
     }
 }

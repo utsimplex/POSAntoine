@@ -136,7 +136,7 @@ namespace UI.Desktop
                     Usuario usr = Datos_UsuarioAdapter.GetUsuario(txtUsuario.Text);
 
 
-                    usrActual = Datos_UsuarioAdapter.GetUsuario(txtUsuario.Text);
+                    usrActual = usr;
                     DialogResult = DialogResult.OK;
 
                 }
