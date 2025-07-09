@@ -498,6 +498,47 @@ namespace Data.Database
             }
         }
 
+        public decimal GetGastos(int caja_id)
+        {
+            // Crear conexión
+            using (SqlConnection con = CrearConexion())
+            {
+                try
+                {
+                    // Abrir la conexión
+                    con.Open();
+
+                    // Crear SqlCommand
+                    using (SqlCommand cmd = new SqlCommand("GetGastosCaja", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros al comando
+                        cmd.Parameters.AddWithValue("@pCaja_id", caja_id);
+
+                        // Agregar parámetro de salida para el efectivo a rendir
+                        SqlParameter ventas = new SqlParameter("@pGastos", SqlDbType.Money);
+                        ventas.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(ventas);
+
+                        // Ejecutar el stored procedure
+                        cmd.ExecuteNonQuery();
+
+                        // Obtener el efectivo a rendir del parámetro de salida
+                        decimal gastosPorCaja = (decimal)ventas.Value;
+
+                        // Devolver el resultado
+                        return gastosPorCaja;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejar la excepción o mostrar un mensaje de error
+                    MessageBox.Show("Error al obtener gastos. " + ex.Message);
+                    return 0;
+                }
+            }
+        }
         public bool GetEstadoCajaAbierta(int? caja_id)
         {
             // Crear conexión

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Windows;
 
 namespace UI.Desktop.Ventas
 {
@@ -337,6 +338,11 @@ namespace UI.Desktop.Ventas
                 Pedido.CuitEmisor = CUIT;
                 VentasAdapter.ActualizarDatosFiscales(Pedido);
                 //Pedido.Ticket_fiscal compResult.Body.FECAESolicitarResult.FeDetResp[0].
+                 MessageBox.Show("Factura Electrónica generada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Error al generar la Factura Electrónica: " + observaciones, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 

@@ -166,7 +166,7 @@ namespace UI.Desktop.Ventas
             //EVALUO UN CAMPO PARA VER SI ES EDICION O ALTA DE VENTA NUEVA
             if (modo == "Alta")
             {
-                formListaArticulos = new UI.Desktop.Artículos.frmListadoArticulos();
+                formListaArticulos = new UI.Desktop.Artículos.frmListadoArticulos(this.usuarioLogueado);
                 if (formListaArticulos.IsDisposed == false)
                     ConfigurarGrillaDetalles();
 
@@ -177,7 +177,7 @@ namespace UI.Desktop.Ventas
             else //LOAD MODO READONLY
             {
                 cbxMedioDePago.SelectedValue = listaMedioDePagos.First(medioDePago=>medioDePago.Descripcion== ventaLocal.TipoPago.ToUpper()).id;
-                formListaArticulos = new UI.Desktop.Artículos.frmListadoArticulos();
+                formListaArticulos = new UI.Desktop.Artículos.frmListadoArticulos(this.usuarioLogueado);
                 ConfigurarGrillaDetalles();
                     this.Text = "VER VENTA";
                 formListaArticulos.ListaArticulosVtaActual = Datos_VentasArticulosAdapter.GetAll(Convert.ToInt32(txtNumeroVenta.Text), ventaLocal.TipoOperacion);

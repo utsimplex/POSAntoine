@@ -40,6 +40,7 @@ namespace UI.Desktop.Cajas
             dtpFechaCaja.Value = caja.FechaCaja;
             dtpFechaApertura.Value = caja.FechaApertura;
             txtVentas.Text = Math.Round(Datos_CajasAdapter.GetVentas(caja.ID), 2).ToString();
+            tbxGatos.Text = Math.Round(Datos_CajasAdapter.GetGastos(caja.ID), 2).ToString();
             txtEfectivoRendir.Text = Math.Round(Datos_CajasAdapter.GetRendirEfectivo(caja.ID), 2).ToString();
             ventasXMP = Datos_CajasAdapter.GetVentasMP(caja.ID);
             dgvVentasxMP.DataSource = ventasXMP;

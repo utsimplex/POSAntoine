@@ -83,6 +83,7 @@
             this.btnCerrarSistema = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnNuevaSeña = new MaterialSkin.Controls.MaterialButton();
             this.btnDescuentos = new MaterialSkin.Controls.MaterialButton();
             this.btnGasto = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -98,7 +99,6 @@
             this.lblNroCaja = new MaterialSkin.Controls.MaterialLabel();
             this.swAbrirCerrarCaja = new MaterialSkin.Controls.MaterialSwitch();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnNuevaSeña = new MaterialSkin.Controls.MaterialButton();
             this.msnPrincipal.SuspendLayout();
             this.panelTabla.SuspendLayout();
             this.materialCard1.SuspendLayout();
@@ -734,6 +734,30 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(179, 595);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // btnNuevaSeña
+            // 
+            this.btnNuevaSeña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuevaSeña.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNuevaSeña.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevaSeña.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnNuevaSeña.Depth = 0;
+            this.btnNuevaSeña.HighEmphasis = true;
+            this.btnNuevaSeña.Icon = null;
+            this.btnNuevaSeña.Location = new System.Drawing.Point(4, 82);
+            this.btnNuevaSeña.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnNuevaSeña.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnNuevaSeña.Name = "btnNuevaSeña";
+            this.btnNuevaSeña.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnNuevaSeña.Size = new System.Drawing.Size(171, 33);
+            this.btnNuevaSeña.TabIndex = 19;
+            this.btnNuevaSeña.Text = "Nueva Seña";
+            this.btnNuevaSeña.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevaSeña.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnNuevaSeña.UseAccentColor = false;
+            this.btnNuevaSeña.UseVisualStyleBackColor = true;
+            this.btnNuevaSeña.Click += new System.EventHandler(this.btnNuevaSeña_Click);
+            // 
             // btnDescuentos
             // 
             this.btnDescuentos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1055,30 +1079,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(212, 97);
             this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // btnNuevaSeña
-            // 
-            this.btnNuevaSeña.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNuevaSeña.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNuevaSeña.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevaSeña.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnNuevaSeña.Depth = 0;
-            this.btnNuevaSeña.HighEmphasis = true;
-            this.btnNuevaSeña.Icon = null;
-            this.btnNuevaSeña.Location = new System.Drawing.Point(4, 82);
-            this.btnNuevaSeña.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnNuevaSeña.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnNuevaSeña.Name = "btnNuevaSeña";
-            this.btnNuevaSeña.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnNuevaSeña.Size = new System.Drawing.Size(171, 33);
-            this.btnNuevaSeña.TabIndex = 19;
-            this.btnNuevaSeña.Text = "Nueva Seña";
-            this.btnNuevaSeña.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNuevaSeña.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnNuevaSeña.UseAccentColor = false;
-            this.btnNuevaSeña.UseVisualStyleBackColor = true;
-            this.btnNuevaSeña.Click += new System.EventHandler(this.btnNuevaSeña_Click);
             // 
             // frmMain
             // 

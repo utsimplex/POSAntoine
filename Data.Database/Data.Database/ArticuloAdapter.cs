@@ -636,7 +636,46 @@ namespace Data.Database
             }
             return codigo;
         }
+        public string getNumeradorCodigobarras(string codigoBarras)
+        {
+            // Crear conexión
+            SqlConnection con = CrearConexion();
+            string codigo = "1234567890123";
 
+            try
+            {
+                // Abrir la conexión
+                con.Open();
+
+                // Crear SqlCommand
+                SqlCommand cmd = new SqlCommand("getNumeradorCodigoBarras", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Agregar los parámetros al comando
+                cmd.Parameters.AddWithValue("@pCodigoBarras", codigoBarras);
+
+
+                // Ejecutar el stored procedure
+                SqlDataReader drMarcas = cmd.ExecuteReader();
+
+                while (drMarcas.Read())
+                {
+                    codigo = (string)drMarcas["codigo"];
+                }
+                drMarcas.Close();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción o mostrar un mensaje de error
+                MessageBox.Show("Error al buscar Articulos: " + ex.Message);
+            }
+            finally
+            {
+                // Cerrar la conexión después de usarla
+                con.Close();
+            }
+            return codigo;
+        }
         public void altaMasivaArticulos(int caja_id)
         {
             //Este metodo devuelve true si la caja tiene al menos una venta Y/O un movimiento

@@ -363,6 +363,8 @@ namespace UI.Desktop.Artículos
             txtCodigo.Text = artiToEdit.Codigo;
             txtDescripcion.Text = artiToEdit.Descripcion;
             txtPrecio.Text = Math.Round(Convert.ToDecimal(artiToEdit.Precio),2).ToString();
+            txtPrecio.ReadOnly = this.rol == "Empleado";
+
 
             txtStock.Text = artiToEdit.Stock.ToString();
             txtStockMin.Text = artiToEdit.StockMin.ToString();
@@ -601,7 +603,7 @@ namespace UI.Desktop.Artículos
         //CLICK Modificar Stock
         private void btnModificarStock_Click(object sender, EventArgs e)
         {
-            if (txtStock.ReadOnly == false|| this.rol=="EMPLEADO")
+            if (txtStock.ReadOnly == false|| this.rol=="Empleado")
             {
                 this.txtStock.ReadOnly = true;
             }

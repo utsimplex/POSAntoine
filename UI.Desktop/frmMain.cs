@@ -51,6 +51,7 @@ namespace UI.Desktop
             AplicarMaterialTheme();
             parametrosEmpresaController = ParametrosEmpresaController.GetInstance();
             parametrosEmpresa = parametrosEmpresaController.ObtenerParametrosEmpresa();
+            IniciarSesion();
         }
 
 
@@ -68,7 +69,7 @@ namespace UI.Desktop
             //materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo500, Primary.Indigo700, Primary.Indigo100, Accent.Red400, TextShade.WHITE);
 
             //Verde y Salmón (INHALA)
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Teal300, Primary.Teal600, Primary.Teal100, Accent.Green700, TextShade.WHITE);
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Teal300, Primary.Teal600, Primary.Teal100, Accent.Green700, TextShade.WHITE);
 
             // Lila y Verde
             //materialSkinManager.ColorScheme = new ColorScheme(Primary.DeepPurple500, Primary.DeepPurple700, Primary.DeepPurple100, Accent.Green400, TextShade.WHITE);
@@ -80,7 +81,7 @@ namespace UI.Desktop
             //materialSkinManager.ColorScheme = new ColorScheme(Primary.Purple500, Primary.Purple700, Primary.Purple100, Accent.Teal700, TextShade.WHITE);
 
             // UtSimplex Theme 1
-            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue500, Primary.Blue700, Primary.Blue100, Accent.LightBlue200, TextShade.WHITE);
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue500, Primary.Blue700, Primary.Blue100, Accent.LightBlue200, TextShade.WHITE);
 
 
         }
@@ -115,7 +116,7 @@ namespace UI.Desktop
                 this.panelTabla.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
                 //this.BackgroundImage = Image.FromFile(this.parametrosEmpresa.FondoPantalla);
             }
-            IniciarSesion();
+            //IniciarSesion();
 
             if (usrActual != null)
             {
@@ -1261,13 +1262,20 @@ namespace UI.Desktop
 
        private void cashFlowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (lblUserRole.Text == "Empleado")
+            {
+                return;
+            }
             Informes.frmReporte formReporteCash = new Informes.frmReporte(this.parametrosEmpresa.ImpresoraReportes,Reportes.CashFlow);
             formReporteCash.ShowDialog();
         }
 
         private void ventasComisionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(lblUserRole.Text == "Empleado")
+            {
+                return;
+            }
             Informes.frmReporte formReporteVentasComisiones = new Informes.frmReporte(this.parametrosEmpresa.ImpresoraReportes, Reportes.VentasComisiones);
             formReporteVentasComisiones.ShowDialog();
         }

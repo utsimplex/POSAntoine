@@ -104,8 +104,8 @@ namespace Entidades
                     Importe = Convert.ToDecimal(this.Total),
                     Moneda = "PES",
                     Cotizacion = 1,
-                    NumeroDocumentoReceptor = (int)TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR ? 0 : (long)this.NumeroDocumentoCliente,
                     TipoDocumentoReceptor = (int)TipoDocumentoCliente,
+                    NumeroDocumentoReceptor = (int)TipoDocumentoCliente == (int)FeConstantes.TipoDocumento.SIN_IDENTIFICAR ? 0 : (long)this.NumeroDocumentoCliente,
                     TipoCodigoAutorizacion = "E",
                     CodigoAutorizacion = Convert.ToInt64(this.CAE)
 

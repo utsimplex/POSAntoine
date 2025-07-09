@@ -49,6 +49,8 @@
             this.cbxDescuentos = new System.Windows.Forms.ComboBox();
             this.cbxMedioDePago = new System.Windows.Forms.ComboBox();
             this.gbArticulosVenta = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtTotalAPagar = new System.Windows.Forms.TextBox();
             this.gpbxRecargo = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txtRecPesos = new System.Windows.Forms.TextBox();
@@ -85,12 +87,11 @@
             this.lblFechaSeña = new System.Windows.Forms.Label();
             this.btnBuscaSeña = new System.Windows.Forms.Button();
             this.tbxSeñaAplicada = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.txtTotalAPagar = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbTipoPago.SuspendLayout();
             this.gbArticulosVenta.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.gpbxRecargo.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulosVtaActual)).BeginInit();
@@ -101,7 +102,6 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblNroFactura
@@ -327,6 +327,29 @@
             this.gbArticulosVenta.TabIndex = 2;
             this.gbArticulosVenta.TabStop = false;
             this.gbArticulosVenta.Text = "Detalle";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.txtTotalAPagar);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(845, 329);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(188, 59);
+            this.groupBox6.TabIndex = 10;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Total a Pagar";
+            // 
+            // txtTotalAPagar
+            // 
+            this.txtTotalAPagar.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalAPagar.ForeColor = System.Drawing.Color.DarkGreen;
+            this.txtTotalAPagar.Location = new System.Drawing.Point(6, 18);
+            this.txtTotalAPagar.Name = "txtTotalAPagar";
+            this.txtTotalAPagar.Size = new System.Drawing.Size(174, 32);
+            this.txtTotalAPagar.TabIndex = 1;
+            this.txtTotalAPagar.TabStop = false;
+            this.txtTotalAPagar.Text = "0";
+            this.txtTotalAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // gpbxRecargo
             // 
@@ -770,29 +793,6 @@
             this.tbxSeñaAplicada.TabStop = false;
             this.tbxSeñaAplicada.Text = "Sin Seña seleccionada";
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.txtTotalAPagar);
-            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(845, 329);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(188, 59);
-            this.groupBox6.TabIndex = 10;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Total a Pagar";
-            // 
-            // txtTotalAPagar
-            // 
-            this.txtTotalAPagar.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalAPagar.ForeColor = System.Drawing.Color.DarkGreen;
-            this.txtTotalAPagar.Location = new System.Drawing.Point(6, 18);
-            this.txtTotalAPagar.Name = "txtTotalAPagar";
-            this.txtTotalAPagar.Size = new System.Drawing.Size(174, 32);
-            this.txtTotalAPagar.TabIndex = 1;
-            this.txtTotalAPagar.TabStop = false;
-            this.txtTotalAPagar.Text = "0";
-            this.txtTotalAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // frmVenta
             // 
             this.AcceptButton = this.btnConfirmar;
@@ -827,6 +827,8 @@
             this.gbTipoPago.ResumeLayout(false);
             this.gbTipoPago.PerformLayout();
             this.gbArticulosVenta.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.gpbxRecargo.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -842,8 +844,6 @@
             this.groupBox5.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

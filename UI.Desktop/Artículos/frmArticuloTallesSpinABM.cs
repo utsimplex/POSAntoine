@@ -553,6 +553,15 @@ namespace UI.Desktop.Artículos
             else
                 this.txtCodigo.Text = this.Datos_ArticuloAdapter.getNumeradorCodigoProveedor(this.cbxProveedor.Text, txtCodigoArtiProveedor.Text);
         }
+
+        private void btnBuscarCodigoBarras_Click(object sender, EventArgs e)
+        {
+            if (tbxCodigoBarras.Text == "")
+                MessageBox.Show("Debes ingresar un codigo de Barras");
+            else
+                this.txtCodigo.Text = this.Datos_ArticuloAdapter.getNumeradorCodigoProveedor(this.cbxProveedor.Text, txtCodigoArtiProveedor.Text);
+        }
+    }
     }
 }
 

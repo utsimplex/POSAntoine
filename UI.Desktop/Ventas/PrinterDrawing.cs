@@ -472,6 +472,20 @@ namespace UI.Desktop.Ventas
                     SizeF netWidth = ev.Graphics.MeasureString("Total " + _venta_Actual.Total.ToString("c"), totalFont);
                     ev.Graphics.DrawString("Total " + _venta_Actual.Total.ToString("c"), totalFont, Brushes.Black, 275 - netWidth.Width, height, new StringFormat());
                     height += 25;
+                    //Print Line
+                    ev.Graphics.DrawLine(linePen, 10, height, 280, height);
+
+                    //ev.Graphics.DrawString(line, normalFont, Brushes.Black, 10, height, new StringFormat());
+                    //height += 15;
+                    //height += 20;
+                    //ev.Graphics.DrawString("REGIMEN DE TRANSPARENCIA FISCAL AL CONSUMIDOR", lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    //height += 12;
+                    //ev.Graphics.DrawString("(LEY 27.743)", lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    //height += 12;
+                    //ev.Graphics.DrawString("IVA CONTENIDO", lessNormalFont, Brushes.Black, 10, height, new StringFormat());
+                    //SizeF ivaWidth = ev.Graphics.MeasureString("$ " + Convert.ToDouble(_venta_Actual.Iva).ToString("0.00"), lessNormalFont);
+                    //ev.Graphics.DrawString("$ " + Convert.ToDouble(_venta_Actual.Iva).ToString("0.00"), lessNormalFont, Brushes.Black, 275 - ivaWidth.Width, height, new StringFormat());
+                    //height += 25;
                 }
 
                     ev.Graphics.DrawString("*** FACTURACION ELECTRÓNICA ***", lessNormalFont, Brushes.Black, 60, height, new StringFormat());

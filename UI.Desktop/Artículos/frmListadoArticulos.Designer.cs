@@ -43,6 +43,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnMasiva = new System.Windows.Forms.Button();
+            this.chbxStock = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -205,12 +206,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chbxStock);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(305, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(555, 30);
+            this.panel1.Size = new System.Drawing.Size(621, 30);
             this.panel1.TabIndex = 32;
             // 
             // panel4
@@ -251,6 +253,17 @@
             this.btnMasiva.UseVisualStyleBackColor = true;
             this.btnMasiva.Click += new System.EventHandler(this.btnMasiva_Click);
             // 
+            // chbxStock
+            // 
+            this.chbxStock.AutoSize = true;
+            this.chbxStock.Location = new System.Drawing.Point(550, 8);
+            this.chbxStock.Name = "chbxStock";
+            this.chbxStock.Size = new System.Drawing.Size(72, 17);
+            this.chbxStock.TabIndex = 37;
+            this.chbxStock.Text = "conStock";
+            this.chbxStock.UseVisualStyleBackColor = true;
+            this.chbxStock.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // frmListadoArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,6 +277,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -286,5 +300,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox cbxFiltroFamilia2;
         public System.Windows.Forms.Button btnMasiva;
+        private System.Windows.Forms.CheckBox chbxStock;
     }
 }

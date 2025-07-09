@@ -35,6 +35,7 @@ namespace UI.Desktop.Artículos
             completaCombosBox();
             FormatearUITabla();
             rol = usr.Rol;
+            this.btnActualizarPrecios.Visible =  this.btnMasiva.Visible = rol != "Empleado";
         }
 
         private void FormatearUITabla()
@@ -184,8 +185,16 @@ namespace UI.Desktop.Artículos
         // ACTUALIZAR LISTA DE ARTICULOS
         private void ActualizarLista()
         {
+            bool conStock = this.chbxStock.Checked;
             ListaArticulos = DatosArticuloAdapter.GetAll();
-            ListaArticulosFiltrados = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
+            if (conStock)
+            {
+                ListaArticulosFiltrados = ListaArticulos.Where(a => a.Habilitado == "Si" && a.Stock > 0).ToList();
+            }
+            else
+            {
+                ListaArticulosFiltrados = ListaArticulos.Where(a => a.Habilitado == "Si").ToList();
+            }
 
             dgvListado.DataSource = ListaArticulosFiltrados;
             
@@ -683,12 +692,14 @@ namespace UI.Desktop.Artículos
             LimpiarFiltros();
             RecargarArticulos();
             ActualizarLista();
+
         }
 
        
         private void LimpiarFiltros()
         {
             tbxFiltro.Text = "";
+            chbxStock.Checked = false;
             cbxFiltroFamilia1.SelectedIndex = -1;
             cbxFiltroFamilia2.SelectedIndex = -1;
             cbxFiltroProveedor.SelectedIndex = -1;
@@ -739,6 +750,10 @@ namespace UI.Desktop.Artículos
                         ListaArticulosFiltrados = AplicarFiltroTexto(searchTerm, new BindingList<Articulo>(ListaArticulosFiltrados));
                     }
                 }
+                if(chbxStock.Checked)
+                {
+                    ListaArticulosFiltrados = ListaArticulosFiltrados.Where(a => a.Stock > 0).ToList();
+                }
                 dgvListado.DataSource = ListaArticulosFiltrados;
             }
 
@@ -754,7 +769,14 @@ namespace UI.Desktop.Artículos
         // Carga TODOS los articulos en la grilla
         private void RecargarArticulos()
         {
+            if(chbxStock.Checked)
+            {
+            dgvListado.DataSource = ListaArticulos.Where(articulo =>articulo.Stock >0);
+            }
+            else
+            {
             dgvListado.DataSource = ListaArticulos;
+            }
         }
 
         // Aplicar filtro segun el valor del search term, a la lista especificada
@@ -867,6 +889,11 @@ namespace UI.Desktop.Artículos
             frmArticuloTallesSpinABM frmArticulos = new Artículos.frmArticuloTallesSpinABM(parametrosEmpresa);
             frmArticulos.ShowDialog();
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.AplicaFiltros();
         }
     }
 
